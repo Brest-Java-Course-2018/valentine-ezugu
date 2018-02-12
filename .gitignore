@@ -24,4 +24,11 @@ hs_err_pid*
 # IntellijIdea files
 *.iml 
 .idea 
- out
+ out/
+ 
+ #temparary files
+**/target/
+
+#libs
+**/node_modules/
+
