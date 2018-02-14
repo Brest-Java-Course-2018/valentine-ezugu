@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
 import java.io.*;
 
 @RunWith(JUnit4.class)
@@ -20,6 +19,7 @@ public class AppTest extends TestCase {
     by bos as out is a PrintWriter that decorates
     this ByteArrayOutputStream
      */
+
     private PrintStream originalOut;
 
     @Before
