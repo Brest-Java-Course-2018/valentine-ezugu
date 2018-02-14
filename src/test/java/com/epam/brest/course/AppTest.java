@@ -3,7 +3,7 @@ package com.epam.brest.course;
 import junit.framework.Assert;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -20,16 +20,17 @@ public class AppTest extends TestCase {
     by bos as out is a PrintWriter that decorates
     this ByteArrayOutputStream
      */
+    private PrintStream originalOut;
 
-    //java lang exception is never thrown so we dont need
+    @Before
+    public void Before() {
+        originalOut = System.out;
+    }
+
     @Test
     public void mainMethodTest() {
-
         // to have a way to undo the binding with your `ByteArrayOutputStream`
-        PrintStream originalOut = System.out;
-
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
         System.setOut(new PrintStream(bos));
 
         // action
@@ -37,8 +38,12 @@ public class AppTest extends TestCase {
 
         // assertion
         Assert.assertEquals("Hello World!", bos.toString().trim());
-        // undo the binding in System
+    }
+
+    //  // undo the binding in System
+    public void after(){
         System.setOut(originalOut);
     }
+
 
 }
