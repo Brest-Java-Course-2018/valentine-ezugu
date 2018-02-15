@@ -1,10 +1,9 @@
 package com.epam.brest.course;
 
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.sql.SQLException;
+
 
 public class DbUtilsTest {
 
