@@ -2,6 +2,7 @@ package com.epam.brest.course;
 
 
 import junit.framework.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,7 @@ public class AppTest {
     }
 
      // undo the binding in System
+    @After
     public void after(){
         System.setOut(originalOut);
     }
