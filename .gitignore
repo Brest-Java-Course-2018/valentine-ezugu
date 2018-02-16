@@ -44,6 +44,8 @@ hs_err_pid*
 *.ipr
 *.iws
 **/*.iml
+mainapplication.iml
+utils.iml
 
 ## Additional for IntelliJ
 out/
