@@ -11,7 +11,7 @@
 
       <modules>
           <module>utils</module>
-    <module>mainApplication</module>
+    <module>mainapplication</module>
   </modules>
 
         <name>sampleuserapp</name>
@@ -35,7 +35,7 @@
 
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
-                <artifactId>mainApplication</artifactId>
+                <artifactId>mainapplication</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
