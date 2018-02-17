@@ -10,6 +10,7 @@ import org.junit.runners.JUnit4;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
 
 @RunWith(JUnit4.class)
 public class AppTest {
@@ -21,7 +22,7 @@ public class AppTest {
     }
 
     @Test
-    public void mainMethodTest() {
+    public void mainMethodTest() throws SQLException, ClassNotFoundException {
         // to have a way to undo the binding with your `ByteArrayOutputStream`
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -29,7 +30,7 @@ public class AppTest {
         // action
         App.main(null);
 
-        // assertion
+        /* assertion */
         Assert.assertEquals("Hello World!", bos.toString().trim());
     }
 
