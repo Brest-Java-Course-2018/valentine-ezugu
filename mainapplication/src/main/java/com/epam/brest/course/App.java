@@ -21,5 +21,6 @@ public class App {
         dbUtils.deleteUser(connection,1);
         dbUtils.getAllUsers(connection);
 
+        dbUtils.updateUser(connection, 2,"valentine" ,"java-man","java is good");
     }
 }

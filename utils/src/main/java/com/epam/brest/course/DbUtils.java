@@ -1,11 +1,8 @@
 package com.epam.brest.course;
 
-
 import java.sql.*;
 
 public class DbUtils {
-
-    private Statement statement;
 
     public Connection getConnection() throws ClassNotFoundException, SQLException {
 
@@ -26,37 +23,28 @@ public class DbUtils {
                 "password VARCHAR(225) NOT NULL," +
                 "description VARCHAR (225) NULL," +
                 "PRIMARY KEY (user_id))";
-        try {
 
-            statement = connection.createStatement();
-            //can create a sql table
-           statement.executeUpdate(createTable);
-        } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
+        try (Statement statement = connection.createStatement()) {
+            //create a sql table
+            statement.executeUpdate(createTable);
         }
     }
 
-    public void deleteUser(Connection connection, int id) throws SQLException{
+    public void deleteUser(Connection connection, int id) throws SQLException {
         System.out.println();
-        System.out.println("delete user with id -> " +id);
+        System.out.println("delete user with id -> " + id);
 
-        PreparedStatement preparedStatement;
 
-      String deleteById = "DELETE FROM app_user \n" +
-              "WHERE user_id = ?; ";
+        String deleteById = "DELETE FROM app_user \n" +
+                "WHERE user_id = ?; ";
 
-      try {
-          preparedStatement = connection.prepareStatement(deleteById);
-          preparedStatement.setInt(1,id);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteById)) {
 
-           preparedStatement.executeUpdate();
-      }catch (SQLException e){
-          System.out.println(e);
-      }
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+        }
 
     }
 
@@ -65,15 +53,11 @@ public class DbUtils {
                         String login, String password,
                         String description) throws SQLException {
 
-        PreparedStatement preparedStatement;
-
         System.out.println(String.format("Add user : %s", login));
 
         String newUSer = "INSERT INTO app_user(login, password, description) VALUES (?,?,?)";
 
-        try {
-
-            preparedStatement = connection.prepareStatement(newUSer);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(newUSer)) {
 
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
@@ -81,9 +65,6 @@ public class DbUtils {
 
             // returns number of changed column
             preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e);
         }
     }
 
@@ -95,9 +76,7 @@ public class DbUtils {
         String getUserRecord = "SELECT user_id, login, description" +
                 " From app_user ORDER BY user_id";
 
-        try {
-
-            statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(getUserRecord);
 
@@ -107,32 +86,57 @@ public class DbUtils {
                         resultSet.getString("login"),
                         resultSet.getString("description")));
             }
-        } catch (SQLException e) {
-            System.out.println(e);
         }
 
     }
 
     public void getAllUsers(Connection connection) throws SQLException {
-        System.out.println();
         System.out.println("--------users remaining after delete --------");
+        System.out.println();
 
-            PreparedStatement preparedStatement;
-        String allUsers = "SELECT login FROM app_user";
+        String allUsers = "SELECT login, password FROM app_user";
 
-        try {
-            preparedStatement = connection.prepareStatement(allUsers);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement1 = connection.prepareStatement(allUsers)) {
+            ResultSet rs = preparedStatement1.executeQuery();
+            while (rs.next()) {
 
-            while ((resultSet.next())){
-                String name  = resultSet.getString("login");
+                String name = rs.getString("login");
+                String password2 = rs.getString("password");
+                System.out.println(String.format("users : %s, %s,",name ,password2));
 
-                System.out.println(name);
             }
-
-        }catch (SQLException e){
-            System.out.println(e);
         }
     }
 
+    public void updateUser(Connection connection, int id, String login, String password, String description) throws SQLException {
+
+        System.out.println("---------after update of table--------");
+        System.out.println();
+
+        String updateQuery = "UPDATE app_user SET password = ?,login = ?, description = ? WHERE user_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, description);
+            preparedStatement.setInt(4, id);
+
+            preparedStatement.executeUpdate();
+
+            String allUsers = "SELECT login,password FROM app_user";
+
+            try (PreparedStatement preparedStatement1 = connection.prepareStatement(allUsers)) {
+                ResultSet resultSet = preparedStatement1.executeQuery();
+                while (resultSet.next()) {
+                    String name = resultSet.getString("login");
+                    String password1 = resultSet.getString("password");
+
+                    System.out.println(String.format("User : %s, %s,",name ,password1));
+
+                }
+
+            }
+        }
+
+    }
 }

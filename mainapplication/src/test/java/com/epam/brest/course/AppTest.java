@@ -1,6 +1,5 @@
 package com.epam.brest.course;
 
-
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +13,7 @@ import java.sql.SQLException;
 
 @RunWith(JUnit4.class)
 public class AppTest {
+
     private PrintStream originalOut;
 
     @Before
@@ -29,7 +29,6 @@ public class AppTest {
 
         // action
         App.main(null);
-
         /* assertion */
         Assert.assertEquals("Hello World!", bos.toString().trim());
     }
