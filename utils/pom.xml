@@ -7,6 +7,9 @@
     <artifactId>utils</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>utils</name>
+
+    <description>This is util module</description>
+
     <url>http://maven.apache.org</url>
 
     <properties>
