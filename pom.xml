@@ -11,8 +11,7 @@
     <packaging>pom</packaging>
 
       <modules >
-          <module>utils</module>
-           <module>mainapplication</module>
+          <module>model</module>
       </modules>
 
         <name>sampleuserapp</name>
@@ -36,18 +35,6 @@
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
                 <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.epam.brest.course</groupId>
-                <artifactId>mainapplication</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.epam.brest.course</groupId>
-                <artifactId>utils</artifactId>
-                <version>${project.version}</version>
             </dependency>
 
             <dependency>
