@@ -1,6 +1,5 @@
-package com.brest.course;
+package com.epam.brest.course;
 
-import com.epam.brest.course.Employee;
 import org.junit.Assert;
 import org.junit.Test;
 

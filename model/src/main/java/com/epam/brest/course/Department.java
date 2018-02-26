@@ -1,23 +1,22 @@
 package com.epam.brest.course;
 
 /**
- *
- *POJO Department model
+ * POJO Department for model.
  */
 public class Department {
 
-    private Integer department;
+    private Integer departmentId;
 
     private String departmentName;
 
     private String description;
 
-    public Integer getDepartment() {
-        return department;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Integer department) {
-        this.department = department;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getDepartmentName() {
@@ -39,10 +38,9 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "department=" + department +
+                "departmentId=" + departmentId +
                 ", departmentName='" + departmentName + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
-
 }

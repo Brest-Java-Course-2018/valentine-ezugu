@@ -2,8 +2,7 @@ package com.epam.brest.course;
 
 
 /**
- * POJO Employee model
- *
+ * POJO Employee for model.
  */
 public class Employee {
 
@@ -16,8 +15,8 @@ public class Employee {
     private Integer departmentId;
 
     /**
-     * get employee id
-     * @return employeeId
+     * Get Employee Id.
+     * @return employeeId.
      */
     public Integer getEmployeeId() {
         return employeeId;
@@ -52,10 +51,10 @@ public class Employee {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Employee{" +
                 "employeeId=" + employeeId +
-                ", employeeName='" + employeeName + '\'' +
+                ", employeeName=" + employeeName +
                 ", salary=" + salary +
                 ", departmentId=" + departmentId +
                 '}';
