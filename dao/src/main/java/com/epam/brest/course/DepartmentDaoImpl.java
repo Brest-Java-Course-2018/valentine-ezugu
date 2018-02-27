@@ -3,7 +3,7 @@ package com.epam.brest.course;
 import java.util.List;
 
 /**
- *
+ *dao class for db manipulation
  */
 public class DepartmentDaoImpl implements DepartmentDao {
 
