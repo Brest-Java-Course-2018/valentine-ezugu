@@ -28,7 +28,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private static final int ROW2 = 2;
 
     /**
-     * final variable for rows affected by execution
+     * final variable for rows affected by execution.
      */
     private static final int ROW3 = 3;
 
@@ -67,21 +67,21 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @return
      */
     @Override
-    public List<Department> getDepartments() {
+    public final List<Department> getDepartments() {
         List<Department> departments =
-        jdbcTemplate.query(JdbcQuery.GET_DEPARTMENT_SQL,new DepartRowMapper());
+        jdbcTemplate.query(JdbcQuery.GET_DEPARTMENT_SQL, new DepartRowMapper());
         return departments;
     }
 
     /**
      *
-     * @param departmentId
+     * @param departmentId used to get one department by id
      * @return
      * during execution time namedParameter will
      * be converted to JDBC style '?' placeholders
      */
     @Override
-    public Department getDepartmentById(final Integer departmentId) {
+    public final Department getDepartmentById(final Integer departmentId) {
         Department department;
 
         SqlParameterSource namedParameterSource =
@@ -89,7 +89,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
           department =
                 namedParameterJdbcTemplate.queryForObject(
-                        JdbcQuery.GET_DEPARTMENT_BY_ID,namedParameterSource,
+                        JdbcQuery.GET_DEPARTMENT_BY_ID, namedParameterSource,
                         new DepartRowMapper());
         return department;
     }
@@ -101,14 +101,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @return department
      */
     @Override
-    public Department addDepartment(final Department department) {
-        Assert.notNull(department,"department cannot be null");
+    public final Department addDepartment(final Department department) {
+        Assert.notNull(department, "department cannot be null");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("departmentName",
                         department.getDepartmentName())
-                        .addValue("description",department.getDescription());
+                        .addValue("description", department.getDescription());
         namedParameterJdbcTemplate.update(
-                        JdbcQuery.ADD_DEPARTMENT,namedParameterSource);
+                        JdbcQuery.ADD_DEPARTMENT, namedParameterSource);
         return department;
     }
 
@@ -117,13 +117,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @param department used to accept infor about department to update
      */
     @Override
-    public void updateDepartment(final Department department) {
+    public final void updateDepartment(final Department department) {
         Assert.notNull(department,"department cannot be null");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("departmentId",
                         department.getDepartmentId())
-                    .addValue("departmentName",department.getDepartmentName())
-                    .addValue("description",department.getDescription());
+                    .addValue("departmentName", department.getDepartmentName())
+                    .addValue("description", department.getDescription());
         namedParameterJdbcTemplate
                 .update(JdbcQuery.UPDATE_DEPARTMENT,namedParameterSource);
     }
@@ -134,12 +134,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * the column to be deleted
      */
     @Override
-    public void deleteDepartmentById(final Integer departmentId) {
+    public final void deleteDepartmentById(final Integer departmentId) {
          Assert.notNull(departmentId, "department id cannot be null ");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("departmentId", departmentId);
         namedParameterJdbcTemplate
-                .update(JdbcQuery.DELETE_DEPARTMENT,namedParameterSource );
+                .update(JdbcQuery.DELETE_DEPARTMENT, namedParameterSource);
     }
 
     /**
@@ -148,10 +148,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
      *  java.sql.SQLException SQLExceptions} will be caught and handled
      * by the calling JdbcTemplate.
      */
-    private class DepartRowMapper implements RowMapper<Department>{
+    private class DepartRowMapper implements RowMapper<Department> {
 
         @Override
-        public Department mapRow(final ResultSet resultSet, int i)
+        public Department mapRow(final ResultSet resultSet, final int i)
                 throws SQLException {
 
             Department department = new Department();
@@ -163,28 +163,41 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     /**
-     * class that stores all query to be used in dao
+     * class that stores all query to be used in dao.
      *
      */
-    private class JdbcQuery{
-
+    private class JdbcQuery {
+        /**
+         * sql query
+         */
         private static final String GET_DEPARTMENT_BY_ID =
                 "SELECT departmentId, departmentName, description "
                         + "FROM department WHERE departmentId = departmentId";
 
-
+        /**
+         * sql query get department
+         */
         private static final String GET_DEPARTMENT_SQL =
            "SELECT departmentId, departmentName, description FROM department";
 
+        /**
+         * sql add entity
+         */
         private static final String ADD_DEPARTMENT =
           "INSERT INTO department (departmentName, description)" +
                   " VALUES (:departmentName, :description)";
 
+        /**
+         * update sql
+         */
         private static final String UPDATE_DEPARTMENT =
                 "UPDATE department SET departmentName ="
                         + " departmentName, description = description "
                         + "WHERE departmentId = departmentId";
 
+        /**
+         * delete department sql query
+         */
         private static final String DELETE_DEPARTMENT =
                 "DELETE FROM department WHERE departmentId = departmentId";
 

@@ -21,21 +21,33 @@ public class Department {
      */
     private String description;
 
+    /**
+     *
+     * @return id.
+     */
     public final Integer getDepartmentId() {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId setter.
+     */
     public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
 
+    /**
+     *
+     * @return deptName.
+     */
     public final String getDepartmentName() {
         return departmentName;
     }
 
     /**
      *
-     * @param departmentName names
+     * @param departmentName names.
      */
     public final void setDepartmentName(final String departmentName) {
         this.departmentName = departmentName;
@@ -43,20 +55,24 @@ public class Department {
 
     /**
      *
-     * @return descriptions
+     * @return descriptions.
      */
     public final String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description setter.
+     */
     public final void setDescription(final String description) {
         this.description = description;
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public final boolean equals(final Object o) {
 
-        if (this == o){
+        if (this == o) {
             return true;
         }
         if (!(o instanceof Department)) {
