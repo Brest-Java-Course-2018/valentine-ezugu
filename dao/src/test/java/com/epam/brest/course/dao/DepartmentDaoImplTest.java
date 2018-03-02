@@ -68,7 +68,7 @@ public class DepartmentDaoImplTest {
 
         department.setDepartmentId(1);
         department.setDepartmentName("Engineering");
-         departmentDao.UpdateDepartment(department);
+         departmentDao.updateDepartment(department);
 
         Department finalResult = departmentDao.getDepartmentById(1);
         Assert.assertNotNull("Distribution",finalResult.getDepartmentName());
