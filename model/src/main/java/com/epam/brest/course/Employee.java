@@ -80,7 +80,7 @@ public class Employee {
 
     /**
      *
-     * @param departmentId setter
+     * @param departmentId setter.
      */
     public final void setDepartmentId(final Integer departmentId) {
         this.deptId = departmentId;
@@ -88,7 +88,7 @@ public class Employee {
 
     /**
      *
-     * @return String
+     * @return String.
      */
     @Override
     public final java.lang.String toString() {

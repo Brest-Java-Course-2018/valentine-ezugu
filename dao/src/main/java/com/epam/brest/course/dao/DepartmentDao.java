@@ -23,7 +23,7 @@ public interface DepartmentDao {
 
     /**
      *
-     * @param department takes an object as param for adding new
+     * @param department takes an object as param for adding new.
      * department.
      * @return department.
      */

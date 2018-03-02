@@ -49,7 +49,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * Template class with a basic set of JDBC operations, allowing the use
      * of named parameters rather than traditional '?' placeholders.
      *
-     * when we want to give a parameter a specific value
+     * when we want to give a parameter a specific value.
      */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     /**
@@ -64,7 +64,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @return
+     * @return list of departments.
      */
     @Override
     public final List<Department> getDepartments() {
@@ -75,10 +75,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @param departmentId used to get one department by id
+     * @param departmentId used to get one department by id.
      * @return
      * during execution time namedParameter will
-     * be converted to JDBC style '?' placeholders
+     * be converted to JDBC style '?' placeholders.
      */
     @Override
     public final Department getDepartmentById(final Integer departmentId) {
@@ -97,8 +97,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @param department to get and set info about department to add
-     * @return department
+     * @param department to get and set info about department to add.
+     * @return department.
      */
     @Override
     public final Department addDepartment(final Department department) {
@@ -114,7 +114,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @param department used to accept infor about department to update
+     * @param department used to accept info about department to update.
      */
     @Override
     public final void updateDepartment(final Department department) {
@@ -131,7 +131,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     /**
      *
      * @param departmentId of
-     * the column to be deleted
+     * the column to be deleted.
      */
     @Override
     public final void deleteDepartmentById(final Integer departmentId) {
@@ -168,39 +168,38 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     private class JdbcQuery {
         /**
-         * sql query
+         * sql query.
          */
         private static final String GET_DEPARTMENT_BY_ID =
                 "SELECT departmentId, departmentName, description "
-                        + "FROM department WHERE departmentId = departmentId";
+                        + "FROM department WHERE departmentId = :departmentId";
 
         /**
-         * sql query get department
+         * sql query get department.
          */
         private static final String GET_DEPARTMENT_SQL =
            "SELECT departmentId, departmentName, description FROM department";
 
         /**
-         * sql add entity
+         * sql add entity.
          */
         private static final String ADD_DEPARTMENT =
           "INSERT INTO department (departmentName, description)" +
                   " VALUES (:departmentName, :description)";
 
         /**
-         * update sql
+         * update sql.
          */
         private static final String UPDATE_DEPARTMENT =
                 "UPDATE department SET departmentName ="
-                        + " departmentName, description = description "
-                        + "WHERE departmentId = departmentId";
+                        + " :departmentName, description = :description "
+                        + "WHERE departmentId = :departmentId";
 
         /**
-         * delete department sql query
+         * delete department sql query.
          */
         private static final String DELETE_DEPARTMENT =
-                "DELETE FROM department WHERE departmentId = departmentId";
-
+                "DELETE FROM department WHERE departmentId = :departmentId";
 
     }
 }

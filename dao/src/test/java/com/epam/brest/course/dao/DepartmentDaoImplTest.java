@@ -15,8 +15,8 @@ import java.util.List;
         "classpath:test-dao.xml"})
 public class DepartmentDaoImplTest {
     /**
-     * my dao for department ,
-     * containing db connection and jdbc template
+     * my dao for department
+     * containing db connection and jdbc template.
      */
     @Autowired
     private DepartmentDao departmentDao;
@@ -29,7 +29,7 @@ public class DepartmentDaoImplTest {
 
     /**
      * get department by id test
-     * test if we can get department from db
+     * test if we can get department from db.
      */
     @Test
     public void getDepartmentById() {
@@ -41,7 +41,7 @@ public class DepartmentDaoImplTest {
     }
 
     /**
-     * add document test
+     * add document test.
      */
     @Test
     public void addDepartment() {
@@ -56,9 +56,9 @@ public class DepartmentDaoImplTest {
     }
 
     /**
-     * At first i get department by id to confirm deptName
-     * now set new department name and update
-     * now call getDepartmentBy id to prove update has occurred
+     * At first i get department by id to confirm deptName.
+     * now set new department name and update.
+     * now call getDepartmentBy id to prove update has occurred.
      */
     @Test
     public void updateDepartment() {
@@ -82,7 +82,7 @@ public class DepartmentDaoImplTest {
      * because delete operation has a void return type
      * when we getDepartmentById value returned will be 0
      * we cant return null because null means variable that points to nothing
-     * and in our case getDepartmentById will return exception because we no such id
+     * and in our case getDepartmentById will return exception because we no such id.
      */
     @Test(expected = org.springframework.dao.EmptyResultDataAccessException.class)
     public void deleteDepartment() {
