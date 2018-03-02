@@ -6,7 +6,7 @@
 
     <import resource="test-db-spring.xml"/>
 
-    <bean id="departmentDao" class="com.epam.brest.course.dao.DepartmentDaoImpl">
+    <bean id="departmentDao" class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
 
