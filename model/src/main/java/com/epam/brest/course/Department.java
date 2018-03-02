@@ -1,82 +1,79 @@
 package com.epam.brest.course;
 
+import java.util.Objects;
+
 /**
- * POJO Department for model.
+ * department pojo.
  */
 public class Department {
 
     /**
-     * id attribute
+     * id attribute.
      */
     private Integer departmentId;
 
     /**
-     * name attribute
+     * name attribute.
      */
     private String departmentName;
     /**
-     * description attribute
+     * description attribute.
      */
     private String description;
 
-    /**
-     *
-     * @return department id
-     */
-    public Integer getDepartmentId() {
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
-    /**
-     *
-     * @param  departmentId setter
-     */
-    public void setDepartmentId(Integer departmentId) {
+    public final void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 
-    /**
-     *
-     * @return name
-     */
-    public String getDepartmentName() {
+    public final String getDepartmentName() {
         return departmentName;
     }
 
     /**
      *
-     * @param departmentName setter
+     * @param departmentName names
      */
-    public void setDepartmentName(String departmentName) {
+    public final void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
 
     /**
      *
-     * @return description
+     * @return descriptions
      */
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
-    /**
-     *
-     * @param description setter
-     */
-    public void setDescription(String description) {
+    public final void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     *
-     * @return all informations
-     */
     @Override
-    public String toString() {
-        return "Department{"
-             + "departmentId=" + departmentId
-             + ", departmentName='" + departmentName + '\''
-             + ", description='" + description + '\''
-             + '}';
+    public boolean equals(final Object o) {
+
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Department)) {
+            return false;
+        }
+        Department that = (Department) o;
+
+        return Objects.equals(getDepartmentId(), that.getDepartmentId())
+             && Objects.equals(getDepartmentName(), that.getDepartmentName())
+             && Objects.equals(getDescription(), that.getDescription());
+    }
+
+    @Override
+    public final int hashCode() {
+
+        return Objects.hash(getDepartmentId(),
+                getDepartmentName(),
+                getDescription());
     }
 }

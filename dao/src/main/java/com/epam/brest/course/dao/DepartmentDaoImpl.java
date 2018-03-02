@@ -1,7 +1,6 @@
-package com.epam.brest.course.dao.impl;
+package com.epam.brest.course.dao;
 
 import com.epam.brest.course.Department;
-import com.epam.brest.course.dao.api.DepartmentDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

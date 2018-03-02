@@ -6,84 +6,84 @@ package com.epam.brest.course;
 public class Employee {
 
     /**
-     * attribute employeeId
+     * attribute employeeId.
      */
     private Integer employeeId;
     /**
-     * attribute employeeName
+     * attribute employeeName.
      */
     private String employeeName;
     /**
-     * attribute salary
+     * attribute salary.
      */
     private Integer salary;
     /**
-     * attribute departmentId
+     * attribute departmentId.
      */
-    private Integer departmentId;
+    private Integer deptId;
 
     /**
      * Get Employee Id.
      * @return employeeId.
      */
-    public Integer getEmployeeId() {
+    public final Integer getEmployeeId() {
         return employeeId;
     }
 
     /**
      *
-     * @param employeeId setter
+     * @param employeeId setter.
      */
-    public void setEmployeeId(Integer employeeId) {
+    public final void setEmployeeId(final Integer employeeId) {
         this.employeeId = employeeId;
     }
 
     /**
      *
-     * @return employeeName
+     * @return employeeName.
      */
-    public String getEmployeeName() {
+    public final String getEmployeeName() {
         return employeeName;
     }
 
     /**
      *
-     * @param employeeName setter
+     * @param employeeName setter.
      */
-    public void setEmployeeName(String employeeName) {
+    public final void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
     }
 
     /**
      *
-     * @return salary
+     * @return salary.
      */
-    public Integer getSalary() {
+    public final Integer getSalary() {
         return salary;
     }
 
     /**
      *
-     * @param salary setter
+     * @param salary setter.
      */
-    public void setSalary(Integer salary) {
+    public final void setSalary(final Integer salary) {
         this.salary = salary;
     }
 
     /**
      *
-     * @return departmentId
+     * @return departmentId.
      */
-    public Integer getDepartmentId() {
-        return departmentId;
+    public final Integer getDepartmentId() {
+        return deptId;
     }
 
     /**
      *
      * @param departmentId setter
      */
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public final void setDepartmentId(final Integer departmentId) {
+        this.deptId = departmentId;
     }
 
     /**
@@ -91,12 +91,12 @@ public class Employee {
      * @return String
      */
     @Override
-    public java.lang.String toString() {
+    public final java.lang.String toString() {
         return "Employee{"
               +  "employeeId=" + employeeId
               + ",   employeeName=" + employeeName
               + ", salary=" + salary
-              + ", departmentId=" + departmentId
+              + ", departmentId=" + deptId
               +  '}';
     }
 }
