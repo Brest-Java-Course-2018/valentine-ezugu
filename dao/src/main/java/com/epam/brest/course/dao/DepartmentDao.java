@@ -16,10 +16,10 @@ public interface DepartmentDao {
 
     /**
      *
-     * @param id to select a particular id.
+     * @param departmentId to select a particular id.
      * @return the department selected.
      */
-    Department getDepartmentById(Integer id);
+    Department getDepartmentById(Integer departmentId);
 
     /**
      *

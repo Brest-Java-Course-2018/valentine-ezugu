@@ -49,14 +49,15 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * Template class with a basic set of JDBC operations, allowing the use
      * of named parameters rather than traditional '?' placeholders.
      *
-     * when we want to give a parameter a specific value.
+     * when we want to give a parameter a specific value
      */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     /**
      *
      * @param dataSource creates a db connection.
      */
-    public DepartmentDaoImpl(final DataSource dataSource) {
+
+    public DepartmentDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(dataSource);
@@ -64,7 +65,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @return list of departments.
+     * @return
      */
     @Override
     public final List<Department> getDepartments() {
@@ -75,7 +76,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @param departmentId used to get one department by id.
+     * @param departmentId used to get one department by id
      * @return
      * during execution time namedParameter will
      * be converted to JDBC style '?' placeholders.
@@ -89,7 +90,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
           department =
                 namedParameterJdbcTemplate.queryForObject(
-                        JdbcQuery.GET_DEPARTMENT_BY_ID, namedParameterSource,
+                         JdbcQuery.GET_DEPARTMENT_BY_ID, namedParameterSource,
                         new DepartRowMapper());
         return department;
     }
@@ -171,8 +172,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
          * sql query.
          */
         private static final String GET_DEPARTMENT_BY_ID =
-                "SELECT departmentId, departmentName, description "
-                        + "FROM department WHERE departmentId = :departmentId";
+                "SELECT departmentId, departmentName, description"
+                        + " FROM department WHERE departmentId = :departmentId";
 
         /**
          * sql query get department.

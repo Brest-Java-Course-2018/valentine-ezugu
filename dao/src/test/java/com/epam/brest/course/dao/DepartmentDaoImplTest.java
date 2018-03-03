@@ -15,7 +15,7 @@ import java.util.List;
         "classpath:test-dao.xml"})
 public class DepartmentDaoImplTest {
     /**
-     * my dao for department
+     * my dao for department ,
      * containing db connection and jdbc template.
      */
     @Autowired

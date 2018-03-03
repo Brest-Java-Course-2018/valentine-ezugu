@@ -25,7 +25,7 @@ public class Department {
      *
      * @return id.
      */
-    public final Integer getDepartmentId() {
+    public   Integer getDepartmentId() {
         return departmentId;
     }
 
@@ -33,7 +33,7 @@ public class Department {
      *
      * @param departmentId setter.
      */
-    public final void setDepartmentId(final Integer departmentId) {
+    public   void setDepartmentId(  Integer departmentId) {
         this.departmentId = departmentId;
     }
 
