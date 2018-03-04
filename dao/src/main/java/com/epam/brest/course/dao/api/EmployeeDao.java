@@ -1,11 +1,10 @@
 package com.epam.brest.course.dao.api;
 
-
 import com.epam.brest.course.Employee;
-
 import java.util.List;
 
 public interface EmployeeDao {
+
     /**
      *
      * @return a list of employees.

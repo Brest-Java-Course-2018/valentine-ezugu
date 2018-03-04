@@ -2,7 +2,6 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.Department;
 import com.epam.brest.course.dao.api.DepartmentDao;
-import com.epam.brest.course.dao.impl.DepartmentDaoImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.sql.DataSource;
+
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

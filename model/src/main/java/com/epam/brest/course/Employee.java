@@ -1,5 +1,7 @@
 package com.epam.brest.course;
 
+import java.util.Objects;
+
 /**
  * POJO Employee for model.
  */
@@ -100,6 +102,30 @@ public class Employee {
               +  '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Employee)) return false;
+
+        Employee employee = (Employee) o;
+        return Objects.equals(getEmployeeId(),
+                employee.getEmployeeId()) &&
+                Objects.equals(getEmployeeName(),
+                        employee.getEmployeeName()) &&
+                Objects.equals(getSalary(),
+                        employee.getSalary()) &&
+                Objects.equals(deptId, employee.deptId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getEmployeeId(),
+                getEmployeeName(),
+                getSalary(),
+                deptId);
+    }
 }
 
 
