@@ -1,4 +1,4 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.dao.api;
 
 import com.epam.brest.course.Department;
 import java.util.List;
@@ -16,24 +16,24 @@ public interface DepartmentDao {
 
     /**
      *
-     * @param departmentId to select a particular id.
+     * @param id to select a particular id.
      * @return the department selected.
      */
-    Department getDepartmentById(Integer departmentId);
+    Department getDepartmentById(Integer id);
 
     /**
      *
-     * @param department takes an object as param for adding new.
+     * @param dept takes an object as param for adding new.
      * department.
      * @return department.
      */
-    Department addDepartment(Department department);
+    Department addDepartment(Department dept);
 
     /**
      *
-     * @param department object used for update.
+     * @param dept object used for update.
      */
-    void updateDepartment(Department department);
+    void updateDepartment(Department dept);
 
     /**
      *

@@ -1,6 +1,7 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.dao.impl;
 
 import com.epam.brest.course.Department;
+import com.epam.brest.course.dao.api.DepartmentDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -76,17 +77,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @param departmentId used to get one department by id
+     * @param deptId used to get one department by id
      * @return
      * during execution time namedParameter will
      * be converted to JDBC style '?' placeholders.
      */
     @Override
-    public final Department getDepartmentById(final Integer departmentId) {
+    public final Department getDepartmentById(final Integer deptId) {
         Department department;
 
         SqlParameterSource namedParameterSource =
-                new MapSqlParameterSource("departmentId", departmentId);
+                new MapSqlParameterSource("departmentId", deptId);
 
           department =
                 namedParameterJdbcTemplate.queryForObject(
@@ -131,14 +132,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @param departmentId of
+     * @param deptId of
      * the column to be deleted.
      */
     @Override
-    public final void deleteDepartmentById(final Integer departmentId) {
-         Assert.notNull(departmentId, "department id cannot be null ");
+    public final void deleteDepartmentById(final Integer deptId) {
+         Assert.notNull(deptId, "department id cannot be null ");
         SqlParameterSource namedParameterSource =
-                new MapSqlParameterSource("departmentId", departmentId);
+                new MapSqlParameterSource("departmentId", deptId);
         namedParameterJdbcTemplate
                 .update(JdbcQuery.DELETE_DEPARTMENT, namedParameterSource);
     }
