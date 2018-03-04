@@ -11,7 +11,6 @@ public class Department {
      * id attribute.
      */
     private Integer departmentId;
-
     /**
      * name attribute.
      */
@@ -25,7 +24,7 @@ public class Department {
      *
      * @return id.
      */
-    public   Integer getDepartmentId() {
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
@@ -33,7 +32,7 @@ public class Department {
      *
      * @param departmentId setter.
      */
-    public   void setDepartmentId(  Integer departmentId) {
+    public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -91,5 +90,17 @@ public class Department {
         return Objects.hash(getDepartmentId(),
                 getDepartmentName(),
                 getDescription());
+    }
+
+    @Override
+    public final String toString() {
+        return "Department{"
+                + "departmentId="
+                + departmentId
+                + ", departmentName='"
+                + departmentName
+                + ", description='"
+                + description
+                + '}';
     }
 }

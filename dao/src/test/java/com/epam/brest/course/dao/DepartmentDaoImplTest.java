@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.Department;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -86,10 +87,12 @@ public class DepartmentDaoImplTest {
      */
     @Test(expected = org.springframework.dao.EmptyResultDataAccessException.class)
     public void deleteDepartment() {
-      Department department = departmentDao.getDepartmentById(1);
-      Assert.assertEquals("Distribution", department.getDepartmentName());
-      departmentDao.deleteDepartmentById(1);
-      departmentDao.getDepartmentById(1);
+        Department department1 = new Department();
+        department1.setDepartmentName("Distribution");
+        department1.setDepartmentId(5);
+        Department department = departmentDao.getDepartmentById(5);
+        Assert.assertEquals("Distribution", department.getDepartmentName());
+        departmentDao.deleteDepartmentById(1);
     }
 
 }

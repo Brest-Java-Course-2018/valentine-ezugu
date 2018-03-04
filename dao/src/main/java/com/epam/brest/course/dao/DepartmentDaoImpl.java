@@ -57,7 +57,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @param dataSource creates a db connection.
      */
 
-    public DepartmentDaoImpl(DataSource dataSource) {
+    public DepartmentDaoImpl(final DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(dataSource);
@@ -65,7 +65,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      *
-     * @return
+     * @return a list of departments
      */
     @Override
     public final List<Department> getDepartments() {
@@ -119,14 +119,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Override
     public final void updateDepartment(final Department department) {
-        Assert.notNull(department,"department cannot be null");
+        Assert.notNull(department, "department cannot be null");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("departmentId",
                         department.getDepartmentId())
                     .addValue("departmentName", department.getDepartmentName())
                     .addValue("description", department.getDescription());
         namedParameterJdbcTemplate
-                .update(JdbcQuery.UPDATE_DEPARTMENT,namedParameterSource);
+                .update(JdbcQuery.UPDATE_DEPARTMENT, namedParameterSource);
     }
 
     /**
@@ -185,8 +185,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
          * sql add entity.
          */
         private static final String ADD_DEPARTMENT =
-          "INSERT INTO department (departmentName, description)" +
-                  " VALUES (:departmentName, :description)";
+          "INSERT INTO department (departmentName, description)"
+                  + " VALUES (:departmentName, :description)";
 
         /**
          * update sql.
