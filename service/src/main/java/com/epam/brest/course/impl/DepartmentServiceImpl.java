@@ -4,10 +4,14 @@ import com.epam.brest.course.Department;
 import com.epam.brest.course.api.DepartmentService;
 import com.epam.brest.course.dao.api.DepartmentDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class DepartmentServiceImpl implements DepartmentService{
 
     @Autowired

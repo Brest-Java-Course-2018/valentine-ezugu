@@ -5,6 +5,8 @@ import com.epam.brest.course.api.EmployeeService;
 import com.epam.brest.course.dao.api.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -13,8 +15,10 @@ import java.util.List;
  * This is the service class for employee entity
  * I have not seperated services  into two distinct modules
  * because its only two entities.
- *  Todo @Transactional and @Services will be added in xml
+ *  Todo @Transactional and @Services will be added in xml for now @
  */
+@Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
