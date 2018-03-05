@@ -15,7 +15,8 @@ import java.util.List;
  * This is the service class for employee entity
  * I have not seperated services  into two distinct modules
  * because its only two entities.
- *  Todo @Transactional and @Services will be added in xml for now @
+ *  Todo @Transactional and @Services will be added in xml for now
+ *  TODO @EnableTransactionManagement will also be added
  */
 @Service
 @Transactional
