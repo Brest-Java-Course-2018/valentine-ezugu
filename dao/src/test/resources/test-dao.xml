@@ -10,4 +10,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
+    <bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 </beans>

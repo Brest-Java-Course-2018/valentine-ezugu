@@ -70,7 +70,7 @@ public class Department {
 
     /**
      *
-     * @param o - object param
+     * @param o - object param.
      * @return an object that matches  department.
      * main purposr is to check that object created is
      * a match to department object.
@@ -81,7 +81,7 @@ public class Department {
         if (this == o) {
             return true;
         }
-        //if object not an instance of dept
+        //if object not an instance of dept.
         if (!(o instanceof Department)) {
             return false;
         }
@@ -94,7 +94,8 @@ public class Department {
 
     /**
      *
-     * @return and store hash value of obj
+     * @return and store hash value of obj.
+     * which is the object's memory address in hexadecimal.
      */
     @Override
     public final int hashCode() {

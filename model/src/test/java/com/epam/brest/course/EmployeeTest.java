@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class EmployeeTest {
 
-    public static final String VALIK ="valik";
+    private static final String VALIK ="valik";
 
     @Test
     public void getEmployeeName( ) {

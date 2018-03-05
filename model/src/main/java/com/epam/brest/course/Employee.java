@@ -15,14 +15,16 @@ public class Employee {
      * attribute employeeName.
      */
     private String employeeName;
+
     /**
      * attribute salary.
      */
     private Integer salary;
+
     /**
      * attribute departmentId.
      */
-    private Integer deptId;
+    private Integer departmentId;
 
     /**
      * Get Employee Id.
@@ -77,7 +79,7 @@ public class Employee {
      * @return departmentId.
      */
     public final Integer getDepartmentId() {
-        return deptId;
+        return departmentId;
     }
 
     /**
@@ -85,7 +87,7 @@ public class Employee {
      * @param departmentId setter.
      */
     public final void setDepartmentId(final Integer departmentId) {
-        this.deptId = departmentId;
+        this.departmentId = departmentId;
     }
 
     /**
@@ -95,36 +97,42 @@ public class Employee {
     @Override
     public final java.lang.String toString() {
         return "Employee{"
-              +  "employeeId=" + employeeId
-              + ",   employeeName=" + employeeName
-              + ", salary=" + salary
-              + ", departmentId=" + deptId
+              +  "employeeId="
+              + employeeId
+              + ",   employeeName="
+              + employeeName
+              + ", salary="
+              + salary
+              + ", departmentId="
+              + departmentId
               +  '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (!(o instanceof Employee)) return false;
-
+    public final boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Employee)) {
+            return false;
+        }
         Employee employee = (Employee) o;
         return Objects.equals(getEmployeeId(),
-                employee.getEmployeeId()) &&
-                Objects.equals(getEmployeeName(),
-                        employee.getEmployeeName()) &&
-                Objects.equals(getSalary(),
-                        employee.getSalary()) &&
-                Objects.equals(deptId, employee.deptId);
+                employee.getEmployeeId())
+                && Objects.equals(getEmployeeName(),
+                        employee.getEmployeeName())
+                && Objects.equals(getSalary(),
+                        employee.getSalary())
+                && Objects.equals(departmentId, employee.departmentId);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
 
         return Objects.hash(getEmployeeId(),
                 getEmployeeName(),
                 getSalary(),
-                deptId);
+                departmentId);
     }
 }
 

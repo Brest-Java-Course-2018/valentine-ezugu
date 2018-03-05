@@ -3,6 +3,9 @@ package com.epam.brest.course.dao.api;
 import com.epam.brest.course.Employee;
 import java.util.List;
 
+/**
+ * employee dao class
+ */
 public interface EmployeeDao {
 
     /**
@@ -24,7 +27,7 @@ public interface EmployeeDao {
      * employee.
      * @return employee.
      */
-    Employee addEmployee (Employee employee);
+    Employee addEmployee(Employee employee);
 
     /**
      *
