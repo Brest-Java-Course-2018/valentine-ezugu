@@ -108,8 +108,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     @Override
     public final Employee addEmployee(final Employee employee) {
-
-        Assert.notNull(employee, "employee cannot be null");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("employeeName",
                          employee.getEmployeeName())
@@ -126,7 +124,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     @Override
     public final void updateEmployee(final Employee employee) {
-        Assert.notNull(employee, "department cannot be null");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("employeeId",
                          employee.getEmployeeId())
@@ -143,7 +140,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     @Override
     public final void deleteEmployeeById(final Integer id) {
-        Assert.notNull(id, "employee id cannot be null ");
         SqlParameterSource namedParameterSource =
                 new MapSqlParameterSource("employeeId", id);
         namedParameterJdbcTemplate

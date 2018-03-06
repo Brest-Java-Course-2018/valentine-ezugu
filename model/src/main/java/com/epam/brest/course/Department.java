@@ -20,6 +20,14 @@ public class Department {
      */
     private String description;
 
+    public Department(String departmentName, String description) {
+        this.departmentName = departmentName;
+        this.description = description;
+    }
+
+    public Department() {
+    }
+
     /**
      *
      * @return id.
@@ -96,6 +104,7 @@ public class Department {
      *
      * @return and store hash value of obj.
      * which is the object's memory address in hexadecimal.
+     * if we put or change hascode value what happens ?
      */
     @Override
     public final int hashCode() {

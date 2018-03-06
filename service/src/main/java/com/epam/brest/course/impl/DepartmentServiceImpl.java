@@ -6,6 +6,7 @@ import com.epam.brest.course.dao.api.DepartmentDao;
 
 import org.springframework.dao.DataAccessException;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * service bean for department.
  */
+@Transactional
 public class DepartmentServiceImpl implements DepartmentService{
 
     /**
@@ -26,7 +28,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      *                      of dependency.
      */
     public DepartmentServiceImpl(DepartmentDao departmentDao){
-         this.departmentDao =departmentDao;
+         this.departmentDao = departmentDao;
       }
 
     /**
@@ -37,9 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public Department saveDepartment(Department department) throws DataAccessException {
-        Assert.notNull(department, "department cannot be null");
-        Assert.hasText(department.getDepartmentName(),"name cannot be null");
-        //description can be null
+        Assert.notNull(department,"department cannot be null");
         return departmentDao.addDepartment(department);
     }
 
@@ -60,6 +60,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public void deleteDepartmentById(Integer id) throws DataAccessException {
+        Assert.notNull(id,"id cannot be null");
         departmentDao.deleteDepartmentById(id);
     }
 
@@ -71,6 +72,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public Department getDepartmentById(Integer id) throws DataAccessException {
+        Assert.notNull(id, "id cannot be null");
         return departmentDao.getDepartmentById(id);
     }
 

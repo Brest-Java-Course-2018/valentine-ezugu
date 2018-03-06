@@ -32,7 +32,7 @@
         of an operation defined by the FooService interface -->
     <!--TODO not complete yet -->
     <aop:config>
-        <aop:pointcut id="ServiceOperation" expression="execution(* com.epam.brest.course.*(..))"/>
+        <aop:pointcut id="ServiceOperation" expression="execution(* com.epam.brest.course.impl*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="ServiceOperation"/>
     </aop:config>
 

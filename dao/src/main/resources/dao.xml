@@ -6,12 +6,33 @@
 
     <import resource="test-db-spring.xml"/>
 
-    <bean id="departmentDao" class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">
-        <constructor-arg ref="dataSource"/>
+    <!--place holder to find sql query store-->
+
+    <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:sql.properties</value>
+            </list>
+        </property>
     </bean>
+
+    <bean id="departmentDao" class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">
+        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+
 
     <bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">
         <constructor-arg ref="dataSource"/>
+    </bean>
+
+
+    <bean id="tranactionManger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
 </beans>
