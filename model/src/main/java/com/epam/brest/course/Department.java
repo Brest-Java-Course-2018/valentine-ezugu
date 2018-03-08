@@ -15,16 +15,25 @@ public class Department {
      * name attribute.
      */
     private String departmentName;
+
     /**
      * description attribute.
      */
     private String description;
 
-    public Department(String departmentName, String description) {
+    /**
+     *
+     * @param departmentName for constructor init.
+     * @param description for constructor init.
+     */
+    public Department(final String departmentName, final String description) {
         this.departmentName = departmentName;
         this.description = description;
     }
 
+    /**
+     * empty constructor.
+     */
     public Department() {
     }
 

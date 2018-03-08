@@ -6,7 +6,6 @@ import com.epam.brest.course.dao.api.EmployeeDao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,10 @@ import java.util.List;
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
+
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
@@ -38,15 +41,17 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @throws DataAccessException when cannot access db.
      */
     @Override
-    public Employee saveEmployee(Employee employee) throws DataAccessException{
+    public final Employee saveEmployee(final Employee employee)
+            throws DataAccessException {
         LOGGER.debug("saveEmployee({})", employee);
 
         Assert.notNull(employee, "employee cannot be null");
 
-        Assert.hasText(employee.getEmployeeName(),"name cannot be null");
-        Assert.notNull(employee.getSalary(),"salary cannot be null");
+        Assert.hasText(employee.getEmployeeName(), "name cannot be null");
+        Assert.notNull(employee.getSalary(), "salary cannot be null");
 
-        Assert.notNull(employee.getDepartmentId(),"department id cannot be null");
+        Assert.notNull(employee.getDepartmentId(),
+                "department id cannot be null");
 
         return employeeDao.addEmployee(employee);
     }
@@ -57,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public List<Employee> getAllEmployees() throws DataAccessException {
+    public final List<Employee> getAllEmployees() throws DataAccessException {
         LOGGER.debug("getAllEmployees()");
 
         return employeeDao.getEmployees();
@@ -69,9 +74,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public void deleteEmployeeById(Integer id) throws DataAccessException {
-        LOGGER.debug("deleteEmployeeById({})" ,id);
-
+    public final void deleteEmployeeById(final Integer id)
+            throws DataAccessException {
+        LOGGER.debug("deleteEmployeeById({})", id);
         employeeDao.deleteEmployeeById(id);
     }
 
@@ -82,7 +87,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public Employee getEmployeeById(Integer id) throws DataAccessException {
+    public final Employee getEmployeeById(final Integer id)
+            throws DataAccessException {
         return employeeDao.getEmployeeById(id);
     }
 

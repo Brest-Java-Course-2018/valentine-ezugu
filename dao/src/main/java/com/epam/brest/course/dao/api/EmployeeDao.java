@@ -4,9 +4,10 @@ import com.epam.brest.course.Employee;
 import java.util.List;
 
 /**
- * employee dao class
+ * employee dao class.
  */
 public interface EmployeeDao {
+
 
     /**
      *

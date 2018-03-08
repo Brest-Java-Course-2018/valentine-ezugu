@@ -20,8 +20,10 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class DepartmentServiceImpl implements DepartmentService{
-
+public class DepartmentServiceImpl implements DepartmentService {
+    /**
+     * log for debugging.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
     /**
      * dao for db transactions.
@@ -36,9 +38,16 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public Department saveDepartment(Department department) throws DataAccessException {
+    public final Department saveDepartment(final Department department)
+            throws DataAccessException {
         LOGGER.debug("saveDepartment({})", department);
-        Assert.notNull(department,"department cannot be null");
+        Assert.notNull(department, "department cannot be null");
+        Assert.hasText(department.getDepartmentName(),
+                " department name cannot be null");
+
+        Assert.hasText(department.getDescription(),
+                " description cannot be null");
+
         return departmentDao.addDepartment(department);
     }
 
@@ -48,7 +57,8 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public List<Department> getAllDepartments() throws DataAccessException {
+    public final List<Department> getAllDepartments()
+            throws DataAccessException {
         LOGGER.debug("getAllDepartments()");
         return departmentDao.getDepartments();
     }
@@ -59,9 +69,10 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public void deleteDepartmentById(Integer id) throws DataAccessException {
-        LOGGER.debug("deleteDepartmentById({})" ,id);
-        Assert.notNull(id,"id cannot be null");
+    public final void deleteDepartmentById(final Integer id)
+            throws DataAccessException {
+        LOGGER.debug("deleteDepartmentById({})", id);
+        Assert.notNull(id, "id cannot be null");
         departmentDao.deleteDepartmentById(id);
     }
 
@@ -72,8 +83,9 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public Department getDepartmentById(Integer id) throws DataAccessException {
-        LOGGER.debug("getDepartmentById({})" ,id);
+    public final Department getDepartmentById(final Integer id)
+            throws DataAccessException {
+        LOGGER.debug("getDepartmentById({})", id);
         Assert.notNull(id, "id cannot be null");
         return departmentDao.getDepartmentById(id);
     }

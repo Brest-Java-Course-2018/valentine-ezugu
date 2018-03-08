@@ -25,39 +25,59 @@ import java.util.List;
 public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
-     * for static logger use logManager
+     * for static logger use logManager.
      */
     private static final Logger LOGGER = LogManager.getLogger();
-
+    /**
+     * sql query for select by id.
+     */
     @Value("${department.select}")
     private String departmentSelect;
-
+    /**
+     * sql query for select all.
+     */
     @Value("${department.selectAll}")
     private String departmentSelectAll;
-
+    /**
+     * sql query for add new.
+     */
     @Value("${department.addDepartment}")
     private String addDepartment;
-
+    /**
+     * sql query for update.
+     */
     @Value("${department.update}")
     private String update;
-
+    /**
+     * sql query for delete by id.
+     */
     @Value("${department.delete}")
     private String delete;
-
+    /**
+     *
+     */
     @Value("${department.checkDepartment}")
     private String checkDepartment;
 
-
+    /**
+     * row description for row mapper.
+     */
     private static final String DEPARTMENT_ID = "departmentId";
+    /**
+     * row description for row mapper.
+     */
     private static final String DEPARTMENT_NAME = "departmentName";
+    /**
+     * row description for row mapper.
+     */
     private static final String DESCRIPTION = "description";
 
 
     /**
-     * Template class with a basic set of JDBC operations, allowing the use
+     * Template class with a basic set of JDBC operations, allowing the use.
      * of named parameters rather than traditional '?' placeholders.
      *
-     * when we want to give a parameter a specific value
+     * when we want to give a parameter a specific value.
      */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -65,20 +85,22 @@ public class DepartmentDaoImpl implements DepartmentDao {
      *
      * @param namedParameterJdbcTemplate jdbc basic ops.
      */
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public final void setNamedParameterJdbcTemplate(
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     /**
      *
-     * @return a list of departments
+     * @return a list of departments.
      */
     @Override
     public final List<Department> getDepartments() {
         LOGGER.debug("getDepartment()");
 
         List<Department> departments =
-        namedParameterJdbcTemplate.getJdbcOperations().query(departmentSelectAll, new DepartRowMapper());
+        namedParameterJdbcTemplate.getJdbcOperations()
+                .query(departmentSelectAll, new DepartRowMapper());
         return departments;
     }
 
@@ -93,15 +115,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * model class to check all attributes and map them to result.
      */
     @Override
-    public Department getDepartmentById(Integer departmentId) {
-        Assert.notNull(departmentId,"departmentId cannot be null");
+    public final Department getDepartmentById(final Integer departmentId) {
+        Assert.notNull(departmentId, "departmentId cannot be null");
 
-        LOGGER.debug("getDepartmentById({})" , departmentId);
+        LOGGER.debug("getDepartmentById({})", departmentId);
 
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
         Department department =
-            namedParameterJdbcTemplate.queryForObject(departmentSelect, namedParameters,
+            namedParameterJdbcTemplate.queryForObject(departmentSelect,
+                    namedParameters,
 
             BeanPropertyRowMapper.newInstance(Department.class));
         return department;
@@ -112,26 +135,29 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @param department to get and set info about department to add.
      * @return department.
      * the idea is to check that no repetition of already
-     * existing department when adding new department
+     * existing department when adding new department.
      */
     @Override
-    public Department addDepartment(Department department) {
+    public final Department addDepartment(final Department department) {
 
-        Assert.notNull(department,"department cannot be null");
-        LOGGER.debug("addDepartment({})" , department);
+        Assert.notNull(department, "department cannot be null");
+        LOGGER.debug("addDepartment({})", department);
 
         MapSqlParameterSource namedParameters =
-                new MapSqlParameterSource("departmentName", department.getDepartmentName());
+                new MapSqlParameterSource("departmentName",
+                        department.getDepartmentName());
         Integer result =
                 namedParameterJdbcTemplate.queryForObject(
                         checkDepartment, namedParameters, Integer.class);
 
-        LOGGER.debug("result({})" , result);
+        LOGGER.debug("result({})", result);
         if (result == 0) {
             namedParameters = new MapSqlParameterSource();
 
-            namedParameters.addValue("departmentName", department.getDepartmentName());
-            namedParameters.addValue("description", department.getDescription());
+            namedParameters.addValue("departmentName",
+                    department.getDepartmentName());
+            namedParameters.addValue("description",
+                    department.getDescription());
 
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(
@@ -153,9 +179,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @param department used to accept info about department to update.
      */
     @Override
-    public void updateDepartment(Department department) {
-        LOGGER.debug("updateDepartment({})" , department);
-        Assert.notNull(department,"department cannot be null");
+    public final void updateDepartment(final Department department) {
+        LOGGER.debug("updateDepartment({})", department);
+        Assert.notNull(department, "department cannot be null");
 
         SqlParameterSource namedParameter =
                 new BeanPropertySqlParameterSource(department);
@@ -169,11 +195,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * the column to be deleted.
      */
     @Override
-    public void deleteDepartmentById(Integer departmentId) {
-        LOGGER.debug("deleteDepartmentById({})" , departmentId);
-        Assert.notNull(departmentId,"departmentId cannot be null");
+    public final void deleteDepartmentById(final Integer departmentId) {
+        LOGGER.debug("deleteDepartmentById({})", departmentId);
+        Assert.notNull(departmentId, "departmentId cannot be null");
 
-        namedParameterJdbcTemplate.getJdbcOperations().update(delete, departmentId);
+        namedParameterJdbcTemplate.getJdbcOperations()
+                .update(delete, departmentId);
     }
 
     /**

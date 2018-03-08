@@ -32,7 +32,7 @@ public class EmployeeServiceTest {
     private static final int ID = 1;
 
     /**
-     * for Exception Tests
+     * for Exception Tests.
      */
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -45,7 +45,7 @@ public class EmployeeServiceTest {
 
     /**
      *
-     * @throws Exception in case of rule violation
+     * @throws Exception in case of rule violation.
      */
     @Test
     public void addEmployee() throws Exception {
