@@ -2,6 +2,8 @@ package com.epam.brest.course.dao.impl;
 
 import com.epam.brest.course.Department;
 import com.epam.brest.course.dao.api.DepartmentDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.util.Assert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +23,11 @@ import java.util.List;
  *dao class for db manipulation.
  */
 public class DepartmentDaoImpl implements DepartmentDao {
+
+    /**
+     * for static logger use logManager
+     */
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Value("${department.select}")
     private String departmentSelect;
@@ -67,6 +75,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Override
     public final List<Department> getDepartments() {
+        LOGGER.debug("getDepartment()");
+
         List<Department> departments =
         namedParameterJdbcTemplate.getJdbcOperations().query(departmentSelectAll, new DepartRowMapper());
         return departments;
@@ -84,10 +94,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Override
     public Department getDepartmentById(Integer departmentId) {
+        Assert.notNull(departmentId,"departmentId cannot be null");
+
+        LOGGER.debug("getDepartmentById({})" , departmentId);
+
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
-        Department department = namedParameterJdbcTemplate.queryForObject(departmentSelect, namedParameters,
-                BeanPropertyRowMapper.newInstance(Department.class));
+        Department department =
+            namedParameterJdbcTemplate.queryForObject(departmentSelect, namedParameters,
+
+            BeanPropertyRowMapper.newInstance(Department.class));
         return department;
     }
 
@@ -101,21 +117,30 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public Department addDepartment(Department department) {
 
+        Assert.notNull(department,"department cannot be null");
+        LOGGER.debug("addDepartment({})" , department);
+
         MapSqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentName", department.getDepartmentName());
         Integer result =
-                namedParameterJdbcTemplate.queryForObject(checkDepartment, namedParameters, Integer.class);
+                namedParameterJdbcTemplate.queryForObject(
+                        checkDepartment, namedParameters, Integer.class);
 
+        LOGGER.debug("result({})" , result);
         if (result == 0) {
             namedParameters = new MapSqlParameterSource();
+
             namedParameters.addValue("departmentName", department.getDepartmentName());
             namedParameters.addValue("description", department.getDescription());
 
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-            namedParameterJdbcTemplate.update(addDepartment, namedParameters, generatedKeyHolder);
+            namedParameterJdbcTemplate.update(
+                    addDepartment, namedParameters, generatedKeyHolder);
+
             department.setDepartmentId(generatedKeyHolder.getKey().intValue());
         } else {
-            throw new IllegalArgumentException("Department with the same name already exists in DB.");
+            throw new IllegalArgumentException(
+                    "Department with the same name already exists in DB.");
         }
 
         return department;
@@ -129,7 +154,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Override
     public void updateDepartment(Department department) {
-        SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(department);
+        LOGGER.debug("updateDepartment({})" , department);
+        Assert.notNull(department,"department cannot be null");
+
+        SqlParameterSource namedParameter =
+                new BeanPropertySqlParameterSource(department);
         namedParameterJdbcTemplate.update(update, namedParameter);
     }
 
@@ -141,6 +170,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Override
     public void deleteDepartmentById(Integer departmentId) {
+        LOGGER.debug("deleteDepartmentById({})" , departmentId);
+        Assert.notNull(departmentId,"departmentId cannot be null");
+
         namedParameterJdbcTemplate.getJdbcOperations().update(delete, departmentId);
     }
 

@@ -4,8 +4,12 @@ import com.epam.brest.course.Department;
 import com.epam.brest.course.api.DepartmentService;
 import com.epam.brest.course.dao.api.DepartmentDao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -14,22 +18,16 @@ import java.util.List;
 /**
  * service bean for department.
  */
+@Service
 @Transactional
 public class DepartmentServiceImpl implements DepartmentService{
 
+    private static final Logger LOGGER = LogManager.getLogger();
     /**
      * dao for db transactions.
      */
-    private final DepartmentDao departmentDao;
-
-    /**
-     *
-     * @param departmentDao constructor based autowiring
-     *                      of dependency.
-     */
-    public DepartmentServiceImpl(DepartmentDao departmentDao){
-         this.departmentDao = departmentDao;
-      }
+    @Autowired
+    private DepartmentDao departmentDao;
 
     /**
      *
@@ -39,6 +37,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public Department saveDepartment(Department department) throws DataAccessException {
+        LOGGER.debug("saveDepartment({})", department);
         Assert.notNull(department,"department cannot be null");
         return departmentDao.addDepartment(department);
     }
@@ -50,6 +49,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public List<Department> getAllDepartments() throws DataAccessException {
+        LOGGER.debug("getAllDepartments()");
         return departmentDao.getDepartments();
     }
 
@@ -60,6 +60,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public void deleteDepartmentById(Integer id) throws DataAccessException {
+        LOGGER.debug("deleteDepartmentById({})" ,id);
         Assert.notNull(id,"id cannot be null");
         departmentDao.deleteDepartmentById(id);
     }
@@ -72,9 +73,9 @@ public class DepartmentServiceImpl implements DepartmentService{
      */
     @Override
     public Department getDepartmentById(Integer id) throws DataAccessException {
+        LOGGER.debug("getDepartmentById({})" ,id);
         Assert.notNull(id, "id cannot be null");
         return departmentDao.getDepartmentById(id);
     }
-
 
 }

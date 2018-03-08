@@ -15,12 +15,12 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db-spring.xml",
-        "classpath:test-dao.xml"})
+        "classpath:test-dao.xml","classpath:dao.xml"})
 @Rollback
 @Transactional
 public class EmployeeDaoImplTest {
 
-@Autowired
+    @Autowired
     private EmployeeDao employeeDao;
 
     @Test
