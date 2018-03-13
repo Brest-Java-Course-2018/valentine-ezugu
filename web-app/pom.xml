@@ -22,12 +22,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-          <groupId>com.epam.brest.course</groupId>
-           <artifactId>dao</artifactId>
-        </dependency>
-
+        
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
