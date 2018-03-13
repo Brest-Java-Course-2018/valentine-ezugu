@@ -10,9 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.epam.brest.course</groupId>
     <artifactId>service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>service</name>
+
 
     <dependencies>
 
