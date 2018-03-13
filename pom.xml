@@ -33,6 +33,7 @@
         <log4j2.version>2.10.0</log4j2.version>
         <easymock.version>3.5.1</easymock.version>
         <thymeleaf-spring4.version>3.0.9.RELEASE</thymeleaf-spring4.version>
+        <project.version>1.0-SNAPSHOT</project.version>
     </properties>
 
     <dependencyManagement>
