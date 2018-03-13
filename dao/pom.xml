@@ -22,7 +22,7 @@
             <artifactId>model</artifactId>
         </dependency>
 
-        <!--for now doesnt work without version-->
+
         <dependency>
             <groupId>com.epam.brest.course</groupId>
             <artifactId>test-db</artifactId>

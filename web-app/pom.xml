@@ -24,18 +24,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.epam.brest.course</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.brest.course</groupId>
-            <artifactId>dao</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.brest.course</groupId>
-            <artifactId>model</artifactId>
+          <groupId>com.epam.brest.course</groupId>
+           <artifactId>dao</artifactId>
         </dependency>
 
         <dependency>
