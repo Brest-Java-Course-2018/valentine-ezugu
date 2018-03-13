@@ -22,7 +22,6 @@
             <artifactId>model</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>com.epam.brest.course</groupId>
             <artifactId>test-db</artifactId>
