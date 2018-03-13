@@ -227,7 +227,7 @@
                             <contextPath>/</contextPath>
                         </webApp>
                         <httpConnector>
-                            <port>8080</port>
+                            <port>8085</port>
                         </httpConnector>
                     </configuration>
                 </plugin>
@@ -248,15 +248,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<id>aggregate</id>-->
-                            <!--<goals>-->
-                                <!--<goal>aggregate</goal>-->
-                            <!--</goals>-->
-                            <!--<phase>site</phase>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
+                    <executions>
+                        <execution>
+                            <id>aggregate</id>
+                            <goals>
+                                <goal>aggregate</goal>
+                            </goals>
+                            <phase>site</phase>
+                        </execution>
+                    </executions>
                 </configuration>
             </plugin>
 
@@ -277,7 +277,7 @@
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>false</failsOnError>
                             <failOnViolation>false</failOnViolation>
-                            <!--<linkXRef>false</linkXRef>-->
+                            <linkXRef>false</linkXRef>
                         </configuration>
                         <goals>
                             <goal>check</goal>
@@ -380,7 +380,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <analysisCache>true</analysisCache>
-                    <!--<linkXref>true</linkXref>-->
+                    <linkXref>true</linkXref>
                     <sourceEncoding>utf-8</sourceEncoding>
                     <minimumTokens>1</minimumTokens>
                     <targetJdk>1.8</targetJdk>
