@@ -15,6 +15,9 @@ import java.util.List;
 
 /**
  * impl of dao fro employee.
+ *
+ * @author user
+ * @version $Id: $
  */
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -76,21 +79,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
+     * <p>Setter for the field <code>namedParameterJdbcTemplate</code>.</p>
      *
      * @param namedParameterJdbcTemplate adding namedParameterJdbcTemplate.
      *  which has datasource init so we can use this.
      * to access and manipulate our db.
-     *
      */
     public final void setNamedParameterJdbcTemplate(
          final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    /**
-     *
-     * @return a list of employees.
-     */
+    /** {@inheritDoc} */
     @Override
     public final List<Employee> getEmployees() {
         List<Employee> employees =
@@ -99,11 +99,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
          return employees;
     }
 
-    /**
-     *
-     * @param id to select a particular id.
-     * @return an employee.
-     */
+    /** {@inheritDoc} */
     @Override
     public final Employee getEmployeeById(final Integer id) {
         Assert.notNull(id, "cannot be null");
@@ -120,12 +116,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employee;
     }
 
-    /**
-     *
-     * @param employee takes an object as param for adding new.
-     * employee.
-     * @return a new employee.
-     */
+    /** {@inheritDoc} */
     @Override
     public final Employee addEmployee(final Employee employee) {
         Assert.notNull(employee, "cannot be null");
@@ -139,10 +130,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employee;
     }
 
-    /**
-     *
-     * @param employee object used for update.
-     */
+    /** {@inheritDoc} */
     @Override
     public final void updateEmployee(final Employee employee) {
 
@@ -158,10 +146,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 .update(update, namedParameterSource);
     }
 
-    /**
-     *
-     * @param id for delete.
-     */
+    /** {@inheritDoc} */
     @Override
     public final void deleteEmployeeById(final Integer id) {
         Assert.notNull(id, "cannot be null");

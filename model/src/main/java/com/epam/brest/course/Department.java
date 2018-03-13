@@ -4,6 +4,9 @@ import java.util.Objects;
 
 /**
  * department pojo.
+ *
+ * @author user
+ * @version $Id: $
  */
 public class Department {
 
@@ -22,6 +25,7 @@ public class Department {
     private String description;
 
     /**
+     * <p>Constructor for Department.</p>
      *
      * @param departmentName for constructor init.
      * @param description for constructor init.
@@ -38,6 +42,7 @@ public class Department {
     }
 
     /**
+     * <p>Getter for the field <code>departmentId</code>.</p>
      *
      * @return id.
      */
@@ -46,6 +51,7 @@ public class Department {
     }
 
     /**
+     * <p>Setter for the field <code>departmentId</code>.</p>
      *
      * @param departmentId setter.
      */
@@ -54,6 +60,7 @@ public class Department {
     }
 
     /**
+     * <p>Getter for the field <code>departmentName</code>.</p>
      *
      * @return deptName.
      */
@@ -62,6 +69,7 @@ public class Department {
     }
 
     /**
+     * <p>Setter for the field <code>departmentName</code>.</p>
      *
      * @param departmentName names.
      */
@@ -70,6 +78,7 @@ public class Department {
     }
 
     /**
+     * <p>Getter for the field <code>description</code>.</p>
      *
      * @return descriptions.
      */
@@ -78,6 +87,7 @@ public class Department {
     }
 
     /**
+     * <p>Setter for the field <code>description</code>.</p>
      *
      * @param description setter.
      */
@@ -85,13 +95,7 @@ public class Department {
         this.description = description;
     }
 
-    /**
-     *
-     * @param o - object param.
-     * @return an object that matches  department.
-     * main purposr is to check that object created is
-     * a match to department object.
-     */
+    /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object o) {
 
@@ -109,12 +113,7 @@ public class Department {
              && Objects.equals(getDescription(), that.getDescription());
     }
 
-    /**
-     *
-     * @return and store hash value of obj.
-     * which is the object's memory address in hexadecimal.
-     * if we put or change hascode value what happens ?
-     */
+    /** {@inheritDoc} */
     @Override
     public final int hashCode() {
 
@@ -123,6 +122,7 @@ public class Department {
                 getDescription());
     }
 
+    /** {@inheritDoc} */
     @Override
     public final String toString() {
         return "Department{"

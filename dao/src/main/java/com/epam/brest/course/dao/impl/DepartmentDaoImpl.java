@@ -21,6 +21,9 @@ import java.util.List;
 
 /**
  *dao class for db manipulation.
+ *
+ * @author user.
+ * @version $Id: $
  */
 public class DepartmentDaoImpl implements DepartmentDao {
 
@@ -82,6 +85,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
+     * <p>Setter for the field <code>namedParameterJdbcTemplate</code>.</p>
      *
      * @param namedParameterJdbcTemplate jdbc basic ops.
      */
@@ -90,10 +94,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    /**
-     *
-     * @return a list of departments.
-     */
+    /** {@inheritDoc} */
     @Override
     public final List<Department> getDepartments() {
         LOGGER.debug("getDepartment()");
@@ -104,16 +105,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return departments;
     }
 
-    /**
-     *
-     * @param departmentId used to get one department by id.
-     * @return
-     * during execution time namedParameter will
-     * be converted to JDBC style '?' placeholders.
-     *
-     * BeanPropertyRowMapper can be used instead of RowMapper by calling the
-     * model class to check all attributes and map them to result.
-     */
+
+
+    /** {@inheritDoc} */
     @Override
     public final Department getDepartmentById(final Integer departmentId) {
         Assert.notNull(departmentId, "departmentId cannot be null");
@@ -130,13 +124,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return department;
     }
 
-    /**
-     *
-     * @param department to get and set info about department to add.
-     * @return department.
-     * the idea is to check that no repetition of already
-     * existing department when adding new department.
-     */
+    /** {@inheritDoc} */
     @Override
     public final Department addDepartment(final Department department) {
 
@@ -173,11 +161,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
 
-
-    /**
-     *
-     * @param department used to accept info about department to update.
-     */
+    /** {@inheritDoc} */
     @Override
     public final void updateDepartment(final Department department) {
         LOGGER.debug("updateDepartment({})", department);
@@ -189,11 +173,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
 
-    /**
-     *
-     * @param departmentId of
-     * the column to be deleted.
-     */
+    /** {@inheritDoc} */
     @Override
     public final void deleteDepartmentById(final Integer departmentId) {
         LOGGER.debug("deleteDepartmentById({})", departmentId);

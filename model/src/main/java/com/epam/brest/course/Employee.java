@@ -4,6 +4,9 @@ import java.util.Objects;
 
 /**
  * POJO Employee for model.
+ *
+ * @author valentine
+ * @version $Id: $
  */
 public class Employee {
 
@@ -28,6 +31,7 @@ public class Employee {
 
     /**
      * Get Employee Id.
+     *
      * @return employeeId.
      */
     public final Integer getEmployeeId() {
@@ -35,6 +39,7 @@ public class Employee {
     }
 
     /**
+     * <p>Setter for the field <code>employeeId</code>.</p>
      *
      * @param employeeId setter.
      */
@@ -43,6 +48,7 @@ public class Employee {
     }
 
     /**
+     * <p>Getter for the field <code>employeeName</code>.</p>
      *
      * @return employeeName.
      */
@@ -51,6 +57,7 @@ public class Employee {
     }
 
     /**
+     * <p>Setter for the field <code>employeeName</code>.</p>
      *
      * @param employeeName setter.
      */
@@ -59,6 +66,7 @@ public class Employee {
     }
 
     /**
+     * <p>Getter for the field <code>salary</code>.</p>
      *
      * @return salary.
      */
@@ -67,6 +75,7 @@ public class Employee {
     }
 
     /**
+     * <p>Setter for the field <code>salary</code>.</p>
      *
      * @param salary setter.
      */
@@ -75,6 +84,7 @@ public class Employee {
     }
 
     /**
+     * <p>Getter for the field <code>departmentId</code>.</p>
      *
      * @return departmentId.
      */
@@ -83,6 +93,7 @@ public class Employee {
     }
 
     /**
+     * <p>Setter for the field <code>departmentId</code>.</p>
      *
      * @param departmentId setter.
      */
@@ -90,10 +101,7 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
-    /**
-     *
-     * @return String.
-     */
+    /** {@inheritDoc} */
     @Override
     public final java.lang.String toString() {
         return "Employee{"
@@ -108,6 +116,7 @@ public class Employee {
               +  '}';
     }
 
+    /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object o) {
         if (this == o) {
@@ -126,6 +135,7 @@ public class Employee {
                 && Objects.equals(departmentId, employee.departmentId);
     }
 
+    /** {@inheritDoc} */
     @Override
     public final int hashCode() {
 
