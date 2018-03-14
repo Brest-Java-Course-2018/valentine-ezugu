@@ -21,9 +21,9 @@
 
     <dependency>
         <groupId>com.epam.brest.course</groupId>
-        <artifactId>dao</artifactId>
+        <artifactId>service</artifactId>
     </dependency>
-
+    
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
