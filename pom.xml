@@ -43,8 +43,9 @@
                 <artifactId>model</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>com.epam.brest.course</groupId>
+                <groupId>com.epam.brest.course.dao</groupId>
                 <artifactId>dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
