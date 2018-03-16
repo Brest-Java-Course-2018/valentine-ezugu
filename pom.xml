@@ -45,7 +45,7 @@
             </dependency>
 
             <dependency>
-                <groupId>com.epam.brest.course.dao</groupId>
+                <groupId>com.epam.brest.course</groupId>
                 <artifactId>dao</artifactId>
                 <version>${project.version}</version>
             </dependency>

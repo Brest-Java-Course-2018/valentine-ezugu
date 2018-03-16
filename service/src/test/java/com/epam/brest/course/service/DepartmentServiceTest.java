@@ -1,9 +1,10 @@
-package com.epam.brest.course;
+package com.epam.brest.course.service;
 
-import com.epam.brest.course.api.DepartmentService;
-import com.epam.brest.course.config.TestConfig;
+import com.epam.brest.course.model.Department;
+import com.epam.brest.course.service.api.DepartmentService;
+import com.epam.brest.course.service.config.TestConfig;
 import com.epam.brest.course.dao.api.DepartmentDao;
-import com.epam.brest.course.impl.DepartmentServiceImpl;
+import com.epam.brest.course.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Rule;

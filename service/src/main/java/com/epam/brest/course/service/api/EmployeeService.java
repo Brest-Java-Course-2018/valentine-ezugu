@@ -1,6 +1,6 @@
-package com.epam.brest.course.api;
+package com.epam.brest.course.service.api;
 
-import com.epam.brest.course.Employee;
+import com.epam.brest.course.model.Employee;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

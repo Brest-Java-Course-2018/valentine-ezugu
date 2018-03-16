@@ -1,7 +1,7 @@
-package com.epam.brest.course.web_app.controllers;
+package com.epam.brest.course.service.web_app.controllers;
 
-import com.epam.brest.course.Department;
-import com.epam.brest.course.api.DepartmentService;
+import com.epam.brest.course.model.Department;
+import com.epam.brest.course.service.api.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

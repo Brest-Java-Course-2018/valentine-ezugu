@@ -1,6 +1,6 @@
 package com.epam.brest.course.dao;
 
-import com.epam.brest.course.Employee;
+import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.dao.api.EmployeeDao;
 import org.junit.Assert;
 import org.junit.Test;

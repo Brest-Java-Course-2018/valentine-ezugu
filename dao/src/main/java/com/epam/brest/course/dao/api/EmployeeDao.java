@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao.api;
 
-import com.epam.brest.course.Employee;
+import com.epam.brest.course.model.Employee;
+
 import java.util.List;
 
 /**

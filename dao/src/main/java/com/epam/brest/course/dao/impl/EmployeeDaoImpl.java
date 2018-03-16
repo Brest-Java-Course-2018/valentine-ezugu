@@ -1,6 +1,6 @@
 package com.epam.brest.course.dao.impl;
 
-import com.epam.brest.course.Employee;
+import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.dao.api.EmployeeDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;

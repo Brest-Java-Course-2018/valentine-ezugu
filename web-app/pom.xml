@@ -19,12 +19,7 @@
         <groupId>com.epam.brest.course</groupId>
         <artifactId>test-db</artifactId>
     </dependency>
-
-    <dependency>
-        <groupId>com.epam.brest.course.dao</groupId>
-        <artifactId>dao</artifactId>
-    </dependency>
-
+    
     <dependency>
         <groupId>com.epam.brest.course</groupId>
         <artifactId>service</artifactId>

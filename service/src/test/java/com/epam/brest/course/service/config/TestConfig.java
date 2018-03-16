@@ -1,4 +1,4 @@
-package com.epam.brest.course.config;
+package com.epam.brest.course.service.config;
 
 import com.epam.brest.course.dao.api.DepartmentDao;
 import com.epam.brest.course.dao.api.EmployeeDao;

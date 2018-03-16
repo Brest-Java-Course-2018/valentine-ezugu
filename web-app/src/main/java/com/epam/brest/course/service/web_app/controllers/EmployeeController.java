@@ -1,4 +1,4 @@
-package com.epam.brest.course.web_app.controllers;
+package com.epam.brest.course.service.web_app.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

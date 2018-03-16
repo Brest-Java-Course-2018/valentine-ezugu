@@ -1,6 +1,6 @@
 package com.epam.brest.course.dao.impl;
 
-import com.epam.brest.course.Department;
+import com.epam.brest.course.model.Department;
 import com.epam.brest.course.dao.api.DepartmentDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

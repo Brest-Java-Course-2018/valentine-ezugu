@@ -1,7 +1,7 @@
-package com.epam.brest.course.impl;
+package com.epam.brest.course.service.impl;
 
-import com.epam.brest.course.Employee;
-import com.epam.brest.course.api.EmployeeService;
+import com.epam.brest.course.model.Employee;
+import com.epam.brest.course.service.api.EmployeeService;
 import com.epam.brest.course.dao.api.EmployeeDao;
 
 import org.apache.logging.log4j.LogManager;
