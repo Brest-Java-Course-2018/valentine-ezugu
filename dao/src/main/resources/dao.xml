@@ -4,10 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="test-db-spring.xml"/>
+    <!--<import resource="test-db-spring.xml"/>-->
 
     <!--place holder to find sql query store-->
-
     <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -16,22 +15,21 @@
         </property>
     </bean>
 
-    <bean id="departmentDao" class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
+    <!--<bean id="departmentDao" class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">-->
+        <!--<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>-->
+    <!--</bean>-->
 
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">-->
+        <!--<constructor-arg name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">-->
+        <!--<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>-->
+    <!--</bean>-->
 
 
-    <bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-
-    <bean id="tranactionManger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean id="tranactionManger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
 </beans>

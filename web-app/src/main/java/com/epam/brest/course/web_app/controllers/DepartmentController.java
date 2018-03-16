@@ -19,4 +19,5 @@ public class DepartmentController {
     public String department(Model model) {
         return "department";
     }
+
 }

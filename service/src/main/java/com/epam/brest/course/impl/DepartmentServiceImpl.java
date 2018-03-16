@@ -2,6 +2,7 @@ package com.epam.brest.course.impl;
 
 import com.epam.brest.course.Department;
 import com.epam.brest.course.api.DepartmentService;
+import com.epam.brest.course.api.EmployeeService;
 import com.epam.brest.course.dao.api.DepartmentDao;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     /**
      * dao for db transactions.
      */
+
     @Autowired
     private DepartmentDao departmentDao;
 

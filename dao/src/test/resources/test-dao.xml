@@ -14,9 +14,9 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--<bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">-->
-        <!--<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>-->
-    <!--</bean>-->
+    <bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">
+        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
 
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
