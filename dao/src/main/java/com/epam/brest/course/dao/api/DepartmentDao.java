@@ -1,5 +1,6 @@
 package com.epam.brest.course.dao.api;
 
+import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
 import java.util.List;
 
@@ -48,4 +49,11 @@ public interface DepartmentDao {
      * @param id for delete.
      */
     void deleteDepartmentById(Integer id);
+
+    /**
+     *
+     * @return dto list.
+     */
+    List<DepartmentAvgSalary> getDepartmentAvgSalary();
+
 }

@@ -92,5 +92,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.getEmployeeById(id);
     }
 
-
+    /**
+     *
+     * @param employee update
+     * @throws DataAccessException exceptions
+     */
+    @Override
+    public void update(Employee employee) throws DataAccessException {
+        Assert.notNull(employee, "employee cannot be null");
+        LOGGER.debug("update({})", employee);
+          employeeDao.updateEmployee(employee);
+    }
 }

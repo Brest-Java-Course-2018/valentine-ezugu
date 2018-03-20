@@ -39,6 +39,8 @@ public interface EmployeeService {
      */
     Employee getEmployeeById(Integer id) throws DataAccessException;
 
+
+    void update(Employee employee) throws DataAccessException;
 }
 
 

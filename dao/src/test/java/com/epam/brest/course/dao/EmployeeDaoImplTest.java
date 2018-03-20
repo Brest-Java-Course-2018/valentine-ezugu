@@ -20,6 +20,8 @@ import java.util.List;
 @Transactional
 public class EmployeeDaoImplTest {
 
+    public static final int ID = 9;
+
     @Autowired
     private EmployeeDao employeeDao;
 
@@ -37,7 +39,7 @@ public class EmployeeDaoImplTest {
     public void getEmployeeById() {
         Employee employee = employeeDao.getEmployeeById(1);
         Assert.assertNotNull(employee);
-        Assert.assertTrue(employee.getDepartmentId().equals(1));
+        Assert.assertTrue(employee.getDepartmentId().equals(4));
         Assert.assertTrue(employee.getEmployeeName().equals("valentine"));
         Assert.assertTrue(employee.getSalary().equals(400));
     }
@@ -90,13 +92,27 @@ public class EmployeeDaoImplTest {
      * and in our case getEmployeeById will return exception because we no such id.
      */
     @Test(expected = org.springframework.dao.EmptyResultDataAccessException.class)
-    public void deleteEmployee() {
+    public void exception_deleteEmployee() {
         Employee employee1 = new Employee();
         employee1.setEmployeeName("Distribution");
-        employee1.setEmployeeId(5);
-        Employee employee = employeeDao.getEmployeeById(5);
+        employee1.setEmployeeId(ID);
+        Employee employee = employeeDao.getEmployeeById(ID);
         Assert.assertEquals("Distribution", employee.getEmployeeName());
-        employeeDao.deleteEmployeeById(5);
+        employeeDao.deleteEmployeeById(ID);
     }
+
+
+
+
+    @Test
+    public void deleteEmployee() {
+        Employee employee = new Employee(1,"valik", 1000, 1);
+        employeeDao.addEmployee(employee);
+        List<Employee> employees = employeeDao.getEmployees();
+        int size_before = employees.size();
+        employeeDao.deleteEmployeeById(employee.getEmployeeId());
+        Assert.assertEquals((size_before - 1), employeeDao.getEmployees().size());
+    }
+
 
 }

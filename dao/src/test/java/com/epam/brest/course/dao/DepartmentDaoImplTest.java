@@ -41,8 +41,8 @@ public class DepartmentDaoImplTest {
         Department department = departmentDao.getDepartmentById(1);
         Assert.assertNotNull(department);
         Assert.assertTrue(department.getDepartmentId().equals(1));
-        Assert.assertTrue(department.getDepartmentName().equals("Distribution"));
-        Assert.assertTrue(department.getDescription().equals("Distribution Department"));
+        Assert.assertTrue(department.getDepartmentName().equals("CEO Department"));
+        Assert.assertTrue(department.getDescription().equals("Department Of Chief executive officer"));
     }
 
     /**
@@ -68,7 +68,7 @@ public class DepartmentDaoImplTest {
     @Test
     public void updateDepartment() {
         Department department = departmentDao.getDepartmentById(1);
-        Assert.assertEquals("Distribution",department.getDepartmentName());
+        Assert.assertEquals("CEO Department",department.getDepartmentName());
         Assert.assertNotNull(department);
 
         department.setDepartmentId(1);
@@ -76,7 +76,7 @@ public class DepartmentDaoImplTest {
          departmentDao.updateDepartment(department);
 
         Department finalResult = departmentDao.getDepartmentById(1);
-        Assert.assertNotNull("Distribution",finalResult.getDepartmentName());
+        Assert.assertNotNull("CEO Department",finalResult.getDepartmentName());
         Assert.assertNotNull(department);
     }
 
@@ -89,17 +89,17 @@ public class DepartmentDaoImplTest {
      * we cant return null because null means variable that points to nothing
      * and in our case getDepartmentById will return exception because we no such id.
      */
-    @Test(expected = org.springframework.dao.EmptyResultDataAccessException.class)
+    @Test
     public void deleteDepartment() {
         Department department1 = new Department();
-        department1.setDepartmentName("Distribution");
-        department1.setDepartmentId(5);
-        Department department = departmentDao.getDepartmentById(5);
-        Assert.assertEquals("Distribution", department.getDepartmentName());
-        departmentDao.deleteDepartmentById(1);
+        department1.setDepartmentName("Hr management'");
+        department1.setDepartmentId(7);
+        Department department = departmentDao.getDepartmentById(7);
+        Assert.assertEquals("Hr management", department.getDepartmentName());
+        departmentDao.deleteDepartmentById(7);
     }
 
-
+//(expected = org.springframework.dao.EmptyResultDataAccessException.class)
     @Test
     public void addDeptSecondTest(){
 

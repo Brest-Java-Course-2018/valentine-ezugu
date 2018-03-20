@@ -30,6 +30,38 @@ public class Employee {
     private Integer departmentId;
 
     /**
+     * attribute email.
+     */
+    private String email;
+
+
+    public Employee(Integer employeeId, String employeeName, Integer salary, Integer departmentId) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.salary = salary;
+        this.departmentId = departmentId;
+    }
+
+    public Employee() {
+    }
+
+    /**
+     *
+     * @return email
+     */
+    public final String getEmail() {
+        return email;
+    }
+
+    /**
+     *
+     * @param email for email set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
      * Get Employee Id.
      *
      * @return employeeId.
@@ -92,6 +124,7 @@ public class Employee {
         return departmentId;
     }
 
+
     /**
      * <p>Setter for the field <code>departmentId</code>.</p>
      *
@@ -103,46 +136,37 @@ public class Employee {
 
     /** {@inheritDoc} */
     @Override
-    public final java.lang.String toString() {
-        return "Employee{"
-              +  "employeeId="
-              + employeeId
-              + ",   employeeName="
-              + employeeName
-              + ", salary="
-              + salary
-              + ", departmentId="
-              + departmentId
-              +  '}';
+    public String toString() {
+        return "Employee{" +
+                "employeeId="
+                + employeeId
+                + ", employeeName='"
+                + employeeName
+                + ", salary="
+                + salary
+                + ", departmentId="
+                + departmentId
+                + ", email='"
+                + email
+                + '}';
     }
 
-    /** {@inheritDoc} */
     @Override
-    public final boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Employee)) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(getEmployeeId(),
-                employee.getEmployeeId())
-                && Objects.equals(getEmployeeName(),
-                        employee.getEmployeeName())
-                && Objects.equals(getSalary(),
-                        employee.getSalary())
-                && Objects.equals(departmentId, employee.departmentId);
+        return Objects.equals(getEmployeeId(), employee.getEmployeeId()) &&
+                Objects.equals(getEmployeeName(), employee.getEmployeeName()) &&
+                Objects.equals(getSalary(), employee.getSalary()) &&
+                Objects.equals(getDepartmentId(), employee.getDepartmentId()) &&
+                Objects.equals(getEmail(), employee.getEmail());
     }
 
-    /** {@inheritDoc} */
     @Override
-    public final int hashCode() {
+    public int hashCode() {
 
-        return Objects.hash(getEmployeeId(),
-                getEmployeeName(),
-                getSalary(),
-                departmentId);
+        return Objects.hash(getEmployeeId(), getEmployeeName(), getSalary(), getDepartmentId(), getEmail());
     }
 }
 

@@ -1,8 +1,10 @@
 package com.epam.brest.course.service.api;
 
+import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
 import org.springframework.dao.DataAccessException;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -38,5 +40,15 @@ public interface DepartmentService {
      * @return found department.
      */
     Department getDepartmentById(Integer id) throws DataAccessException;
+
+    /**
+     * @param department
+     */
+    void updateDepartment(Department department);
+
+    /**
+     *
+     */
+    Collection<DepartmentAvgSalary> getDepartments_avgSalary();
 
 }

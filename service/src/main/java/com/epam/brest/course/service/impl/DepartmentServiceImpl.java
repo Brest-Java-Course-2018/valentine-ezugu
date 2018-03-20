@@ -1,5 +1,6 @@
 package com.epam.brest.course.service.impl;
 
+import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.service.api.DepartmentService;
 import com.epam.brest.course.dao.api.DepartmentDao;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -44,11 +46,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         LOGGER.debug("saveDepartment({})", department);
         Assert.notNull(department, "department cannot be null");
         Assert.hasText(department.getDepartmentName(),
-                " department name cannot be null");
+                 " department name cannot be null");
 
-        Assert.hasText(department.getDescription(),
-                " description cannot be null");
-
+        Assert.hasText(department.getDescription(), " description cannot be null");
+        Assert.hasText(department.getHeadOfDepartment(), "head of department required but null");
         return departmentDao.addDepartment(department);
     }
 
@@ -91,4 +92,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.getDepartmentById(id);
     }
 
+
+    @Override
+    public Collection<DepartmentAvgSalary> getDepartments_avgSalary() {
+        LOGGER.debug("getDepartments_avgSalary()");
+        return departmentDao.getDepartmentAvgSalary();
+    }
+
+    @Override
+    public void updateDepartment(Department department) {
+        LOGGER.debug("updateDepartment({})", department);
+        departmentDao.updateDepartment(department);
+    }
 }

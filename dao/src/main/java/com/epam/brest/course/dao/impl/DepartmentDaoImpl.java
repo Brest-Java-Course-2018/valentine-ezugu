@@ -1,5 +1,6 @@
 package com.epam.brest.course.dao.impl;
 
+import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.dao.api.DepartmentDao;
 import org.apache.logging.log4j.LogManager;
@@ -28,9 +29,13 @@ import java.util.List;
 public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
-     * for static logger use logManager.
+     * for logging.
      */
     private static final Logger LOGGER = LogManager.getLogger();
+
+
+    @Value("${department.selectAvgSalary}")
+    private String selectAvgSalarySql;
     /**
      * sql query for select by id.
      */
@@ -74,7 +79,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * row description for row mapper.
      */
     private static final String DESCRIPTION = "description";
-
+    /**
+     *
+     */
+    private static final String HEAD_OF_DEPARTMENT = "headOfDepartment";
+    /**
+     *
+     */
+    private static final String AVG_SALARY = "avgSalary";
 
     /**
      * Template class with a basic set of JDBC operations, allowing the use.
@@ -147,6 +159,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
             namedParameters.addValue("description",
                     department.getDescription());
 
+            namedParameters.addValue("headOfDepartment",
+                    department.getHeadOfDepartment());
+
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(
                     addDepartment, namedParameters, generatedKeyHolder);
@@ -183,6 +198,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
                 .update(delete, departmentId);
     }
 
+    @Override
+    public List<DepartmentAvgSalary> getDepartmentAvgSalary() {
+        LOGGER.debug("getDepartmentDTOs()");
+        List<DepartmentAvgSalary> departments_with_AvgSalaries =
+                namedParameterJdbcTemplate.getJdbcOperations().query(selectAvgSalarySql, new DepartmentDTORowMapper());
+        return departments_with_AvgSalaries;
+    }
     /**
      * interface perform the actual work of mapping each row to a result object,
      * but don't need to worry about exception handling.
@@ -190,6 +212,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * by the calling JdbcTemplate.
      */
     private class DepartRowMapper implements RowMapper<Department> {
+
         @Override
         public Department mapRow(final ResultSet resultSet, final int i)
                 throws SQLException {
@@ -198,7 +221,20 @@ public class DepartmentDaoImpl implements DepartmentDao {
             department.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
             department.setDepartmentName(resultSet.getString(DEPARTMENT_NAME));
             department.setDescription(resultSet.getString(DESCRIPTION));
+            department.setHeadOfDepartment(resultSet.getString(HEAD_OF_DEPARTMENT));
             return department;
+        }
+    }
+
+    private class DepartmentDTORowMapper implements RowMapper<DepartmentAvgSalary> {
+
+        @Override
+        public DepartmentAvgSalary mapRow(ResultSet resultSet, int i) throws SQLException {
+            DepartmentAvgSalary dto = new DepartmentAvgSalary();
+            dto.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
+            dto.setDepartmentName(resultSet.getString(DEPARTMENT_NAME));
+            dto.setAvgSalary(resultSet.getInt(AVG_SALARY));
+            return dto;
         }
     }
 

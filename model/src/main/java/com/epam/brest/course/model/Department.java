@@ -25,6 +25,11 @@ public class Department {
     private String description;
 
     /**
+     *
+     */
+    private String headOfDepartment;
+
+    /**
      * <p>Constructor for Department.</p>
      *
      * @param departmentName for constructor init.
@@ -95,22 +100,28 @@ public class Department {
         this.description = description;
     }
 
+    public String getHeadOfDepartment() {
+        return headOfDepartment;
+    }
+
+    public void setHeadOfDepartment(String headOfDepartment) {
+        this.headOfDepartment = headOfDepartment;
+    }
+
     /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object o) {
-
-        if (this == o) {
-            return true;
-        }
-        //if object not an instance of dept.
-        if (!(o instanceof Department)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Department)) return false;
         Department that = (Department) o;
-
-        return Objects.equals(getDepartmentId(), that.getDepartmentId())
-             && Objects.equals(getDepartmentName(), that.getDepartmentName())
-             && Objects.equals(getDescription(), that.getDescription());
+        return Objects.equals(getDepartmentId(),
+                that.getDepartmentId())
+                && Objects.equals(getDepartmentName(),
+                that.getDepartmentName())
+                && Objects.equals(getDescription(),
+                that.getDescription())
+                && Objects.equals(getHeadOfDepartment(),
+                that.getHeadOfDepartment());
     }
 
     /** {@inheritDoc} */
@@ -132,7 +143,8 @@ public class Department {
                 + departmentName
                 + ", description='"
                 + description
-                + '}';
-    }
+                + ", headOfDepartment='"
+                + headOfDepartment +
+                '}';
+    }}
 
-}

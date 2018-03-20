@@ -2,7 +2,10 @@ package com.epam.brest.course.dao.impl;
 
 import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.dao.api.EmployeeDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,6 +23,12 @@ import java.util.List;
  * @version $Id: $
  */
 public class EmployeeDaoImpl implements EmployeeDao {
+
+
+    /**
+     * for static logger use logManager.
+     */
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * sql query for get by id.
@@ -69,6 +78,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     private static final String DEPARTMENT_ID = "departmentId";
 
+    private static final String EMAIL = "email";
 
     /**
      * Template class with a basic set of JDBC operations, allowing the use
@@ -99,20 +109,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
          return employees;
     }
 
-    /** {@inheritDoc} */
     @Override
-    public final Employee getEmployeeById(final Integer id) {
-        Assert.notNull(id, "cannot be null");
-
-    Employee employee;
-
-        SqlParameterSource namedParameterSource =
-                new MapSqlParameterSource("employeeId", id);
-
-        employee =
-                namedParameterJdbcTemplate.queryForObject(
-                        employeeSelect, namedParameterSource,
-                        new DepartRowMapper());
+    public Employee getEmployeeById(Integer id) {
+        LOGGER.debug("getEmployeeById {}", id);
+        SqlParameterSource namedParametres =
+                new MapSqlParameterSource(EMPLOYEE_ID, id);
+        Employee employee =
+                namedParameterJdbcTemplate.queryForObject(employeeSelect,
+                        namedParametres, BeanPropertyRowMapper.newInstance(Employee.class));
         return employee;
     }
 
@@ -170,7 +174,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             employee.setEmployeeName(resultSet.getString(EMPLOYEE_NAME));
             employee.setSalary(resultSet.getInt(SALARY));
             employee.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
-
+            employee.setEmail(resultSet.getString(EMAIL));
             return employee;
         }
     }

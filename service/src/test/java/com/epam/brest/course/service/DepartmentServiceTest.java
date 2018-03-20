@@ -49,9 +49,9 @@ public class DepartmentServiceTest {
         department.setDepartmentName("java academy");
         department.setDepartmentId(ID);
         department.setDescription("Learn java");
+        department.setHeadOfDepartment("val");
 
 
-        department.setDepartmentId(ID);
         Department testDepartment;
         when(departmentDao.addDepartment(department)).thenReturn(department);
 
@@ -123,7 +123,9 @@ public class DepartmentServiceTest {
     public void exceptionOccursWhenIncompleteArgumentIsGiven() throws Exception {
         Department department = new Department();
         department.setDepartmentName("ana");
+        department.setHeadOfDepartment("mikel");
         departmentService.saveDepartment(department);
+
     }
 
 }

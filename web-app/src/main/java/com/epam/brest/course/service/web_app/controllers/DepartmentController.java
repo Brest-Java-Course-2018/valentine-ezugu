@@ -1,12 +1,19 @@
 package com.epam.brest.course.service.web_app.controllers;
 
+import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.service.api.DepartmentService;
+import com.epam.brest.course.service.api.EmployeeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import javax.validation.Valid;
+import java.util.Collection;
 
 /**
  * Department controller.
@@ -14,82 +21,109 @@ import java.util.List;
 @Controller
 public class DepartmentController {
 
-    Department department;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
+    @Autowired
+    EmployeeService employeeService;
+
+    Department department;
     /**
+     * Goto departments list page.
      *
-     * @param model
-     * @return
+     * @return view name
      */
     @GetMapping(value = "/departments")
-    public String departments(Model model) {
-        List<Department> departments = departmentService.getAllDepartments();
+    public final String departments(Model model) {
+        LOGGER.debug("getDepartments({})", model);
+        Collection<DepartmentAvgSalary> departments = departmentService.getDepartments_avgSalary();
         model.addAttribute("departments", departments);
         return "departments";
     }
 
     /**
+     * Goto new department page.
      *
-     * @param model
-     * @return
+     * @return view name
+     */
+    @GetMapping(value = "/department")
+    public final String gotoAddDepartmentPage(Model model) {
+        LOGGER.debug("addDepartment({})", model);
+        Department department = new Department();
+        model.addAttribute("isNew", true);
+        model.addAttribute("department", department);
+        return "department";
+    }
+
+    /**
+     * @param department new department.
+     * @param result data binding result.
+     * @return view name.
+     */
+    @PostMapping(value = "/department")
+    public String addDepartment(@Valid Department department,
+                                BindingResult result
+    ) {
+        LOGGER.debug("addDepartment({}, {})", department, result);
+        if (result.hasErrors()) {
+            return "department";
+        } else {
+            this.departmentService.saveDepartment(department);
+            return "redirect:/departments";
+        }
+    }
+
+    /**
+     * Goto edit department page.
+     * @return view name.
      */
     @GetMapping(value = "/department/{id}")
-    public String getDepartmentById(@PathVariable Integer id, Model model) {
-        department = departmentService.getDepartmentById(id);
+    public final String gotoEditDepartmentPage(@PathVariable Integer id, Model model) {
+        LOGGER.debug("gotoEditDepartmentPage({},{})", id, model);
+        Department department = departmentService.getDepartmentById(id);
+        model.addAttribute("isNew", false);
         model.addAttribute("department", department);
         return "department";
     }
 
     /**
-     *
-     * @param id
-     * @param model
-     * @return
+     * Update department into persistence storage.
+     * @return view name.
      */
-    @GetMapping(value = "/updateDepartment/{id}")
-    public String updateDepartment(@PathVariable Integer id, Model model) {
-
-        department = departmentService.getDepartmentById(id);
-        model.addAttribute("department", department);
-        return "department";
+    @PostMapping(value = "/department/{id}")
+    public String updateDepartment(@Valid Department department,
+                                   BindingResult result
+    ) {
+        LOGGER.debug("updateDepartment({}, {})", department, result);
+        if (result.hasErrors()) {
+            return "department";
+        } else {
+            this.departmentService.updateDepartment(department);
+            return "redirect:/departments";
+        }
     }
 
     /**
-     *
-     * @param department
-     * @return
+     * Delete department.
+     * @return view name
      */
-    @PostMapping(value = "/updateDepartment}")
-    public String updateDepartmentPost(@ModelAttribute("department") Department department) {
+    @GetMapping(value = "/department/{id}/delete")
+    public final String deleteDepartmentById(@PathVariable Integer id, Model model) {
+        LOGGER.debug("deleteDepartmentById({},{})", id, model);
 
-        departmentService.saveDepartment(department);
-        return "redirect:/departments" + department.getDepartmentId();
-    }
+        for (Employee employee : employeeService.getAllEmployees()) {
 
-    /**
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping
-    public String GetDepartmentList(Model model){
-        List<Department> departments = departmentService.getAllDepartments();
-        model.addAttribute("departments", departments);
-        return "departments";
-    }
-
-    /**
-     *
-     * @param model
-     * @return
-     */
-    @PostMapping
-    public String saveDepartment(Model model){
-
-        return "forward:departments";
+            Department department = departmentService.getDepartmentById(id);
+            if (department.getDepartmentId().equals(employee.getDepartmentId())){
+                model.addAttribute("cantdelete", true);
+                return "departments";
+            }
+            model.addAttribute("cantdelete", false);
+        }
+        departmentService.deleteDepartmentById(id);
+        return "redirect:/departments";
     }
 
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Employees List</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
@@ -26,12 +27,12 @@
                                           height="32" width="64"></a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <a class="nav-item nav-link"
-               href="departments.html"
-               th:href="departments">Departments</a>
             <a class="nav-item nav-link active"
+               href="departments.html"
+               th:href="@{/departments}">Departments</a>
+            <a class="nav-item nav-link"
                href="employees.html"
-               th:href="employees">Employees</a>
+               th:href="@{/employees}">Employees</a>
         </ul>
     </div>
 </nav>
@@ -42,7 +43,7 @@
         <span class="navbar-brand text-uppercase mr-auto">Employees</span>
         <ul class="navbar-nav float-right">
             <li class="nav-item">
-                <a href="employee.html"
+                <a href="editEmployee.html"
                    class="btn btn-light"
                    title="Add employee"
                    data-toggle="tooltip"
@@ -55,12 +56,11 @@
     </nav>
 </header>
 
-
 <section id="employees">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card" th:if="not ${employees.isEmpty()}">
                     <table class="table table-striped">
                         <thead class="thead-inverse">
                         <tr>
@@ -70,39 +70,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Ivan Ivanov</td>
-                            <td>ivan.ivanov@test.com</td>
-                            <td>1000</td>
+                        <tr th:each="employee : ${employees}">
+
+                            <td th:text="${employee.employeeName}">Ivan Ivanov</td>
+                            <td th:text="${employee.email}">ivan.ivanov@test.com</td>
+                            <td th:text="${employee.salary}">1000</td>
                             <td class="text-right">
-                                <a href="employee.html"
+                             <a href="editEmployee.html"
+                                th:href="'/editEmployee/' + ${employee.employeeId}"
                                    class="btn-sm btn-outline-secondary"
                                    title="Edit employee"
                                    data-toggle="tooltip"
                                    data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Edit</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete employee"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alexander Petrov</td>
-                            <td>alex.petrov@test.com</td>
-                            <td>1100</td>
-                            <td class="text-right">
-                                <a href="employee.html"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Edit employee"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Edit</span></a>
+                                    <i class="fa fa-pencil"></i>
+                                    <span class="d-none d-md-inline">Edit
+                                    </span></a>
                                 <span data-toggle="modal" data-target="#deleteDialog">
                                 <a href="#" class="btn-sm btn-outline-secondary"
                                    title="Delete employee"
@@ -115,6 +97,11 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            </div>
+            <div>
+                <div class="card" th:if=" ${employees.isEmpty()}">
+                    <h2>Nothing Found</h2>
             </div>
         </div>
     </div>
