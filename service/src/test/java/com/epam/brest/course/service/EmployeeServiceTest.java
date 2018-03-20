@@ -56,6 +56,7 @@ public class EmployeeServiceTest {
         employee.setEmployeeName("valentine");
         employee.setSalary(400);
         employee.setDepartmentId(ID);
+        employee.setEmail("vale@yah");
 
         employee.setEmployeeId(ID);
         Employee employee1;

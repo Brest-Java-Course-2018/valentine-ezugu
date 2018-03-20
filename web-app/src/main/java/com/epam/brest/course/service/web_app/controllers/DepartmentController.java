@@ -30,9 +30,8 @@ public class DepartmentController {
     EmployeeService employeeService;
 
     Department department;
+
     /**
-     * Goto departments list page.
-     *
      * @return view name
      */
     @GetMapping(value = "/departments")
@@ -77,7 +76,6 @@ public class DepartmentController {
 
     /**
      * Goto edit department page.
-     * @return view name.
      */
     @GetMapping(value = "/department/{id}")
     public final String gotoEditDepartmentPage(@PathVariable Integer id, Model model) {

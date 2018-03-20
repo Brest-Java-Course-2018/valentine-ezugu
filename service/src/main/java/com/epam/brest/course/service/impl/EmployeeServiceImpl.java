@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Assert.hasText(employee.getEmployeeName(), "name cannot be null");
         Assert.notNull(employee.getSalary(), "salary cannot be null");
-
+        Assert.hasText(employee.getEmail(),"you should have email");
         Assert.notNull(employee.getDepartmentId(),
                 "department id cannot be null");
 

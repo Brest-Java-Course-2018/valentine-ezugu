@@ -4,11 +4,15 @@ import com.epam.brest.course.model.Department;
 import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.service.api.DepartmentService;
 import com.epam.brest.course.service.api.EmployeeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,8 +20,9 @@ import java.util.List;
  * Employee controller.
  */
 @Controller
-@SessionAttributes(types = Employee.class)
 public class EmployeeController {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private EmployeeService employeeService;
@@ -26,10 +31,9 @@ public class EmployeeController {
     private DepartmentService departmentService;
 
     /**
-     * method employees mapping /employees reqest and get list  employees.
      *
-     * @param model attributes map
-     * @return template name
+     * @param model
+     * @return
      */
     @GetMapping(value = "/employees")
     public String employees(final Model model) {
@@ -40,37 +44,53 @@ public class EmployeeController {
     }
 
     /**
-     * method editEmployee mapping /editEmployee reqest make setups to edit Employee record.
-     *
-     * @param model attributes map.
-     * @return template name.
+     * @param model for adding model to ui.
+     * @return
      */
     @GetMapping(value = "/addEmployee")
     public String addEmployee(final Model model) {
-        Employee new_employee = new Employee();
+        Employee employee = new Employee();
         Collection<Department> departments = departmentService.getAllDepartments();
-
-        model.addAttribute("employee", new_employee);
-        model.addAttribute("Title", "Add Employee");
+        model.addAttribute("employee", employee);
         model.addAttribute("isNew", true);
         model.addAttribute("departments", departments);
-        return "editEmployee";
+        return "employee";
+    }
+
+    @PostMapping(value = "/employee")
+    public String addEmployee(@Valid Employee employee,
+                                BindingResult result
+    ) {
+        LOGGER.debug("addEmployee({}, {})", employee, result);
+        if (result.hasErrors()) {
+            return "employee";
+        } else {
+            this.employeeService.saveEmployee(employee);
+            return "redirect:/employees";
+        }
     }
 
     /**
-     * method editEmployee mapping /editEmployee reqest make setups to edit Employee record.
      *
-     * @param model attributes map
-     * @param id id of Employee record
-     * @return template name
+     * @param employee employee to be updated.
+     * @param result binded result
+     * @return
      */
+    @PostMapping(value = "/employee/{id}")
+    public String updateDepartment(@Valid Employee employee,
+                                   BindingResult result
+    ) {
+        LOGGER.debug("updateDepartment({}, {})", employee, result);
+        if (result.hasErrors()) {
+            return "employee";
+        } else {
+            this.employeeService.update(employee);
+            return "redirect:/employees";
+        }
+    }
 
     /**
-     * method removeEmployee mapping /removeEmployee reqest and remoce Employee record from db
-     *
-     * @param model attributes map
-     * @param id id of Employee record
-     * @return template name
+     * @param id
      */
     @GetMapping(value = "/removeEmployee/{id}")
     public String removeEmployee(@PathVariable Integer id, final Model model) {

@@ -80,11 +80,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     private static final String DESCRIPTION = "description";
     /**
-     *
+     *head of the department attribute
      */
     private static final String HEAD_OF_DEPARTMENT = "headOfDepartment";
     /**
-     *
+     *average salary will increase or reduce when we add new salary
      */
     private static final String AVG_SALARY = "avgSalary";
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<nav th:replace="common/header :: common-nav" />
+
+<header>
+
+     <nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
+        <ul class="navbar-nav float-left">
+            <li class="nav-item">
+                <a href="employees.html" th:href="'/employees'" class="btn btn-sm btn-outline-secondary"
+                   data-toggle="tooltip" data-placement="top"
+                   title="Back"><i class="fa fa-arrow-circle-left">
+
+                </i></a>
+            </li>
+        </ul>
+
+        <span  class="navbar-brand text-uppercase mr-auto"
+             th:text="${isNew} ? 'New employee' : 'Edit employee'">
+         </span>
+        <ul class="p-2 navbar-nav float-right">
+            <li class="nav-item">
+                <a href="#"
+                   th:href="@{/employee}"
+                   th:onclick="@{document.forms['employeeForm'].submit(); return false;}"
+                   class="btn btn-sm btn-outline-secondary"
+                   data-toggle="tooltip" data-placement="top"
+                   title="Save"><i class="fa fa-save">
+                  </i>Save</a>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+<section id="department">
+
+    <div class="card">
+        <div class="card-body">
+            <form id="employeeForm"
+                th:object="${employee}"
+                action="employees.html"
+                th:action="@{/employee}"
+                th:method="@{post}">
+
+                <input id="field_employeeId"
+                       name="field_employeeId"
+                       type="hidden"
+                       th:field="*{employeeId}"/>
+
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Error in fields, fix errors:</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeName">Name</label>
+                    <input type="text"
+                           class="form-control"
+                           th:class="${#fields.hasErrors('employeeName')} ? 'form-control is-invalid' : 'form-control'"
+                           id="employeeName"
+                           placeholder="Employee Name"
+                           th:field="*{employeeName}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="text"
+                           class="form-control"
+                           th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'"
+                           id="Email" placeholder="Email"
+                           th:field="*{email}"/>
+                </div>
+                <div>
+                    <label for="Salary">Salary</label>
+                    <input type="text"
+                           class="form-control"
+                           th:class="${#fields.hasErrors('salary')} ? 'form-control is-invalid' : 'form-control'"
+                           id="Salary"
+                           placeholder="Salary"
+                           th:field="*{salary}">
+                    <p></p>
+                </div>
+                <div class="form-group">
+                    <label for="departmentChoose">Department</label>
+                    <select class="custom-select" id="departmentChoose"
+                            th:field="*{departmentId}">
+                        <option th:each="department : ${departments}"
+                                th:value="${department.departmentId}"
+                                th:text="${department.departmentName}">Department Name
+                       </option>
+                    </select>
+                 </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+</body>
+</html>
