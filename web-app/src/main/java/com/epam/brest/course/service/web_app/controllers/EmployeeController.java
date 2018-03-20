@@ -58,7 +58,7 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employee")
-    public String addEmployee(@Valid Employee employee,
+    public String addEmployeePost(@Valid Employee employee,
                                 BindingResult result
     ) {
         LOGGER.debug("addEmployee({}, {})", employee, result);
@@ -77,10 +77,10 @@ public class EmployeeController {
      * @return
      */
     @PostMapping(value = "/employee/{id}")
-    public String updateDepartment(@Valid Employee employee,
+    public String updateEmployee(@Valid Employee employee,
                                    BindingResult result
     ) {
-        LOGGER.debug("updateDepartment({}, {})", employee, result);
+        LOGGER.debug("updateEmployee({}, {})", employee, result);
         if (result.hasErrors()) {
             return "employee";
         } else {
