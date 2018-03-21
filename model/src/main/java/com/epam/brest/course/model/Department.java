@@ -5,8 +5,8 @@ import java.util.Objects;
 /**
  * department pojo.
  *
- * @author user
- * @version $Id: $
+ * @author valentine
+ * @version $Id: 1
  */
 public class Department {
 

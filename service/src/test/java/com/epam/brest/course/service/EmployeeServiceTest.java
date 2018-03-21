@@ -49,7 +49,7 @@ public class EmployeeServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void addEmployee() throws Exception {
+    public void addEmployee() {
         LOGGER.debug("test: addEmployee()");
 
         Employee employee = new Employee();
@@ -74,7 +74,7 @@ public class EmployeeServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void getEmployeeById() throws Exception {
+    public void getEmployeeById() {
         LOGGER.debug("test: getEmployeeById()");
 
         Employee employee = new Employee();
@@ -93,7 +93,7 @@ public class EmployeeServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void deleteEmployeeById() throws Exception {
+    public void deleteEmployeeById() {
         LOGGER.debug("test: deleteEmployeeById()");
 
         Employee employee = new Employee();
@@ -108,7 +108,7 @@ public class EmployeeServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void getEmployeeList() throws Exception {
+    public void getEmployeeList() {
         LOGGER.debug("test: getEmployeeList()");
         Employee employee = new Employee();
             employee.setDepartmentId(ID);
@@ -126,7 +126,7 @@ public class EmployeeServiceTest {
      * @throws Exception is thrown because id cannot be null.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void exceptionOccursWhenIncompleteArgument() throws Exception {
+    public void exceptionOccursWhenIncompleteArgument() {
         Employee employee = new Employee();
         employee.setEmployeeName("ana");
         employeeService.saveEmployee(employee);

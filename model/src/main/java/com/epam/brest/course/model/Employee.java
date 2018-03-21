@@ -32,7 +32,7 @@ public class Employee {
     /**
      * attribute email.
      */
-    private String email;
+     private String email;
 
 
     public Employee(Integer employeeId, String employeeName, Integer salary, Integer departmentId) {

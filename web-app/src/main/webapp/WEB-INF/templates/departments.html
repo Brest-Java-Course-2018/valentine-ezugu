@@ -5,7 +5,6 @@
 <body>
 <nav th:replace="common/header :: common-nav" />
 
-
 <header>
     <nav id="main-header"
          class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -51,9 +50,7 @@
                                    class="btn-sm btn-outline-secondary"
                                    title="Edit department"
                                    data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Edit</span></a>
+                                   data-placement="top"><i class="fa fa-pencil"></i> <span class="d-none d-md-inline">Edit</span></a>
 
                                 <div th:if="${cantdelete}">
                                     cannot delete
@@ -178,7 +175,7 @@
                 </div>
 
                 <div class="card alert alert-warning" th:if="${departments.isEmpty()}">
-                    <h2>Notning found</h2>
+                    <h2>Nothing found</h2>
                 </div>
              </div>
         </div>
@@ -207,6 +204,8 @@
     </div>
 </div>
 
+<div th:replace="common/header :: footer"/>
+
 <script src="../../resources/static/js/jquery.min.js"
         th:src="@{/resources/static/js/jquery.min.js}"></script>
 <script src="../../resources/static/js/popper.min.js"
@@ -217,11 +216,11 @@
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
-    })
+    });
 
     $('#deleteDialog').on('show.bs.modal', function (event) {
-        var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
+        var target = $(event.relatedTarget);
+        $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"');
         document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
     })
 </script>

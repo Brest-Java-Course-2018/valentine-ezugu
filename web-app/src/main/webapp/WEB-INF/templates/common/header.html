@@ -41,6 +41,63 @@
     </div>
 </nav>
 
+<div th:fragment="footer" class="container-fluid">
+<br/>
+<br/>
+<footer class="myfooter">
+    <div class="row">
+        <div class="col-sm-4 footerleft">
+             <div class="logofooter">
+                <a th:href="@{/}"><img class="img-responsive"
+                                       th:src="@{/resources/static/img/logo.svg}"
+                                       height="32" width="64"/></a>
+            </div>
+            <p>
+                 Hr Management System. <br/>Epam - ENGINEERING IS IN OUR DNA.
+            </p>
+        </div>
+        <div class="col-sm-4 paddingtop-bottom">
+            <h6 class="heading7">CONTACT</h6>
+            <ul class="post">
+                <p>
+                    <i class="fa fa-map-pin"></i>Location<br/> BREST, BELARUS
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i> Phone (BYN) : +375-29-xxx-xxx-x
+                </p>
+                <p>
+                    <i class="fa fa-envelope"></i> E-mail : valentineezugu@yahoo.com
+                </p>
+                <p>
+                    <i class="fa-li fa fa-spinner fa-spin"></i> Project : BREST JAVA COURSE 2018
+                </p>
+            </ul>
+        </div>
+        <div class="col-sm-4 paddingtop-bottom">
+            <h6 class="heading7">LINKS</h6>
+            <ul class="footer-ul">
+                <li><a href="#"> Privacy Policy</a></li>
+                <li><a href="#"> Terms &#38; Conditions</a></li>
+                <li><a href="#"> Frequently Ask Questions</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div class="copyright">
+    <div class="col-sm-6">
+        <p>© 2018 - All Rights Reserved</p>
+    </div>
+    <div class="col-sm-6">
+        <ul class="bottom_ul">
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
 <div th:fragment="body-bottom-scripts">
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
