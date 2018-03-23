@@ -23,16 +23,25 @@ import java.util.List;
 @Service
 @Transactional
 public class DepartmentServiceImpl implements DepartmentService {
+
     /**
      * log for debugging.
      */
     private static final Logger LOGGER = LogManager.getLogger();
+
     /**
      * dao for db transactions.
      */
-
-    @Autowired
     private DepartmentDao departmentDao;
+
+    /**
+     *
+     * @param departmentDao1 is injected by setter
+     */
+    @Autowired
+    public final void setDepartmentDao(final DepartmentDao departmentDao1) {
+        this.departmentDao = departmentDao1;
+    }
 
     /**
      *
@@ -46,15 +55,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         LOGGER.debug("saveDepartment({})", department);
         Assert.notNull(department, "department cannot be null");
         Assert.hasText(department.getDepartmentName(),
-                 " department name cannot be null");
+                 "department name cannot be null");
 
-        Assert.hasText(department.getDescription(), " description cannot be null");
-        Assert.hasText(department.getHeadOfDepartment(), "head of department required but null");
+        Assert.hasText(department.getDescription(),
+                "description cannot be null");
+        Assert.hasText(department.getHeadOfDepartment(),
+                "head of department required but null");
         return departmentDao.addDepartment(department);
     }
 
     /**
-     *
      * @return list of all departments.
      * @throws DataAccessException DataAccessException when cannot access db.
      */
@@ -94,13 +104,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
     @Override
-    public Collection<DepartmentAvgSalary> getDepartments_avgSalary() {
-        LOGGER.debug("getDepartments_avgSalary()");
+    public final Collection<DepartmentAvgSalary> getDepartmentsAvgSalary() {
+        LOGGER.debug("getDepartmentsAvgSalary()");
         return departmentDao.getDepartmentAvgSalary();
     }
 
     @Override
-    public void updateDepartment(Department department) {
+    public final void updateDepartment(final Department department) {
         LOGGER.debug("updateDepartment({})", department);
         departmentDao.updateDepartment(department);
     }

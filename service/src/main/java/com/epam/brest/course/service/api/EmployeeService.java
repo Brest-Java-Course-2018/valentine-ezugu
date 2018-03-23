@@ -3,12 +3,11 @@ package com.epam.brest.course.service.api;
 import com.epam.brest.course.model.Employee;
 import org.springframework.dao.DataAccessException;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  *service class.
  */
-
 public interface EmployeeService {
 
     /**
@@ -22,7 +21,7 @@ public interface EmployeeService {
      *@throws DataAccessException if db cant be accessed.
      * @return a list of employees.
      */
-    List<Employee> getAllEmployees() throws DataAccessException;
+    Collection<Employee> getAllEmployees() throws DataAccessException;
 
     /**
      *
@@ -37,10 +36,14 @@ public interface EmployeeService {
      * @return found employee.
      * @throws DataAccessException if db cant be accessed.
      */
-    Employee getEmployeeById(Integer id) throws DataAccessException;
+    Employee getEmployeeById(final Integer id) throws DataAccessException;
 
-
-    void update(Employee employee) throws DataAccessException;
+    /**
+     *
+     * @param employee for update.
+     * @throws DataAccessException when occurred.
+     */
+      void update(Employee employee) throws DataAccessException;
 }
 
 

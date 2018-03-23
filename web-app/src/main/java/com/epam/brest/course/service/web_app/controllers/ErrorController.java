@@ -12,13 +12,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice
 public class ErrorController {
-
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     * @param request for request coming in.
+     * @param exception if error the log this error.
+     * @return template page.
+     */
     @ExceptionHandler(value = Exception.class)
-    public String handleControllerError(HttpServletRequest request, Exception exception){
+    public final String handleControllerError(final HttpServletRequest request,
+                                         final Exception exception) {
 
-        LOGGER.error("Request" + request.getRequestURL() + "threw " + exception );
+        LOGGER.error("Request" + request.getRequestURL() + " threw "
+               + " " + exception);
         return "error";
     }
 

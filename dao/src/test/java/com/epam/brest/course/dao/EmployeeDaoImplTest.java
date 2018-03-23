@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,7 +28,8 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getEmployees() {
-        List<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employees = employeeDao.getEmployees();
+
         Assert.assertFalse(employees.isEmpty());
     }
 
@@ -108,7 +110,7 @@ public class EmployeeDaoImplTest {
     public void deleteEmployee() {
         Employee employee = new Employee(1,"valik", 1000, 1);
         employeeDao.addEmployee(employee);
-        List<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employees = employeeDao.getEmployees();
         int size_before = employees.size();
         employeeDao.deleteEmployeeById(employee.getEmployeeId());
         Assert.assertEquals((size_before - 1), employeeDao.getEmployees().size());

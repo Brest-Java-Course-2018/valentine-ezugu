@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -20,35 +22,42 @@ import java.util.Collection;
  */
 @Controller
 public class DepartmentController {
-
+    /**
+     * log for debug controller.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
-
+    /**
+     * department service injected.
+     */
     @Autowired
     private DepartmentService departmentService;
-
+    /**
+     * employee service injected.
+     */
     @Autowired
-    EmployeeService employeeService;
-
-    Department department;
+    private EmployeeService employeeService;
 
     /**
-     * @return view name
+     * @param model for ui.
+     * @return list of all departments.
      */
     @GetMapping(value = "/departments")
-    public final String departments(Model model) {
+    public final String departments(final Model model) {
         LOGGER.debug("getDepartments({})", model);
-        Collection<DepartmentAvgSalary> departments = departmentService.getDepartments_avgSalary();
+        Collection<DepartmentAvgSalary> departments
+                = departmentService.getDepartmentsAvgSalary();
+
         model.addAttribute("departments", departments);
         return "departments";
     }
 
     /**
-     * Goto new department page.
-     *
-     * @return view name
+     * add department page.
+     * @param model ui model .
+     * @return new page for filling form department.
      */
     @GetMapping(value = "/department")
-    public final String gotoAddDepartmentPage(Model model) {
+    public final String addDepartment(final Model model) {
         LOGGER.debug("addDepartment({})", model);
         Department department = new Department();
         model.addAttribute("isNew", true);
@@ -57,13 +66,14 @@ public class DepartmentController {
     }
 
     /**
-     * @param department new department.
-     * @param result data binding result.
-     * @return view name.
+     *
+     * @param department to be add new dept.
+     * @param result binding.
+     * @return list with new department.
      */
     @PostMapping(value = "/department")
-    public String addDepartment(@Valid Department department,
-                                BindingResult result
+    public final String addDepartment(@Valid final Department department,
+                              final BindingResult result
     ) {
         LOGGER.debug("addDepartment({}, {})", department, result);
         if (result.hasErrors()) {
@@ -75,11 +85,15 @@ public class DepartmentController {
     }
 
     /**
-     * Goto edit department page.
+     * edit department get page.
+     * @param id to find department to edit.
+     * @param model for ui model transfer.
+     * @return department page.
      */
     @GetMapping(value = "/department/{id}")
-    public final String gotoEditDepartmentPage(@PathVariable Integer id, Model model) {
-        LOGGER.debug("gotoEditDepartmentPage({},{})", id, model);
+    public final String editDepartment(@PathVariable final Integer id,
+                                       final Model model) {
+        LOGGER.debug("editDepartment({},{})", id, model);
         Department department = departmentService.getDepartmentById(id);
         model.addAttribute("isNew", false);
         model.addAttribute("department", department);
@@ -87,12 +101,13 @@ public class DepartmentController {
     }
 
     /**
-     * Update department into persistence storage.
-     * @return view name.
+     * @param department to be updated.
+     * @param result for binding.
+     * @return updated list.
      */
     @PostMapping(value = "/department/{id}")
-    public String updateDepartment(@Valid Department department,
-                                   BindingResult result
+    public final String updateDepartment(@Valid final Department department,
+                                 final BindingResult result
     ) {
         LOGGER.debug("updateDepartment({}, {})", department, result);
         if (result.hasErrors()) {
@@ -104,17 +119,22 @@ public class DepartmentController {
     }
 
     /**
-     * Delete department.
-     * @return view name
+     *
+     * @param id for finding dept.
+     * @param model for ui.
+     * @return department page.
      */
     @GetMapping(value = "/department/{id}/delete")
-    public final String deleteDepartmentById(@PathVariable Integer id, Model model) {
+    public final String deleteDepartmentById(@PathVariable final Integer id,
+                                             final Model model) {
         LOGGER.debug("deleteDepartmentById({},{})", id, model);
 
         for (Employee employee : employeeService.getAllEmployees()) {
 
-            Department department = departmentService.getDepartmentById(id);
-            if (department.getDepartmentId().equals(employee.getDepartmentId())){
+            Department dept = departmentService.getDepartmentById(id);
+            if (dept.getDepartmentId()
+                    .equals(employee.getDepartmentId())) {
+
                 model.addAttribute("cantdelete", true);
                 return "departments";
             }

@@ -5,25 +5,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ *Version control to test rest.
  */
 @RestController
 public class VersionController {
 
     /**
-     *
+     *version.
      */
     public static final String VERSION = "1.0";
 
     /**
      *
-     * @return
+     * @return version value.
      */
     @RequestMapping(value = "/version", method = RequestMethod.GET)
-    public String getVersion(){
+    public final String getVersion() {
         return VERSION;
     }
-
 
 
 }

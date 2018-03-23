@@ -19,6 +19,13 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>tinymce.init({selector: 'textarea'});</script>
 
+
+    <!-- data table -->
+    <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+
 </head>
 
 <body>
@@ -35,7 +42,7 @@
                href="../departments.html"
                th:href="@{/departments}">Departments</a>
             <a class="nav-item nav-link"
-               href="../employees.html"
+               href="../../../resources/employees.html"
                th:href="@{/employees}">Employees</a>
         </ul>
     </div>

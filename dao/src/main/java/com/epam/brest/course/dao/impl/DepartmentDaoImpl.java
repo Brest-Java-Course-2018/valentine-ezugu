@@ -1,8 +1,8 @@
 package com.epam.brest.course.dao.impl;
 
+import com.epam.brest.course.dao.api.DepartmentDao;
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.dao.api.DepartmentDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- *dao class for db manipulation.
+ * dao class for db manipulation.
  *
  * @author user.
  * @version $Id: $
@@ -33,7 +33,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
-
+    /**
+     * query for getting avg salary of employee
+     * grouped by department id.
+     */
     @Value("${department.selectAvgSalary}")
     private String selectAvgSalarySql;
     /**
@@ -80,18 +83,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     private static final String DESCRIPTION = "description";
     /**
-     *head of the department attribute
+     * head of the department attribute.
      */
     private static final String HEAD_OF_DEPARTMENT = "headOfDepartment";
     /**
-     *average salary will increase or reduce when we add new salary
+     * average salary will increase or reduce when we add new salary.
      */
     private static final String AVG_SALARY = "avgSalary";
 
     /**
      * Template class with a basic set of JDBC operations, allowing the use.
      * of named parameters rather than traditional '?' placeholders.
-     *
+     * <p>
      * when we want to give a parameter a specific value.
      */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -99,27 +102,30 @@ public class DepartmentDaoImpl implements DepartmentDao {
     /**
      * <p>Setter for the field <code>namedParameterJdbcTemplate</code>.</p>
      *
-     * @param namedParameterJdbcTemplate jdbc basic ops.
+     * @param namedParameterJdbcTemplate1 jdbc basic ops.
      */
     public final void setNamedParameterJdbcTemplate(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate1) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate1;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final List<Department> getDepartments() {
         LOGGER.debug("getDepartment()");
 
         List<Department> departments =
-        namedParameterJdbcTemplate.getJdbcOperations()
-                .query(departmentSelectAll, new DepartRowMapper());
+                namedParameterJdbcTemplate.getJdbcOperations()
+                        .query(departmentSelectAll, new DepartRowMapper());
         return departments;
     }
 
 
-
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Department getDepartmentById(final Integer departmentId) {
         Assert.notNull(departmentId, "departmentId cannot be null");
@@ -129,14 +135,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
         Department department =
-            namedParameterJdbcTemplate.queryForObject(departmentSelect,
-                    namedParameters,
+                namedParameterJdbcTemplate.queryForObject(departmentSelect,
+                        namedParameters,
 
-            BeanPropertyRowMapper.newInstance(Department.class));
+                        BeanPropertyRowMapper.newInstance(Department.class));
         return department;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Department addDepartment(final Department department) {
 
@@ -176,7 +184,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void updateDepartment(final Department department) {
         LOGGER.debug("updateDepartment({})", department);
@@ -188,53 +198,86 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     *
+     * @param id for finding department to delete.
+     */
     @Override
-    public final void deleteDepartmentById(final Integer departmentId) {
-        LOGGER.debug("deleteDepartmentById({})", departmentId);
-        Assert.notNull(departmentId, "departmentId cannot be null");
+    public final void deleteDepartmentById(final Integer id) {
+        LOGGER.debug("deleteDepartmentById({})", id);
+        Assert.notNull(id, "departmentId cannot be null");
 
         namedParameterJdbcTemplate.getJdbcOperations()
-                .update(delete, departmentId);
+                .update(delete, id);
     }
 
+    /**
+     *
+     * @return departments with avg salary.
+     */
     @Override
-    public List<DepartmentAvgSalary> getDepartmentAvgSalary() {
+    public final List<DepartmentAvgSalary> getDepartmentAvgSalary() {
         LOGGER.debug("getDepartmentDTOs()");
-        List<DepartmentAvgSalary> departments_with_AvgSalaries =
-                namedParameterJdbcTemplate.getJdbcOperations().query(selectAvgSalarySql, new DepartmentDTORowMapper());
-        return departments_with_AvgSalaries;
+        List<DepartmentAvgSalary> departmentAvgSalaries =
+                namedParameterJdbcTemplate
+                        .getJdbcOperations()
+                        .query(selectAvgSalarySql,
+                                new DepartmentDTORowMapper());
+        return departmentAvgSalaries;
     }
+
     /**
      * interface perform the actual work of mapping each row to a result object,
      * but don't need to worry about exception handling.
-     *  java.sql.SQLException SQLExceptions} will be caught and handled
+     * java.sql.SQLException SQLExceptions} will be caught and handled
      * by the calling JdbcTemplate.
      */
     private class DepartRowMapper implements RowMapper<Department> {
 
         @Override
-        public Department mapRow(final ResultSet resultSet, final int i)
+        public final Department mapRow(final ResultSet resultSet, final int i)
                 throws SQLException {
 
             Department department = new Department();
-            department.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
-            department.setDepartmentName(resultSet.getString(DEPARTMENT_NAME));
-            department.setDescription(resultSet.getString(DESCRIPTION));
-            department.setHeadOfDepartment(resultSet.getString(HEAD_OF_DEPARTMENT));
+            department.setDepartmentId(
+                    resultSet.getInt(DEPARTMENT_ID));
+
+            department.setDepartmentName(
+                    resultSet.getString(DEPARTMENT_NAME));
+
+            department.setDescription(
+                    resultSet.getString(DESCRIPTION));
+
+            department.setHeadOfDepartment(
+                    resultSet.getString(HEAD_OF_DEPARTMENT));
+
             return department;
         }
     }
 
-    private class DepartmentDTORowMapper implements RowMapper<DepartmentAvgSalary> {
+    /**
+     * This inner class is for mapping the rows of our table.
+     */
+    private class DepartmentDTORowMapper
+            implements RowMapper<DepartmentAvgSalary> {
 
         @Override
-        public DepartmentAvgSalary mapRow(ResultSet resultSet, int i) throws SQLException {
-            DepartmentAvgSalary dto = new DepartmentAvgSalary();
-            dto.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
-            dto.setDepartmentName(resultSet.getString(DEPARTMENT_NAME));
-            dto.setAvgSalary(resultSet.getInt(AVG_SALARY));
-            return dto;
+        public final DepartmentAvgSalary mapRow(final ResultSet
+                                                        resultSet, final int i)
+                throws SQLException {
+
+            DepartmentAvgSalary departmentAvgSalary = new DepartmentAvgSalary();
+
+            departmentAvgSalary.setDepartmentId(
+                    resultSet.getInt(DEPARTMENT_ID));
+
+            departmentAvgSalary.setDepartmentName(
+                    resultSet.getString(DEPARTMENT_NAME));
+
+            departmentAvgSalary.setAvgSalary(
+                    resultSet.getInt(AVG_SALARY));
+
+            return departmentAvgSalary;
         }
     }
 

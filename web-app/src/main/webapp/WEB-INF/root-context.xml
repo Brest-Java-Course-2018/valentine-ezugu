@@ -61,10 +61,10 @@
          - Files are stored inside in main/resources
      -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-          p:basename="messages/messages"/>
+          p:basename="messages/message"/>
 
 
-    <bean id="departmentDao" class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">
+    <bean id="departmentDao"  class="com.epam.brest.course.dao.impl.DepartmentDaoImpl">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
@@ -72,7 +72,7 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="employeeDao" class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">
+    <bean id="employeeDao"  class="com.epam.brest.course.dao.impl.EmployeeDaoImpl">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
@@ -80,4 +80,12 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+
+    <bean id="departmentService" class="com.epam.brest.course.service.impl.DepartmentServiceImpl">
+        <property name="departmentDao"  ref="departmentDao" />
+    </bean>
+
+    <bean id="employeeService" class="com.epam.brest.course.service.impl.EmployeeServiceImpl">
+        <property name="employeeDao"  ref="employeeDao"/>
+    </bean>
 </beans>

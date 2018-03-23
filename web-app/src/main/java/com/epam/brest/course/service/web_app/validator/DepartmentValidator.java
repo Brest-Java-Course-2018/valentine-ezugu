@@ -10,13 +10,30 @@ import org.springframework.validation.Validator;
  */
 public class DepartmentValidator implements Validator {
 
+    /**
+     * min name length for head of department.
+     */
+    private static final int MIN_HEAD_OF_DEPARTMENT_LENGTH = 2;
+    /**
+     * max name length for head of department.
+     */
+    private static final int MAX_LENGTH_OF_HEAD_OF_DEPARTMENT = 25;
+    /**
+     *  min name length for department name.
+     */
+    private static final int MIN_DEPARTMENT_NAME_LENGTH = 2;
+    /**
+     * max name length for department name.
+     */
+    private static final int MAX_DEPARTMENT_NAME_LENGTH = 250;
+
     @Override
-    public boolean supports(Class<?> clazz) {
+    public final boolean supports(final Class<?> clazz) {
         return Department.class.equals(clazz);
     }
 
     @Override
-    public void validate(Object obj, Errors e) {
+    public final void validate(final Object obj, final Errors e) {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(e,
                 "departmentName", "departmentName.empty");
@@ -28,14 +45,20 @@ public class DepartmentValidator implements Validator {
 
         Department department = (Department) obj;
 
-        if (department.getHeadOfDepartment().length() < 2) {
+        if (department.getHeadOfDepartment().length()
+                < MIN_HEAD_OF_DEPARTMENT_LENGTH) {
             e.rejectValue("headOfDepartment", "too short");
-        } else if (department.getHeadOfDepartment().length() > 25 ) {
+
+        } else if (department.getHeadOfDepartment().length()
+                > MAX_LENGTH_OF_HEAD_OF_DEPARTMENT) {
             e.rejectValue("headOfDepartment", "too long");
         }
-        if (department.getDepartmentName().length() < 2) {
+        if (department.getDepartmentName().length()
+                < MIN_DEPARTMENT_NAME_LENGTH) {
             e.rejectValue("description", "description is too short");
-        } else if (department.getDepartmentName().length()  > 250) {
+
+        } else if (department.getDepartmentName().length()
+                > MAX_DEPARTMENT_NAME_LENGTH) {
             e.rejectValue("description", "To long description");
         }
      }

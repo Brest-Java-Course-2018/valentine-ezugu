@@ -1,12 +1,10 @@
 package com.epam.brest.course.model;
 
-import java.util.Objects;
-
 /**
  * POJO Employee for model.
  *
  * @author valentine
- * @version $Id: $
+ * @version $Id: $1
  */
 public class Employee {
 
@@ -34,36 +32,29 @@ public class Employee {
      */
      private String email;
 
-
-    public Employee(Integer employeeId, String employeeName, Integer salary, Integer departmentId) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.salary = salary;
-        this.departmentId = departmentId;
+    /**
+     * Constructor.
+     * @param id id.
+     * @param name employeeName.
+     * @param salaryToStart salary.
+     * @param deptId department.
+     */
+    public Employee(final Integer id, final String name,
+                    final Integer salaryToStart, final Integer deptId) {
+        this.employeeId = id;
+        this.employeeName = name;
+        this.salary = salaryToStart;
+        this.departmentId = deptId;
     }
 
+    /**
+     * default constructor.
+     */
     public Employee() {
     }
 
     /**
-     *
-     * @return email
-     */
-    public final String getEmail() {
-        return email;
-    }
-
-    /**
-     *
-     * @param email for email set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
      * Get Employee Id.
-     *
      * @return employeeId.
      */
     public final Integer getEmployeeId() {
@@ -71,12 +62,10 @@ public class Employee {
     }
 
     /**
-     * <p>Setter for the field <code>employeeId</code>.</p>
-     *
-     * @param employeeId setter.
+     * @param id setter.
      */
-    public final void setEmployeeId(final Integer employeeId) {
-        this.employeeId = employeeId;
+    public final void setEmployeeId(final Integer id) {
+        this.employeeId = id;
     }
 
     /**
@@ -89,17 +78,13 @@ public class Employee {
     }
 
     /**
-     * <p>Setter for the field <code>employeeName</code>.</p>
-     *
-     * @param employeeName setter.
+     * @param name setter.
      */
-    public final void setEmployeeName(final String employeeName) {
-        this.employeeName = employeeName;
+    public final void setEmployeeName(final String name) {
+        this.employeeName = name;
     }
 
     /**
-     * <p>Getter for the field <code>salary</code>.</p>
-     *
      * @return salary.
      */
     public final Integer getSalary() {
@@ -107,12 +92,10 @@ public class Employee {
     }
 
     /**
-     * <p>Setter for the field <code>salary</code>.</p>
-     *
-     * @param salary setter.
+     * @param salaryToSet setter.
      */
-    public final void setSalary(final Integer salary) {
-        this.salary = salary;
+    public final void setSalary(final Integer salaryToSet) {
+        this.salary = salaryToSet;
     }
 
     /**
@@ -124,49 +107,41 @@ public class Employee {
         return departmentId;
     }
 
+    /**
+     *
+     * @return email
+     */
+    public final String getEmail() {
+        return email;
+    }
+
+    /**
+     *
+     * @param emails for email set
+     */
+    public final void setEmail(final String emails) {
+        this.email = emails;
+    }
+
 
     /**
      * <p>Setter for the field <code>departmentId</code>.</p>
      *
-     * @param departmentId setter.
+     * @param id setter.
      */
-    public final void setDepartmentId(final Integer departmentId) {
-        this.departmentId = departmentId;
+    public final void setDepartmentId(final Integer id) {
+        this.departmentId = id;
     }
 
-    /** {@inheritDoc} */
     @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId="
-                + employeeId
-                + ", employeeName='"
-                + employeeName
-                + ", salary="
-                + salary
-                + ", departmentId="
-                + departmentId
-                + ", email='"
-                + email
+    public final String toString() {
+        return "Employee{"
+                + "employeeId=" + employeeId
+                + ", employeeName='" + employeeName
+                + ", salary=" + salary
+                + ", departmentId=" + departmentId
+                + ", email='" + email
                 + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(getEmployeeId(), employee.getEmployeeId()) &&
-                Objects.equals(getEmployeeName(), employee.getEmployeeName()) &&
-                Objects.equals(getSalary(), employee.getSalary()) &&
-                Objects.equals(getDepartmentId(), employee.getDepartmentId()) &&
-                Objects.equals(getEmail(), employee.getEmail());
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(getEmployeeId(), getEmployeeName(), getSalary(), getDepartmentId(), getEmail());
     }
 }
 

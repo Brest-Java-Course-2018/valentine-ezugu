@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.List;
+import java.util.Collection;
+
 
 /**
  * This is the service bean for employee entity
@@ -32,8 +33,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      * dao for db transactions.
      */
-    @Autowired
     private EmployeeDao employeeDao;
+
+    /**
+     *
+     * @param employeeDao1 for setter inject.
+     */
+    @Autowired
+    public final void setEmployeeDao(final EmployeeDao employeeDao1) {
+        this.employeeDao = employeeDao1;
+    }
 
     /**
      *
@@ -50,10 +59,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Assert.hasText(employee.getEmployeeName(), "name cannot be null");
         Assert.notNull(employee.getSalary(), "salary cannot be null");
-        Assert.hasText(employee.getEmail(),"you should have email");
+        Assert.hasText(employee.getEmail(), "you should have email");
         Assert.notNull(employee.getDepartmentId(),
                 "department id cannot be null");
-
         return employeeDao.addEmployee(employee);
     }
 
@@ -63,14 +71,13 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
-    public final List<Employee> getAllEmployees() throws DataAccessException {
+    public final Collection<Employee> getAllEmployees()
+            throws DataAccessException {
         LOGGER.debug("getAllEmployees()");
-
         return employeeDao.getEmployees();
     }
 
     /**
-     *
      * @param id for deleteBy Id.
      * @throws DataAccessException DataAccessException when cannot access db.
      */
@@ -84,22 +91,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      *
      * @param id for get by Id.
-     * @return an employee that matches id ;
+     * @return an employee that matches id.
      * @throws DataAccessException DataAccessException when cannot access db.
      */
     @Override
     public final Employee getEmployeeById(final Integer id)
             throws DataAccessException {
+            LOGGER.debug("getEmployeeById({})", id);
+            Assert.notNull(id, "id cannot be null");
         return employeeDao.getEmployeeById(id);
     }
 
     /**
      *
-     * @param employee update
-     * @throws DataAccessException exceptions
+     * @param employee update.
+     * @throws DataAccessException exceptions.
      */
     @Override
-    public void update(Employee employee) throws DataAccessException {
+    public final void update(final Employee employee)
+            throws DataAccessException {
+
         Assert.notNull(employee, "employee cannot be null");
         LOGGER.debug("update({})", employee);
           employeeDao.updateEmployee(employee);

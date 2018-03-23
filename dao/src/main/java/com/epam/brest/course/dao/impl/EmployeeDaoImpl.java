@@ -4,17 +4,16 @@ import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.dao.api.EmployeeDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.util.Assert;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.Collection;
+
 
 /**
  * impl of dao fro employee.
@@ -65,20 +64,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * variables for resultSet.
      */
     private static final String EMPLOYEE_ID = "employeeId";
-    /**
-     * row name for row mapper.
-     */
-    private static final String EMPLOYEE_NAME = "employeeName";
-    /**
-     * row name for row mapper.
-     */
-    private static final String SALARY = "salary";
-    /**
-     * row name for row mapper.
-     */
-    private static final String DEPARTMENT_ID = "departmentId";
-
-    private static final String EMAIL = "email";
 
     /**
      * Template class with a basic set of JDBC operations, allowing the use
@@ -89,38 +74,48 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
-     * <p>Setter for the field <code>namedParameterJdbcTemplate</code>.</p>
-     *
-     * @param namedParameterJdbcTemplate adding namedParameterJdbcTemplate.
+     * @param namedParameterJdbcTemplate1 adding namedParameterJdbcTemplate.
      *  which has datasource init so we can use this.
      * to access and manipulate our db.
      */
     public final void setNamedParameterJdbcTemplate(
-         final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final List<Employee> getEmployees() {
-        List<Employee> employees =
-                namedParameterJdbcTemplate.getJdbcOperations()
-                        .query(employeeSelectAll, new DepartRowMapper());
-         return employees;
+         final NamedParameterJdbcTemplate namedParameterJdbcTemplate1) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate1;
     }
 
     @Override
-    public Employee getEmployeeById(Integer id) {
+    public  final Collection<Employee> getEmployees() {
+        LOGGER.debug("getEmployees()");
+        Collection<Employee> employees =
+                namedParameterJdbcTemplate.getJdbcOperations().
+                        query(employeeSelectAll, BeanPropertyRowMapper.
+                                newInstance(Employee.class));
+        return employees;
+    }
+
+    /**
+     *
+     * @param id to select a particular id.
+     * @return employee.
+     */
+    @Override
+    public final Employee getEmployeeById(final Integer id) {
         LOGGER.debug("getEmployeeById {}", id);
-        SqlParameterSource namedParametres =
+        SqlParameterSource namedParameters =
                 new MapSqlParameterSource(EMPLOYEE_ID, id);
         Employee employee =
                 namedParameterJdbcTemplate.queryForObject(employeeSelect,
-                        namedParametres, BeanPropertyRowMapper.newInstance(Employee.class));
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(Employee.class));
         return employee;
     }
 
-    /** {@inheritDoc} */
+    /**
+     *
+     * @param employee takes an object as param for adding new.
+     * employee.
+     * @return new employee.
+     */
     @Override
     public final Employee addEmployee(final Employee employee) {
         Assert.notNull(employee, "cannot be null");
@@ -134,7 +129,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employee;
     }
 
-    /** {@inheritDoc} */
+    /**
+     *
+     * @param employee object used for update.
+     */
     @Override
     public final void updateEmployee(final Employee employee) {
 
@@ -150,7 +148,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 .update(update, namedParameterSource);
     }
 
-    /** {@inheritDoc} */
+    /**
+     *
+     * @param id for delete.
+     */
     @Override
     public final void deleteEmployeeById(final Integer id) {
         Assert.notNull(id, "cannot be null");
@@ -158,25 +159,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 new MapSqlParameterSource("employeeId", id);
         namedParameterJdbcTemplate
                 .update(delete, namedParameterSource);
-    }
-
-    /**
-     * row mapper.
-     */
-    private class DepartRowMapper implements RowMapper<Employee> {
-
-        @Override
-        public Employee mapRow(final ResultSet resultSet, final int i)
-                throws SQLException {
-
-            Employee employee = new Employee();
-            employee.setDepartmentId(resultSet.getInt(EMPLOYEE_ID));
-            employee.setEmployeeName(resultSet.getString(EMPLOYEE_NAME));
-            employee.setSalary(resultSet.getInt(SALARY));
-            employee.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
-            employee.setEmail(resultSet.getString(EMAIL));
-            return employee;
-        }
     }
 
 }

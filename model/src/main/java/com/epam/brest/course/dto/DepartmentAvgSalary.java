@@ -1,37 +1,73 @@
 package com.epam.brest.course.dto;
 
+/**
+ * This class is mainly for finding
+ * average salary in list of department.
+ */
 public class DepartmentAvgSalary {
-
+    /**
+     * id.
+     */
     private Integer departmentId;
-
+    /**
+     * department name.
+     */
     private String departmentName;
-
+    /**
+     * avg salary.
+     */
     private Integer avgSalary;
 
+    /**
+     * default constructor.
+     */
     public DepartmentAvgSalary() {
     }
 
-    public Integer getDepartmentId() {
+    /**
+     *
+     * @return departmentId.
+     */
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    /**
+     *
+     * @param id setter method for id.
+     */
+    public final void setDepartmentId(final Integer id) {
+        this.departmentId = id;
     }
 
-    public String getDepartmentName() {
+    /**
+     *
+     * @return department name.
+     */
+    public final String getDepartmentName() {
         return departmentName;
     }
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+    /**
+     * @param name name.
+     */
+    public final void setDepartmentName(final String name) {
+        this.departmentName = name;
     }
 
-    public Integer getAvgSalary() {
+    /**
+     *
+     * @return avgSalary.
+     */
+    public final Integer getAvgSalary() {
         return avgSalary;
     }
 
-    public void setAvgSalary(Integer avgSalary) {
-        this.avgSalary = avgSalary;
+    /**
+     *
+     * @param salary setter for avg salary.
+     */
+    public final void setAvgSalary(final Integer salary) {
+        this.avgSalary = salary;
     }
 }

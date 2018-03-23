@@ -39,16 +39,17 @@ public interface DepartmentService {
      * @throws DataAccessException if cannot access db.
      * @return found department.
      */
-    Department getDepartmentById(Integer id) throws DataAccessException;
+    Department getDepartmentById(final Integer id) throws DataAccessException;
 
     /**
-     * @param department
+     * @param department for update.
      */
-    void updateDepartment(Department department);
+    void updateDepartment(final Department department);
 
     /**
      *
+     * @return collection for list of departments with avg salary.
      */
-    Collection<DepartmentAvgSalary> getDepartments_avgSalary();
+    Collection<DepartmentAvgSalary> getDepartmentsAvgSalary();
 
 }

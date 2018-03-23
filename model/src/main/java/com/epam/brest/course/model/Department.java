@@ -1,7 +1,5 @@
 package com.epam.brest.course.model;
 
-import java.util.Objects;
-
 /**
  * department pojo.
  *
@@ -25,23 +23,23 @@ public class Department {
     private String description;
 
     /**
-     *
+     *head of department.
      */
     private String headOfDepartment;
 
     /**
      * <p>Constructor for Department.</p>
      *
-     * @param departmentName for constructor init.
-     * @param description for constructor init.
+     * @param name for constructor init.
+     * @param descriptions for constructor init.
      */
-    public Department(final String departmentName, final String description) {
-        this.departmentName = departmentName;
-        this.description = description;
+    public Department(final String name, final String descriptions) {
+        this.departmentName = name;
+        this.description = descriptions;
     }
 
     /**
-     * empty constructor.
+     * default constructor.
      */
     public Department() {
     }
@@ -58,10 +56,10 @@ public class Department {
     /**
      * <p>Setter for the field <code>departmentId</code>.</p>
      *
-     * @param departmentId setter.
+     * @param id setter.
      */
-    public final void setDepartmentId(final Integer departmentId) {
-        this.departmentId = departmentId;
+    public final void setDepartmentId(final Integer id) {
+        this.departmentId = id;
     }
 
     /**
@@ -76,15 +74,13 @@ public class Department {
     /**
      * <p>Setter for the field <code>departmentName</code>.</p>
      *
-     * @param departmentName names.
+     * @param name names.
      */
-    public final void setDepartmentName(final String departmentName) {
-        this.departmentName = departmentName;
+    public final void setDepartmentName(final String name) {
+        this.departmentName = name;
     }
 
     /**
-     * <p>Getter for the field <code>description</code>.</p>
-     *
      * @return descriptions.
      */
     public final String getDescription() {
@@ -92,45 +88,25 @@ public class Department {
     }
 
     /**
-     * <p>Setter for the field <code>description</code>.</p>
-     *
-     * @param description setter.
+     * @param descriptions setter.
      */
-    public final void setDescription(final String description) {
-        this.description = description;
+    public final void setDescription(final String descriptions) {
+        this.description = descriptions;
     }
 
-    public String getHeadOfDepartment() {
+    /**
+     * @return head of department
+     */
+    public final String getHeadOfDepartment() {
         return headOfDepartment;
     }
 
-    public void setHeadOfDepartment(String headOfDepartment) {
-        this.headOfDepartment = headOfDepartment;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Department)) return false;
-        Department that = (Department) o;
-        return Objects.equals(getDepartmentId(),
-                that.getDepartmentId())
-                && Objects.equals(getDepartmentName(),
-                that.getDepartmentName())
-                && Objects.equals(getDescription(),
-                that.getDescription())
-                && Objects.equals(getHeadOfDepartment(),
-                that.getHeadOfDepartment());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int hashCode() {
-
-        return Objects.hash(getDepartmentId(),
-                getDepartmentName(),
-                getDescription());
+    /**
+     *
+     * @param headOfDepartments to set head of dept.
+     */
+    public final void setHeadOfDepartment(final String headOfDepartments) {
+        this.headOfDepartment = headOfDepartments;
     }
 
     /** {@inheritDoc} */
@@ -144,7 +120,7 @@ public class Department {
                 + ", description='"
                 + description
                 + ", headOfDepartment='"
-                + headOfDepartment +
-                '}';
-    }}
-
+                + headOfDepartment
+                + '}';
+    }
+}
