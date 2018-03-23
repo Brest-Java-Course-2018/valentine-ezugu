@@ -28,8 +28,8 @@ public class EmployeeServiceImpl {
     private static final String EMPLOYEE_NAME = "valentine";
     private static final String EMAIL = "valen@yahoo.com";
 
-    private static final String DEPARTMENT_NAME_FOR_UPDATE = "Enterprise Integration Pattern";
-    private static final int DEPARTMENT_ID = 22;
+    private static final String EMPLOYEE_NAME_FOR_UPDATE = "Enterprise Integration Pattern";
+    private static final int EMPLOYEE_ID = 22;
 
     @Autowired
     private EmployeeService employeeService;
@@ -40,9 +40,9 @@ public class EmployeeServiceImpl {
         Collection<Employee> employees = employeeService.getAllEmployees();
         int sizeBeforeAdd = employees.size();
 
-        //populating the department for add
+        //populating the employee for add
         Employee employee = new Employee();
-        employee.setEmployeeId(DEPARTMENT_ID);
+        employee.setEmployeeId(EMPLOYEE_ID);
         employee.setEmployeeName(EMPLOYEE_NAME);
         employee.setSalary(900);
         employee.setDepartmentId(ID);
@@ -69,7 +69,7 @@ public class EmployeeServiceImpl {
         employee.setEmployeeName(EMPLOYEE_NAME);
         employee.setEmail(EMAIL);
 
-        //get this department by id
+        //get this employee by id
         Employee empl = employeeService.getEmployeeById(ID);
 
         //assertions
@@ -81,19 +81,19 @@ public class EmployeeServiceImpl {
     public void updateEmployee() {
         LOGGER.debug("test: updateEmployee()");
 
-        //get department by id for updating
+        //get employee by id for updating
         Employee employee = employeeService.getEmployeeById(ID);
 
-        //confirm we got the right department
+        //confirm we got the right employee
         Assert.assertEquals(employee.getEmployeeName(), "valentine");
 
-        //give department a new name
-        employee.setEmployeeName(DEPARTMENT_NAME_FOR_UPDATE);
+        //give employee a new name
+        employee.setEmployeeName(EMPLOYEE_NAME_FOR_UPDATE);
         employeeService.update(employee);
 
         // assert to confirm result
         Assert.assertNotNull(employee);
-        Assert.assertEquals(DEPARTMENT_NAME_FOR_UPDATE, employee.getEmployeeName());
+        Assert.assertEquals(EMPLOYEE_NAME_FOR_UPDATE, employee.getEmployeeName());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class EmployeeServiceImpl {
         LOGGER.debug("test: deleteById()");
         int employeeSize = employeeService.getAllEmployees().size();
 
-        //get this department by id and delete
+        //get this employee by id and delete
         employeeService.deleteEmployeeById(ID);
 
         //assertions
