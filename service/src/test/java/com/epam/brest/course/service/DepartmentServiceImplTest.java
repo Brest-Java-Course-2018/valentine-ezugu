@@ -37,7 +37,7 @@ public class DepartmentServiceImplTest {
     private DepartmentService departmentService;
 
     @Test
-    public void saveDepartment() {
+    public void saveDepartment() throws Exception {
         LOGGER.debug("test: saveDepartment()");
         List<Department> departments = departmentService.getAllDepartments();
         int sizeBeforeAdd = departments.size();
@@ -64,7 +64,7 @@ public class DepartmentServiceImplTest {
 
 
     @Test
-    public void getDepartmentById() {
+    public void getDepartmentById()throws Exception {
         LOGGER.debug("test: getDepartmentById()");
 
         //populating the department
@@ -82,7 +82,7 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
-    public void updateDepartment() {
+    public void updateDepartment() throws Exception {
         LOGGER.debug("test: updateDepartment()");
 
         //get department by id for updating
@@ -102,7 +102,7 @@ public class DepartmentServiceImplTest {
 
         //Because department has employee
     @Test(expected = DataIntegrityViolationException.class)
-    public void deleteById() {
+    public void deleteById() throws Exception {
         LOGGER.debug("test: deleteById()");
         int departmentSize = departmentService.getAllDepartments().size();
 

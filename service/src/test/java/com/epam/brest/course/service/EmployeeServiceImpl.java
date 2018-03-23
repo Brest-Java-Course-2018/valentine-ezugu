@@ -35,7 +35,7 @@ public class EmployeeServiceImpl {
     private EmployeeService employeeService;
 
     @Test
-    public void saveEmployee() {
+    public void saveEmployee() throws Exception {
         LOGGER.debug("test: saveEmployee()");
         Collection<Employee> employees = employeeService.getAllEmployees();
         int sizeBeforeAdd = employees.size();
@@ -62,7 +62,7 @@ public class EmployeeServiceImpl {
     }
 
     @Test
-    public void getEmployeeById() {
+    public void getEmployeeById() throws Exception {
         LOGGER.debug("test: getEmployeeById()");
 
         Employee employee = new Employee();
@@ -78,7 +78,7 @@ public class EmployeeServiceImpl {
     }
 
     @Test
-    public void updateEmployee() {
+    public void updateEmployee() throws Exception {
         LOGGER.debug("test: updateEmployee()");
 
         //get employee by id for updating
@@ -97,7 +97,7 @@ public class EmployeeServiceImpl {
     }
 
     @Test
-    public void deleteById() {
+    public void deleteById() throws Exception {
         LOGGER.debug("test: deleteById()");
         int employeeSize = employeeService.getAllEmployees().size();
 

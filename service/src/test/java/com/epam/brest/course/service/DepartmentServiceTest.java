@@ -42,7 +42,7 @@ public class DepartmentServiceTest {
     
     
     @Test
-    public void addDepartment() {
+    public void addDepartment() throws Exception {
         LOGGER.debug("test: addDepartment()");
 
         Department department = new Department();
@@ -71,7 +71,7 @@ public class DepartmentServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void getDepartmentById() {
+    public void getDepartmentById() throws Exception {
         LOGGER.debug("test: getDepartmentById()");
 
         Department department = new Department();
@@ -92,7 +92,7 @@ public class DepartmentServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void deleteDepartmentById() {
+    public void deleteDepartmentById() throws Exception {
         LOGGER.debug("test: deleteDepartmentById()");
 
         Department department = new Department();
@@ -107,7 +107,7 @@ public class DepartmentServiceTest {
      * @throws Exception in case of rule violation.
      */
     @Test
-    public void getDepartmentList() {
+    public void getDepartmentList() throws Exception {
         LOGGER.debug("test: getDepartmentList()");
         Department department = new Department();
         department.setDepartmentId(ID);
@@ -126,7 +126,7 @@ public class DepartmentServiceTest {
      * @throws Exception is thrown because id cannot be null.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void exceptionOccursWhenIncompleteArgumentIsGiven() {
+    public void exceptionOccursWhenIncompleteArgumentIsGiven() throws Exception {
         Department department = new Department();
         department.setDepartmentName("ana");
         department.setHeadOfDepartment("mikel");
