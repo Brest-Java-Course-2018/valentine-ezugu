@@ -1,0 +1,111 @@
+package com.epam.brest.course.service;
+
+import com.epam.brest.course.model.Employee;
+import com.epam.brest.course.service.api.EmployeeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:test-db-spring.xml",
+        "classpath:bean.xml", "classpath:dao.xml"})
+@Transactional
+@Rollback
+public class EmployeeServiceImpl {
+
+    private static final Logger LOGGER = LogManager.getLogger();
+
+    private static final int ID = 1;
+    private static final String EMPLOYEE_NAME = "valentine";
+    private static final String EMAIL = "valen@yahoo.com";
+
+    private static final String DEPARTMENT_NAME_FOR_UPDATE = "Enterprise Integration Pattern";
+    private static final int DEPARTMENT_ID = 22;
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Test
+    public void saveEmployee() {
+        LOGGER.debug("test: saveEmployee()");
+        Collection<Employee> employees = employeeService.getAllEmployees();
+        int sizeBeforeAdd = employees.size();
+
+        //populating the department for add
+        Employee employee = new Employee();
+        employee.setEmployeeId(DEPARTMENT_ID);
+        employee.setEmployeeName(EMPLOYEE_NAME);
+        employee.setSalary(900);
+        employee.setDepartmentId(ID);
+        employee.setEmail(EMAIL);
+
+        //perform save
+        Employee newEmployee = employeeService.saveEmployee(employee);
+
+        //assertions
+        Assert.assertNotNull(employee.getEmployeeId());
+        Assert.assertNotNull(newEmployee.getEmployeeId());
+        Assert.assertTrue(newEmployee.getEmployeeName().equals(employee.getEmployeeName()));
+        Assert.assertTrue(newEmployee.getSalary().equals(employee.getSalary()));
+        Assert.assertTrue(sizeBeforeAdd < employeeService.getAllEmployees().size());
+        Assert.assertTrue((sizeBeforeAdd + 1) == employeeService.getAllEmployees().size());
+
+    }
+
+    @Test
+    public void getEmployeeById() {
+        LOGGER.debug("test: getEmployeeById()");
+
+        Employee employee = new Employee();
+        employee.setEmployeeName(EMPLOYEE_NAME);
+        employee.setEmail(EMAIL);
+
+        //get this department by id
+        Employee empl = employeeService.getEmployeeById(ID);
+
+        //assertions
+        Assert.assertNotNull(employee);
+        Assert.assertEquals("valentine", empl.getEmployeeName());
+    }
+
+    @Test
+    public void updateEmployee() {
+        LOGGER.debug("test: updateEmployee()");
+
+        //get department by id for updating
+        Employee employee = employeeService.getEmployeeById(ID);
+
+        //confirm we got the right department
+        Assert.assertEquals(employee.getEmployeeName(), "valentine");
+
+        //give department a new name
+        employee.setEmployeeName(DEPARTMENT_NAME_FOR_UPDATE);
+        employeeService.update(employee);
+
+        // assert to confirm result
+        Assert.assertNotNull(employee);
+        Assert.assertEquals(DEPARTMENT_NAME_FOR_UPDATE, employee.getEmployeeName());
+    }
+
+    @Test
+    public void deleteById() {
+        LOGGER.debug("test: deleteById()");
+        int employeeSize = employeeService.getAllEmployees().size();
+
+        //get this department by id and delete
+        employeeService.deleteEmployeeById(ID);
+
+        //assertions
+        Assert.assertTrue(employeeSize > employeeService.getAllEmployees().size());
+    }
+
+}

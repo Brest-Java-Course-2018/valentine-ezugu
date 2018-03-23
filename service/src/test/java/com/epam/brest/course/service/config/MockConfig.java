@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 @Profile("test")
 @Configuration
-public class TestConfig {
+public class MockConfig {
 
     @Bean
     public EmployeeDao employeeDao(){

@@ -2,7 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.service.api.DepartmentService;
-import com.epam.brest.course.service.config.TestConfig;
+import com.epam.brest.course.service.config.MockConfig;
 import com.epam.brest.course.dao.api.DepartmentDao;
 import com.epam.brest.course.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes ={ DepartmentServiceImpl.class, TestConfig.class})
+@ContextConfiguration(classes ={ DepartmentServiceImpl.class, MockConfig.class})
 public class DepartmentServiceTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -53,13 +53,16 @@ public class DepartmentServiceTest {
 
 
         Department testDepartment;
-        when(departmentDao.addDepartment(department)).thenReturn(department);
+        when(departmentDao.addDepartment(department))
+                .thenReturn(department);
 
         testDepartment = departmentService.saveDepartment(department);
 
         org.junit.Assert.assertNotNull(department);
-        assertEquals(testDepartment.getDepartmentName(), department.getDepartmentName());
-        Mockito.verify(departmentDao).addDepartment(department);
+        assertEquals(testDepartment.getDepartmentName(),
+                department.getDepartmentName());
+        Mockito.verify(departmentDao)
+                .addDepartment(department);
 
     }
 
@@ -77,8 +80,10 @@ public class DepartmentServiceTest {
                 .thenReturn(department);
 
         Department department1 = departmentService.getDepartmentById(ID);
-        assertEquals(department.getDepartmentId(), department1.getDepartmentId());
-        Mockito.verify(departmentDao).getDepartmentById(Mockito.anyInt());
+        assertEquals(department.getDepartmentId(),
+                department1.getDepartmentId());
+        Mockito.verify(departmentDao)
+                .getDepartmentById(Mockito.anyInt());
 
     }
 
@@ -109,7 +114,8 @@ public class DepartmentServiceTest {
         Department department1 = new Department();
         department.setDepartmentId(ID);
 
-        when(departmentDao.getDepartments()).thenReturn(Arrays.asList(department,department1));
+        when(departmentDao.getDepartments())
+                .thenReturn(Arrays.asList(department,department1));
 
         departmentService.getAllDepartments();
         Mockito.verify(departmentDao).getDepartments();

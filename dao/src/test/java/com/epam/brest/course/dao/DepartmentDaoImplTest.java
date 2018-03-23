@@ -99,8 +99,7 @@ public class DepartmentDaoImplTest {
         departmentDao.deleteDepartmentById(7);
     }
 
-//(expected = org.springframework.dao.EmptyResultDataAccessException.class)
-    @Test
+     @Test
     public void addDeptSecondTest(){
 
         List<Department> departments = departmentDao.getDepartments();
