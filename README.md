@@ -1,5 +1,9 @@
 # valentine-ezugu
 #sample organisation management system for Brest java course(2018)
+
+This project consists of a web application with spring-mvc and Thymeleaf and Restful webservice
+TODO Implement this application with  Angular
+
 [![Build Status](https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu)
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/valentine-ezugu/badge.svg)](https://coveralls.io/github/Brest-Java-Course-2018/valentine-ezugu)
 
@@ -24,8 +28,22 @@
       
         check:/target/stage/index.html
         ``
-
-    4.web-app runs on localhost:8082
+        To run jetty-server
+        on web-app directory - mvn jetty run 
+        
+    4.web-app runs on http://localhost:8082/
 
 5. Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/
+
+To be found in this projects are software products of the following versions :
+
+JDK: 1.8
+
+Maven: 3.3.9
+
+Spring: 4
+
+jetty 9.4.8.v20171121
+
+travis ci - also to add jenkins 
