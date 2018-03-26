@@ -1,7 +1,8 @@
-package com.epam.brest.course.service.web_app.controllers;
+package com.epam.brest.course.controllers.web_app.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 /**
  * Home MVC controller.
@@ -17,4 +18,5 @@ public class HomeController {
     public final String defaultPageRedirect() {
         return "redirect:departments";
     }
+
 }

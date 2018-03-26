@@ -100,18 +100,14 @@ public class DepartmentServiceImplTest {
         Assert.assertEquals(DEPARTMENT_NAME_FOR_UPDATE, department.getDepartmentName());
     }
 
-        //Because department has employee
-    @Test(expected = DataIntegrityViolationException.class)
+    @Test
     public void deleteById() throws Exception {
         LOGGER.debug("test: deleteById()");
         int departmentSize = departmentService.getAllDepartments().size();
-
         //get this department by id and delete
         departmentService.deleteDepartmentById(ID);
-
         //assertions
         Assert.assertTrue(departmentSize > departmentService.getAllDepartments().size());
     }
-
 
 }

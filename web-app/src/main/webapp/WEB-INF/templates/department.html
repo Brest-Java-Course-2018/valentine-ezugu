@@ -56,8 +56,10 @@
                                    th:field="*{departmentId}"/>
 
                             <div class="form-group">
+
                                 <label class="form-control-label"
                                        for="field_departmentName">Department Name</label>
+
                                 <input class="form-control"
                                        th:class="${#fields.hasErrors('departmentName')} ? 'form-control is-invalid' : 'form-control'"
                                        id="field_departmentName"

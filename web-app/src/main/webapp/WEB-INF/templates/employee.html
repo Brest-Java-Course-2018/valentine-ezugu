@@ -91,13 +91,15 @@
                               action="employees.html"
                               th:action="@{${#httpServletRequest.servletPath}}"
                               th:method="@{post}">
+
                             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                                 <p>Fix errors to continue</p>
                             </div>
+
                             <input id="field_employeeId"
                                    name="field_employeeId"
                                    type="hidden"
-                                   th:field ="*{employeeId}">
+                                   th:field ="*{employeeId}"/>
 
                             <div class="form-group"
                                  th:class="${#fields.hasErrors('*')} ? 'form-group is-invalid' : 'form-group'">
@@ -130,11 +132,12 @@
                             <div class="form-group"
                                  th:class="${#fields.hasErrors('email')} ? 'form-group is-invalid' : 'form-group'">
                                 <label class="form-control-label"
-                                       for="employeeMailInput">Email</label>
+                                       for="employeeMailInput"
+                                      >Email</label>
                                 <input type="text"
                                        class="form-control"
                                        id="employeeMailInput"
-                                       placeholder="Email"
+                                       placeholder="email"
                                        th:field ="*{email}">
                                 <div class="form-text text-danger"
                                      th:if="${#fields.hasErrors('email')}"
@@ -166,6 +169,7 @@
 
 </section>
 
+<div th:replace="common/header :: footer"/>
 <script src="../../resources/static/js/jquery.min.js"
         th:src="@{/resources/static/js/jquery.min.js}"></script>
 <script src="../../resources/static/js/popper.min.js"

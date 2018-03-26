@@ -1,10 +1,8 @@
-package com.epam.brest.course.service.web_app.controllers;
+package com.epam.brest.course.controllers.web_app.controllers;
 
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.service.api.DepartmentService;
-import com.epam.brest.course.service.api.EmployeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -31,11 +30,6 @@ public class DepartmentController {
      */
     @Autowired
     private DepartmentService departmentService;
-    /**
-     * employee service injected.
-     */
-    @Autowired
-    private EmployeeService employeeService;
 
     /**
      * @param model for ui.
@@ -75,11 +69,12 @@ public class DepartmentController {
     public final String addDepartment(@Valid final Department department,
                               final BindingResult result
     ) {
+
         LOGGER.debug("addDepartment({}, {})", department, result);
         if (result.hasErrors()) {
             return "department";
         } else {
-            this.departmentService.saveDepartment(department);
+             departmentService.saveDepartment(department);
             return "redirect:/departments";
         }
     }
@@ -128,18 +123,6 @@ public class DepartmentController {
     public final String deleteDepartmentById(@PathVariable final Integer id,
                                              final Model model) {
         LOGGER.debug("deleteDepartmentById({},{})", id, model);
-
-        for (Employee employee : employeeService.getAllEmployees()) {
-
-            Department dept = departmentService.getDepartmentById(id);
-            if (dept.getDepartmentId()
-                    .equals(employee.getDepartmentId())) {
-
-                model.addAttribute("cantdelete", true);
-                return "departments";
-            }
-            model.addAttribute("cantdelete", false);
-        }
         departmentService.deleteDepartmentById(id);
         return "redirect:/departments";
     }

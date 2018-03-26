@@ -55,6 +55,7 @@ public class EmployeeServiceImpl {
         Assert.assertNotNull(employee.getEmployeeId());
         Assert.assertNotNull(newEmployee.getEmployeeId());
         Assert.assertTrue(newEmployee.getEmployeeName().equals(employee.getEmployeeName()));
+        Assert.assertTrue(newEmployee.getEmail().matches("valen@yahoo.com"));
         Assert.assertTrue(newEmployee.getSalary().equals(employee.getSalary()));
         Assert.assertTrue(sizeBeforeAdd < employeeService.getAllEmployees().size());
         Assert.assertTrue((sizeBeforeAdd + 1) == employeeService.getAllEmployees().size());

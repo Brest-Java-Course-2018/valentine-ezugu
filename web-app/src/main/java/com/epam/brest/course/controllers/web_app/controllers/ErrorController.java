@@ -1,4 +1,4 @@
-package com.epam.brest.course.service.web_app.controllers;
+package com.epam.brest.course.controllers.web_app.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

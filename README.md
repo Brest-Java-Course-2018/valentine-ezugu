@@ -22,8 +22,10 @@
       
         $mvn site:stage
       
-        check:/target/stage/index.html``
+        check:/target/stage/index.html
+        ``
 
+    4.web-app runs on localhost:8082
 
-4. Travis CI integration
+5. Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/

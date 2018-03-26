@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
         http://www.springframework.org/schema/beans
@@ -24,6 +25,7 @@
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
+
         <property name="suffix" value=".html" />
         <property name="templateMode" value="HTML" />
     </bean>
@@ -39,8 +41,8 @@
 
     <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
     <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-        <property name="templateEngine" ref="templateEngine" />
-        <property name="characterEncoding" value="UTF-8" />
+        <property name="templateEngine" ref="templateEngine"/>
+        <property name="characterEncoding" value="UTF-8"/>
     </bean>
 
     <!--<context:property-placeholder location="classpath:application.properties"/>-->

@@ -52,7 +52,9 @@
     </bean>
 
     <bean id="departmentService" class="com.epam.brest.course.service.impl.DepartmentServiceImpl">
+    </bean>
 
+    <bean id="employeeService" class="com.epam.brest.course.service.impl.EmployeeServiceImpl">
     </bean>
 
     <mvc:annotation-driven/>

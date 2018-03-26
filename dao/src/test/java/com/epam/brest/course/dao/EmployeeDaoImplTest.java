@@ -55,6 +55,7 @@ public class EmployeeDaoImplTest {
         testEmployee.setEmployeeName("salisu");
         testEmployee.setSalary(400);
         testEmployee.setDepartmentId(1);
+        testEmployee.setEmail("valentine@yahoo.com");
         Employee resultEmployee = employeeDao.addEmployee(testEmployee);
         Assert.assertNotNull(resultEmployee);
         Assert.assertTrue(testEmployee.equals(resultEmployee));
@@ -76,6 +77,7 @@ public class EmployeeDaoImplTest {
         employee.setEmployeeId(1);
         employee.setEmployeeName("james");
         employee.setSalary(500);
+        employee.setEmail("valentine@yahoo.com");
 
         employeeDao.updateEmployee(employee);
 
@@ -104,15 +106,13 @@ public class EmployeeDaoImplTest {
     }
 
 
-
-
     @Test
     public void deleteEmployee() {
         Employee employee = new Employee(1,"valik", 1000, 1);
         employeeDao.addEmployee(employee);
         Collection<Employee> employees = employeeDao.getEmployees();
         int size_before = employees.size();
-        employeeDao.deleteEmployeeById(employee.getEmployeeId());
+        employeeDao.deleteEmployeeById(1);
         Assert.assertEquals((size_before - 1), employeeDao.getEmployees().size());
     }
 

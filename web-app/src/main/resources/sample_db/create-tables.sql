@@ -17,4 +17,5 @@ CREATE TABLE employee (
   PRIMARY KEY (employeeId),
   FOREIGN KEY (departmentId) REFERENCES department(departmentId)
   ON UPDATE CASCADE
+  ON DELETE CASCADE
 );

@@ -7,9 +7,12 @@ import org.apache.logging.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
@@ -59,6 +62,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Value("${employee.delete}")
     private String delete;
 
+    @Value("${employee.check}")
+    private String employeeCheck;
 
     /**
      * variables for resultSet.
@@ -116,16 +121,39 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * employee.
      * @return new employee.
      */
+//    @Override
+//    public final Employee addEmployee(final Employee employee) {
+//        Assert.notNull(employee, "cannot be null");
+//        SqlParameterSource namedParameterSource =
+//                new MapSqlParameterSource("employeeName",
+//                         employee.getEmployeeName())
+//                        .addValue("salary", employee.getSalary())
+//                        .addValue("departmentId", employee.getDepartmentId());
+//        namedParameterJdbcTemplate.update(
+//                addEmployee, namedParameterSource);
+//        return employee;
+//    }
     @Override
     public final Employee addEmployee(final Employee employee) {
         Assert.notNull(employee, "cannot be null");
-        SqlParameterSource namedParameterSource =
-                new MapSqlParameterSource("employeeName",
-                         employee.getEmployeeName())
-                        .addValue("salary", employee.getSalary())
-                        .addValue("departmentId", employee.getDepartmentId());
-        namedParameterJdbcTemplate.update(
-                addEmployee, namedParameterSource);
+        SqlParameterSource namedParameters =
+                new BeanPropertySqlParameterSource(employee);
+
+        KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+
+        Integer result = namedParameterJdbcTemplate.queryForObject(
+                employeeCheck, namedParameters, Integer.class);
+        LOGGER.debug("result({})", result);
+        if (result == 0) {
+            namedParameterJdbcTemplate.
+                    update(addEmployee, namedParameters, generatedKeyHolder);
+            employee.setEmployeeId(generatedKeyHolder.getKey().intValue());
+        } else {
+            throw new IllegalArgumentException(
+                    "such Employee is already belong "
+                            + "to this department.");
+        }
+        LOGGER.debug("addEmployee({})", employee);
         return employee;
     }
 
@@ -143,6 +171,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                          employee.getEmployeeId())
                         .addValue("employeeName", employee.getEmployeeName())
                         .addValue("salary", employee.getSalary())
+                        .addValue("email", employee.getEmail())
                         .addValue("departmentId", employee.getDepartmentId());
         namedParameterJdbcTemplate
                 .update(update, namedParameterSource);

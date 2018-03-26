@@ -1,4 +1,4 @@
-package com.epam.brest.course.service.web_app.controllers;
+package com.epam.brest.course.controllers.web_app.controllers;
 
 
 import com.epam.brest.course.model.Department;

@@ -1,4 +1,4 @@
-package com.epam.brest.course.service.web_app.validator;
+package com.epam.brest.course.controllers.web_app.validator;
 
 import com.epam.brest.course.model.Department;
 import org.springframework.validation.Errors;

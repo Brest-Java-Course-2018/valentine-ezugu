@@ -38,6 +38,12 @@ public class Department {
         this.description = descriptions;
     }
 
+    public Department(final String name, final String descriptions, String headOfDepartment1) {
+        this.departmentName = name;
+        this.description = descriptions;
+        this.headOfDepartment = headOfDepartment1;
+    }
+
     /**
      * default constructor.
      */
@@ -123,4 +129,5 @@ public class Department {
                 + headOfDepartment
                 + '}';
     }
+
 }

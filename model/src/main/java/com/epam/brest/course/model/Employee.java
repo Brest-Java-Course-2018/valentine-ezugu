@@ -48,6 +48,20 @@ public class Employee {
     }
 
     /**
+     * This is used for test purpose.
+     * @param name1 name.
+     * @param salaryToStart1 salary.
+     * @param deptId1 deptId.
+     */
+    public Employee(final String name1,
+                    final Integer salaryToStart1, final Integer deptId1) {
+
+        this.employeeName = name1;
+        this.salary = salaryToStart1;
+        this.departmentId = deptId1;
+    }
+
+    /**
      * default constructor.
      */
     public Employee() {

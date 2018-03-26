@@ -1,19 +1,13 @@
 package com.epam.brest.course.rest;
 
+import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.service.api.DepartmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -34,13 +28,12 @@ public class DepartmentRestController {
     private DepartmentService departmentService;
 
     /**
-     *
      * @return json list of departments.
      */
     @GetMapping(value = "/departments")
-    public final Collection<Department> departments() {
+    public final Collection<DepartmentAvgSalary> departments() {
         LOGGER.debug("departments()");
-        return departmentService.getAllDepartments();
+        return departmentService.getDepartmentsAvgSalary();
     }
 
     /**
@@ -79,6 +72,14 @@ public class DepartmentRestController {
                                            final Integer id) {
         LOGGER.debug("deleteDepartment({})", id);
         departmentService.deleteDepartmentById(id);
+    }
+
+
+    @PutMapping(value = "/departments")
+    @ResponseStatus(HttpStatus.OK)
+    void updateDepartment(@RequestBody Department department){
+        LOGGER.debug("updateDepartment({})", department);
+        departmentService.updateDepartment(department);
     }
 
 }
