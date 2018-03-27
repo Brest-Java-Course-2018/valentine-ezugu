@@ -1,7 +1,6 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Employee;
-import com.epam.brest.course.service.api.EmployeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -12,15 +11,16 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collection;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-db-spring.xml",
-        "classpath:bean.xml", "classpath:dao.xml"})
+        "classpath:bean-test.xml", "classpath:dao.xml"})
 @Transactional
 @Rollback
-public class EmployeeServiceImpl {
+public class EmployeeServiceImplTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
 

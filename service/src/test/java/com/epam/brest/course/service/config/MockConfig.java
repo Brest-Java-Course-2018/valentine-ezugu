@@ -2,7 +2,6 @@ package com.epam.brest.course.service.config;
 
 import com.epam.brest.course.dao.api.DepartmentDao;
 import com.epam.brest.course.dao.api.EmployeeDao;
-import com.epam.brest.course.service.impl.EmployeeServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

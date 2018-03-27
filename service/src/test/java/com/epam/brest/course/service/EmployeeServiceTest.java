@@ -1,10 +1,8 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Employee;
-import com.epam.brest.course.service.api.EmployeeService;
 import com.epam.brest.course.service.config.MockConfig;
 import com.epam.brest.course.dao.api.EmployeeDao;
-import com.epam.brest.course.service.impl.EmployeeServiceImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,21 +24,20 @@ import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes ={ EmployeeServiceImpl.class, MockConfig.class})
+@ContextConfiguration(classes ={EmployeeServiceImpl.class, MockConfig.class})
 public class EmployeeServiceTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final int ID = 1;
 
+    @Autowired
+    private EmployeeService employeeService;
+
 
     @Autowired
     private EmployeeDao employeeDao;
 
-    @Autowired
-    private EmployeeService employeeService;
-
     /**
-     *
      * @throws Exception in case of rule violation.
      */
     @Test

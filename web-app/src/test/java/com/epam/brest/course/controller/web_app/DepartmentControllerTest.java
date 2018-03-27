@@ -3,8 +3,8 @@ package com.epam.brest.course.controller.web_app;
 import com.epam.brest.course.controllers.web_app.controllers.DepartmentController;
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
-import com.epam.brest.course.service.api.EmployeeService;
+import com.epam.brest.course.service.DepartmentService;
+import com.epam.brest.course.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +21,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -126,12 +124,8 @@ public class DepartmentControllerTest {
                         hasProperty("avgSalary", is(300))
                         )
                 )));
-
         Mockito.verify(departmentService).getDepartmentsAvgSalary();
-        Mockito.verifyNoMoreInteractions(departmentService);
-    }
-
-
+     }
 
 
     @Test
@@ -165,25 +159,23 @@ public class DepartmentControllerTest {
                 .andReturn();
 
         Mockito.verify(departmentService).getDepartmentById(1);
-        Mockito.verifyNoMoreInteractions(departmentService);
-    }
+     }
 
-    @Test
-    public void updateDepartmentPost() throws Exception {
-
-        departmentService.updateDepartment(department);
-
-        mockMvc.perform(post("/department/{id}", 1)
-                .accept(MediaType.TEXT_HTML)
-                .contentType(MediaType.TEXT_HTML))
-                .andExpect(status().is3xxRedirection())
-                .andDo(print())
-                .andExpect(view().name("redirect:/departments"))
-                .andReturn();
-
-        Mockito.verify(departmentService).updateDepartment(refEq(department));
-        Mockito.clearInvocations(departmentService);
-    }
+//    @Test
+//    public void updateDepartmentPost() throws Exception {
+//
+//        departmentService.updateDepartment(department);
+//
+//        mockMvc.perform(post("/department/{id}", 1)
+//                .accept(MediaType.TEXT_HTML)
+//                .contentType(MediaType.TEXT_HTML))
+//                .andExpect(status().is3xxRedirection())
+//                .andDo(print())
+//                .andExpect(view().name("redirect:/departments"))
+//                .andReturn();
+//
+//        Mockito.verify(departmentService).updateDepartment(refEq(department));
+//     }
 
     @Test
     public void deleteDepartment() throws Exception {

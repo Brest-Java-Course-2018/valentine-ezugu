@@ -1,17 +1,23 @@
 package com.epam.brest.course.rest;
 
 import com.epam.brest.course.model.Employee;
-import com.epam.brest.course.service.api.EmployeeService;
+import com.epam.brest.course.service.EmployeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import java.util.Collection;
 
 /**
- * This is the controller for Employee
+ * This is the controller for Employee.
  */
 @RestController
 public class EmployeeRestController {
@@ -36,11 +42,10 @@ public class EmployeeRestController {
     }
 
     /**
-     *
      * @param id for find.
      * @return found employee object.
      */
-    @GetMapping(value = "/employee/{id}")
+    @GetMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public final Employee employeeId(@PathVariable(value = "id")
                                          final Integer id) {
@@ -49,11 +54,10 @@ public class EmployeeRestController {
     }
 
     /**
-     *
      * @param employee body for http create.
      * @return persisted object.
      */
-    @PostMapping(value = "/employee")
+    @PostMapping(value = "/employees")
     @ResponseStatus(HttpStatus.CREATED)
     public final Employee addEmployee(@RequestBody
                                           final Employee employee) {
@@ -62,10 +66,9 @@ public class EmployeeRestController {
     }
 
     /**
-     *
      * @param id for find.
      */
-    @DeleteMapping(value = "/employee/{id}")
+    @DeleteMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public final void deleteEmployee(@PathVariable(value = "id")
                                        final Integer id) {
@@ -73,11 +76,14 @@ public class EmployeeRestController {
         employeeService.deleteEmployeeById(id);
     }
 
-    @PutMapping(value = "/employee")
+    /**
+     * @param employee .
+     */
+    @PutMapping(value = "/employees")
     @ResponseStatus(HttpStatus.OK)
-    void updateEmployee(@RequestBody Employee employee){
+    final void updateEmployee(@RequestBody final Employee employee) {
         LOGGER.debug("updateEmployee({})", employee);
         employeeService.update(employee);
     }
-
 }
+

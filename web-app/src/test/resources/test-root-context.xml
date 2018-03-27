@@ -9,16 +9,13 @@
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
         <bean id="departmentService" class="org.mockito.Mockito" factory-method="mock">
-            <constructor-arg value="com.epam.brest.course.service.api.DepartmentService"/>
-
+            <constructor-arg value="com.epam.brest.course.service.DepartmentService"/>
         </bean>
 
         <bean id="employeeService" class="org.mockito.Mockito" factory-method="mock">
-            <constructor-arg value="com.epam.brest.course.service.api.EmployeeService"/>
-
+            <constructor-arg value="com.epam.brest.course.service.EmployeeService"/>
         </bean>
 
     <context:component-scan base-package="com.epam.brest.course.controllers.web_app"/>
-
 
 </beans>

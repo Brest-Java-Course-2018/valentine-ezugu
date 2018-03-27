@@ -1,8 +1,7 @@
-package com.epam.brest.course.service.impl;
+package com.epam.brest.course.service;
 
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
 import com.epam.brest.course.dao.api.DepartmentDao;
 
 import org.apache.logging.log4j.LogManager;
@@ -36,7 +35,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     /**
      *
-     * @param departmentDao1 is injected by setter
+     * @param departmentDao1 is injected by setter.
      */
     @Autowired
     public final void setDepartmentDao(final DepartmentDao departmentDao1) {

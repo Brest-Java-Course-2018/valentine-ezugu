@@ -1,12 +1,10 @@
 package com.epam.brest.course.controllers.web_app.controllers;
 
-
-
-import com.epam.brest.course.controllers.web_app.validator.EmployeeValidator;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.model.Employee;
-import com.epam.brest.course.service.api.DepartmentService;
-import com.epam.brest.course.service.api.EmployeeService;
+import com.epam.brest.course.service.DepartmentService;
+import com.epam.brest.course.service.EmployeeService;
+import com.epam.brest.course.validation.validator.EmployeeValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +89,8 @@ public class EmployeeController {
                                      final BindingResult result,
                                      final Model model) {
         LOGGER.debug("editEmployee({}, {})", employee, result);
+
+        EmployeeValidator.validate(employee, result);
         if (result.hasErrors()) {
             Collection<Department> departments =
                     departmentService.getAllDepartments();
@@ -131,14 +131,15 @@ public class EmployeeController {
                                     final Model model) {
         LOGGER.debug("addEmployee({},{})", employee, result);
 
-        new EmployeeValidator().validate(employee, result);
+         EmployeeValidator.validate(employee, result);
 
         if (result.hasErrors()) {
             Collection<Department> departments =
                     departmentService.getAllDepartments();
             model.addAttribute("departments", departments);
             return "employee";
-        }else {
+
+        } else {
             employeeService.saveEmployee(employee);
             return "redirect:/employees";
         }

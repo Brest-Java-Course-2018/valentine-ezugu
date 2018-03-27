@@ -2,12 +2,20 @@ package com.epam.brest.course.rest;
 
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
+import com.epam.brest.course.service.DepartmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 import java.util.Collection;
 
@@ -49,7 +57,6 @@ public class DepartmentRestController {
     }
 
     /**
-     *
      * @param department body for http create.
      * @return persisted object.
      */
@@ -62,7 +69,6 @@ public class DepartmentRestController {
     }
 
     /**
-     *
      * @param id for find.
      */
     @DeleteMapping(value = "/departments/{id}")
@@ -73,10 +79,13 @@ public class DepartmentRestController {
         departmentService.deleteDepartmentById(id);
     }
 
-
+    /**
+     *
+     * @param department .
+     */
     @PutMapping(value = "/departments")
     @ResponseStatus(HttpStatus.OK)
-    void updateDepartment(@RequestBody Department department){
+    final void updateDepartment(@RequestBody final Department department) {
         LOGGER.debug("updateDepartment({})", department);
         departmentService.updateDepartment(department);
     }

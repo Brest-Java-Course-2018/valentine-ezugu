@@ -86,12 +86,11 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-
-    <bean id="departmentService" class="com.epam.brest.course.service.impl.DepartmentServiceImpl">
+    <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
         <property name="departmentDao"  ref="departmentDao" />
     </bean>
 
-    <bean id="employeeService" class="com.epam.brest.course.service.impl.EmployeeServiceImpl">
+    <bean id="employeeService" class="com.epam.brest.course.service.EmployeeServiceImpl">
         <property name="employeeDao"  ref="employeeDao"/>
     </bean>
 </beans>

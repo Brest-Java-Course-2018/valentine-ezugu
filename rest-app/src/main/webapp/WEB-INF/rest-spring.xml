@@ -25,6 +25,7 @@
     </jdbc:initialize-database>
 
 <context:component-scan base-package="com.epam.brest.course.rest"/>
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -51,12 +52,14 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="departmentService" class="com.epam.brest.course.service.impl.DepartmentServiceImpl">
+    <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
     </bean>
 
-    <bean id="employeeService" class="com.epam.brest.course.service.impl.EmployeeServiceImpl">
+    <bean id="employeeService" class="com.epam.brest.course.service.EmployeeServiceImpl">
+
     </bean>
 
+    <context:annotation-config/>
     <mvc:annotation-driven/>
 
 </beans>

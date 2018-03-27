@@ -1,9 +1,9 @@
 package com.epam.brest.course.controllers.web_app.controllers;
 
-import com.epam.brest.course.controllers.web_app.validator.DepartmentValidator;
+import com.epam.brest.course.validation.validator.DepartmentValidator;
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
+import com.epam.brest.course.service.DepartmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,7 @@ public class DepartmentController {
      */
     @Autowired
     private DepartmentService departmentService;
+
 
     /**
      * @param model for ui.
@@ -70,7 +71,7 @@ public class DepartmentController {
     public final String addDepartment(@Valid final Department department,
                               final BindingResult result
     ) {
-            new DepartmentValidator().validate(department, result);
+             DepartmentValidator.validate(department, result);
         LOGGER.debug("addDepartment({}, {})", department, result);
         if (result.hasErrors()) {
             return "department";
@@ -106,6 +107,7 @@ public class DepartmentController {
                                  final BindingResult result
     ) {
         LOGGER.debug("updateDepartment({}, {})", department, result);
+        DepartmentValidator.validate(department, result);
         if (result.hasErrors()) {
             return "department";
         } else {

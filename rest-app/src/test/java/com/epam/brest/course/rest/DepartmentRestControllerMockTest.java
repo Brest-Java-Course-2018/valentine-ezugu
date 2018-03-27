@@ -2,7 +2,7 @@ package com.epam.brest.course.rest;
 
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
+import com.epam.brest.course.service.DepartmentService;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

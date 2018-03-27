@@ -61,7 +61,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     @Value("${employee.delete}")
     private String delete;
-
+    /**
+     * sql query for count employeeId to check if any exists with params.
+     */
     @Value("${employee.check}")
     private String employeeCheck;
 

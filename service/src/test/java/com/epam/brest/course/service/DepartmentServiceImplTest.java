@@ -1,14 +1,14 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
+import com.epam.brest.course.service.DepartmentService;
+import com.epam.brest.course.service.EmployeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-db-spring.xml",
-        "classpath:bean.xml", "classpath:dao.xml"})
+        "classpath:bean-test.xml", "classpath:dao.xml"})
 @Transactional
 @Rollback
 public class DepartmentServiceImplTest {
@@ -35,6 +35,9 @@ public class DepartmentServiceImplTest {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @Test
     public void saveDepartment() throws Exception {
@@ -80,6 +83,7 @@ public class DepartmentServiceImplTest {
         Assert.assertNotNull(department);
         Assert.assertEquals("Warren Buffet", dept_test.getHeadOfDepartment());
     }
+
 
     @Test
     public void updateDepartment() throws Exception {

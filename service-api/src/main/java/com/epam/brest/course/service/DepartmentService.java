@@ -1,4 +1,4 @@
-package com.epam.brest.course.service.api;
+package com.epam.brest.course.service;
 
 import com.epam.brest.course.dto.DepartmentAvgSalary;
 import com.epam.brest.course.model.Department;

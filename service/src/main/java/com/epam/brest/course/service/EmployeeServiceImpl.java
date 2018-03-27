@@ -1,9 +1,7 @@
-package com.epam.brest.course.service.impl;
+package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Employee;
-import com.epam.brest.course.service.api.EmployeeService;
 import com.epam.brest.course.dao.api.EmployeeDao;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +12,15 @@ import org.springframework.util.Assert;
 
 import java.util.Collection;
 
-
 /**
- * This is the service bean for employee entity
- * I have not seperated services  into two distinct modules.
- * because its only two entities.
+ * This is the service bean for employee entity.
  */
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
-
     /**
-     *
+     *log.
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -36,7 +30,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     /**
-     *
      * @param employeeDao1 for setter inject.
      */
     @Autowired
@@ -45,7 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *
      * @param employee for adding new employee.
      * @return new employee.
      * @throws DataAccessException when cannot access db.
@@ -64,7 +56,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *
      * @return list of all employees.
      * @throws DataAccessException DataAccessException when cannot access db.
      */

@@ -38,7 +38,14 @@ public class Department {
         this.description = descriptions;
     }
 
-    public Department(final String name, final String descriptions, String headOfDepartment1) {
+    /**
+     *
+     * @param name .
+     * @param descriptions .
+     * @param headOfDepartment1 .
+     */
+    public Department(final String name, final String descriptions,
+                      final String headOfDepartment1) {
         this.departmentName = name;
         this.description = descriptions;
         this.headOfDepartment = headOfDepartment1;

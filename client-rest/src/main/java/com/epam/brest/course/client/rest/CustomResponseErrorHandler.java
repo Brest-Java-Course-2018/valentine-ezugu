@@ -7,19 +7,39 @@ import org.springframework.web.client.ResponseErrorHandler;
 
 import java.io.IOException;
 
+/**
+ * custom response handler.
+ */
 public class CustomResponseErrorHandler implements ResponseErrorHandler {
 
-    private ResponseErrorHandler errorHandler = new DefaultResponseErrorHandler();
+    /**
+     * error handler.
+     */
+    private ResponseErrorHandler errorHandler =
+            new DefaultResponseErrorHandler();
 
+    /**
+     *
+     * @param response .
+     * @return response err.
+     * @throws IOException .
+     */
     @Override
-    public boolean hasError(ClientHttpResponse response) throws IOException {
+    public final boolean hasError(final ClientHttpResponse response)
+            throws IOException {
         return errorHandler.hasError(response);
     }
 
+    /**
+     *
+     * @param response with status.
+     * @throws IOException exe.
+     */
     @Override
-    public void handleError(ClientHttpResponse response) throws IOException {
+    public final void handleError(final ClientHttpResponse response)
+            throws IOException {
      throw new ServletDataAccesException(" ERROR: " + response.getStatusCode()
-        +" :" + response.getStatusText()
+        + " :" + response.getStatusText()
         + " :" + response.getBody());
     }
 }

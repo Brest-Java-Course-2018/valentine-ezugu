@@ -1,22 +1,17 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Department;
-import com.epam.brest.course.service.api.DepartmentService;
 import com.epam.brest.course.service.config.MockConfig;
 import com.epam.brest.course.dao.api.DepartmentDao;
-import com.epam.brest.course.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -37,10 +32,7 @@ public class DepartmentServiceTest {
     @Autowired
     private DepartmentDao departmentDao;
 
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
-    
-    
+
     @Test
     public void addDepartment() throws Exception {
         LOGGER.debug("test: addDepartment()");

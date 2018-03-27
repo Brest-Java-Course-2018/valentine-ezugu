@@ -19,9 +19,23 @@ public class DepartmentAvgSalary {
     private Integer avgSalary;
 
     /**
-     * default constructor.
+     * default.
      */
     public DepartmentAvgSalary() {
+    }
+
+    /**
+     *
+     * @param departmentId1 .
+     * @param departmentName1 .
+     * @param avgSalary1 .
+     */
+    public DepartmentAvgSalary(final Integer departmentId1,
+                               final String departmentName1,
+                               final Integer avgSalary1) {
+        this.departmentId = departmentId1;
+        this.departmentName = departmentName1;
+        this.avgSalary = avgSalary1;
     }
 
     /**
@@ -72,11 +86,11 @@ public class DepartmentAvgSalary {
     }
 
     @Override
-    public String toString() {
-        return "DepartmentAvgSalary{" +
-                "departmentId=" + departmentId +
-                ", departmentName='" + departmentName + '\'' +
-                ", avgSalary=" + avgSalary +
-                '}';
+    public final String toString() {
+        return "DepartmentAvgSalary{"
+                + "departmentId=" + departmentId
+                + ", departmentName='" + departmentName + '\''
+                + ", avgSalary=" + avgSalary
+                + '}';
     }
 }

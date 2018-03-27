@@ -19,6 +19,8 @@
         <module>web-app</module>
         <module>rest-app</module>
         <module>client-rest</module>
+        <module>service-api</module>
+        <module>utility</module>
     </modules>
 
     <distributionManagement>
@@ -54,6 +56,24 @@
             </dependency>
 
             <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>utility</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.databind-version}</version>
@@ -69,12 +89,6 @@
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
                 <artifactId>dao</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.epam.brest.course</groupId>
-                <artifactId>service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

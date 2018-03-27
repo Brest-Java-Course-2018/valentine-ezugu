@@ -2,7 +2,7 @@ package com.epam.brest.course.rest;
 
 
 import com.epam.brest.course.model.Employee;
-import com.epam.brest.course.service.api.EmployeeService;
+import com.epam.brest.course.service.EmployeeService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,7 +112,7 @@ public class EmployeeRestControllerMockTest {
 
         when(employeeService.getEmployeeById(ID)).thenReturn(employee_One);
 
-        mockMvc.perform(get("/employee/{id}", 1).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/employees/{id}", 1).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -130,7 +130,7 @@ public class EmployeeRestControllerMockTest {
        when(employeeService.saveEmployee(new Employee(EMPLOYEE_NAME,SALARY,1)))
                .thenReturn(employee_Two);
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/employees")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content("{\"employeeId\":4," +
                         "\"employeeName\":\"vinto\"," +
@@ -149,7 +149,7 @@ public class EmployeeRestControllerMockTest {
 
         doNothing().when(employeeService).deleteEmployeeById(ID);
 
-        mockMvc.perform(delete("/employee/{id}", ID).accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+        mockMvc.perform(delete("/employees/{id}", ID).accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isFound());
         Mockito.verify(employeeService).deleteEmployeeById(ID);
     }
@@ -161,7 +161,7 @@ public class EmployeeRestControllerMockTest {
         employeeService.update(employee_One);
 
         mockMvc.perform(
-                put("/employee")
+                put("/employees")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                         .content("{\"employeeId\":1," +
                                 "\"employeeName\":\"James\"," +

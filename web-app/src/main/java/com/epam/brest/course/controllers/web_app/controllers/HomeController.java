@@ -3,7 +3,6 @@ package com.epam.brest.course.controllers.web_app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 /**
  * Home MVC controller.
  */
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     /**
-     *
      * @return departments.
      */
     @GetMapping(value = "/")

@@ -1,4 +1,4 @@
-package com.epam.brest.course.controllers.web_app.validator;
+package com.epam.brest.course.validation.validator;
 
 import com.epam.brest.course.model.Employee;
 import org.springframework.validation.Errors;
@@ -25,7 +25,11 @@ public class EmployeeValidator  {
      */
     private static final int MIN_NAME_LENGTH = 3;
 
-
+    /**
+     *
+     * @param clazz .
+     * @return class.
+     */
     public final boolean supports(final Class<?> clazz) {
 
         return Employee.class.equals(clazz);
@@ -35,7 +39,7 @@ public class EmployeeValidator  {
      * @param obj to validate.
      * @param e   error param.
      */
-    public void validate(final Object obj, final Errors e) {
+    public static void validate(final Object obj, final Errors e) {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(e,
                 "employeeName", "employeeName.empty", "name cannot be empty");
@@ -67,7 +71,8 @@ public class EmployeeValidator  {
             e.rejectValue("employeeName", "employeeName too long",
                     "employeeName too long");
         }
-        if (!EmailValidator.EMAIL_PATTERN.matcher(employee.getEmail()).matches()) {
+        if (!EmailValidator.EMAIL_PATTERN.matcher(
+                employee.getEmail()).matches()) {
             e.rejectValue("email",
                     "please enter correct email",
                     "please enter correct email");

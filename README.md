@@ -7,20 +7,20 @@ TODO Implement this application with  Angular
 [![Build Status](https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu)
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/valentine-ezugu/badge.svg)](https://coveralls.io/github/Brest-Java-Course-2018/valentine-ezugu)
 
-    1. Check  
+ 1. Check  
         
-        $java -version  
+   $java -version  
         
-        $export JAVA_HOME = ...
+   $export JAVA_HOME = ...
         
-        $mvn -version
+   $mvn -version
         
-    2. Build
+2. Build
     
+   from main directory     
+   $mvn clean install
         
-        $mvn clean install
-        
-    3. Preparing repotrs
+3. Preparing repotrs
       
         $mvn site
       
@@ -28,10 +28,13 @@ TODO Implement this application with  Angular
       
         check:/target/stage/index.html
         ``
-        To run jetty-server
-        on web-app directory - mvn jetty run 
+ **To run jetty-server**
         
-    4.web-app runs on http://localhost:8082/
+  To run  web-app -/web-app  mvn jetty run 
+        
+  TO run Rest webservices producer -/rest-app  mvn jetty run
+        
+4. web-app runs on http://localhost:8082/
 
 5. Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/

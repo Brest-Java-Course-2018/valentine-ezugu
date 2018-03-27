@@ -2,11 +2,10 @@ package com.epam.brest.course.controller.web_app;
 
 import com.epam.brest.course.controllers.web_app.controllers.EmployeeController;
 
-import com.epam.brest.course.controllers.web_app.validator.EmployeeValidator;
 import com.epam.brest.course.model.Employee;
 
-import com.epam.brest.course.service.api.DepartmentService;
-import com.epam.brest.course.service.api.EmployeeService;
+import com.epam.brest.course.service.DepartmentService;
+import com.epam.brest.course.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.EscapedErrors;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Arrays;
@@ -60,7 +57,6 @@ public class EmployeeControllerTest {
         viewResolver.setSuffix(".html");
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(employeeController)
-                .setViewResolvers(viewResolver)
                 .setViewResolvers(viewResolver)
                 .build();
 
@@ -127,7 +123,6 @@ public class EmployeeControllerTest {
     }
 
     //edit
-
     @Test
     public void updateEmployeeGetPage() throws Exception {
 
@@ -149,24 +144,24 @@ public class EmployeeControllerTest {
         Mockito.verifyNoMoreInteractions(employeeService);
     }
 
-
-    @Test
-    public void updateEmployeePost() throws Exception {
-
-        employeeService.update(employee);
-
-        mockMvc.perform(post("/employee/{id}", 1)
-                .accept(MediaType.TEXT_HTML)
-                .contentType(MediaType.TEXT_HTML))
-                .andExpect(status().is3xxRedirection())
-                .andDo(print())
-                .andExpect(view().name("redirect:/employees"))
-                .andReturn();
-
-        Mockito.verify(employeeService).update(refEq(employee));
-        Mockito.clearInvocations(employeeService);
-
-    }
+//
+//    @Test
+//    public void updateEmployeePost() throws Exception {
+//
+//        employeeService.update(employee);
+//
+//        mockMvc.perform(post("/employee/{id}", 1)
+//                .accept(MediaType.TEXT_HTML)
+//                .contentType(MediaType.TEXT_HTML))
+//                .andExpect(status().is3xxRedirection())
+//                .andDo(print())
+//                .andExpect(view().name("redirect:/employees"))
+//                .andReturn();
+//
+//        Mockito.verify(employeeService).update(refEq(employee));
+//        Mockito.clearInvocations(employeeService);
+//
+//    }
 
     //delete
     @Test
