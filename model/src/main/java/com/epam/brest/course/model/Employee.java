@@ -23,14 +23,16 @@ public class Employee {
     private Integer salary;
 
     /**
+     * attribute email.
+     */
+    private String email;
+
+    /**
      * attribute departmentId.
      */
     private Integer departmentId;
 
-    /**
-     * attribute email.
-     */
-     private String email;
+
 
     /**
      * Constructor.

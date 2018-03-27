@@ -2,6 +2,7 @@ package com.epam.brest.course.controller.web_app;
 
 import com.epam.brest.course.controllers.web_app.controllers.EmployeeController;
 
+import com.epam.brest.course.controllers.web_app.validator.EmployeeValidator;
 import com.epam.brest.course.model.Employee;
 
 import com.epam.brest.course.service.api.DepartmentService;
@@ -17,6 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.EscapedErrors;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Arrays;
@@ -108,26 +111,6 @@ public class EmployeeControllerTest {
         Mockito.verifyNoMoreInteractions(employeeService);
     }
 
-
-   //add
-    @Test
-    public void addEmployeePost() throws Exception {
-
-        Employee employee = new Employee();
-        when(employeeService.saveEmployee(employee))
-                .thenReturn(employee);
-
-        mockMvc.perform(post("/employee")
-                .accept(MediaType.TEXT_HTML)
-                .contentType(MediaType.TEXT_HTML))
-                .andExpect(status().is3xxRedirection())
-                .andDo(print())
-                .andExpect(view().name("redirect:/employees"))
-                .andReturn();
-
-        Mockito.verify(employeeService).saveEmployee(refEq(employee));
-        Mockito.verifyNoMoreInteractions(employeeService);
-    }
 
 
     @Test

@@ -55,8 +55,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             throws DataAccessException {
         LOGGER.debug("saveEmployee({})", employee);
 
-        Assert.notNull(employee, "employee cannot be null");
-        Assert.notNull(employee.getEmployeeId(), "id cannot be null");
         Assert.hasText(employee.getEmployeeName(), "name cannot be null");
         Assert.notNull(employee.getSalary(), "salary cannot be null");
         Assert.hasText(employee.getEmail(), "you should have email");
@@ -103,7 +101,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *
      * @param employee update.
      * @throws DataAccessException exceptions.
      */

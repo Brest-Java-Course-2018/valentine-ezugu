@@ -70,4 +70,13 @@ public class DepartmentAvgSalary {
     public final void setAvgSalary(final Integer salary) {
         this.avgSalary = salary;
     }
+
+    @Override
+    public String toString() {
+        return "DepartmentAvgSalary{" +
+                "departmentId=" + departmentId +
+                ", departmentName='" + departmentName + '\'' +
+                ", avgSalary=" + avgSalary +
+                '}';
+    }
 }

@@ -53,15 +53,13 @@ public class EmployeeServiceTest {
         employee.setDepartmentId(ID);
         employee.setEmail("vale@yah");
 
-        employee.setEmployeeId(ID);
-        Employee employee1;
+        Employee newemployee1;
         when(employeeDao.addEmployee(employee)).thenReturn(employee);
-        employee1 = employeeService.saveEmployee(employee);
+        newemployee1 = employeeService.saveEmployee(employee);
 
         org.junit.Assert.assertNotNull(employee);
-        assertEquals(employee1.getSalary(), employee.getSalary());
+        assertEquals(newemployee1.getSalary(), employee.getSalary());
         Mockito.verify(employeeDao).addEmployee(employee);
-
     }
 
     /**

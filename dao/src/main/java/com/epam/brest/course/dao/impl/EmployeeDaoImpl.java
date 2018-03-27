@@ -139,12 +139,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
         SqlParameterSource namedParameters =
                 new BeanPropertySqlParameterSource(employee);
 
+        //this is used for auto generated key
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 
         Integer result = namedParameterJdbcTemplate.queryForObject(
                 employeeCheck, namedParameters, Integer.class);
         LOGGER.debug("result({})", result);
         if (result == 0) {
+
             namedParameterJdbcTemplate.
                     update(addEmployee, namedParameters, generatedKeyHolder);
             employee.setEmployeeId(generatedKeyHolder.getKey().intValue());

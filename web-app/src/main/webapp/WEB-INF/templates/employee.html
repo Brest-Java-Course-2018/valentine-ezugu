@@ -1,46 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title th:text="${isNew} ? 'Add employee' : 'Edit employee'"/>
-    <link rel="stylesheet"
-          href="../../resources/static/css/font-awesome.min.css"
-          th:href="@{/resources/static/css/font-awesome.min.css}">
-    <link rel="stylesheet"
-          href="../../resources/staticcss/bootstrap.css"
-          th:href="@{/resources/static/css/bootstrap.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/style.css"
-          th:href="@{/resources/static/css/style.css}">
-</head>
-<body>
+<head th:replace="common/header :: common-header"/>
 
-<nav class="pl-sm-2 navbar navbar-expand-sm navbar-dark bg-dark text-light p-0">
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarsNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a href="/" class="navbar-brand">
-        <img src="../../resources/static/img/logo.svg"
-             th:src="@{/resources/static/img/logo.svg}"
-             width="64" height="32">
-    </a>
-    <div class="collapse navbar-collapse" id="navbarsNav">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link"
-               href="departments.html"
-               th:href="@{/departments}">Departments</a>
-            <a class="nav-item nav-link active"
-               href="employees.html"
-               th:href="@{/employees}">Employees</a>
-            <span class="sr-only">(current)</span>
-        </div>
-    </div>
-</nav>
+<body>
+<nav th:replace="common/header :: common-nav" />
 
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -78,7 +41,6 @@
         </ul>
     </nav>
 </header>
-
 
 <section id="employee">
     <div class="container-fluid">
@@ -120,6 +82,7 @@
                                 <label class="form-control-label"
                                        for="employeeNameInput">Employee name</label>
                                 <input type="text"
+                                        required="required"
                                        class="form-control"
                                        id="employeeNameInput"
                                        placeholder="Employee name"
@@ -150,16 +113,16 @@
                                 <label class="form-control-label"
                                        for="employeeSalaryInput">Salary</label>
                                 <input type="number"
+                                       required="required"
                                        class="form-control"
                                        id="employeeSalaryInput"
-                                       placeholder="Salary"
+                                        placeholder="salary"
                                        th:field ="*{salary}">
                                 <div class="form-text text-danger"
                                      th:if="${#fields.hasErrors('salary')}"
                                      th:errors="*{salary}">[errors]
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>

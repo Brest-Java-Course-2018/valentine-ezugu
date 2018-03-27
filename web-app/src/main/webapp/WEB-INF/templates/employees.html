@@ -1,53 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Employees</title>
-    <link rel="stylesheet"
-          href="../../resources/static/css/font-awesome.min.css"
-          th:href="@{/resources/static/css/font-awesome.min.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/bootstrap.css"
-          th:href="@{/resources/static/css/bootstrap.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/style.css"
-          th:href="@{/resources/static/css/style.css}">
-</head>
-<body>
+<head th:replace="common/header :: common-header"/>
 
-<nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light pl-0">
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarsNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a href="/" class="navbar-brand">
-        <img src="../../resources/static/img/logo.svg"
-             th:src="@{/resources/static/img/logo.svg}"
-             width="64" height="32">
-    </a>
-    <div class="collapse navbar-collapse" id="navbarsNav">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link"
-               href="departments.html"
-               th:href="@{/departments}">Departments</a>
-            <a class="nav-item nav-link active"
-               href="employees.html"
-               th:href="@{/employees}">Employees
-                <span class="sr-only">(current)</span>
-            </a>
-        </div>
-    </div>
-</nav>
+<body>
+<nav th:replace="common/header :: common-nav" />
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <a href = "employees.html" class="navbar-brand text-uppercase mr-auto">
-            Employees
-        </a>
+    <nav  class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+        <span class="navbar-brand text-uppercase mr-auto">Employees</span>
         <ul class="p-0 pr-3 navbar-nav float-right">
             <li class="nav-item">
                 <a href="employee.html"
@@ -69,7 +29,7 @@
         <div class="row">
             <div class="col">
                 <div class="card" th:if="not ${employees.isEmpty()}">
-                    <table class="table table-striped table-light">
+                    <table id="deptList" class="table table-striped table-light">
                         <thead class="thead-inverse">
                         <tr>
                             <th>Name</th>
@@ -118,7 +78,6 @@
     </div>
 </section>
 
-
 <!-- Modal -->
 <div class="modal fade" id="deleteDialog"
      tabindex="-1"
@@ -161,6 +120,27 @@ $('#deleteDialog').on('show.bs.modal', function (event) {
     var target = $(event.relatedTarget)
     $(this).find('.modal-body').text('Please, confirm delete operation: "' + target.data('name') + '"')
     document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
+
+
+    $(document).ready(function() {
+        var t = $('#deptList').DataTable();
+        var counter = 1;
+
+        $('#addRow').on( 'click', function () {
+            t.row.add( [
+                counter +'.1',
+                counter +'.2',
+                counter +'.3',
+                counter +'.4',
+                counter +'.5'
+            ] ).draw( false );
+
+            counter++;
+        } );
+
+        // Automatically add a first row of data
+        $('#addRow').click();
+    } );
 })
 
 </script>

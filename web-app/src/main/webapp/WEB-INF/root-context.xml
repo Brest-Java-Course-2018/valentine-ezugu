@@ -51,6 +51,10 @@
             <list>
                 <value>classpath:sql.properties</value>
                 <value>classpath:application.properties</value>
+
+                <!--for using rest services-->
+
+                <value>classpath:rest.properties</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>

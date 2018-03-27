@@ -49,6 +49,12 @@
         <artifactId>spring-test</artifactId>
     </dependency>
 
+
+    <dependency>
+        <groupId>com.epam.brest.course</groupId>
+        <artifactId>client-rest</artifactId>
+    </dependency>
+
     <dependency>
         <groupId>org.thymeleaf</groupId>
         <artifactId>thymeleaf-spring4</artifactId>

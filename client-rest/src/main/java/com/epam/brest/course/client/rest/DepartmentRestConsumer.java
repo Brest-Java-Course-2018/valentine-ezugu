@@ -23,7 +23,7 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public Department saveDepartment(Department department) throws DataAccessException {
-       ResponseEntity responseEntity =  restTemplate.postForEntity("url", department, Department.class);
+       ResponseEntity responseEntity =  restTemplate.postForEntity(url, department, Department.class);
         Department result = (Department) responseEntity.getBody();
         return result;
     }

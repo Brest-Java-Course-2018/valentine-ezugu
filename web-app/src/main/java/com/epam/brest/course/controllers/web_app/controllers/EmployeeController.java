@@ -1,6 +1,8 @@
 package com.epam.brest.course.controllers.web_app.controllers;
 
 
+
+import com.epam.brest.course.controllers.web_app.validator.EmployeeValidator;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.model.Employee;
 import com.epam.brest.course.service.api.DepartmentService;
@@ -11,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.Collection;
+
 
 /**
  * Employee controller.
@@ -126,12 +130,15 @@ public class EmployeeController {
                                     final BindingResult result,
                                     final Model model) {
         LOGGER.debug("addEmployee({},{})", employee, result);
+
+        new EmployeeValidator().validate(employee, result);
+
         if (result.hasErrors()) {
             Collection<Department> departments =
                     departmentService.getAllDepartments();
             model.addAttribute("departments", departments);
             return "employee";
-        } else {
+        }else {
             employeeService.saveEmployee(employee);
             return "redirect:/employees";
         }

@@ -37,7 +37,6 @@ public class DepartmentRestController {
     }
 
     /**
-     *
      * @param id for find.
      * @return found department object.
      */

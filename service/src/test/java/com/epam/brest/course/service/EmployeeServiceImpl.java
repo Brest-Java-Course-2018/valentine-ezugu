@@ -42,7 +42,6 @@ public class EmployeeServiceImpl {
 
         //populating the employee for add
         Employee employee = new Employee();
-        employee.setEmployeeId(EMPLOYEE_ID);
         employee.setEmployeeName(EMPLOYEE_NAME);
         employee.setSalary(900);
         employee.setDepartmentId(ID);
@@ -52,7 +51,6 @@ public class EmployeeServiceImpl {
         Employee newEmployee = employeeService.saveEmployee(employee);
 
         //assertions
-        Assert.assertNotNull(employee.getEmployeeId());
         Assert.assertNotNull(newEmployee.getEmployeeId());
         Assert.assertTrue(newEmployee.getEmployeeName().equals(employee.getEmployeeName()));
         Assert.assertTrue(newEmployee.getEmail().matches("valen@yahoo.com"));
@@ -61,6 +59,14 @@ public class EmployeeServiceImpl {
         Assert.assertTrue((sizeBeforeAdd + 1) == employeeService.getAllEmployees().size());
 
     }
+
+    @Test
+    public void getEmployees(){
+       Collection<Employee> employees =  employeeService.getAllEmployees();
+
+
+    }
+
 
     @Test
     public void getEmployeeById() throws Exception {

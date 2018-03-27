@@ -132,24 +132,6 @@ public class DepartmentControllerTest {
     }
 
 
-    @Test
-    public void addDepartmentPost() throws Exception {
-
-        Department department2 = new Department();
-        when(departmentService.saveDepartment(department2))
-                .thenReturn(department);
-
-        mockMvc.perform(post("/department")
-                .accept(MediaType.TEXT_HTML)
-                .contentType(MediaType.TEXT_HTML))
-                .andExpect(status().is3xxRedirection())
-                .andDo(print())
-                .andExpect(view().name("redirect:/departments"))
-                .andReturn();
-
-        Mockito.verify(departmentService).saveDepartment(refEq(department2));
-        Mockito.verifyNoMoreInteractions(departmentService);
-    }
 
 
     @Test
