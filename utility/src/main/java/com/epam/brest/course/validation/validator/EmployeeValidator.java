@@ -53,7 +53,7 @@ public class EmployeeValidator  {
 
         Employee employee = (Employee) obj;
 
-        if (employee.getSalary() < MIN_SALARY) {
+        if (employee.getSalary() == null || employee.getSalary() < MIN_SALARY) {
             e.rejectValue("salary", "too small",
                     "salary must be above 249");
         } else if (employee.getSalary() > MAX_SALARY) {
