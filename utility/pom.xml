@@ -26,6 +26,17 @@
             <artifactId>model</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>

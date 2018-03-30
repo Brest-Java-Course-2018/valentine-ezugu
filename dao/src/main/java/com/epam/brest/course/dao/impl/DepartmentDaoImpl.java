@@ -159,6 +159,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
                         checkDepartment, namedParameters, Integer.class);
 
         LOGGER.debug("result({})", result);
+
         if (result == 0) {
             namedParameters = new MapSqlParameterSource();
 
@@ -196,7 +197,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
                 new BeanPropertySqlParameterSource(department);
         namedParameterJdbcTemplate.update(update, namedParameter);
     }
-
 
     /**
      *
