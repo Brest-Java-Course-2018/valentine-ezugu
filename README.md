@@ -1,8 +1,5 @@
 # valentine-ezugu
-#sample organisation management system for Brest java course(2018)
-
-This project consists of a web application with spring-mvc and Thymeleaf and Restful webservice
-TODO Implement this application with  Angular
+#simple transport company order of petrol management for Brest java course(2018)
 
 [![Build Status](https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu)
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/valentine-ezugu/badge.svg)](https://coveralls.io/github/Brest-Java-Course-2018/valentine-ezugu)
