@@ -14,14 +14,8 @@
     <modules>
         <module>dao</module>
         <module>model</module>
-        <module>service</module>
         <module>test-db</module>
-        <module>web-app</module>
-        <module>rest-app</module>
-        <module>client-rest</module>
-        <module>service-api</module>
-        <module>utility</module>
-    </modules>
+      </modules>
 
     <distributionManagement>
         <site>
