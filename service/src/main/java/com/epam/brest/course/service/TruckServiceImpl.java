@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
@@ -16,12 +17,12 @@ import java.util.Collection;
  * Impl Class.
  */
 @Service
+@Transactional
 public class TruckServiceImpl implements TruckService {
 
-    /*
-     *logger.
-     *
-      */
+    /**
+     * logger.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
@@ -33,7 +34,7 @@ public class TruckServiceImpl implements TruckService {
     /**
      *  @param truckDao1 injected.
     */
-    public void setTruckDao(TruckDao truckDao1) {
+    public final void setTruckDao(final TruckDao truckDao1) {
         this.truckDao = truckDao1;
     }
 
@@ -103,7 +104,7 @@ public class TruckServiceImpl implements TruckService {
     @Override
     public final Collection<TruckWIthAvgPetrolPerMonth>
                                              getAllTruckWithAvgPetrolPerMonth()
-            throws DataAccessException {
+                                                   throws DataAccessException {
         LOGGER.debug("getAllTruckWithAvgPetrolPerMonth()");
         return truckDao.getAllTruckWithAvgPetrolPerMonth();
     }

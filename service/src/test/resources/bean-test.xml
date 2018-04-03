@@ -8,8 +8,6 @@
 
     <context:annotation-config/>
 
-    <import resource="dao.xml"/>
-
     <import resource="test-db-spring.xml"/>
 
     <bean id="orderService" class="com.epam.brest.course.service.OrderServiceImpl">

@@ -1,4 +1,4 @@
 /**
- * this package contains service implementation
+ * this package contains service implementation.
  */
 package com.epam.brest.course.service;

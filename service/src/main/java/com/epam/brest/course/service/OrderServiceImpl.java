@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.text.ParseException;
@@ -18,6 +19,7 @@ import java.util.Date;
  * Impl class.
  */
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     /**
@@ -34,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * @param orderDao1 .
      */
-    public void setOrderDao(OrderDao orderDao1) {
+    public final void setOrderDao(final OrderDao orderDao1) {
         this.orderDao = orderDao1;
     }
 
@@ -46,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public final Collection<OrderWithTruckCodeDto> getAllOrdersWithTruckCode()
                                                 throws DataAccessException {
-        LOGGER.debug("getAllOrdersWithTruckCode()" );
+        LOGGER.debug("getAllOrdersWithTruckCode()");
         return orderDao.getAllOrdersWithTruckCode();
     }
 
@@ -107,7 +109,7 @@ public class OrderServiceImpl implements OrderService {
      * @throws DataAccessException exception.
      */
     @Override
-    public Collection<Order> getAllOrder() throws DataAccessException {
+    public final Collection<Order> getAllOrder() throws DataAccessException {
         LOGGER.debug("getAllOrder()");
         return orderDao.getAllOrders();
     }

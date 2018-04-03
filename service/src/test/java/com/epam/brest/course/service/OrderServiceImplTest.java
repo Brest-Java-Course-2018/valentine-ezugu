@@ -24,14 +24,13 @@ import java.util.Date;
 @Rollback
 public class OrderServiceImplTest {
 
-
     /*** logger*/
     private static final Logger LOGGER= LogManager.getLogger();
     private static final int ORDER_ID_1 = 1;
     private static final Double PETROL_QTY = 234.0;
     private static final int ONE = 1;
-    public static final int ACTUAL = 3;
-    public static final int TRUCK_ID = 4;
+    private static final int ACTUAL = 3;
+    private static final int TRUCK_ID = 4;
 
     @Autowired
     private OrderService orderService;

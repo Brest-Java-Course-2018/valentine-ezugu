@@ -2,7 +2,6 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
 import com.epam.brest.course.model.Truck;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,6 +78,7 @@ public class TruckDaoImplTest {
     @Test
     public void addTruckWithTruckCodeUnique() throws Exception {
         Date date = formatter.parse(DATE);
+
         //new truck to save
         Truck truck = new Truck("BY2000", date, "BLUE VAN");
         //save method
