@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <parent>
         <groupId>com.epam.brest.course</groupId>
         <artifactId>sampleuserapp</artifactId>
@@ -11,28 +12,21 @@
     </parent>
 
     <groupId>com.epam.brest.course</groupId>
-    <artifactId>model</artifactId>
+    <artifactId>service-api</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>model</name>
 
     <dependencies>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>model</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>1.48</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.0.1.RELEASE</version>
         </dependency>
 
     </dependencies>
-
+    
 </project>

@@ -11,11 +11,14 @@
     <name>sampleuserapp</name>
     <url>http://maven.apache.org</url>
 
-    <modules>
+     <modules>
         <module>dao</module>
         <module>model</module>
         <module>test-db</module>
-      </modules>
+        <module>dao-api</module>
+        <module>service</module>
+        <module>service-api</module>
+     </modules>
 
     <distributionManagement>
         <site>
@@ -46,6 +49,18 @@
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
                 <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>dao-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -82,12 +97,6 @@
 
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
-                <artifactId>dao</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.epam.brest.course</groupId>
                 <artifactId>test-db</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
@@ -103,13 +112,6 @@
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.epam.brest.course</groupId>
-                <artifactId>web-app</artifactId>
-                <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -207,7 +209,6 @@
             </dependency>
 
         </dependencies>
-        
     </dependencyManagement>
 
     <repositories>
