@@ -41,7 +41,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     *
      * @return list.
      * @throws DataAccessException exception.
      */
@@ -91,7 +90,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     *
      * @param order for update.
      * @throws DataAccessException for db.
      */
@@ -104,7 +102,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     *
      * @return list of all orders.
      * @throws DataAccessException exception.
      */
@@ -115,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     *
      * @param start date.
      * @param end date.
      * @return list with truckCode.
