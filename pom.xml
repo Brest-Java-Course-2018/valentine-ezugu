@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>sampleuserapp</name>
+     <name>sampleuserapp</name>
     <url>http://maven.apache.org</url>
 
      <modules>
@@ -18,6 +18,7 @@
         <module>dao-api</module>
         <module>service</module>
         <module>service-api</module>
+        <module>rest-producer</module>
      </modules>
 
     <distributionManagement>

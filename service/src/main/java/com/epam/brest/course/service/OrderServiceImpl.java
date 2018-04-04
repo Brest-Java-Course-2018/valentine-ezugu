@@ -106,8 +106,8 @@ public class OrderServiceImpl implements OrderService {
      * @throws DataAccessException exception.
      */
     @Override
-    public final Collection<Order> getAllOrder() throws DataAccessException {
-        LOGGER.debug("getAllOrder()");
+    public final Collection<Order> getAllOrders() throws DataAccessException {
+        LOGGER.debug("getAllOrders()");
         return orderDao.getAllOrders();
     }
 
@@ -126,4 +126,5 @@ public class OrderServiceImpl implements OrderService {
         LOGGER.debug("filterOrdersByDate({})", start, end);
         return orderDao.filterOrdersByDate(start, end);
     }
+
 }

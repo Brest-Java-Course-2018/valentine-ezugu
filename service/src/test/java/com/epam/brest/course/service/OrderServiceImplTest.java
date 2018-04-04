@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -31,6 +32,7 @@ public class OrderServiceImplTest {
     private static final int ONE = 1;
     private static final int ACTUAL = 3;
     private static final int TRUCK_ID = 4;
+    private static final int SIX = 6;
 
     @Autowired
     private OrderService orderService;
@@ -39,13 +41,13 @@ public class OrderServiceImplTest {
 
     private static final String DATE_STRING = "2007-01-01";
 
-    public static final String DATE_STRING_2 = "2009-01-01";
+    private static final String DATE_STRING_2 = "2009-01-01";
 
     @Test
     public void saveOrder() throws Exception {
         LOGGER.debug("test: saveOrder()");
 
-        Collection<Order> orders = orderService.getAllOrder();
+        Collection<Order> orders = orderService.getAllOrders();
         int sizeBeforeAdd = orders.size();
 
         Date date = formatter.parse(DATE_STRING);
@@ -63,7 +65,7 @@ public class OrderServiceImplTest {
         Assert.assertNotNull(order.getOrderId());
         Assert.assertNotNull(newOrder.getOrderId());
         Assert.assertTrue(newOrder.getPetrolQty().equals(order.getPetrolQty()));
-        Assert.assertTrue((sizeBeforeAdd + 1) == orderService.getAllOrder().size());
+        Assert.assertTrue((sizeBeforeAdd + 1) == orderService.getAllOrders().size());
     }
 
 
@@ -107,12 +109,12 @@ public class OrderServiceImplTest {
     @Test
     public void deleteOrderById() throws Exception {
         LOGGER.debug("test: deleteById()");
-        int orderListSize = orderService.getAllOrder().size();
+        int orderListSize = orderService.getAllOrders().size();
 
         //get this order by id and delete
         orderService.deleteOrderById(ONE);
         //assertions
-        Assert.assertTrue(orderListSize > orderService.getAllOrder().size());
+        Assert.assertTrue(orderListSize > orderService.getAllOrders().size());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -128,7 +130,46 @@ public class OrderServiceImplTest {
        Collection<OrderWithTruckCodeDto> orders =
                orderService.getAllOrdersWithTruckCode();
         Assert.assertNotNull(orders);
-        Assert.assertTrue(orders.size() > 6);
+        Assert.assertTrue(orders.size() > SIX);
+    }
+
+    @Test
+    public void filterByDate_With_Null_Values() throws Exception {
+        LOGGER.debug("test: filterByDate_With_Null_Values()");
+
+        Collection<OrderWithTruckCodeDto> collection =
+                orderService.filterOrdersByDate(null, null);
+
+        //when null values we have a default settings
+        Assert.assertNotNull(collection);
+        Assert.assertTrue(collection.size() > SIX);
+    }
+
+    @Test
+    public void filterByDate_With_One_Null_Value() throws ParseException {
+        LOGGER.debug("test: filterByDate_With_One_Null_Value()");
+
+        Date date = formatter.parse(DATE_STRING);
+        Collection<OrderWithTruckCodeDto> collection =
+                orderService.filterOrdersByDate(date, null);
+
+    //assertions
+        Assert.assertNotNull(collection);
+        Assert.assertTrue(collection.size() > ONE);
+    }
+
+    @Test
+    public void filterByDate_With_BothValues() throws ParseException {
+        LOGGER.debug("test: filterByDate_With_BothValues() ");
+         Date date = formatter.parse(DATE_STRING);
+         Date date2 = formatter.parse(DATE_STRING_2);
+
+        Collection<OrderWithTruckCodeDto> collection =
+                    orderService.filterOrdersByDate(date, date2);
+
+        //assertions
+            Assert.assertNotNull(collection);
+            Assert.assertTrue(collection.size() > ONE);
     }
 
 }

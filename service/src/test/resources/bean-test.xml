@@ -18,7 +18,6 @@
         <property name="truckDao"  ref="truckDao"/>
     </bean>
 
-
     <bean id="truckDao" class="com.epam.brest.course.dao.TruckDaoImpl">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
