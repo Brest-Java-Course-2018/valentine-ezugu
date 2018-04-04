@@ -26,7 +26,7 @@
       
         check:/target/stage/index.html
         ``
-# To run jetty-server**
+# To run jetty-server
         
   To run  web-app -/web-app  mvn jetty run 
         
