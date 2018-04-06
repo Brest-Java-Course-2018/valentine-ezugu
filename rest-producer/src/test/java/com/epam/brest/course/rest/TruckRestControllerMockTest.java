@@ -17,7 +17,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.text.SimpleDateFormat;
@@ -100,7 +99,7 @@ public class TruckRestControllerMockTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))
-                .andExpect(MockMvcResultMatchers.jsonPath("description", Matchers.is(DESCRIPTION)));
+                .andExpect(jsonPath("description", Matchers.is(DESCRIPTION)));
 
         Mockito.verify(truckService).getTruckById(ID);
     }

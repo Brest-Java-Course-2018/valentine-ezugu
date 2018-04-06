@@ -36,10 +36,13 @@ public class OrderRestControllerMockTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final double QTY = 23.0;
-    private static final long VALUE = 1078092000000L;
+
     private static final int ID_1 = 2;
     private static final String TRUCK_CODE = "BY234";
     private static Integer ID = 1;
+
+    private static final String DATE_STRING_2 = "2009-01-01";
+    private static final long DATE_VALUE = 1230760800000L;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -71,6 +74,7 @@ public class OrderRestControllerMockTest {
         order.setPetrolQty(QTY);
         order.setTruckId(ID);
 
+
         order1 = new Order();
         order1.setOrderId(ID_1);
         order1.setPetrolQty(QTY);
@@ -97,7 +101,8 @@ public class OrderRestControllerMockTest {
     @Test
     public void getOrderById() throws Exception {
         LOGGER.debug("test: getOrderById() ");
-
+        Date date = formatter.parse(DATE_STRING_2);
+        order.setOrderDate(date);
 
         when(orderService.getOrderById(ID)).thenReturn(order);
 
@@ -107,6 +112,7 @@ public class OrderRestControllerMockTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("orderId", Matchers.is(ID)))
                 .andExpect(jsonPath("petrolQty", Matchers.is(QTY)))
+                .andExpect(jsonPath("orderDate", Matchers.is(DATE_VALUE)))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)));
 
         Mockito.verify(orderService).getOrderById(ID);
