@@ -112,7 +112,7 @@ public class OrderRestControllerMockTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("orderId", Matchers.is(ID)))
                 .andExpect(jsonPath("petrolQty", Matchers.is(QTY)))
-                .andExpect(jsonPath("orderDate", Matchers.is(DATE_VALUE)))
+                .andExpect(jsonPath("orderDate", Matchers.is(date.getTime())))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)));
 
         Mockito.verify(orderService).getOrderById(ID);
