@@ -98,7 +98,6 @@ public class OrderRestControllerMockTest {
     public void getOrderById() throws Exception {
         LOGGER.debug("test: getOrderById() ");
 
-        order.setOrderDate(new Date(formatter.parse("2004-03-01").getTime()));
 
         when(orderService.getOrderById(ID)).thenReturn(order);
 
@@ -108,7 +107,6 @@ public class OrderRestControllerMockTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("orderId", Matchers.is(ID)))
                 .andExpect(jsonPath("petrolQty", Matchers.is(QTY)))
-                .andExpect(jsonPath("orderDate", Matchers.is(VALUE)))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)));
 
         Mockito.verify(orderService).getOrderById(ID);
@@ -128,6 +126,15 @@ public class OrderRestControllerMockTest {
         Mockito.verify(orderService).updateOrder(order);
     }
 
+    @Test
+    public void deleteOrder() throws Exception {
+        LOGGER.debug("test: deleteOrder() ");
+
+        mockMvc.perform(delete("/orders/{orderId}", ID)
+                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isFound());
+        Mockito.verify(orderService).deleteOrderById(ID);
+    }
 
     @Test
     public void getAllOrders() throws Exception {
