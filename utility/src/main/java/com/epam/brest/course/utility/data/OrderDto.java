@@ -10,7 +10,7 @@ public class OrderDto {
      * order id.
      */
     private Integer orderId;
-    /**
+    /*
      *petrol qty.
      */
     private Double petrolQty;

@@ -105,25 +105,6 @@ public class TruckRestControllerMockTest {
         Mockito.verify(truckService).getTruckById(ID);
     }
 
-
-//
-//    @Test
-//    public void addTruck() throws Exception {
-//        LOGGER.debug("test: addTruck() ");
-//
-//        Date date = formatter.parse("2004-03-01");
-//
-//        when(truckService.addTruck(new Truck(TRUCK_CODE1, date, DESCRIPTION_1))).thenReturn(truck);
-//
-//        mockMvc.perform(post("/trucks", Truck.class).contentType(MediaType.APPLICATION_JSON_UTF8)
-//                .content(TestUtil.convertObjectToJsonBytes(truck))
-//                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//                .andDo(print()).andExpect(status().isCreated());
-//
-//        Mockito.verify(truckService).addTruck(new Truck(TRUCK_CODE1, date, DESCRIPTION_1));
-//    }
-
-
         //update
     @Test
     public void update() throws Exception {

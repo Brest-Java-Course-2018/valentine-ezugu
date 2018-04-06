@@ -113,22 +113,7 @@ public class OrderRestControllerMockTest {
 
         Mockito.verify(orderService).getOrderById(ID);
     }
-//
-//    @Test
-//    public void addOrder() throws Exception {
-//        LOGGER.debug("test: addOrder() ");
-//
-//        Date date = formatter.parse("2004-03-01");
-//
-//        when(orderService.addOrder(new Order(QTY, date, ID))).thenReturn(order);
-//
-//        mockMvc.perform(post("/orders").contentType(MediaType.APPLICATION_JSON_UTF8)
-//                .content(TestUtil.convertObjectToJsonBytes(orderDto))
-//                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//                .andDo(print()).andExpect(status().isCreated());
-//
-//        Mockito.verify(orderService).addOrder(new Order(QTY, date, ID));
-//    }
+
 
 
     @Test
