@@ -128,15 +128,6 @@ public class OrderRestControllerMockTest {
         Mockito.verify(orderService).updateOrder(order);
     }
 
-    @Test
-    public void deleteOrder() throws Exception {
-        LOGGER.debug("test: deleteOrder() ");
-
-        mockMvc.perform(delete("/orders/{orderId}", ID)
-                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(status().isFound());
-        Mockito.verify(orderService).deleteOrderById(ID);
-    }
 
     @Test
     public void getAllOrders() throws Exception {
