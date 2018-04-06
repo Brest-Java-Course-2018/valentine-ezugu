@@ -20,4 +20,7 @@ public class MockConfig {
     public TruckDao truckDao() {
         return Mockito.mock(TruckDao.class);
     }
+
+
+
 }

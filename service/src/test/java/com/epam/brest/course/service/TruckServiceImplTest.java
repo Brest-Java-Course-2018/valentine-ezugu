@@ -24,18 +24,15 @@ import java.util.Date;
 @Rollback
 public class TruckServiceImplTest {
 
-
     /*** logger*/
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static final int ONE = 1;
     private static final int SIZE = 5;
 
-
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     private static final String DATE_STRING = "2007-01-01";
-
 
     @Autowired
     private TruckService truckService;

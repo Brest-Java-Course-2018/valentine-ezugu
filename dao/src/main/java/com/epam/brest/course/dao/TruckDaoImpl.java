@@ -11,7 +11,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import java.util.Collection;
+
+import java.util.List;
 
 /**
  *dao implementation for truck.
@@ -77,9 +78,9 @@ public class TruckDaoImpl implements TruckDao {
      * @return trucks.
      */
     @Override
-    public final Collection<Truck> getAllTrucks() {
+    public final List<Truck> getAllTrucks() {
         LOGGER.debug("getAllTrucks()");
-        Collection<Truck> trucks =
+        List<Truck> trucks =
                 namedParameterJdbcTemplate.getJdbcOperations()
                 .query(selectAll,
                         BeanPropertyRowMapper.newInstance(Truck.class));
@@ -174,9 +175,9 @@ public class TruckDaoImpl implements TruckDao {
      * @return
      */
     @Override
-    public final Collection<TruckWIthAvgPetrolPerMonth>
+    public final List<TruckWIthAvgPetrolPerMonth>
                         getAllTruckWithAvgPetrolPerMonth() {
-        Collection<TruckWIthAvgPetrolPerMonth> trucks =
+        List<TruckWIthAvgPetrolPerMonth> trucks =
                 namedParameterJdbcTemplate.getJdbcOperations()
 
                 .query(selectAllTrucksWithAvg, BeanPropertyRowMapper
