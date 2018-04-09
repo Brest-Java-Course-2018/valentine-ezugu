@@ -1,7 +1,6 @@
 package com.epam.brest.course.utility.data;
 
 import java.util.Date;
-
 /**
  * class is the dto for ui , for order.
  */

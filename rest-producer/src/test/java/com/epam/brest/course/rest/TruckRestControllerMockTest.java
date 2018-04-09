@@ -2,6 +2,7 @@ package com.epam.brest.course.rest;
 
 import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
 import com.epam.brest.course.model.Truck;
+import com.epam.brest.course.rest.config.TestUtil;
 import com.epam.brest.course.service.TruckService;
 import com.epam.brest.course.utility.dozer.MappingService;
 import org.apache.logging.log4j.LogManager;
@@ -19,8 +20,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -31,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = "classpath:rest.spring.test.xml")
 public class TruckRestControllerMockTest {
 
-    private static final String TRUCK_CODE = "BY2442";
+    private static final String TRUCK_CODE = "BY24472";
     private static final String DESCRIPTION = "NEW TRUCK";
     private static final String DESCRIPTION_1 = "BLACK TRUCK";
     private static final String TRUCK_CODE1 = "BY2606";
@@ -56,7 +59,7 @@ public class TruckRestControllerMockTest {
     private MockMvc mockMvc;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
+    private static final String DATE_STRING_2 = "2009-01-01";
     private Truck truck;
 
     private Truck truck2;
@@ -65,12 +68,14 @@ public class TruckRestControllerMockTest {
 
 
     @Before
-    public void setUp() {
+    public void setUp() throws ParseException {
 
         truck = new Truck();
+        Date date = formatter.parse(DATE_STRING_2);
         truck.setDescription(DESCRIPTION);
         truck.setTruckCode(TRUCK_CODE);
         truck.setTruckId(ID);
+        truck.setPurchasedDate(date);
 
         truck2 = new Truck();
         truck2.setDescription(DESCRIPTION_1);
@@ -91,8 +96,8 @@ public class TruckRestControllerMockTest {
     @Test
     public void getTruckById() throws Exception {
         LOGGER.debug("test: getTruckById()");
-        when(truckService.getTruckById(ID)).thenReturn(truck);
 
+        when(truckService.getTruckById(ID)).thenReturn(truck);
         mockMvc.perform(get("/trucks/{id}", ID).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isFound())
@@ -104,7 +109,7 @@ public class TruckRestControllerMockTest {
         Mockito.verify(truckService).getTruckById(ID);
     }
 
-        //update
+    //update
     @Test
     public void update() throws Exception {
         LOGGER.debug("test: update() ");
@@ -117,7 +122,21 @@ public class TruckRestControllerMockTest {
         Mockito.verify(truckService).updateTruck(truck);
     }
 
-        //delete
+    @Test
+    public void addTruck() throws Exception {
+        LOGGER.debug("test: addTruck() ");
+
+        when(truckService.addTruck(truck)).thenReturn(truck);
+
+        mockMvc.perform(post("/trucks").contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(truck))
+                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andDo(print()).andExpect(status().isCreated());
+
+        Mockito.verify(truckService).addTruck(truck);
+    }
+
+    //delete
     @Test
     public void deleteTruck() throws Exception {
         LOGGER.debug("test: deleteTruck() ");
@@ -129,14 +148,14 @@ public class TruckRestControllerMockTest {
     }
 
 
-       //getlist
+    //getlist
     @Test
     public void getTrucks() throws Exception {
         LOGGER.debug("test: getTrucks()");
 
         when(truckService.getAllTrucks()).thenReturn(Arrays.asList(truck, truck2));
 
-        mockMvc.perform(get("/trucks/truckList").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/trucks").accept(MediaType.APPLICATION_JSON))
 
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -153,28 +172,28 @@ public class TruckRestControllerMockTest {
         Mockito.verify(truckService).getAllTrucks();
     }
 
-     @Test
-    public void trucksWithAvg() throws Exception {
-
-        LOGGER.debug("test: trucksWithAvg()");
-
-        when(truckService.getAllTruckWithAvgPetrolPerMonth())
-                .thenReturn(Arrays.asList(truckPerMonth));
-
-        mockMvc.perform(get("/trucks/trucksAvgPetrol")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-
-                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)))
-                .andExpect(jsonPath("$[0]avgPetrolQty", Matchers.is(QTY)))
-                .andExpect(jsonPath("$[0]month", Matchers.is("JANUARY")))
-                .andExpect(jsonPath("$[0]year", Matchers.is(2009)));
-
-        Mockito.verify(truckService).getAllTruckWithAvgPetrolPerMonth();
-
-    }
+//    @Test
+//    public void trucksWithAvg() throws Exception {
+//
+//        LOGGER.debug("test: trucksWithAvg()");
+//
+//        when(truckService.getAllTruckWithAvgPetrolPerMonth())
+//                .thenReturn(Arrays.asList(truckPerMonth));
+//
+//        mockMvc.perform(get("/trucks/trucksAvgPetrol")
+//                .accept(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//
+//                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)))
+//                .andExpect(jsonPath("$[0]avgPetrolQty", Matchers.is(QTY)))
+//                .andExpect(jsonPath("$[0]month", Matchers.is("JANUARY")))
+//                .andExpect(jsonPath("$[0]year", Matchers.is(2009)));
+//
+//        Mockito.verify(truckService).getAllTruckWithAvgPetrolPerMonth();
+//
+//    }
 
 }

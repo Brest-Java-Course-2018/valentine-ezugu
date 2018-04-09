@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -74,6 +73,9 @@ public class OrderServiceImpl implements OrderService {
                                             throws DataAccessException {
         LOGGER.debug("addOrder({})", order);
         Assert.notNull(order, "order cannot be null");
+        Assert.notNull(order.getTruckId(),"truckId cannot be null");
+        Assert.notNull(order.getPetrolQty(),"petrol cannot be null");
+        Assert.notNull(order.getOrderDate(),"date cannot be null");
         return orderDao.addOrder(order);
     }
 
@@ -106,25 +108,10 @@ public class OrderServiceImpl implements OrderService {
      * @throws DataAccessException exception.
      */
     @Override
-    public final Collection<Order> getAllOrders() throws DataAccessException {
+    public final Collection<Order> getAllOrders(Date start, Date end) throws DataAccessException {
         LOGGER.debug("getAllOrders()");
-        return orderDao.getAllOrders();
+        return orderDao.getAllOrders(start, end);
     }
 
-    /**
-     * @param start date.
-     * @param end date.
-     * @return list with truckCode.
-     * @throws ParseException for date.
-     * @throws DataAccessException for db.
-     */
-    @Override
-    public final Collection<OrderWithTruckCodeDto>
-                                    filterOrdersByDate(final Date start,
-                                                                final Date end)
-            throws ParseException, DataAccessException {
-        LOGGER.debug("filterOrdersByDate({})", start, end);
-        return orderDao.filterOrdersByDate(start, end);
-    }
 
 }

@@ -1,4 +1,4 @@
-package com.epam.brest.course.rest;
+package com.epam.brest.course.rest.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

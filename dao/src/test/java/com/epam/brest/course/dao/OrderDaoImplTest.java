@@ -2,6 +2,8 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.dto.OrderWithTruckCodeDto;
 import com.epam.brest.course.model.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +26,14 @@ import java.util.Date;
 @Transactional
 public class OrderDaoImplTest {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     private static final String DATE = "2006-01-21";
     private static final int TRUCK_ID = 3;
     private static final double PETROL_QTY = 23.0;
-    public static final int ONE = 1;
+    private static final int ONE = 1;
+    private static final double QTY = 234.3;
+    private static final double QTY1 = 25.0;
 
     @Autowired
     private OrderDao orderDao;
@@ -40,6 +46,8 @@ public class OrderDaoImplTest {
 
     @Test
     public void getOrderById() {
+        LOGGER.debug("test: getOrderById()");
+
         Order order = orderDao.getOrderById(ONE);
         Assert.assertNotNull(order);
         Assert.assertTrue(order.getOrderId().equals(ONE));
@@ -48,6 +56,9 @@ public class OrderDaoImplTest {
 
     @Test
     public void getAllOrderWithTruckCodeDto() {
+        LOGGER.debug("test: getAllOrderWithTruckCodeDto()");
+
+
         Collection<OrderWithTruckCodeDto> orders =
                 orderDao.getAllOrdersWithTruckCode();
         Assert.assertFalse(orders.isEmpty());
@@ -56,40 +67,45 @@ public class OrderDaoImplTest {
 
     @Test
     public void getAllOrders() {
-        Collection<Order> orderCollection = orderDao.getAllOrders();
+        LOGGER.debug("test: getAllOrders()");
+
+        Collection<Order> orderCollection = orderDao.getAllOrders(null, null);
         Assert.assertFalse(orderCollection.isEmpty());
         Assert.assertTrue(orderCollection.size() == 7);
     }
 
+
+
     @Test
     public void addOrder() throws ParseException {
+        LOGGER.debug("test: addOrder()");
 
         Date date = formatter.parse(DATE);
-        Collection<Order> orders = orderDao.getAllOrders();
+        Collection<Order> orders = orderDao.getAllOrders(null, null);
         int sizeBefore = orders.size();
         // add order
-        Order order = new Order(234.3, date, ONE);
+        Order order = new Order(QTY, date, ONE);
         Order order1 = orderDao.addOrder(order);
         Assert.assertNotNull(order1);
         Assert.assertTrue(order.getOrderDate().equals(date));
-        Assert.assertTrue((sizeBefore + 1) == orderDao.getAllOrders().size());
+        Assert.assertTrue((sizeBefore + 1) == orderDao.getAllOrders(null, null).size());
     }
 
     @Test
     public void updateOrder() throws Exception {
-        // set date
+        LOGGER.debug("test: updateOrder()");
+
         Date date = formatter.parse(DATE);
-        //pass date to new order
-        Order order = new Order(25.0, date, TRUCK_ID);
-        // add order
+
+        Order order = new Order(QTY1, date, TRUCK_ID);
         Order newOrder = orderDao.addOrder(order);
         newOrder.setOrderDate(date);
-        //set new truck code for order
         newOrder.setTruckId(5);
         newOrder.setPetrolQty(PETROL_QTY);
+
         //perform update
         orderDao.updateOrder(newOrder);
-        //assert
+
         Order updatedOrder = orderDao.getOrderById(newOrder.getOrderId());
         Assert.assertTrue(updatedOrder.getOrderId().equals(newOrder.getOrderId()));
     }
@@ -97,42 +113,21 @@ public class OrderDaoImplTest {
 
     @Test
     public void deleteOrderById() throws ParseException {
+        LOGGER.debug("test: deleteOrderById()");
 
         Date date = formatter.parse(DATE);
 
-        Order order =
-                new Order(PETROL_QTY, date, TRUCK_ID);
+        Order order = new Order(PETROL_QTY, date, TRUCK_ID);
         order = orderDao.addOrder(order);
 
-        Collection<Order> orders = orderDao.getAllOrders();
-        //get size before delete
-        int sizeBefore = orders.size();
+        Collection<Order> orders = orderDao.getAllOrders(null, null);
+         int sizeBefore = orders.size();
 
         orderDao.deleteOrderById(order.getOrderId());
-        orders = orderDao.getAllOrders();
-       //get size after delete
+        orders = orderDao.getAllOrders(null, null);
+
         int sizeAfter = orders.size();
-        //assert there was a reduction after delete
         Assert.assertTrue(sizeAfter < sizeBefore);
-    }
-
-    @Test
-    public void filterByDate() throws ParseException {
-
-        Date date = formatter.parse(DATE_STRING);
-        Date date2 = formatter.parse(DATE_STRING_2);
-
-        Collection<OrderWithTruckCodeDto> orders =   orderDao.filterOrdersByDate(date, date2);
-     Assert.assertNotNull(orders);
-     Assert.assertTrue(orders.size() > 1 );
-    }
-
-    @Test
-    public void doFilterWithNoNullValuesShouldGiveDefault() throws ParseException {
-
-        Collection<OrderWithTruckCodeDto> orders =   orderDao.filterOrdersByDate(null, null);
-        Assert.assertNotNull(orders);
-        Assert.assertTrue(orders.size() > 6 );
     }
 
 }

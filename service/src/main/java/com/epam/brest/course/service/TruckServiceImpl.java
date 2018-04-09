@@ -1,8 +1,7 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.TruckDao;
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
-import com.epam.brest.course.model.Truck;
+ import com.epam.brest.course.model.Truck;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,15 +96,15 @@ public class TruckServiceImpl implements TruckService {
         truckDao.updateTruck(truck);
     }
 
-    /**
-     * @return list of trucks.
-     * @throws DataAccessException exception.
-     */
-    @Override
-    public final Collection<TruckWIthAvgPetrolPerMonth>
-                                             getAllTruckWithAvgPetrolPerMonth()
-                                                   throws DataAccessException {
-        LOGGER.debug("getAllTruckWithAvgPetrolPerMonth()");
-        return truckDao.getAllTruckWithAvgPetrolPerMonth();
-    }
+//    /**
+//     * @return list of trucks.
+//     * @throws DataAccessException exception.
+//     */
+//    @Override
+//    public final Collection<TruckWIthAvgPetrolPerMonth>
+//                                             getAllTruckWithAvgPetrolPerMonth()
+//                                                   throws DataAccessException {
+//        LOGGER.debug("getAllTruckWithAvgPetrolPerMonth()");
+//        return truckDao.getAllTruckWithAvgPetrolPerMonth();
+//    }
 }

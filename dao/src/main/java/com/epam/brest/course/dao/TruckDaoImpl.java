@@ -31,34 +31,34 @@ public class TruckDaoImpl implements TruckDao {
      * sql query for delete.
      */
     @Value("${truck.deleteById}")
-    private String deleteByIdSql;
+    private String deleteTruckByIdSql;
     /**
      * sql query for update.
      */
     @Value("${truck.update}")
-    private String updateSql;
+    private String updateTruckSql;
 
     /**
      * sql query for select where @id.
      */
     @Value("${truck.selectById}")
-    private String selectById;
+    private String getTruckByIdSql;
     /**
      * sql query for select all.
      */
     @Value("${truck.selectAllWithAvg}")
-    private String selectAllTrucksWithAvg;
+    private String getAllTrucksWithAvgPetrolSql;
     /**
      *to check if truck code i unique.
      */
     @Value("${truck.checkIfUnique}")
-    private String checkIfTruckCodeUnique;
+    private String truckCodeCount;
 
     /**
      * basic select all.
      */
     @Value("${truck.selectAll}")
-    private String selectAll;
+    private String getAllTrucksSql;
 
 
     /**
@@ -82,7 +82,7 @@ public class TruckDaoImpl implements TruckDao {
         LOGGER.debug("getAllTrucks()");
         List<Truck> trucks =
                 namedParameterJdbcTemplate.getJdbcOperations()
-                .query(selectAll,
+                .query(getAllTrucksSql,
                         BeanPropertyRowMapper.newInstance(Truck.class));
         return trucks;
     }
@@ -99,7 +99,7 @@ public class TruckDaoImpl implements TruckDao {
                         truck.getTruckCode());
         Integer result =
                 namedParameterJdbcTemplate.queryForObject(
-                        checkIfTruckCodeUnique, namedParameters, Integer.class);
+                        truckCodeCount, namedParameters, Integer.class);
         LOGGER.debug("result({})", result);
 
         if (result == 0) {
@@ -139,7 +139,7 @@ public class TruckDaoImpl implements TruckDao {
 
         Truck truck = namedParameterJdbcTemplate
                 .queryForObject(
-                        selectById, parameterSource,
+                        getTruckByIdSql, parameterSource,
                         BeanPropertyRowMapper.newInstance(Truck.class));
         return truck;
     }
@@ -153,7 +153,7 @@ public class TruckDaoImpl implements TruckDao {
 
         namedParameterJdbcTemplate
                 .getJdbcOperations()
-                .update(deleteByIdSql, id);
+                .update(deleteTruckByIdSql, id);
     }
 
     /**
@@ -168,7 +168,7 @@ public class TruckDaoImpl implements TruckDao {
                         .addValue("purchasedDate", truck.getPurchasedDate())
                         .addValue("description", truck.getDescription());
 
-        namedParameterJdbcTemplate.update(updateSql, namedParameterSource);
+        namedParameterJdbcTemplate.update(updateTruckSql, namedParameterSource);
     }
 
     /**
@@ -180,7 +180,7 @@ public class TruckDaoImpl implements TruckDao {
         List<TruckWIthAvgPetrolPerMonth> trucks =
                 namedParameterJdbcTemplate.getJdbcOperations()
 
-                .query(selectAllTrucksWithAvg, BeanPropertyRowMapper
+                .query(getAllTrucksWithAvgPetrolSql, BeanPropertyRowMapper
                         .newInstance(TruckWIthAvgPetrolPerMonth.class));
         return trucks;
     }

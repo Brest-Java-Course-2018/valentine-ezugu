@@ -120,18 +120,19 @@ public class TruckServiceMockTest {
         Mockito.verify(truckDao).updateTruck(truck);
     }
 
-    @Test
-    public void findAllTruck_AvgPetrolPerMonth() {
-        LOGGER.debug("test: findAllTruck_AvgPetrolPerMonth()");
-
-        when(truckDao.getAllTruckWithAvgPetrolPerMonth())
-                .thenReturn(Arrays.asList(truckPerMonth, truckPerMonth1));
-
-        Collection<TruckWIthAvgPetrolPerMonth> trucks =
-                truckService.getAllTruckWithAvgPetrolPerMonth();
-        Assert.assertTrue(trucks.containsAll(Arrays.asList(truckPerMonth, truckPerMonth1)));
-        Mockito.verify(truckDao).getAllTruckWithAvgPetrolPerMonth();
-    }
+//
+//    @Test
+//    public void findAllTruck_AvgPetrolPerMonth() {
+//        LOGGER.debug("test: findAllTruck_AvgPetrolPerMonth()");
+//
+//        when(truckDao.getAllTruckWithAvgPetrolPerMonth())
+//                .thenReturn(Arrays.asList(truckPerMonth, truckPerMonth1));
+//
+//        Collection<TruckWIthAvgPetrolPerMonth> trucks =
+//                truckService.getAllTruckWithAvgPetrolPerMonth();
+//        Assert.assertTrue(trucks.containsAll(Arrays.asList(truckPerMonth, truckPerMonth1)));
+//        Mockito.verify(truckDao).getAllTruckWithAvgPetrolPerMonth();
+//    }
 
 
     @Test

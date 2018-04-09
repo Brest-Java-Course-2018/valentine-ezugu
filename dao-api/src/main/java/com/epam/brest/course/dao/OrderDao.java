@@ -4,7 +4,6 @@ package com.epam.brest.course.dao;
 import com.epam.brest.course.dto.OrderWithTruckCodeDto;
 import com.epam.brest.course.model.Order;
 
-import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,7 +15,7 @@ public interface OrderDao {
      *
      * @return orders.
      */
-    Collection<Order> getAllOrders();
+    Collection<Order> getAllOrders(Date start, Date end);
 
     /**
      *
@@ -50,13 +49,4 @@ public interface OrderDao {
      */
     void updateOrder(Order order);
 
-    /**
-     *
-     * @param from start date.
-     * @param to end date.
-     * @return collection that matches criteria.
-     * @throws ParseException text exception.
-     */
-    Collection<OrderWithTruckCodeDto> filterOrdersByDate(Date from, Date to)
-                                        throws ParseException;
 }

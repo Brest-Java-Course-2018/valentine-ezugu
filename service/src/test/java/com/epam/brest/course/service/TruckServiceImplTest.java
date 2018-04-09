@@ -59,18 +59,18 @@ public class TruckServiceImplTest {
         Assert.assertEquals(truck.getDescription(), "AUDI TRUCK");
     }
 
-    @Test
-    public void getTruckWithAvgPetrolUsed() {
-        LOGGER.debug("test: getTruckWithAvgPetrolUsed()");
-
-        Collection<TruckWIthAvgPetrolPerMonth> truckWIthAvgPetrolPerMonths =
-                truckService.getAllTruckWithAvgPetrolPerMonth();
-
-        //assertions
-        Assert.assertNotNull(truckWIthAvgPetrolPerMonths);
-        Assert.assertFalse(truckWIthAvgPetrolPerMonths.isEmpty());
-        Assert.assertTrue(truckWIthAvgPetrolPerMonths.size() > SIZE);
-    }
+//    @Test
+//    public void getTruckWithAvgPetrolUsed() {
+//        LOGGER.debug("test: getTruckWithAvgPetrolUsed()");
+//
+//        Collection<TruckWIthAvgPetrolPerMonth> truckWIthAvgPetrolPerMonths =
+//                truckService.getAllTruckWithAvgPetrolPerMonth();
+//
+//        //assertions
+//        Assert.assertNotNull(truckWIthAvgPetrolPerMonths);
+//        Assert.assertFalse(truckWIthAvgPetrolPerMonths.isEmpty());
+//        Assert.assertTrue(truckWIthAvgPetrolPerMonths.size() > SIZE);
+//    }
 
     @Test
     public void addNewTruck() throws Exception {

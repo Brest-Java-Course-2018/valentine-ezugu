@@ -1,8 +1,8 @@
 package com.epam.brest.course.rest;
 
-
 import com.epam.brest.course.dto.OrderWithTruckCodeDto;
 import com.epam.brest.course.model.Order;
+import com.epam.brest.course.rest.config.TestUtil;
 import com.epam.brest.course.service.OrderService;
 import com.epam.brest.course.utility.data.OrderDto;
 import com.epam.brest.course.utility.dozer.MappingService;
@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -42,7 +43,6 @@ public class OrderRestControllerMockTest {
     private static Integer ID = 1;
 
     private static final String DATE_STRING_2 = "2009-01-01";
-    private static final long DATE_VALUE = 1230760800000L;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -68,11 +68,14 @@ public class OrderRestControllerMockTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setUp() {
+    public void setUp() throws ParseException {
         order = new Order();
+
+        Date date = formatter.parse(DATE_STRING_2);
         order.setOrderId(ID);
         order.setPetrolQty(QTY);
         order.setTruckId(ID);
+        order.setOrderDate(date);
 
 
         order1 = new Order();
@@ -91,8 +94,7 @@ public class OrderRestControllerMockTest {
         orderWithTruckCodeDto.setOrderId(ID);
         orderWithTruckCodeDto.setTruckCode(TRUCK_CODE);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(
-                orderRestController)
+        mockMvc = MockMvcBuilders.standaloneSetup(orderRestController)
                 .setMessageConverters(
                         new MappingJackson2HttpMessageConverter())
                 .build();
@@ -119,7 +121,6 @@ public class OrderRestControllerMockTest {
     }
 
 
-
     @Test
     public void update() throws Exception {
         LOGGER.debug("test: update() ");
@@ -130,6 +131,20 @@ public class OrderRestControllerMockTest {
                 .andDo(print()).andExpect(status().isOk());
 
         Mockito.verify(orderService).updateOrder(order);
+    }
+
+    @Test
+    public void addOrder() throws Exception {
+        LOGGER.debug("test: addOrder() ");
+
+        when(orderService.addOrder(order)).thenReturn(order);
+
+        mockMvc.perform(post("/orders").contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtil.convertObjectToJsonBytes(order))
+                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andDo(print()).andExpect(status().isCreated());
+
+        Mockito.verify(orderService).addOrder(order);
     }
 
     @Test
@@ -146,67 +161,42 @@ public class OrderRestControllerMockTest {
     public void getAllOrders() throws Exception {
         LOGGER.debug("test: getAllOrders()");
 
-        when(orderService.getAllOrders()).thenReturn(Arrays.asList(order, order1));
+        when(orderService.getAllOrders(null, null)).thenReturn(Arrays.asList(order, order1));
 
-    mockMvc.perform(get("/orders").accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-            .andExpect(jsonPath("$[0]orderId", Matchers.is(ID)))
-            .andExpect(jsonPath("$[0]petrolQty", Matchers.is(QTY)))
-            .andExpect(jsonPath("$[0]truckId", Matchers.is(ID)))
-
-            .andExpect(jsonPath("$[1]orderId", Matchers.is(ID_1)))
-            .andExpect(jsonPath("$[1]petrolQty", Matchers.is(QTY)))
-            .andExpect(jsonPath("$[1]truckId", Matchers.is(ID_1)));
-
-            Mockito.verify(orderService).getAllOrders();
-    }
-
-
-    @Test
-    public void filterOrderByDate() throws Exception {
-        LOGGER.debug("test: filterOrderByDate()");
-
-        when(orderService.filterOrdersByDate(
-                new Date(formatter.parse("2003-02-01").getTime()),
-                new Date(formatter.parse("2009-02-01").getTime())))
-                .thenReturn(Arrays.asList(orderWithTruckCodeDto));
-
-        mockMvc.perform(get("/orders/from/{start}/to/{end}", "2003-02-01", "2009-02-01")
-
-                .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/orders").accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0]orderId", Matchers.is(ID)))
                 .andExpect(jsonPath("$[0]petrolQty", Matchers.is(QTY)))
-                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)));
+                .andExpect(jsonPath("$[0]truckId", Matchers.is(ID)))
 
-        Mockito.verify(orderService).filterOrdersByDate(new Date(formatter.parse("2003-02-01").getTime()),
-                new Date(formatter.parse("2009-02-01").getTime()));
+                .andExpect(jsonPath("$[1]orderId", Matchers.is(ID_1)))
+                .andExpect(jsonPath("$[1]petrolQty", Matchers.is(QTY)))
+                .andExpect(jsonPath("$[1]truckId", Matchers.is(ID_1)));
+
+        Mockito.verify(orderService).getAllOrders(null, null);
     }
 
-
-    @Test
-    public void ordersListWithTruck() throws Exception {
-
-        LOGGER.debug("test: ordersListWithTruck()");
-
-        when(orderService.getAllOrdersWithTruckCode()).thenReturn(Arrays.asList(orderWithTruckCodeDto));
-
-        mockMvc.perform(get("/orders/ordersWithTruckCode")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0]orderId", Matchers.is(ID)))
-                .andExpect(jsonPath("$[0]petrolQty", Matchers.is(QTY)))
-                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)));
-
-                Mockito.verify(orderService).getAllOrdersWithTruckCode();
-
-     }
+//    @Test
+//    public void ordersListWithTruck() throws Exception {
+//
+//        LOGGER.debug("test: ordersListWithTruck()");
+//
+//        when(orderService.getAllOrdersWithTruckCode()).thenReturn(Arrays.asList(orderWithTruckCodeDto));
+//
+//        mockMvc.perform(get("/orders/ordersWithTruckCode")
+//                .accept(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(jsonPath("$[0]orderId", Matchers.is(ID)))
+//                .andExpect(jsonPath("$[0]petrolQty", Matchers.is(QTY)))
+//                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)));
+//
+//        Mockito.verify(orderService).getAllOrdersWithTruckCode();
+//
+//    }
 
 }

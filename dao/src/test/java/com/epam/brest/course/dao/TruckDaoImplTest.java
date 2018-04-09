@@ -2,6 +2,8 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
 import com.epam.brest.course.model.Truck;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,9 +25,11 @@ import java.util.Date;
 @Transactional
 public class TruckDaoImplTest {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     private static final String DATE = "2006-01-21";
 
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
 
     private static final int ID = 2;
     private static final int SIZE = 5;
@@ -36,6 +40,8 @@ public class TruckDaoImplTest {
 
     @Test(expected = EmptyResultDataAccessException.class)
     public void getTruckByIdWithNullValue() {
+        LOGGER.debug("test: getTruckByIdWithNullValue()");
+
         //give null value we should get empty result .
        Truck truck =  truckDao.getTruckById(null);
         Assert.assertNotNull(truck);
@@ -43,12 +49,17 @@ public class TruckDaoImplTest {
 
     @Test
     public void getTruckByIdWithValidInput() {
+        LOGGER.debug("test: getTruckByIdWithValidInput()");
+
         Truck truck =  truckDao.getTruckById(ID);
         Assert.assertNotNull(truck);
     }
 
     @Test
     public void getAllTrucks() {
+        LOGGER.debug("test: getAllTrucks()");
+
+
         Collection<Truck> trucks = truckDao.getAllTrucks();
         //assert we have list of trucks
         Assert.assertNotNull(trucks);
@@ -57,6 +68,9 @@ public class TruckDaoImplTest {
 
     @Test
     public void getAllTrucksWithAvgPetrolPerMonth()  {
+        LOGGER.debug("test: getAllTrucksWithAvgPetrolPerMonth()");
+
+
         Collection<TruckWIthAvgPetrolPerMonth> truckWIthAvgPetrolPerMonths =
                 truckDao.getAllTruckWithAvgPetrolPerMonth();
         //get all trucks with calculated average petrol used
@@ -67,7 +81,8 @@ public class TruckDaoImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void addTruckWithTruckCodeAlreadyInUse() throws Exception {
-        //give date and pass code which is already in use
+        LOGGER.debug("test: addTruckWithTruckCodeAlreadyInUse()");
+
       Date date = formatter.parse(DATE);
       Truck truck = new Truck("BY2334", date, "BLUE VAN");
       //save truck
@@ -77,9 +92,9 @@ public class TruckDaoImplTest {
 
     @Test
     public void addTruckWithTruckCodeUnique() throws Exception {
-        Date date = formatter.parse(DATE);
+        LOGGER.debug("test: addTruckWithTruckCodeUnique()");
 
-        //new truck to save
+        Date date = formatter.parse(DATE);
         Truck truck = new Truck("BY2000", date, "BLUE VAN");
         //save method
         truckDao.addTruck(truck);
@@ -92,38 +107,31 @@ public class TruckDaoImplTest {
 
     @Test
     public void updateAnExistingTruck() throws Exception {
-       // Date date = formatter.parse(DATE);
+        LOGGER.debug("test: updateAnExistingTruck()");
+
         Truck truck = truckDao.getTruckById(ID);
         Assert.assertEquals(truck.getTruckCode(), "BY8754");
-       //set new code
+
         truck.setTruckCode("BY8888");
-        //update
         truckDao.updateTruck(truck);
 
         //get same truck from db
         Truck truckWithNewCode = truckDao.getTruckById(ID);
-
-        //assert if code changed then update works
         Assert.assertEquals(truckWithNewCode.getTruckCode(), "BY8888");
      }
 
     @Test
     public void deleteAnExistingTruck() throws Exception {
-        // Date date = formatter.parse(DATE);
+        LOGGER.debug("test: deleteAnExistingTruck()");
+
         Truck truck = truckDao.getTruckById(ID);
         Collection<Truck> collection = truckDao.getAllTrucks();
 
-        //take size before delete
         int sizeBefore = collection.size();
-
-        //perform delete
         truckDao.deleteTruckById(truck.getTruckId());
         Collection<Truck> collectionAfterDelete = truckDao.getAllTrucks();
-        //take size after delete
         int sizeAfter = collectionAfterDelete.size();
-        //check to confirm reduction after delete
         Assert.assertTrue((sizeAfter + 1) == sizeBefore);
-
     }
 
 }

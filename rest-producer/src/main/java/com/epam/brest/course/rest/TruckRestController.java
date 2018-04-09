@@ -1,36 +1,58 @@
 package com.epam.brest.course.rest;
 
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import com.epam.brest.course.utility.data.TruckDto;
-import com.epam.brest.course.utility.data.TruckWithAvgPetrolDto;
+
 import com.epam.brest.course.utility.dozer.MappingService;
+
+import com.epam.brest.course.utility.validator.TruckValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
+
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * truck controller.
  */
+@CrossOrigin
 @RestController
 public class TruckRestController {
 
-    /**
+     /**
      * Log class for debug.
      */
     private static final Logger LOGGER = LogManager.getLogger();
+    /**
+     *
+     */
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * Autowired mapping service bean dozer.
      */
     @Autowired
     private MappingService mappingService;
+
+    /**
+     * @param binder .
+     */
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(new TruckValidator());
+        formatter.setLenient(false);
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(formatter, true));
+    }
 
     /**
      * truck service.
@@ -51,27 +73,27 @@ public class TruckRestController {
         Truck truck = truckService.getTruckById(truckId);
        return mappingService.map(truck, TruckDto.class);
     }
-
-    /**
-     * @return collection through dto.
-     */
-    @GetMapping(value = "/trucks/trucksAvgPetrol")
-    public final Collection<TruckWithAvgPetrolDto>
-                                                truckWithAvgPetrolPerMonth() {
-
-        LOGGER.debug("test: truckWithAvgPetrolPerMonth()");
-        Collection<TruckWIthAvgPetrolPerMonth> avgPetrolPerMonths =
-
-                           truckService.getAllTruckWithAvgPetrolPerMonth();
-
-        return mappingService.map(avgPetrolPerMonths,
-                                                TruckWithAvgPetrolDto.class);
-    }
+//
+//    /**
+//     * @return collection through dto.
+//     */
+//    @GetMapping(value = "/trucks/trucksAvgPetrol")
+//    public final Collection<TruckWithAvgPetrolDto>
+//                                                truckWithAvgPetrolPerMonth() {
+//
+//        LOGGER.debug("test: truckWithAvgPetrolPerMonth()");
+//        Collection<TruckWIthAvgPetrolPerMonth> avgPetrolPerMonths =
+//
+//                           truckService.getAllTruckWithAvgPetrolPerMonth();
+//
+//        return mappingService.map(avgPetrolPerMonths,
+//                                                TruckWithAvgPetrolDto.class);
+//    }
 
     /**
      * @return collection of just order list through dto.
      */
-    @GetMapping(value = "/trucks/truckList")
+    @GetMapping(value = "/trucks")
     public final Collection<TruckDto>  getAllTrucks() {
 
         LOGGER.debug("test: getAllTrucks()");
@@ -119,7 +141,6 @@ public class TruckRestController {
                                        final Integer truckId) {
 
         LOGGER.debug("deleteTruck({})", truckId);
-
         truckService.deleteTruckById(truckId);
     }
 

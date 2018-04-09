@@ -1,6 +1,6 @@
 package com.epam.brest.course.service;
 
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
+
 import com.epam.brest.course.model.Truck;
 import org.springframework.dao.DataAccessException;
 
@@ -42,12 +42,12 @@ public interface TruckService {
      * @param truck to update.
      */
     void updateTruck(Truck truck) throws DataAccessException;
-
-    /**
-     *@throws DataAccessException exception.
-     * @return collection.
-     */
-    Collection<TruckWIthAvgPetrolPerMonth> getAllTruckWithAvgPetrolPerMonth()
-                                            throws DataAccessException;
+//
+//    /**
+//     *@throws DataAccessException exception.
+//     * @return collection.
+//     */
+//    Collection<TruckWIthAvgPetrolPerMonth> getAllTruckWithAvgPetrolPerMonth()
+//                                            throws DataAccessException;
 
 }

@@ -18,7 +18,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,6 +39,7 @@ public class OrderServiceMockTest {
     private static final String DATE_STRING = "2007-01-01";
     private static final String DATE_STRING_2 = "2009-01-01";
     private static int TRUCK_ID = 1;
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
@@ -87,7 +87,7 @@ public class OrderServiceMockTest {
 
         Order order = new Order();
         order.setOrderId(ID);
-        when(orderDao.getOrderById(Mockito.anyInt()))
+        when(orderDao.getOrderById(ID))
                 .thenReturn(order);
 
         newOrder = orderService.getOrderById(ID);
@@ -95,7 +95,7 @@ public class OrderServiceMockTest {
                 order.getOrderId());
 
         Mockito.verify(orderDao)
-                .getOrderById(Mockito.anyInt());
+                .getOrderById(ID);
     }
 
     /**
@@ -114,6 +114,13 @@ public class OrderServiceMockTest {
         Mockito.verify(orderDao).deleteOrderById(ID);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalArgumentInDelete() throws Exception {
+        LOGGER.debug("test: illegalArgumentInDelete()");
+
+        orderService.deleteOrderById(null);
+    }
+
 
     @Test
     public void getOrders() throws Exception {
@@ -122,22 +129,48 @@ public class OrderServiceMockTest {
         Order firstOrder = new Order();
         Order secondOrder = new Order();
 
-        when(orderDao.getAllOrders())
+        when(orderDao.getAllOrders(null, null))
                 .thenReturn(Arrays.asList(firstOrder, secondOrder));
-        Collection<Order> orders = orderService.getAllOrders();
+        Collection<Order> orders = orderService.getAllOrders(null, null);
+
+        Assert.assertEquals(orders.size(), 2);
+        Assert.assertTrue(orders.contains(firstOrder));
+
+        Mockito.verify(orderDao).getAllOrders(null, null);
+
+    }
+
+    @Test
+    public void getOrdersWithDates() throws Exception {
+        LOGGER.debug("test: getOrdersWithDates()");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        Date from = sdf.parse("2005-01-01");
+        Date to = sdf.parse("2009-01-01");
+
+        Order firstOrder = new Order();
+        Order secondOrder = new Order();
+
+        when(orderDao.getAllOrders(from, to))
+                .thenReturn(Arrays.asList(firstOrder, secondOrder));
+
+        Collection<Order> orders = orderService.getAllOrders(from, to);
 
         Assert.assertEquals(orders.size(), 2);
         Assert.assertTrue(orders.contains(firstOrder));
         //verify that dao getAll orders was called
-        Mockito.verify(orderDao).getAllOrders();
+        Mockito.verify(orderDao).getAllOrders(from, to);
     }
+
 
     /**
      * @throws Exception is thrown because order cannot be null.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void whenIncompleteArgumentIsGiven() throws Exception {
-        orderService.addOrder(null);
+    public void addOrderWithIncompleteArgument() throws Exception {
+        Date date = formatter.parse(DATE_STRING);
+
+        orderService.addOrder(new Order(PETROL_QTY,date, null));
     }
 
 
@@ -165,27 +198,8 @@ public class OrderServiceMockTest {
                 orderService.getAllOrdersWithTruckCode();
 
         //assertions
-        Assert.assertTrue(getAllOrdersWithTruckCode.containsAll(Arrays.asList(order,order1)));
+        Assert.assertTrue(getAllOrdersWithTruckCode.containsAll(Arrays.asList(order, order1)));
         Mockito.verify(orderDao).getAllOrdersWithTruckCode();
-    }
-
-    @Test
-    public void filterOrdersByDate() throws ParseException {
-        LOGGER.debug("test: filterOrdersByDate");
-
-        Date date = formatter.parse(DATE_STRING);
-        Date date1 = formatter.parse(DATE_STRING_2);
-
-        when(orderDao.filterOrdersByDate(date,date1))
-                .thenReturn(Arrays.asList(order, order1));
-
-
-        Collection<OrderWithTruckCodeDto> filterOrdersByDate =
-                             orderService.filterOrdersByDate(date, date1);
-
-        //assertions
-        Assert.assertTrue(filterOrdersByDate.containsAll(Arrays.asList(order, order1)));
-        Mockito.verify(orderDao).filterOrdersByDate(date,date1);
     }
 
 

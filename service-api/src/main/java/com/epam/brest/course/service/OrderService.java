@@ -4,7 +4,6 @@ import com.epam.brest.course.dto.OrderWithTruckCodeDto;
 import com.epam.brest.course.model.Order;
 import org.springframework.dao.DataAccessException;
 
-import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -56,17 +55,6 @@ public interface OrderService {
      * @return list of all orders.
      * @throws DataAccessException exception.
      */
-    Collection<Order> getAllOrders() throws DataAccessException;
-
-    /**
-     *
-     * @param start date.
-     * @param end date.
-     * @return collection that matches criteria.
-     * @throws ParseException text exception.
-     * @throws DataAccessException exception.
-     */
-    Collection<OrderWithTruckCodeDto> filterOrdersByDate(Date start, Date end)
-            throws ParseException, DataAccessException;
+    Collection<Order> getAllOrders(Date start, Date end) throws DataAccessException;
 
 }
