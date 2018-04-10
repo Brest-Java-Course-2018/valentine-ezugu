@@ -34,11 +34,12 @@ public class OrderRestConsumer  implements OrderService {
 
     /**
      * @param url1 url for getting resource.
-     * @param restTemplate restTemplate.
+     * @param restTemplate1 restTemplate.
      */
-    public OrderRestConsumer(String url1, RestTemplate restTemplate) {
+    public OrderRestConsumer(final String url1,
+                             final RestTemplate restTemplate1) {
         url = url1;
-        this.restTemplate = restTemplate;
+        this.restTemplate = restTemplate1;
     }
 
     /**
@@ -49,10 +50,11 @@ public class OrderRestConsumer  implements OrderService {
     @Override
     public final Collection<OrderWithTruckCodeDto> getAllOrdersWithTruckCode()
                                                 throws DataAccessException {
-     LOGGER.debug("getAllOrdersWithTruckCode()" );
+     LOGGER.debug("getAllOrdersWithTruckCode()");
 
       ResponseEntity responseEntity =
-                            restTemplate.getForEntity(url + "/ordersWithTruckCode",  List.class);
+                            restTemplate.getForEntity(url
+                                    + "/ordersWithTruckCode",  List.class);
 
         List<OrderWithTruckCodeDto> orders =
                         (List<OrderWithTruckCodeDto>) responseEntity.getBody();
@@ -70,7 +72,7 @@ public class OrderRestConsumer  implements OrderService {
 
         LOGGER.debug("getOrderById({})", id);
         ResponseEntity<Order> responseEntity =
-                        restTemplate.getForEntity(url +"/" + id, Order.class);
+                        restTemplate.getForEntity(url + "/" + id, Order.class);
 
         Order order = responseEntity.getBody();
 
@@ -87,8 +89,8 @@ public class OrderRestConsumer  implements OrderService {
                                     throws DataAccessException {
         LOGGER.debug("addOrder({})", order);
         ResponseEntity<Order> responseEntity =
-                        restTemplate.postForEntity(url , order, Order.class);
-        Order result =responseEntity.getBody();
+                        restTemplate.postForEntity(url, order, Order.class);
+        Order result = responseEntity.getBody();
 
         return result;
     }
@@ -123,7 +125,8 @@ public class OrderRestConsumer  implements OrderService {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final Collection<Order> getAllOrders(Date start, Date end)
+    public final Collection<Order> getAllOrders(final Date start,
+                                                final Date end)
                                     throws DataAccessException {
         LOGGER.debug("getAllOrders({})");
 

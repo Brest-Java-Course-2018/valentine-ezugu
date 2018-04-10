@@ -4,7 +4,6 @@ package com.epam.brest.course.rest;
 import com.epam.brest.course.model.Order;
 import com.epam.brest.course.service.OrderService;
 import com.epam.brest.course.utility.data.OrderDto;
-
 import com.epam.brest.course.utility.dozer.MappingService;
 import com.epam.brest.course.utility.validator.OrderValidator;
 import org.apache.logging.log4j.LogManager;
@@ -49,9 +48,12 @@ public class OrderRestController {
     @Autowired
     private MappingService mappingService;
 
-
+    /**
+     *
+     * @param binder binding datas and error check.
+     */
     @InitBinder
-    protected void initBinder(WebDataBinder binder) {
+    protected final void initBinder(final WebDataBinder binder) {
         binder.setValidator(new OrderValidator());
         binder.setMessageCodesResolver(new DefaultMessageCodesResolver());
         formatter.setLenient(false);
@@ -65,12 +67,11 @@ public class OrderRestController {
      */
     @GetMapping("/orders/{orderId}")
     @ResponseStatus(HttpStatus.FOUND)
-    public final OrderDto getOrderId(@PathVariable(value = "orderId") final Integer orderId) {
+    public final OrderDto getOrderId(@PathVariable(value = "orderId")
+                                                    final Integer orderId) {
         LOGGER.debug("getOrderId({})", orderId);
 
-        // get order then map to dto
         Order order = orderService.getOrderById(orderId);
-
         return mappingService.map(order, OrderDto.class);
     }
 
@@ -80,14 +81,12 @@ public class OrderRestController {
      */
     @PostMapping(value = "/orders")
     @ResponseStatus(HttpStatus.CREATED)
-    public final OrderDto addOrder(@Valid @RequestBody final OrderDto orderDto) {
+    public final OrderDto addOrder(@Valid @RequestBody
+                                                final OrderDto orderDto) {
         LOGGER.debug("addOrder({})", orderDto);
 
-        //take dto and convert to model
         Order mappedOrder = mappingService.map(orderDto, Order.class);
-        //persist model
         Order persistedOrder = orderService.addOrder(mappedOrder);
-        //convert to dto for return
         return mappingService.map(persistedOrder, OrderDto.class);
     }
 
@@ -97,12 +96,10 @@ public class OrderRestController {
     @PutMapping(value = "/orders")
     @ResponseStatus(HttpStatus.OK)
     public final void updateOrder(@Valid @RequestBody final OrderDto orderDto) {
-
         LOGGER.debug("updateOrder({})", orderDto);
 
         // transfer data to model then update
         Order mappedOrder = mappingService.map(orderDto, Order.class);
-
         orderService.updateOrder(mappedOrder);
     }
 
@@ -111,8 +108,8 @@ public class OrderRestController {
      */
     @DeleteMapping(value = "/orders/{orderId}")
     @ResponseStatus(HttpStatus.FOUND)
-    public final void deleteOrder(@PathVariable(value = "orderId") final Integer orderId) {
-
+    public final void deleteOrder(@PathVariable(value = "orderId")
+                                                    final Integer orderId) {
         LOGGER.debug("deleteOrder({})", orderId);
         //delete
         orderService.deleteOrderById(orderId);
@@ -120,22 +117,20 @@ public class OrderRestController {
 
     /**
      * @param start date.
-     * @param end date.
+     * @param end   date.
      * @return order list all or filtered
-     *
-     * // curl -v localhost:8088/orders/
-      // curl -v  http://localhost:8088/orders?start=2007-01-01&end=2008-01-01
+     * <p>
      */
     @GetMapping(value = "/orders")
     public final Collection<OrderDto> getOrders(
-      @RequestParam(value = "start", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date start,
-      @RequestParam(value = "end", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date end) {
+            @RequestParam(value = "start", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") final Date start,
 
+            @RequestParam(value = "end", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") final Date end) {
         LOGGER.debug("getOrders()");
 
         Collection<Order> orders = orderService.getAllOrders(start, end);
-
-        // copy all orders to order dto.
         return mappingService.map(orders, OrderDto.class);
     }
 

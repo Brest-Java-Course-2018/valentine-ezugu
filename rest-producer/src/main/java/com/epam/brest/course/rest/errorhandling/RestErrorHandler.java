@@ -34,10 +34,11 @@ public class RestErrorHandler {
      */
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public @ResponseBody
-    String handleDataAccessException(
-                                             DataAccessException e) {
+    @ResponseBody
+    public final String handleDataAccessException(
+                                                final DataAccessException e) {
         LOGGER.debug("handleDataAccessException({})", e);
+
         return "DataAccessException: " + e.getLocalizedMessage();
     }
 
@@ -49,22 +50,25 @@ public class RestErrorHandler {
     @ExceptionHandler(ParseException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleIllegalArgumentException(ParseException e) {
+    public final String handleIllegalArgumentException(
+                                                    final ParseException e) {
+
         LOGGER.debug("handleIllegalArgumentException({})", e);
         return "Parse-Exception: " + e.getLocalizedMessage();
     }
 
 
     /**
-     * @param e exception.
+     * @param ex exception.
      * @return string and local message.
      */
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String IllegalStateException(IllegalStateException e) {
-        LOGGER.debug("IllegalStateException({})", e);
-        return "IllegalStateException: " + e.getLocalizedMessage();
+    public final String illegalStateHandler(final IllegalStateException ex) {
+        LOGGER.debug("IllegalStateException({})", ex);
+
+        return "IllegalStateException: " + ex.getLocalizedMessage();
     }
 
     /**
@@ -81,8 +85,10 @@ public class RestErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public MessageDTO processValidationError(
-                            MethodArgumentNotValidException ex) {
+    public final MessageDTO processValidationError(
+                          final  MethodArgumentNotValidException ex) {
+        LOGGER.debug("processValidationError({})", ex);
+
         BindingResult result = ex.getBindingResult();
         FieldError error = result.getFieldError();
         return processFieldError(error);
@@ -91,9 +97,9 @@ public class RestErrorHandler {
     /**
      *
      * @param error error.
-     * @return
+     * @return message and type.
      */
-    private MessageDTO processFieldError(FieldError error) {
+    private MessageDTO processFieldError(final FieldError error) {
         MessageDTO message = null;
         if (error != null) {
             Locale currentLocale = LocaleContextHolder.getLocale();

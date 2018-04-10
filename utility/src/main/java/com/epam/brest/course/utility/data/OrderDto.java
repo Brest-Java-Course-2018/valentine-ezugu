@@ -9,8 +9,8 @@ public class OrderDto {
      * order id.
      */
     private Integer orderId;
-    /*
-     *petrol qty.
+    /**
+     * qty petrol.
      */
     private Double petrolQty;
 

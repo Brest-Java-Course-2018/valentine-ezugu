@@ -10,8 +10,13 @@ import org.springframework.validation.Validator;
  */
 public class TruckValidator implements Validator {
 
-
+    /**
+     * min truck code letters.
+     */
     private static final int MIN_TRUCK_CODE = 5;
+    /**
+     * max .
+     */
     private static final int MAX_TRUCK_CODE = 7;
 
     /**
@@ -19,7 +24,7 @@ public class TruckValidator implements Validator {
      * @return truck.
      */
     @Override
-    public boolean supports(Class<?> clazz) {
+    public final boolean supports(final Class<?> clazz) {
         return TruckDto.class.equals(clazz);
     }
 
@@ -28,7 +33,7 @@ public class TruckValidator implements Validator {
      * @param e errors.
      */
     @Override
-    public void validate(Object obj, Errors e) {
+    public final void validate(final Object obj, final Errors e) {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(e,
                 "truckCode", "truckCode.empty");

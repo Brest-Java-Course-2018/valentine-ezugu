@@ -1,33 +1,63 @@
 package com.epam.brest.course.rest.errorhandling;
 
+/**
+ * my message class this class take message type and message.
+ */
 public class MessageDTO {
-
+    /**
+     * message.
+     */
     private String message;
+    /**
+     *type.
+     */
     private MessageType type;
 
+    /**
+     *constructor.
+     */
     public MessageDTO() {
-        super();
     }
 
-    public MessageDTO(MessageType type, String message) {
-        super();
-        this.message = message;
-        this.type = type;
+    /**
+     *
+     * @param type1 enum type.
+     * @param message1 and message.
+     */
+    public MessageDTO(final MessageType type1, final String message1) {
+        this.message = message1;
+        this.type = type1;
     }
 
-    public String getMessage() {
+    /**
+     *
+     * @return messgage
+     */
+    public final String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    /**
+     *
+     * @param message1 setter.
+     */
+    public final void setMessage(final String message1) {
+        this.message = message1;
     }
 
-    public MessageType getType() {
+    /**
+     *
+     * @return return type.
+     */
+    public final MessageType getType() {
         return type;
     }
 
-    public void setType(MessageType type) {
-        this.type = type;
+    /**
+     *
+     * @param type1 for setter.
+     */
+    public final void setType(final MessageType type1) {
+        this.type = type1;
     }
 }

@@ -1,5 +1,7 @@
 package com.epam.brest.course.utility.data;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -18,6 +20,7 @@ public class TruckDto {
     /**
      * this can be purchase date or when truck was added to company.
      */
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date purchasedDate;
     /**
      * this is description.

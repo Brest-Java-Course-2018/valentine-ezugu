@@ -1,9 +1,12 @@
 package com.epam.brest.course.rest.errorhandling;
 
 /**
- *
+ *my message enum class.
  */
 public enum MessageType {
-        WARNING, ERROR
+    /**
+     * enums.
+     */
+      WARNING, ERROR
     }
 

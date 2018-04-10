@@ -47,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
     public final Collection<OrderWithTruckCodeDto> getAllOrdersWithTruckCode()
                                                 throws DataAccessException {
         LOGGER.debug("getAllOrdersWithTruckCode()");
+
         return orderDao.getAllOrdersWithTruckCode();
     }
 
@@ -59,6 +60,7 @@ public class OrderServiceImpl implements OrderService {
     public final Order getOrderById(final Integer id)
                                         throws DataAccessException {
        LOGGER.debug("getOrderById({})", id);
+
         Assert.notNull(id, "id cannot be null");
         return orderDao.getOrderById(id);
     }
@@ -72,10 +74,11 @@ public class OrderServiceImpl implements OrderService {
     public final Order addOrder(final Order order)
                                             throws DataAccessException {
         LOGGER.debug("addOrder({})", order);
+
         Assert.notNull(order, "order cannot be null");
-        Assert.notNull(order.getTruckId(),"truckId cannot be null");
-        Assert.notNull(order.getPetrolQty(),"petrol cannot be null");
-        Assert.notNull(order.getOrderDate(),"date cannot be null");
+        Assert.notNull(order.getTruckId(), "truckId cannot be null");
+        Assert.notNull(order.getPetrolQty(), "petrol cannot be null");
+        Assert.notNull(order.getOrderDate(), "date cannot be null");
         return orderDao.addOrder(order);
     }
 
@@ -87,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
     public final void deleteOrderById(final Integer id)
                                         throws DataAccessException {
       LOGGER.debug("deleteOrderById({})", id);
+
         Assert.notNull(id, "id cannot be null");
         orderDao.deleteOrderById(id);
     }
@@ -97,9 +101,10 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public final void updateOrder(final Order order)
-                                throws DataAccessException {
+                                        throws DataAccessException {
       LOGGER.debug("updateOrder({})", order);
         Assert.notNull(order, "order cannot be null");
+
         orderDao.updateOrder(order);
     }
 
@@ -108,8 +113,11 @@ public class OrderServiceImpl implements OrderService {
      * @throws DataAccessException exception.
      */
     @Override
-    public final Collection<Order> getAllOrders(Date start, Date end) throws DataAccessException {
+    public final Collection<Order> getAllOrders(final Date start,
+                                                        final Date end)
+                                                throws DataAccessException {
         LOGGER.debug("getAllOrders()");
+
         return orderDao.getAllOrders(start, end);
     }
 

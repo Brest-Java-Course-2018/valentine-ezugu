@@ -2,6 +2,9 @@ package com.epam.brest.course.utility.data;
 
 import java.util.Date;
 
+/**
+ * dto class for order with truck code.
+ */
 public class OrderWithTruckCodeForList {
     /**
      * order_id.

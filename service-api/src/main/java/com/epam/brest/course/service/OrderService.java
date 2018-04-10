@@ -52,9 +52,12 @@ public interface OrderService {
 
     /**
      *
-     * @return list of all orders.
-     * @throws DataAccessException exception.
+     * @param start date.
+     * @param end date.
+     * @return list.
+     * @throws DataAccessException ex.
      */
-    Collection<Order> getAllOrders(Date start, Date end) throws DataAccessException;
+    Collection<Order> getAllOrders(Date start, Date end)
+                                                    throws DataAccessException;
 
 }

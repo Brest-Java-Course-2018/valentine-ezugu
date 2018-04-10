@@ -7,7 +7,7 @@ import org.springframework.web.client.ResponseErrorHandler;
 import java.io.IOException;
 
 /**
- *
+ *client rest error handler.
  */
 public class CustomResponseErrorHandler implements ResponseErrorHandler {
     /**
@@ -34,9 +34,11 @@ public class CustomResponseErrorHandler implements ResponseErrorHandler {
     @Override
     public final void handleError(final ClientHttpResponse response)
             throws IOException {
-        throw new ServletDataAccessException(" ERROR: " + response.getStatusCode()
+        throw new ServletDataAccessException(" ERROR: "
+                + response.getStatusCode()
                 + " :" + response.getStatusText()
                 + " :" + response.getBody());
     }
 
 }
+

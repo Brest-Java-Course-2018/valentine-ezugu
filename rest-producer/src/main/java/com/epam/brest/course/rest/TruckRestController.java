@@ -3,16 +3,13 @@ package com.epam.brest.course.rest;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import com.epam.brest.course.utility.data.TruckDto;
-
 import com.epam.brest.course.utility.dozer.MappingService;
-
 import com.epam.brest.course.utility.validator.TruckValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +25,12 @@ import java.util.Date;
 @RestController
 public class TruckRestController {
 
-     /**
+    /**
      * Log class for debug.
      */
     private static final Logger LOGGER = LogManager.getLogger();
     /**
-     *
+     * time formatter.
      */
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -47,7 +44,7 @@ public class TruckRestController {
      * @param binder .
      */
     @InitBinder
-    protected void initBinder(WebDataBinder binder) {
+    protected final void initBinder(final WebDataBinder binder) {
         binder.setValidator(new TruckValidator());
         formatter.setLenient(false);
         binder.registerCustomEditor(Date.class,
@@ -62,18 +59,18 @@ public class TruckRestController {
 
     /**
      * @param truckId param .
-     * @return  new truck through dto.
+     * @return new truck through dto.
      */
     @GetMapping(value = "/trucks/{truckId}")
     @ResponseStatus(HttpStatus.FOUND)
-    public final TruckDto getTruckId(@PathVariable(value =  "truckId")
-                                                    final Integer truckId) {
+    public final TruckDto getTruckId(@PathVariable(value = "truckId")
+                                         final Integer truckId) {
 
         LOGGER.debug("test: truckId({})", truckId);
         Truck truck = truckService.getTruckById(truckId);
-       return mappingService.map(truck, TruckDto.class);
+        return mappingService.map(truck, TruckDto.class);
     }
-//
+
 //    /**
 //     * @return collection through dto.
 //     */
@@ -94,11 +91,10 @@ public class TruckRestController {
      * @return collection of just order list through dto.
      */
     @GetMapping(value = "/trucks")
-    public final Collection<TruckDto>  getAllTrucks() {
+    public final Collection<TruckDto> getAllTrucks() {
 
         LOGGER.debug("test: getAllTrucks()");
         Collection<Truck> trucks = truckService.getAllTrucks();
-
         return mappingService.map(trucks, TruckDto.class);
     }
 
@@ -110,13 +106,14 @@ public class TruckRestController {
      */
     @PostMapping(value = "/trucks")
     @ResponseStatus(HttpStatus.CREATED)
-    public final TruckDto addTruck(@Valid @RequestBody
-                                                final TruckDto truckDto) {
+    public final TruckDto addTruck(@Valid
+                                       @RequestBody final TruckDto truckDto) {
+
         LOGGER.debug("addTruck({})", truckDto);
 
 
         Truck mappedTruck = mappingService.map(truckDto, Truck.class);
-        Truck persisted =  truckService.addTruck(mappedTruck);
+        Truck persisted = truckService.addTruck(mappedTruck);
         return mappingService.map(persisted, TruckDto.class);
     }
 
@@ -128,7 +125,7 @@ public class TruckRestController {
     public final void update(@Valid @RequestBody final TruckDto truckDto) {
         LOGGER.debug("update({})", truckDto);
 
-        Truck mappedTruck =  mappingService.map(truckDto, Truck.class);
+        Truck mappedTruck = mappingService.map(truckDto, Truck.class);
         truckService.updateTruck(mappedTruck);
     }
 
@@ -138,7 +135,7 @@ public class TruckRestController {
     @DeleteMapping(value = "/trucks/{truckId}")
     @ResponseStatus(HttpStatus.FOUND)
     public final void deleteTruck(@PathVariable(value = "truckId")
-                                       final Integer truckId) {
+                                                      final Integer truckId) {
 
         LOGGER.debug("deleteTruck({})", truckId);
         truckService.deleteTruckById(truckId);

@@ -102,8 +102,8 @@ public class TruckServiceImpl implements TruckService {
 //     */
 //    @Override
 //    public final Collection<TruckWIthAvgPetrolPerMonth>
-//                                             getAllTruckWithAvgPetrolPerMonth()
-//                                                   throws DataAccessException {
+//                                   getAllTruckWithAvgPetrolPerMonth()
+//                                          throws DataAccessException {
 //        LOGGER.debug("getAllTruckWithAvgPetrolPerMonth()");
 //        return truckDao.getAllTruckWithAvgPetrolPerMonth();
 //    }
