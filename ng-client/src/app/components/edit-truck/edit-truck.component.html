@@ -1,0 +1,83 @@
+<header>
+
+  <nav id="main-header"
+       class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <ul class="navbar-nav float-lg-left">
+      <li class="nav-item"
+          title="Back to list"
+          data-toggle="tooltip"
+          data-placement="bottom"  ><a class="btn btn-light btn-block">
+        <i class="fa fa-arrow-left"></i></a>
+      </li>
+    </ul>
+    <button type="submit" form="editFormTruck" (click)="processForm()"
+     class="btn btn-light" [disabled]="!truckForm.valid">Save</button>
+  </nav>
+
+</header>
+<section id="truck">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+
+            <form [formGroup]="truckForm"  (ngSubmit)="processForm()"  id="editFormTruck" >
+
+              <div class="form-group" >
+                <label class="form-control-label">Truck code</label>
+
+                <input formControlName="truckCode" type="text" name="truckCode"  class="form-control"
+                       [class.invalid]="isInvalidAndDirty('truckCode')"
+                       ngControl="truckCode">
+
+                <div class="error-message" *ngIf="hasError('truckCode', 'required')"
+                     class="alert alert-danger">
+                </div>
+
+                  <div class="error-message" *ngIf="hasError('truckCode', 'minLength')">
+                    truckCode length should be 5 chars .
+                  </div>
+
+                <div class="error-message" *ngIf="hasError('truckCode', 'maxLength')">
+                  name length should be 5 chars .
+                </div>
+                </div>
+
+
+              <div class="form-group">
+                <label class="form-control-label"
+                      ngFor="purchasedDate">purchased Date</label>
+                <input type="date" name="purchaseDate" class="form-control"
+                       [class.invalid]="isInvalidAndDirty('purchasedDate')"
+                       ngControl="purchasedDate">
+
+                <div class="error-message" *ngIf="hasError('purchasedDate', 'required')"
+                     class="alert alert-danger">
+                </div>
+
+              </div>
+
+
+              <div class="form-group">
+                <label class="form-control-label"
+                       ngFor="description">Description</label>
+                <input type="text" name="description" class="form-control"
+                       [class.invalid]="isInvalidAndDirty('descriptions')"
+                       ngControl="descriptions">
+
+                <div class="error-message" *ngIf="hasError('descriptions', 'minLength')">
+                  truckCode length should be 5 chars .
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

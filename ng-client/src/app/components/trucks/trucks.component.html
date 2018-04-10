@@ -1,0 +1,60 @@
+<header>
+  <nav id="main-header"
+       class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <span class="navbar-brand text-uppercase mr-auto">TRUCK</span>
+    <ul class="navbar-nav float-right">
+      <li class="nav-item">
+        <a class="btn btn-light"
+           ngbTooltip="Add Truck"
+           placement="bottom">
+          <i class="fa fa-plus"></i> <span
+          class="d-none d-sm-inline"(click)="newTruck()">Add</span></a>
+      </li>
+    </ul>
+
+  </nav>
+</header>
+<section id="departments">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <table class="table table-striped">
+            <thead class="thead-inverse">
+            <tr>
+              <th>TruckId</th>
+              <th>TruckCode</th>
+              <th>purchasedDate</th>
+              <th>description</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let truck of trucks | async">
+              <td>{{truck.truckId}}</td>
+              <td>{{truck.truckCode}}</td>
+              <td>{{truck.purchasedDate | date: 'yyyy-MM-dd'}}</td>
+              <td>{{truck.description}}</td>
+              <td class="text-right">
+                <a class="btn-sm btn-outline-secondary"
+                   ngbTooltip="Edit Truck"
+                   placement="top">
+                  <i class="fa fa-bus"></i> <span
+                  class="d-none d-md-inline"  (click)="updateTruck(truck)" >Edit</span></a>
+
+                 <span data-toggle="modal" data-target="#deleteDialog">
+                            	<a href="#" class="btn-sm btn-outline-secondary"
+                                 ngbTooltip="delete truck"
+                                 placement="top">
+                                	<i class="fa fa-remove"></i>
+                                <span class="d-none d-md-inline" (click)="deleteTruck(truck)">Delete</span></a>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

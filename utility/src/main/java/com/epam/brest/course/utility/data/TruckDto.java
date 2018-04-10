@@ -1,7 +1,9 @@
 package com.epam.brest.course.utility.data;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 /**
@@ -16,6 +18,7 @@ public class TruckDto {
      * truck_code it is unique.
      */
 
+    @Valid
     private String truckCode;
     /**
      * this can be purchase date or when truck was added to company.
