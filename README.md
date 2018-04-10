@@ -7,16 +7,17 @@
 # Getting Started
  1. Check  
        
-   $java -version  
+    $java -version  
         
-   $export JAVA_HOME = ..
+    $export JAVA_HOME = ..
         
-   $mvn -version
+    $mvn -version
         
 2. Build
     
    from main directory     
    $mvn clean install
+   
         
 3. Preparing reports
       
@@ -26,15 +27,42 @@
       
         check:/target/stage/index.html
         ``
-# To run jetty-server
+4.  To run jetty server
         
-  To run  web-app -/web-app  mvn jetty run 
-        
-  TO run Rest webservices producer -/rest-app  mvn jetty run
-        
-4. web-app runs on http://localhost:8082/
+   To run  rest go to dir* -/rest-producer mvn jetty run 
+  
+# use embedded jetty server to test rest-producer
+     
+     mvn -pl rest-producer/ jetty:run
+     
+     Once started, the REST server should be available at:
+     
+     http://localhost:8088
+     
+     Try CURL:
+     
+     curl -v localhost:8088/trucks
+     
+     curl -v localhost:8088/trucks/1
+     
+     curl -H "Content-Type: application/json" -X POST -d '{"truckCode":"BY2354","purchasedDate":"xyz", "description":"my truck is good"}' -v localhost:8088/trucks
+     
+     curl -X "DELETE" localhost:8088/trucks/1
+     
+     curl -v localhost:8088/orders/
+      
+     curl -v  http://localhost:8088/orders?start=2007-01-01&end=2008-01-01
 
-5. Travis CI integration
+#Angular 
+
+  **what you will need**
+    
+   **This project was generated with Angular CLI version 1.7.3.**
+
+5.  ng-client app runs on http://localhost:4200/
+
+
+6.  Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/
 
 To be found in this projects are software products of the following versions :
