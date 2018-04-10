@@ -29,6 +29,23 @@ public class RestErrorHandler {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
+     * @param error error.
+     * @return message and type.
+     */
+    private MessageDTO processFieldError(final FieldError error) {
+        MessageDTO message = null;
+        if (error != null) {
+            Locale currentLocale = LocaleContextHolder.getLocale();
+            String msg = msgSource.getMessage(error.getCode(),
+                    error.getCodes(),
+
+                    null, currentLocale);
+            message = new MessageDTO(MessageType.ERROR, msg);
+        }
+        return message;
+    }
+
+    /**
      * @param e exception.
      * @return string and local message.
      */
@@ -50,7 +67,7 @@ public class RestErrorHandler {
     @ExceptionHandler(ParseException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public final String handleIllegalArgumentException(
+    public final String handleParseException(
                                                     final ParseException e) {
 
         LOGGER.debug("handleIllegalArgumentException({})", e);
@@ -85,7 +102,7 @@ public class RestErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public final MessageDTO processValidationError(
+    public final MessageDTO handleMethodArgumentNotValidException (
                           final  MethodArgumentNotValidException ex) {
         LOGGER.debug("processValidationError({})", ex);
 
@@ -95,21 +112,16 @@ public class RestErrorHandler {
     }
 
     /**
-     *
-     * @param error error.
-     * @return message and type.
+     * @param ex x.
+     * @return message.
      */
-    private MessageDTO processFieldError(final FieldError error) {
-        MessageDTO message = null;
-        if (error != null) {
-            Locale currentLocale = LocaleContextHolder.getLocale();
-            String msg = msgSource.getMessage(error.getCode(),
-                    error.getCodes(),
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public final String alreadyExistsException(final IllegalArgumentException ex) {
+        LOGGER.debug("processValidationError({})", ex);
 
-                    null, currentLocale);
-            message = new MessageDTO(MessageType.ERROR, msg);
-        }
-        return message;
+        return "IllegalStateException: " + ex.getMessage();
     }
 
 }
