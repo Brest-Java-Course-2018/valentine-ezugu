@@ -12,9 +12,10 @@ export class TruckService {
   private baseUrl: string = 'http://localhost:8088/trucks';
 
   private truck: Truck;
+  private  headers = new HttpHeaders({'Content-Type': 'application/json'});
+
 
   constructor(private http: HttpClient) {
-
   }
 
   getTrucks(): Observable<Truck[]> {
@@ -34,41 +35,36 @@ export class TruckService {
       );
   }
 
-  updateTrucks(truck: Truck) {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(this.baseUrl, JSON.stringify(truck), {headers: headers})
+  updateTrucks(truck: Truck): Observable<any> {
+    return this.http.put(this.baseUrl, JSON.stringify(truck), {headers:this.headers})
       .pipe(
         map(this.extractData),
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError));
   }
 
-
-  setter(truck: Truck) {
+   setter(truck: Truck) {
     this.truck = truck;
-  }
+   }
+
 
   getter() {
     return this.truck;
   }
 
-   createTruck(truck: Truck): Observable<any> {
-      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(this.baseUrl, JSON.stringify(truck), {headers: headers})
+  createTruck(truck: Truck): Observable<any> {
+     return this.http.post(this.baseUrl, JSON.stringify(truck), {headers: this.headers})
       .pipe(
         map(this.extractData),
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError));
   }
 
-    getTruckById(truckId: string): Observable<Truck> {
-      let cpParams = new URLSearchParams();
-      cpParams.set('id', truckId);
-     return this.http.get(this.baseUrl + "/" + cpParams)
+  getTruckById(id: Number) {
+    return this.http.get(this.baseUrl + '/' + id, {headers: this.headers})
       .pipe(map(this.extractData),
-       catchError(this.handleError));
-   }
-
+        catchError(this.handleError));
+  }
 
   private extractData(response: HttpResponse<Truck>) {
     const body = response;

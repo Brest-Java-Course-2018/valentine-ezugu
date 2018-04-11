@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 })
 
 export class TrucksComponent implements OnInit {
+
   statusCode: number;
   trucks: Observable<Array<Truck>>;
 
@@ -28,10 +29,11 @@ export class TrucksComponent implements OnInit {
     this.truckService.deleteTruckById(truck.truckId)
       .subscribe(successCode => {
           this.statusCode = successCode;
-        //  this.getTrucksDtos();
+          this.getTrucksDtos();
+          this.router.navigate(['/trucks'])
         },
         errorCode => this.statusCode = errorCode);
-  }
+   }
 
   updateTruck(truck) {
     this.truckService.setter(truck)
@@ -40,7 +42,7 @@ export class TrucksComponent implements OnInit {
 
   //this gets us edit page with blank forms.
   newTruck() {
-    let truck = new Truck(null, null, new Date(), "")
+    let truck = new Truck()
     this.truckService.setter(truck)
     this.router.navigate(['/edits'])
    }

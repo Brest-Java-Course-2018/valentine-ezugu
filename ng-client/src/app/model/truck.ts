@@ -3,12 +3,8 @@
  */
 
 export class Truck {
-
-  constructor(public truckId: number,
-  public truckCode : string,
-  public purchasedDate: Date,
-  public description : string) {
-
-  }
-
+  public truckId: number;
+  public truckCode : string;
+  public purchasedDate: Date;
+  public description : string
 }

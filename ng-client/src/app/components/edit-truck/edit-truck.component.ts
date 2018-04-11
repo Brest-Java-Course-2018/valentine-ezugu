@@ -3,7 +3,6 @@ import {Truck} from "../../model/truck";
 import {TruckService} from "../../services/trucks/truck.service";
 
 import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-edit-truck',
@@ -14,48 +13,39 @@ export class EditTruckComponent implements OnInit {
 
   private truck: Truck;
 
-  public truckForm: FormGroup;
+
 
   constructor(private truckService: TruckService,
               private router: Router) {
   }
 
+
   ngOnInit() {
     this.truck = this.truckService.getter();
   }
 
-  processForm() {
-    if (this.truck  == undefined) {
-      this.truckService.createTruck(this.truck)
-        .subscribe((truck) => {
-          console.log(truck)
-          this.router.navigate([''])
-        },(error) => {
-          console.log(error);
-        });
-    } else {
-      this.truckService.updateTrucks(this.truck)
-        .subscribe(
-          (truck) => {
-            console.log(truck);
-            this.router.navigate([''])
-          }, (error) => {
-            console.log(error);
-          });
-    }
-
+  back() {
+    this.router.navigate(['/trucks'])
   }
 
-  //
-  // hasError(field: string, error: string) {
-  //   const ctrl = this.truckForm.get(field);
-  //   return ctrl.dirty && ctrl.hasError(error);
-  // }
-  //
-  // isInvalidAndDirty(field: string) {
-  //   const ctrl = this.truckForm.get(field);
-  //   return !ctrl.valid && ctrl.dirty;
-  // }
+  processForm() {
 
+    if (this.truck.truckId == undefined) {
+      this.truckService.createTruck(this.truck).subscribe((truck) => {
+        console.log(truck);
+        this.router.navigate(['/trucks'])
+      }, (error) => {
+        console.log(error);
+      });
+    }else {
+
+      this.truckService.updateTrucks(this.truck).subscribe((truck) => {
+        console.log(truck);
+        this.router.navigate(['/trucks'])
+      }, (error) => {
+        console.log(error);
+      });
+    }
+  }
 
 }
