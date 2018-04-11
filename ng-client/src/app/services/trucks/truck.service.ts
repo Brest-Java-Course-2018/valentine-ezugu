@@ -5,6 +5,7 @@ import {Truck} from "../../model/truck";
 import {Observable} from "rxjs/Observable";
 import {catchError, map, tap} from "rxjs/operators";
 
+
 @Injectable()
 export class TruckService {
 
@@ -52,13 +53,21 @@ export class TruckService {
   }
 
    createTruck(truck: Truck): Observable<any> {
- let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.baseUrl, JSON.stringify(truck), {headers: headers})
       .pipe(
         map(this.extractData),
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError));
   }
+
+    getTruckById(truckId: string): Observable<Truck> {
+      let cpParams = new URLSearchParams();
+      cpParams.set('id', truckId);
+     return this.http.get(this.baseUrl + "/" + cpParams)
+      .pipe(map(this.extractData),
+       catchError(this.handleError));
+   }
 
 
   private extractData(response: HttpResponse<Truck>) {

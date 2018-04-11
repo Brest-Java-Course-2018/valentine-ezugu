@@ -12,7 +12,6 @@ import {Router} from "@angular/router";
 
 export class TrucksComponent implements OnInit {
   statusCode: number;
-
   trucks: Observable<Array<Truck>>;
 
   constructor(private truckService: TruckService, private router: Router) { }
@@ -34,9 +33,8 @@ export class TrucksComponent implements OnInit {
         errorCode => this.statusCode = errorCode);
   }
 
-  //this method just take us to edit page with filled form , doesn't do update.
   updateTruck(truck) {
-  this.truckService.setter(truck)
+    this.truckService.setter(truck)
     this.router.navigate(['/edits'])
   }
 
