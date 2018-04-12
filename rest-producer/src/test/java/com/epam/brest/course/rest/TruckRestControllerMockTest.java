@@ -72,13 +72,13 @@ public class TruckRestControllerMockTest {
 
         truck = new Truck();
         Date date = formatter.parse(DATE_STRING_2);
-        truck.setDescription(DESCRIPTION);
+        truck.setDescriptions(DESCRIPTION);
         truck.setTruckCode(TRUCK_CODE);
         truck.setTruckId(ID);
         truck.setPurchasedDate(date);
 
         truck2 = new Truck();
-        truck2.setDescription(DESCRIPTION_1);
+        truck2.setDescriptions(DESCRIPTION_1);
         truck2.setTruckCode(TRUCK_CODE1);
         truck2.setTruckId(TRUCK_ID);
 
@@ -104,7 +104,7 @@ public class TruckRestControllerMockTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))
-                .andExpect(jsonPath("description", Matchers.is(DESCRIPTION)));
+                .andExpect(jsonPath("descriptions", Matchers.is(DESCRIPTION)));
 
         Mockito.verify(truckService).getTruckById(ID);
     }
@@ -163,11 +163,11 @@ public class TruckRestControllerMockTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0]truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)))
-                .andExpect(jsonPath("$[0]description", Matchers.is(DESCRIPTION)))
+                .andExpect(jsonPath("$[0]descriptions", Matchers.is(DESCRIPTION)))
 
                 .andExpect(jsonPath("$[1]truckId", Matchers.is(TRUCK_ID)))
                 .andExpect(jsonPath("$[1]truckCode", Matchers.is(TRUCK_CODE1)))
-                .andExpect(jsonPath("$[1]description", Matchers.is(DESCRIPTION_1)));
+                .andExpect(jsonPath("$[1]descriptions", Matchers.is(DESCRIPTION_1)));
 
         Mockito.verify(truckService).getAllTrucks();
     }

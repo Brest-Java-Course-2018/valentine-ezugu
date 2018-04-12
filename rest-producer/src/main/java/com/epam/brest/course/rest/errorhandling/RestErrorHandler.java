@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -53,17 +51,23 @@ public class RestErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public final String handleDataAccessException(
-                                                final DataAccessException e) {
+                                                @RequestBody final DataAccessException e) {
         LOGGER.debug("handleDataAccessException({})", e);
 
         return "DataAccessException: " + e.getLocalizedMessage();
     }
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)  // 409
+    @ExceptionHandler( DataIntegrityViolationException.class)
+    public void handleConflict() {
 
-    /**
-     * @param e exception.
-     * @return string and local message.
-     */
+    }
+
+        /**
+         * @param e exception.
+         * @return string and local message.
+         */
     @ExceptionHandler(ParseException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -74,19 +78,11 @@ public class RestErrorHandler {
         return "Parse-Exception: " + e.getLocalizedMessage();
     }
 
-
-    /**
-     * @param ex exception.
-     * @return string and local message.
-     */
     @ExceptionHandler(IllegalStateException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public final String illegalStateHandler(final IllegalStateException ex) {
-        LOGGER.debug("IllegalStateException({})", ex);
-
-        return "IllegalStateException: " + ex.getLocalizedMessage();
+    @ResponseStatus(HttpStatus.BAD_REQUEST) //400
+    public final void illegalStateHandler( ) {
     }
+
 
     /**
      * message source.
