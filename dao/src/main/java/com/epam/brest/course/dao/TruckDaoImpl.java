@@ -5,6 +5,7 @@ import com.epam.brest.course.model.Truck;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -111,8 +112,8 @@ public class TruckDaoImpl implements TruckDao {
             namedParameters.addValue("purchasedDate",
                     truck.getPurchasedDate());
 
-            namedParameters.addValue("description",
-                    truck.getDescription());
+            namedParameters.addValue("descriptions",
+                    truck.getDescriptions());
 
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 
@@ -121,7 +122,7 @@ public class TruckDaoImpl implements TruckDao {
 
             truck.setTruckId(generatedKeyHolder.getKey().intValue());
         } else {
-            throw new IllegalArgumentException("such Truck already exits ");
+            throw new DataIntegrityViolationException("such Truck already exits ");
         }
         LOGGER.debug("addTruck({})", truck);
         return truck;
@@ -166,7 +167,7 @@ public class TruckDaoImpl implements TruckDao {
                         truck.getTruckId())
                         .addValue("truckCode", truck.getTruckCode())
                         .addValue("purchasedDate", truck.getPurchasedDate())
-                        .addValue("description", truck.getDescription());
+                        .addValue("descriptions", truck.getDescriptions());
 
         namedParameterJdbcTemplate.update(updateTruckSql, namedParameterSource);
     }

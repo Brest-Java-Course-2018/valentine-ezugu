@@ -60,7 +60,7 @@ public class TruckRestConsumerMockTest {
         truck.setTruckId(ID);
         truck.setPurchasedDate(date);
         truck.setTruckCode("BY2432");
-        truck.setDescription(DESCRIPTION);
+        truck.setDescriptions(DESCRIPTION);
 
         truckWIthAvgPetrolPerMonth = new TruckWIthAvgPetrolPerMonth();
         truckWIthAvgPetrolPerMonth.setYear(ID);

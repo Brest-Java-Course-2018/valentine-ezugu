@@ -26,9 +26,9 @@ public class TruckDto {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date purchasedDate;
     /**
-     * this is description.
+     * this is descriptions.
      */
-    private String description;
+    private String descriptions;
 
     /**
      * default.
@@ -83,21 +83,19 @@ public class TruckDto {
         this.truckCode = truckCode1;
     }
 
-
     /**
      *
-     * @return description.
+     * @return dsc.
      */
-    public final String getDescription() {
-        return description;
+    public final String getDescriptions() {
+        return descriptions;
     }
 
     /**
      *
-     * @param description1 for setter.
+     * @param descriptions setter.
      */
-    public final void setDescription(final String description1) {
-        this.description = description1;
+    public final void setDescriptions(final String descriptions) {
+        this.descriptions = descriptions;
     }
-
 }

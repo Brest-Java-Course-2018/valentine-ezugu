@@ -42,7 +42,7 @@ public class TruckValidator implements Validator {
                 "purchasedDate", "purchasedDate.empty");
 
         ValidationUtils.rejectIfEmptyOrWhitespace(e,
-                "description", "description.empty");
+                "descriptions", "descriptions.empty");
 
         TruckDto truckDto = (TruckDto) obj;
 
@@ -53,4 +53,5 @@ public class TruckValidator implements Validator {
         }
 
     }
+
 }

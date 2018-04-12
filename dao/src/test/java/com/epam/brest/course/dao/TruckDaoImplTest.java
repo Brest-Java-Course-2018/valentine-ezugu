@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -79,7 +81,7 @@ public class TruckDaoImplTest {
         Assert.assertTrue(truckWIthAvgPetrolPerMonths.size() > SIZE);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataIntegrityViolationException.class)
     public void addTruckWithTruckCodeAlreadyInUse() throws Exception {
         LOGGER.debug("test: addTruckWithTruckCodeAlreadyInUse()");
 

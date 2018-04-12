@@ -20,9 +20,9 @@ public class Truck {
      */
     private Date purchasedDate;
     /**
-     * this is description.
+     * this is descriptions.
      */
-    private String description;
+    private String descriptions;
 
     /**
      * default.
@@ -40,7 +40,7 @@ public class Truck {
                  final String description1) {
         this.truckCode = truckCode1;
         this.purchasedDate = purchasedDate1;
-        this.description = description1;
+        this.descriptions = description1;
     }
 
     /**
@@ -93,18 +93,18 @@ public class Truck {
 
     /**
      *
-     * @return description.
+     * @return descriptions.
      */
-    public final String getDescription() {
-        return description;
+    public final String getDescriptions() {
+        return descriptions;
     }
 
     /**
      *
      * @param description1 for setter.
      */
-    public final void setDescription(final String description1) {
-        this.description = description1;
+    public final void setDescriptions(final String description1) {
+        this.descriptions = description1;
     }
 
 
@@ -120,7 +120,7 @@ public class Truck {
         return Objects.equals(getTruckId(), truck.getTruckId())
                 && Objects.equals(getTruckCode(), truck.getTruckCode())
                 && Objects.equals(getPurchasedDate(), truck.getPurchasedDate())
-                && Objects.equals(getDescription(), truck.getDescription());
+                && Objects.equals(getDescriptions(), truck.getDescriptions());
     }
 
     @Override
@@ -128,7 +128,7 @@ public class Truck {
 
         return Objects.hash(getTruckId(),
                 getTruckCode(), getPurchasedDate(),
-                getDescription());
+                getDescriptions());
     }
 
     @Override
@@ -137,7 +137,7 @@ public class Truck {
                 + "truckId=" + truckId
                 + ", truckCode='" + truckCode + '\''
                 + ", purchasedDate=" + purchasedDate
-                + ", description='" + description + '\''
+                + ", descriptions='" + descriptions + '\''
                 + '}';
     }
 }
