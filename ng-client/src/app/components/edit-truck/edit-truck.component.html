@@ -78,11 +78,9 @@
                   Truck added successfully.
                 </div>
                 <div *ngIf="statusCode === 409" [ngClass] = "'success'">
-                  Truck already exists.
+                  Truck already exists Change TruckCode.
                 </div>
-                <div *ngIf="statusCode === 400" [ngClass] = "'success'">
-                  Truck already exists.
-                </div>
+
                 <div *ngIf="statusCode === 200" [ngClass] = "'success'">
                   Truck updated successfully.
                 </div>

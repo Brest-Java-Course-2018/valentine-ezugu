@@ -51,28 +51,21 @@ export class EditTruckComponent implements OnInit {
 
 
     if (this.truck.truckId == undefined) {
-      let truck= new Truck(null, truckCode, date, description);
+      let truck = new Truck(null, truckCode, date, description);
 
-      this.truckService.createTruck(truck).subscribe((truck) => {
 
-          this.statusCode = truck['status'];
-          this.router.navigate(['/trucks']);
-        },
-        error => {
-          console.log(error);
-        });
+      this.truckService.createTruck(truck).subscribe(successCode => {
+        this.statusCode = successCode;
+        this.router.navigate(['/trucks']);
+      }, errorCode => this.statusCode = errorCode);
 
-    }else {
-      let truck= new Truck(this.truck.truckId, truckCode, date, description);
+    } else {
+      let truck = new Truck(this.truck.truckId, truckCode, date, description);
 
-      this.truckService.updateTrucks(truck).subscribe((truck) => {
-
-          this.statusCode = truck['status'];
-          this.router.navigate(['/trucks']);
-        },
-        error => {
-          console.log(error);
-        });
+      this.truckService.updateTrucks(truck).subscribe(successCode => {
+        this.statusCode = successCode;
+        this.router.navigate(['/trucks']);
+      }, errorCode => this.statusCode = errorCode);
 
     }
   }

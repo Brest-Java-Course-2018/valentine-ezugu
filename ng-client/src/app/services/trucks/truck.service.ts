@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 import {Truck} from "../../model/truck";
-import {Observable} from "rxjs/Observable";
-import {catchError, map, tap} from "rxjs/operators";
+//import {Observable} from "rxjs/Observable";
+import { Observable } from 'rxjs';
 
+import {catchError, map, tap} from "rxjs/operators";
 
 @Injectable()
 export class TruckService {
@@ -39,7 +40,6 @@ export class TruckService {
     return this.http.put(this.baseUrl, JSON.stringify(truck), {headers:this.headers})
       .pipe(
         map(this.extractData),
-        tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError));
   }
 
@@ -55,7 +55,6 @@ export class TruckService {
     return this.http.post(this.baseUrl, JSON.stringify(truck), {headers: this.headers})
       .pipe(
         map(this.extractData),
-        tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError));
   }
 
@@ -67,11 +66,12 @@ export class TruckService {
 
   private extractData(response: HttpResponse<Truck>) {
     const body = response;
-    return body || {};
+    console.log(body)
+    return body ;
   }
 
-  private handleError (error: HttpErrorResponse) {
-    console.error(error.message || error);
+  private handleError (error: HttpResponse<Truck> | any) {
+    console.error(error.ok || error);
     return Observable.throw(error.status);
   }
 
@@ -92,6 +92,5 @@ export class TruckService {
   //   console.error(errorMessage);
   //   return Observable.throw(errorMessage);
   // }
-
 
 }
