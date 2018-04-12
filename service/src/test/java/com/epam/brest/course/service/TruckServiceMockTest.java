@@ -48,12 +48,12 @@ public class TruckServiceMockTest {
     @Before
     public void setup() {
         truck = new Truck();
-        truck.setDescription("NEW TRUCK");
+        truck.setDescriptions("NEW TRUCK");
         truck.setTruckCode("BY2442");
         truck.setTruckId(32);
 
         truck2 = new Truck();
-        truck2.setDescription("BLACK TRUCK");
+        truck2.setDescriptions("BLACK TRUCK");
         truck2.setTruckCode("BY2606");
         truck2.setTruckId(12);
 

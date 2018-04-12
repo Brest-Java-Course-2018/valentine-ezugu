@@ -56,7 +56,7 @@ public class TruckServiceImplTest {
 
         //Assertions
         Assert.assertNotNull(truck);
-        Assert.assertEquals(truck.getDescription(), "AUDI TRUCK");
+        Assert.assertEquals(truck.getDescriptions(), "AUDI TRUCK");
     }
 
 //    @Test
@@ -113,12 +113,12 @@ public class TruckServiceImplTest {
         LOGGER.debug("test: updateTruck()");
 
         Truck truck = truckService.getTruckById(ONE);
-        Assert.assertEquals(truck.getDescription(), "AUDI TRUCK");
+        Assert.assertEquals(truck.getDescriptions(), "AUDI TRUCK");
 
-        truck.setDescription("BMW TRUCK");
+        truck.setDescriptions("BMW TRUCK");
         truckService.updateTruck(truck);
         Truck truckWithUpdate = truckService.getTruckById(ONE);
-        Assert.assertEquals(truckWithUpdate.getDescription(), "BMW TRUCK");
+        Assert.assertEquals(truckWithUpdate.getDescriptions(), "BMW TRUCK");
 
     }
 }
