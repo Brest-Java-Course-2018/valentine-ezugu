@@ -40,6 +40,9 @@
                        min="2018-04-11" required
                        [(ngModel)]="truck.truckCode"/> Truck Code
 
+                <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+                  Truck with such Code already exists try another TruckCode.
+                </div>
               </div>
 
               <!--purchasedDate-->
@@ -76,16 +79,6 @@
 
                 <div *ngIf="statusCode === 201" [ngClass] = "'success'">
                   Truck added successfully.
-                </div>
-                <div *ngIf="statusCode === 409" [ngClass] = "'success'">
-                  Truck already exists Change TruckCode.
-                </div>
-
-                <div *ngIf="statusCode === 200" [ngClass] = "'success'">
-                  Truck updated successfully.
-                </div>
-                <div *ngIf="statusCode === 204" [ngClass] = "'success'">
-                  Truck deleted successfully.
                 </div>
                 <div *ngIf="statusCode === 500" [ngClass] = "'error'">
                   Internal Server Error.

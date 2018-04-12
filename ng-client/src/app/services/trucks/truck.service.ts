@@ -2,9 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 import {Truck} from "../../model/truck";
-//import {Observable} from "rxjs/Observable";
-import { Observable } from 'rxjs';
 
+//use both throw and observable or import all observable like below commented
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/throw';
+//import {Observable} from 'rxjs';
 import {catchError, map, tap} from "rxjs/operators";
 
 @Injectable()
@@ -13,7 +15,7 @@ export class TruckService {
   private baseUrl: string = 'http://localhost:8088/trucks';
 
   private truck: Truck;
-  private  headers = new HttpHeaders({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
 
   constructor(private http: HttpClient) {
@@ -37,15 +39,14 @@ export class TruckService {
   }
 
   updateTrucks(truck: Truck): Observable<number> {
-    return this.http.put(this.baseUrl, JSON.stringify(truck), {headers:this.headers})
-      .pipe(
-        map(this.extractData),
+    return this.http.put(this.baseUrl, JSON.stringify(truck), {headers: this.headers})
+      .pipe(map(this.extractData),
         catchError(this.handleError));
   }
 
-   setter(truck: Truck) {
+  setter(truck: Truck) {
     this.truck = truck;
-   }
+  }
 
   getter() {
     return this.truck;
@@ -53,44 +54,36 @@ export class TruckService {
 
   createTruck(truck: Truck): Observable<number> {
     return this.http.post(this.baseUrl, JSON.stringify(truck), {headers: this.headers})
-      .pipe(
-        map(this.extractData),
+      .pipe(map(this.extractData),
         catchError(this.handleError));
   }
 
-  getTruckById(id: Number) : Observable<number>  {
+  getTruckById(id: Number): Observable<number> {
     return this.http.get(this.baseUrl + '/' + id, {headers: this.headers})
-      .pipe(map(extractData=>extractData),
+      .pipe(map(extractData => extractData),
         catchError(this.handleError));
   }
 
   private extractData(response: HttpResponse<Truck>) {
     const body = response;
     console.log(body)
-    return body ;
+    return body;
   }
 
-  private handleError (error: HttpResponse<Truck> | any) {
+
+  private handleError(error: HttpErrorResponse| any) {
+    let errorMessage: string;
+
+    // A client-side or network error occurred.
+    if (error.error instanceof Error) {
+      errorMessage = `An error occurred: ${error.error.message}`;
+
+    } else {
+      errorMessage = `server side  ${error.status}, body was: ${error.error}`;
+    }
+
     console.error(error.ok || error);
     return Observable.throw(error.status);
   }
-
-  // private handleError(err: HttpErrorResponse) {
-  //   let errorMessage: string;
-  //
-  //   // A client-side or network error occurred.
-  //   if (err.error instanceof Error) {
-  //     errorMessage = `An error occurred: ${err.error.message}`;
-  //   }
-  //
-  //   // The backend returned an unsuccessful response code.
-  //   // The response body may contain clues as to what went wrong,
-  //   else {
-  //     errorMessage = `server side  ${err.status}, body was: ${err.error}`;
-  //   }
-  //
-  //   console.error(errorMessage);
-  //   return Observable.throw(errorMessage);
-  // }
 
 }
