@@ -7,11 +7,13 @@
       <li class="nav-item">
         <a type="submit" form="editFormTruck"
            (click)="processForm()"
+
            class="btn btn-light"
            title="Save Truck"
            data-toggle="tooltip"
            data-placement="bottom">
-          <i class="fa fa-save"></i> <span class="d-none d-sm-inline">Save</span>
+          <i class="fa fa-save"></i> <span class="d-none d-sm-inline" *ngIf="truck.truckId === null">Save</span>
+          <span class="d-none d-sm-inline" *ngIf="truck.truckId">Update</span>
         </a></li>
     </ul>
   </nav>
@@ -24,45 +26,82 @@
         <div class="card">
           <div class="card-body">
 
-            <form (ngSubmit)="processForm()"   id="editFormTruck" >
+            <form [formGroup]="truckForm" (ngSubmit)="processForm()"   id="editFormTruck" >
 
               <!--truck code-->
               <div class="form-group">
-                <label class="form-control-label"
-                       for="truckCode">Truck Code</label>
-                <input id="truckCode" class="form-control"
+                <label class="form-control-label"  *ngIf="truckForm.get('truckCode').invalid && processValidation" required="required" [ngClass] ="'error'"
+                       for="truckCode">truck code is required.</label>
+                <input formControlName="truckCode"
+                       id="truckCode"
+                       class="form-control"
                        type="text"
                        name="truckCode"
                        min="2018-04-11" required
-                       [(ngModel)]="truck.truckCode"/>
+                       [(ngModel)]="truck.truckCode"/> Truck Code
+
               </div>
 
               <!--purchasedDate-->
-              <div class="form-group">
-                <label class="form-control-label"
-                       for="purchasedDate">purchased Date</label>
-                <input id="purchasedDate" class="form-control"
+              <div class="form-group" >
+                <label class="form-control-label"  *ngIf="truckForm.get('date').invalid && processValidation"  [ngClass] ="'error'"
+                       for="purchasedDate">date is required.</label>
+                <input formControlName="date"
+                       id="purchasedDate"
+                       class="form-control"
                         type="date"
                         name="purchasedDate"
-                       [(ngModel)]="truck.purchasedDate"/>
+                       [(ngModel)]="truck.purchasedDate"/> Purchased Date
               </div>
 
               <!--description-->
               <div class="form-group">
-                <label class="form-control-label"
-                       for="description">Description</label>
-                <input class="form-control"
-                        id="description"
-                       name="description"
+                <label class="form-control-label"  *ngIf="truckForm.get('descriptions').invalid && processValidation"  [ngClass] ="'error'"
+                       for="descriptions">descriptions is required</label>
+                <input formControlName="descriptions"
+                       class="form-control"
+                        id="descriptions"
+                       name="descriptions"
                        type="text"
-                       [(ngModel)]="truck.description"/>
+                       [(ngModel)]="truck.descriptions"/> Description
 
               </div>
+
+              <br/>
+              <div *ngIf="statusCode; else processing">
+
+                <div *ngIf="statusCode === 400" [ngClass] = "'success'">
+                  Truck already exists.
+                </div>
+
+                <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+                  Truck added successfully.
+                </div>
+                <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+                  Truck already exists.
+                </div>
+                <div *ngIf="statusCode === 400" [ngClass] = "'success'">
+                  Truck already exists.
+                </div>
+                <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+                  Truck updated successfully.
+                </div>
+                <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+                  Truck deleted successfully.
+                </div>
+                <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+                  Internal Server Error.
+                </div>
+              </div>
+
+              <ng-template #processing>
+                <img *ngIf="requestProcessing" src="assets/images/logo.png">
+              </ng-template>
 
            <!--form end-->
             </form>
 
-            <!--card body-->
+          <!--card body-->
           </div>
         </div>
       </div>

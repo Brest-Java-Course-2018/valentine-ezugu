@@ -3,6 +3,7 @@ import {Truck} from "../../model/truck";
 import {TruckService} from "../../services/trucks/truck.service";
 
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-edit-truck',
@@ -12,8 +13,14 @@ import {Router} from "@angular/router";
 export class EditTruckComponent implements OnInit {
 
   private truck: Truck;
-
-
+  processValidation = false;
+  statusCode: number;
+  requestProcessing = false;
+  truckForm = new FormGroup({
+    truckCode: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
+    descriptions: new FormControl('', Validators.required)
+  });
 
   constructor(private truckService: TruckService,
               private router: Router) {
@@ -30,22 +37,51 @@ export class EditTruckComponent implements OnInit {
 
   processForm() {
 
-    if (this.truck.truckId == undefined) {
-      this.truckService.createTruck(this.truck).subscribe((truck) => {
-        console.log(truck);
-        this.router.navigate(['/trucks'])
-      }, (error) => {
-        console.log(error);
-      });
-    }else {
+    this.processValidation = true;
+    if (this.truckForm.invalid) {
+      return; //Validation failed, exit from method.
+    }
 
-      this.truckService.updateTrucks(this.truck).subscribe((truck) => {
-        console.log(truck);
-        this.router.navigate(['/trucks'])
-      }, (error) => {
-        console.log(error);
-      });
+    // if we are here then all good
+    this.preProcessConfigurations()
+
+    let truckCode = this.truckForm.get('truckCode').value.trim();
+    let date = this.truckForm.get('date').value.trim();
+    let description = this.truckForm.get('descriptions').value.trim();
+
+
+    if (this.truck.truckId == undefined) {
+      let truck= new Truck(null, truckCode, date, description);
+
+      this.truckService.createTruck(truck).subscribe((truck) => {
+
+          this.statusCode = truck['status'];
+          this.router.navigate(['/trucks']);
+        },
+        error => {
+          console.log(error);
+        });
+
+    }else {
+      let truck= new Truck(this.truck.truckId, truckCode, date, description);
+
+      this.truckService.updateTrucks(truck).subscribe((truck) => {
+
+          this.statusCode = truck['status'];
+          this.router.navigate(['/trucks']);
+        },
+        error => {
+          console.log(error);
+        });
+
     }
   }
+
+  //Perform preliminary processing configurations
+  preProcessConfigurations() {
+    this.statusCode = null;
+    this.requestProcessing = true;
+  }
+
 
 }

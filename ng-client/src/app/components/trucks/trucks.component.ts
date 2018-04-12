@@ -14,6 +14,7 @@ export class TrucksComponent implements OnInit {
 
   statusCode: number;
   trucks: Observable<Array<Truck>>;
+  requestProcessing = false;
 
   constructor(private truckService: TruckService, private router: Router) { }
 
@@ -42,7 +43,7 @@ export class TrucksComponent implements OnInit {
 
   //this gets us edit page with blank forms.
   newTruck() {
-    let truck = new Truck()
+    let truck = new Truck(null,null,null,null)
     this.truckService.setter(truck)
     this.router.navigate(['/edits'])
    }
