@@ -47,8 +47,8 @@ public class TruckDaoImpl implements TruckDao {
     /**
      * sql query for select all.
      */
-    @Value("${truck.selectAllWithAvg}")
-    private String getAllTrucksWithAvgPetrolSql;
+    @Value("${truck.selectTruckAvgByName}")
+    private String getTruckAvgPetrolByNameSql;
     /**
      *to check if truck code i unique.
      */
@@ -177,13 +177,13 @@ public class TruckDaoImpl implements TruckDao {
      */
     @Override
     public final List<TruckWIthAvgPetrolPerMonth>
-                        getAllTruckWithAvgPetrolPerMonth() {
-        List<TruckWIthAvgPetrolPerMonth> trucks =
-                namedParameterJdbcTemplate.getJdbcOperations()
-
-                .query(getAllTrucksWithAvgPetrolSql, BeanPropertyRowMapper
+                        getTruckWithAvgPetrolPerMonth(final String name) {
+        SqlParameterSource namedParameterSource =
+                new MapSqlParameterSource("t.truckCode", name);
+        List<TruckWIthAvgPetrolPerMonth> truck = namedParameterJdbcTemplate
+                .query(getTruckAvgPetrolByNameSql, namedParameterSource, BeanPropertyRowMapper
                         .newInstance(TruckWIthAvgPetrolPerMonth.class));
-        return trucks;
+        return truck;
     }
 
 }

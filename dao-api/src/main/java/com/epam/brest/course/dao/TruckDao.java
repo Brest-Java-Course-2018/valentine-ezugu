@@ -3,6 +3,8 @@ package com.epam.brest.course.dao;
 import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
 import com.epam.brest.course.model.Truck;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * the interface of Truck dao.
@@ -44,5 +46,5 @@ public interface TruckDao {
      *
      * @return collection.
      */
-    Collection<TruckWIthAvgPetrolPerMonth> getAllTruckWithAvgPetrolPerMonth();
+     List<TruckWIthAvgPetrolPerMonth> getTruckWithAvgPetrolPerMonth(String name);
 }
