@@ -4,7 +4,7 @@ import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
 import com.epam.brest.course.model.Truck;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * the interface of Truck dao.

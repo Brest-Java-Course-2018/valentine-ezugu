@@ -122,7 +122,7 @@ public class OrderRestControllerMockTest {
 
 
     @Test
-    public void update() throws Exception {
+    public void updateOrder() throws Exception {
         LOGGER.debug("test: update() ");
 
         mockMvc.perform(put("/orders").contentType(MediaType.APPLICATION_JSON_UTF8)

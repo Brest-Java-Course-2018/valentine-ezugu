@@ -11,6 +11,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {OrderService} from "./services/orders/order.service";
 import {TruckService} from "./services/trucks/truck.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { EditOrderComponent } from './components/edit-order/edit-order.component';
+import {TruckProfileComponent} from "./components/truck-profile/truck-profile.component";
 
 @NgModule({
   declarations: [
@@ -20,17 +22,20 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     PageNotFoundComponent,
     NavigationComponent,
     EditTruckComponent,
+    EditOrderComponent,
+    TruckProfileComponent
   ],
 
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [OrderService,TruckService],
-  bootstrap: [AppComponent,TrucksComponent,OrdersComponent,EditTruckComponent]
+  bootstrap: [AppComponent,TrucksComponent,OrdersComponent,EditTruckComponent,EditOrderComponent, TruckProfileComponent]
 })
 
  export class AppModule {

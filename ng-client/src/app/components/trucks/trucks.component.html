@@ -13,7 +13,7 @@
     </ul>
   </nav>
 </header>
-<section id="departments">
+<section id="trucks">
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -31,7 +31,9 @@
             <tbody>
             <tr *ngFor="let truck of trucks | async">
               <td>{{truck.truckId}}</td>
+              <a routerLink="/truckProfile/">
               <td>{{truck.truckCode}}</td>
+              </a>
               <td>{{truck.purchasedDate | date: 'yyyy-MM-dd'}}</td>
               <td>{{truck.descriptions}}</td>
               <td class="text-right">
@@ -41,12 +43,15 @@
                   <i class="fa fa-bus"></i> <span
                   class="d-none d-md-inline"  (click)="updateTruck(truck)" >Edit</span></a>
 
+                <!--routerLink="/editsTrucks/{{truck.truckId}}"-->
+                <!--(click)="updateTruck(truck)"-->
+
                  <span data-toggle="modal" data-target="#deleteDialog">
                             	<a href="#" class="btn-sm btn-outline-secondary"
                                  ngbTooltip="delete truck"
                                  placement="top">
                                 	<i class="fa fa-remove"></i>
-                                <span class="d-none d-md-inline" (click)="deleteTruck(truck)">Delete</span></a>
+                                <span class="d-none d-md-inline"  (click)="deleteTruck(truck)">Delete</span></a>
                 </span>
               </td>
             </tr>

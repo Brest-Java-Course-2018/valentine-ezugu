@@ -3,9 +3,12 @@
  */
 export class Order {
 
-orderId :number;
-petrolQty :number;
-orderDate : any;
-truckId: number;
+
+  constructor(public orderId :number,
+  public petrolQty :number,
+  public orderDate : Date,
+  public truckId: number) {
+  }
+
 
 }

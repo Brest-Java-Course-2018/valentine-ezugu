@@ -38,9 +38,10 @@ export class TruckService {
       );
   }
 
-  updateTrucks(truck: Truck): Observable<number> {
+  updateTrucks(truck: Truck) {
     return this.http.put(this.baseUrl, JSON.stringify(truck), {headers: this.headers})
       .pipe(map(this.extractData),
+        tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError));
   }
 
@@ -58,9 +59,9 @@ export class TruckService {
         catchError(this.handleError));
   }
 
-  getTruckById(id: Number): Observable<number> {
+  getTruckById(id: number): Observable<Truck> {
     return this.http.get(this.baseUrl + '/' + id, {headers: this.headers})
-      .pipe(map(extractData => extractData),
+      .pipe(map(this.extractData),
         catchError(this.handleError));
   }
 
@@ -79,10 +80,10 @@ export class TruckService {
       errorMessage = `An error occurred: ${error.error.message}`;
 
     } else {
-      errorMessage = `server side  ${error.status}, body was: ${error.error}`;
+      errorMessage = `server side  ${error.message}, body was: ${error.error}`;
     }
 
-    console.error(error.ok || error);
+    console.error(error.message || error);
     return Observable.throw(error.status);
   }
 

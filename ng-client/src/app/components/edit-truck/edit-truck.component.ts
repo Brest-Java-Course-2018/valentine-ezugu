@@ -16,6 +16,7 @@ export class EditTruckComponent implements OnInit {
   processValidation = false;
   statusCode: number;
   requestProcessing = false;
+
   truckForm = new FormGroup({
     truckCode: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),

@@ -30,40 +30,38 @@
 
               <!--truck code-->
               <div class="form-group">
-                <label class="form-control-label"  *ngIf="truckForm.get('truckCode').invalid && processValidation" required="required" [ngClass] ="'error'"
+                <label class="form-control-label" *ngIf="truckForm.get('truckCode').invalid && processValidation"
+                       required="required" [ngClass]="'error'"
                        for="truckCode">truck code is required.</label>
                 <input formControlName="truckCode"
                        id="truckCode"
                        class="form-control"
                        type="text"
                        name="truckCode"
-                       min="2018-04-11" required
+                       required
                        [(ngModel)]="truck.truckCode"/> Truck Code
-
-                <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+                <div *ngIf="statusCode === 409" [ngClass]="'success'">
                   Truck with such Code already exists try another TruckCode.
                 </div>
               </div>
-
-              <!--purchasedDate-->
-              <div class="form-group" >
-                <label class="form-control-label"  *ngIf="truckForm.get('date').invalid && processValidation"  [ngClass] ="'error'"
+            <div>
+                <label class="form-control-label" *ngIf="truckForm.get('date').invalid && processValidation"
+                       [ngClass]="'error'"
                        for="purchasedDate">date is required.</label>
                 <input formControlName="date"
                        id="purchasedDate"
                        class="form-control"
-                        type="date"
-                        name="purchasedDate"
+                       type="date"
+                       name="purchasedDate"
                        [(ngModel)]="truck.purchasedDate"/> Purchased Date
               </div>
 
-              <!--description-->
               <div class="form-group">
                 <label class="form-control-label"  *ngIf="truckForm.get('descriptions').invalid && processValidation"  [ngClass] ="'error'"
                        for="descriptions">descriptions is required</label>
                 <input formControlName="descriptions"
                        class="form-control"
-                        id="descriptions"
+                       id="descriptions"
                        name="descriptions"
                        type="text"
                        [(ngModel)]="truck.descriptions"/> Description
@@ -89,10 +87,10 @@
                 <img *ngIf="requestProcessing" src="assets/images/logo.png">
               </ng-template>
 
-           <!--form end-->
+              <!--form end-->
             </form>
 
-          <!--card body-->
+            <!--card body-->
           </div>
         </div>
       </div>

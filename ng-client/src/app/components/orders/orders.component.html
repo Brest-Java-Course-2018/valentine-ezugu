@@ -1,3 +1,78 @@
-<p>
-  orders works!
-</p>
+<header>
+  <nav id="main-header"
+       class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <span class="navbar-brand text-uppercase mr-auto">TRUCK</span>
+    <ul class="navbar-nav float-right">
+      <li class="nav-item">
+        <a class="btn btn-light"
+           ngbTooltip="Add Truck"
+           placement="bottom">
+          <i class="fa fa-plus"></i> <span
+          class="d-none d-sm-inline" (click)="newOrder()">Add</span></a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div *ngIf="statusCode === 400" [ngClass]="'success'">
+  Dates must be given to filter.
+</div>
+<form class="form-inline" id="myform" [formGroup]="dateForm">
+  <div class="form-group mb-2">
+
+    <label   for="date1" *ngIf="dateForm.get('date1').invalid && processValidation" required="required" [ngClass] ="'error'" class="sr-only">date is required to filter.</label>
+    <input id="date1" type="text" formControlName="date1"   class="form-control" [(ngModel)]="start" name="startDate"   placeholder="From">
+  </div>
+
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="date2" *ngIf="dateForm.get('date2').invalid && processValidation" required="required" [ngClass] ="'error'" class="sr-only">date is required to filter.</label>
+    <input  id="date2" type="text" formControlName="date2"  class="form-control" [(ngModel)]="end"  name="endDate"   placeholder="To">
+  </div>
+  <button type="submit" form="myform" class="btn btn-dark"(click)="getOrdersFilter()" >Filter</button>
+</form>
+<!--(click)="getOrders()"-->
+
+<section id="departments">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <table class="table table-striped">
+            <thead class="thead-inverse">
+            <tr>
+              <th>OrderId</th>
+              <th>PetrolQty</th>
+              <th>orderDate</th>
+              <th>truckId</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of orders | async">
+              <td>{{order.orderId}}</td>
+              <td>{{order.petrolQty}}</td>
+              <td>{{order.orderDate | date: 'yyyy-MM-dd'}}</td>
+              <td>{{order.truckId}}</td>
+
+              <td class="text-right">
+                <a class="btn-sm btn-outline-secondary"
+                   ngbTooltip="Edit Truck"
+                   placement="top">
+                  <i class="fa fa-bus"></i> <span
+                  class="d-none d-md-inline"  (click)="updateOrder(order)">Edit</span></a>
+
+                <span data-toggle="modal" data-target="#deleteDialog">
+                            	<a href="orders"  class="btn-sm btn-outline-secondary"
+                                 ngbTooltip="delete truck"
+                                 placement="top">
+                                	<i class="fa fa-remove"></i>
+                                <span  class="d-none d-md-inline" (click)="deleteOrder(order)">Delete</span></a>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

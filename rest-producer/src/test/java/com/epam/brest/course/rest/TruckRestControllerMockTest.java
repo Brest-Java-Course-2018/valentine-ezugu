@@ -116,6 +116,7 @@ public class TruckRestControllerMockTest {
 
         mockMvc.perform(put("/trucks").contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(truck))
+
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andDo(print()).andExpect(status().isOk());
 
