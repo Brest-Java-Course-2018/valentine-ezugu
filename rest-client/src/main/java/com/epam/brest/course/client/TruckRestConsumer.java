@@ -1,6 +1,7 @@
 package com.epam.brest.course.client;
 
- import com.epam.brest.course.model.Truck;
+import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,22 +23,21 @@ public class TruckRestConsumer implements TruckService {
      */
     private static final Logger LOGGER = LogManager.getLogger();
     /**
-     *url.
+     * url.
      */
     private final String url;
     /**
-     *rest template.
+     * rest template.
      */
     private RestTemplate restTemplate;
 
 
     /**
-     *
-     * @param url1 url for getting resource.
+     * @param url1          url for getting resource.
      * @param restTemplate1 restTemplate.
      */
     public TruckRestConsumer(final String url1,
-                                    final RestTemplate restTemplate1) {
+                             final RestTemplate restTemplate1) {
         url = url1;
         this.restTemplate = restTemplate1;
     }
@@ -58,7 +58,6 @@ public class TruckRestConsumer implements TruckService {
     }
 
     /**
-     *
      * @param truck to add.
      * @return new truck.
      * @throws DataAccessException exception.
@@ -66,27 +65,26 @@ public class TruckRestConsumer implements TruckService {
     @Override
     public final Truck addTruck(final Truck truck) throws DataAccessException {
         LOGGER.debug("addTruck({})", truck);
-            ResponseEntity<Truck> responseEntity =
-                    restTemplate.postForEntity(url, truck, Truck.class);
-            Truck result = responseEntity.getBody();
+        ResponseEntity<Truck> responseEntity =
+                restTemplate.postForEntity(url, truck, Truck.class);
+        Truck result = responseEntity.getBody();
         return result;
     }
 
     /**
-     *
      * @param id to get.
      * @return truck.
      * @throws DataAccessException exception.
      */
     @Override
-    public final Truck getTruckById(final Integer id)
-                                        throws DataAccessException {
+    public final TruckWithAvgDto getTruckById(final Integer id)
+            throws DataAccessException {
         LOGGER.debug("getTruckById({})", id);
 
-        ResponseEntity<Truck> responseEntity =
+        ResponseEntity<TruckWithAvgDto> responseEntity =
 
-                restTemplate.getForEntity(url + "/" +  id, Truck.class);
-        Truck result = responseEntity.getBody();
+                restTemplate.getForEntity(url + "/" + id, TruckWithAvgDto.class);
+        TruckWithAvgDto result = responseEntity.getBody();
 
         return result;
     }
@@ -97,10 +95,10 @@ public class TruckRestConsumer implements TruckService {
      */
     @Override
     public final void deleteTruckById(final Integer id)
-                                            throws DataAccessException {
+            throws DataAccessException {
         LOGGER.debug("deleteTruckById({})", id);
 
-            restTemplate.delete(url + "/" + id);
+        restTemplate.delete(url + "/" + id);
     }
 
     /**
@@ -109,12 +107,11 @@ public class TruckRestConsumer implements TruckService {
      */
     @Override
     public final void updateTruck(final Truck truck)
-                                        throws DataAccessException {
+            throws DataAccessException {
         LOGGER.debug("updateTruck({})", truck);
 
         restTemplate.put(url, truck);
 
     }
-
 
 }

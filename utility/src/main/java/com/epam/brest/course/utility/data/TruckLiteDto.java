@@ -60,4 +60,15 @@ public class TruckLiteDto {
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
     }
+
+    @Override
+    public String toString() {
+        return "TruckLiteDto{" +
+                "truckId=" + truckId
+                + ", truckCode='" + truckCode + '\''
+                + ", purchasedDate=" + purchasedDate
+                + ", descriptions='" + descriptions + '\''
+                + '}';
+    }
+
 }

@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS truck;
 CREATE TABLE truck (
   truckId INT NOT NULL AUTO_INCREMENT,
-  truckCode VARCHAR(255) NOT NULL,
+  truckCode VARCHAR(255) NOT NULL UNIQUE,
   purchasedDate timestamp  NOT NULL,
   descriptions VARCHAR(255) NOT NULL,
   PRIMARY KEY (truckId)

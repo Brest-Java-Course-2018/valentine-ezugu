@@ -13,9 +13,21 @@
         <class-b>com.epam.brest.course.model.Truck</class-b>
     </mapping>
 
+    <mapping map-null="true">
+        <class-a>com.epam.brest.course.utility.data.TruckLiteDto</class-a>
+        <class-b>com.epam.brest.course.model.Truck</class-b>
+    </mapping>
+
+
+    <mapping map-null="false">
+        <class-a>com.epam.brest.course.model.Truck</class-a>
+        <class-b>com.epam.brest.course.dto.TruckWithAvgDto</class-b>
+    </mapping>
+
+
     <mapping map-null="false">
         <class-a>com.epam.brest.course.utility.data.TruckWithAvgPetrolDto</class-a>
-        <class-b>com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth</class-b>
+        <class-b>com.epam.brest.course.dto.TruckWithAvgDto</class-b>
     </mapping>
 
     <mapping map-null="false">

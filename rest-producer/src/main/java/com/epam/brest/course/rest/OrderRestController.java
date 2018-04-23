@@ -67,6 +67,7 @@ public class OrderRestController {
      */
     @GetMapping("/orders/{orderId}")
     @ResponseStatus(HttpStatus.FOUND)
+    @ResponseBody
     public final OrderDto getOrderId(@PathVariable(value = "orderId")
                                                     final Integer orderId) {
         LOGGER.debug("getOrderId({})", orderId);

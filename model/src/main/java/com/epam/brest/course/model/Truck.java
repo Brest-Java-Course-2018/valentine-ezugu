@@ -7,6 +7,7 @@ import java.util.Objects;
  * truck class.
  */
 public class Truck {
+
     /**
      * truck id.
      */

@@ -66,11 +66,12 @@
             <artifactId>spring-beans</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>utility</artifactId>
+            <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 

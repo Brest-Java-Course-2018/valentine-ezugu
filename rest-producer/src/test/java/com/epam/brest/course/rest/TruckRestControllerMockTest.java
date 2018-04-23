@@ -1,6 +1,7 @@
 package com.epam.brest.course.rest;
 
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
+
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.rest.config.TestUtil;
 import com.epam.brest.course.service.TruckService;
@@ -34,12 +35,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = "classpath:rest.spring.test.xml")
 public class TruckRestControllerMockTest {
 
-    private static final String TRUCK_CODE = "BY24472";
+    private static final String TRUCK_CODE = "BY2447";
     private static final String DESCRIPTION = "NEW TRUCK";
     private static final String DESCRIPTION_1 = "BLACK TRUCK";
     private static final String TRUCK_CODE1 = "BY2606";
     private static final int TRUCK_ID = 2;
     private static final Double QTY = 123.0;
+    private static final double AVG = 39.0;
     private static Integer ID = 1;
 
     /**
@@ -56,6 +58,7 @@ public class TruckRestControllerMockTest {
     @Autowired
     private TruckRestController truckRestController;
 
+
     private MockMvc mockMvc;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -64,8 +67,7 @@ public class TruckRestControllerMockTest {
 
     private Truck truck2;
 
-    private TruckWIthAvgPetrolPerMonth truckPerMonth;
-
+    private TruckWithAvgDto truckWithAvgDto;
 
     @Before
     public void setUp() throws ParseException {
@@ -82,29 +84,35 @@ public class TruckRestControllerMockTest {
         truck2.setTruckCode(TRUCK_CODE1);
         truck2.setTruckId(TRUCK_ID);
 
-        truckPerMonth = new TruckWIthAvgPetrolPerMonth();
-        truckPerMonth.setTruckCode(TRUCK_CODE);
-        truckPerMonth.setAvgPetrolQty(QTY);
-        truckPerMonth.setMonth("JANUARY");
-        truckPerMonth.setYear(2009);
+        truckWithAvgDto = new TruckWithAvgDto();
+        truckWithAvgDto.setTruckId(ID);
+        truckWithAvgDto.setTruckCode(TRUCK_CODE);
+        truckWithAvgDto.setDescriptions(DESCRIPTION);
+        truckWithAvgDto.setAvgPerMonth(AVG);
+
 
         mockMvc = MockMvcBuilders.standaloneSetup(truckRestController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
                 .build();
     }
 
+    //getByid
     @Test
     public void getTruckById() throws Exception {
         LOGGER.debug("test: getTruckById()");
 
-        when(truckService.getTruckById(ID)).thenReturn(truck);
-        mockMvc.perform(get("/trucks/{id}", ID).accept(MediaType.APPLICATION_JSON))
+        when(truckService.getTruckById(ID)).thenReturn(truckWithAvgDto);
+
+        mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
+
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))
-                .andExpect(jsonPath("descriptions", Matchers.is(DESCRIPTION)));
+                .andExpect(jsonPath("descriptions", Matchers.is(DESCRIPTION)))
+                .andExpect(jsonPath("avgPerMonth", Matchers.is(AVG)));
+
 
         Mockito.verify(truckService).getTruckById(ID);
     }
@@ -123,6 +131,7 @@ public class TruckRestControllerMockTest {
         Mockito.verify(truckService).updateTruck(truck);
     }
 
+    //add
     @Test
     public void addTruck() throws Exception {
         LOGGER.debug("test: addTruck() ");
@@ -172,29 +181,5 @@ public class TruckRestControllerMockTest {
 
         Mockito.verify(truckService).getAllTrucks();
     }
-
-//    @Test
-//    public void trucksWithAvg() throws Exception {
-//
-//        LOGGER.debug("test: trucksWithAvg()");
-//
-//        when(truckService.getAllTruckWithAvgPetrolPerMonth())
-//                .thenReturn(Arrays.asList(truckPerMonth));
-//
-//        mockMvc.perform(get("/trucks/trucksAvgPetrol")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-//
-//                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)))
-//                .andExpect(jsonPath("$[0]avgPetrolQty", Matchers.is(QTY)))
-//                .andExpect(jsonPath("$[0]month", Matchers.is("JANUARY")))
-//                .andExpect(jsonPath("$[0]year", Matchers.is(2009)));
-//
-//        Mockito.verify(truckService).getAllTruckWithAvgPetrolPerMonth();
-//
-//    }
 
 }

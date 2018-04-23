@@ -31,6 +31,12 @@ public class TruckDto {
     private String descriptions;
 
     /**
+     *for avg per month.
+     */
+    private Double avgPerMonth;
+
+
+    /**
      * default.
      */
     public TruckDto() {
@@ -97,5 +103,21 @@ public class TruckDto {
      */
     public final void setDescriptions(final String descriptions) {
         this.descriptions = descriptions;
+    }
+
+    /**
+     *
+     * @return avg per month.
+     */
+    public Double getAvgPerMonth() {
+        return avgPerMonth;
+    }
+
+    /**
+     *
+     * @param avgPerMonth setter.
+     */
+    public void setAvgPerMonth(Double avgPerMonth) {
+        this.avgPerMonth = avgPerMonth;
     }
 }

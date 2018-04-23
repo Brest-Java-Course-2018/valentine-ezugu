@@ -1,9 +1,9 @@
 package com.epam.brest.course.dao;
 
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
+import com.epam.brest.course.dto.TruckFullDetailDto;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import java.util.Collection;
-import java.util.List;
 
 
 /**
@@ -25,13 +25,6 @@ public interface TruckDao {
 
     /**
      *
-     * @param id to get.
-     * @return truck.
-     */
-    Truck getTruckById(Integer id);
-
-    /**
-     *
      * @param id to delete.
      */
     void deleteTruckById(Integer id);
@@ -43,8 +36,16 @@ public interface TruckDao {
     void updateTruck(Truck truck);
 
     /**
-     *
-     * @return collection.
+     * @param id .
+     * @return Truck.
      */
-     List<TruckWIthAvgPetrolPerMonth> getTruckWithAvgPetrolPerMonth(String name);
+     TruckFullDetailDto getTruckFullDetailById(Integer id);
+
+    /**
+     *
+     * @param id .
+     * @return truck with avg per month.
+     */
+    TruckWithAvgDto getTruckById(final Integer id);
+
 }

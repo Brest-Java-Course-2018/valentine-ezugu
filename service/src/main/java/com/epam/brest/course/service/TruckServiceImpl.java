@@ -1,7 +1,8 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.TruckDao;
- import com.epam.brest.course.model.Truck;
+import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.model.Truck;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class TruckServiceImpl implements TruckService {
     @Override
     public final Collection<Truck> getAllTrucks() throws DataAccessException {
         LOGGER.debug("getAllTrucks()");
+
         return truckDao.getAllTrucks();
     }
 
@@ -56,20 +58,8 @@ public class TruckServiceImpl implements TruckService {
     public final Truck addTruck(final Truck truck)
                                                 throws DataAccessException {
         LOGGER.debug("addTruck({})", truck);
-        return truckDao.addTruck(truck);
-    }
 
-    /**
-     * @param id to get.
-     * @return truck.
-     * @throws DataAccessException exception.
-     */
-    @Override
-    public final Truck getTruckById(final Integer id)
-                                                throws DataAccessException {
-        LOGGER.debug("getTruckById({})", id);
-        Assert.notNull(id, "id cannot be null");
-        return truckDao.getTruckById(id);
+        return truckDao.addTruck(truck);
     }
 
     /**
@@ -81,6 +71,7 @@ public class TruckServiceImpl implements TruckService {
                                                 throws DataAccessException {
         LOGGER.debug("deleteTruckById({})", id);
         Assert.notNull(id, "id cannot be null");
+
         truckDao.deleteTruckById(id);
     }
 
@@ -96,15 +87,17 @@ public class TruckServiceImpl implements TruckService {
         truckDao.updateTruck(truck);
     }
 
-//    /**
-//     * @return list of trucks.
-//     * @throws DataAccessException exception.
-//     */
-//    @Override
-//    public final Collection<TruckWIthAvgPetrolPerMonth>
-//                                   getAllTruckWithAvgPetrolPerMonth()
-//                                          throws DataAccessException {
-//        LOGGER.debug("getAllTruckWithAvgPetrolPerMonth()");
-//        return truckDao.getAllTruckWithAvgPetrolPerMonth();
-//    }
+    /**
+     *
+     * @param id .
+     * @return truck with details and avg.
+     */
+    @Override
+    public final TruckWithAvgDto getTruckById(final Integer id) {
+        LOGGER.debug("getTruckById({})", id);
+
+        Assert.notNull(id, "id cannot be null");
+        return truckDao.getTruckById(id);
+    }
+
 }

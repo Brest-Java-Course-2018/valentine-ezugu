@@ -33,6 +33,20 @@ public class Order {
 
     /**
      *
+     * @param orderId .
+     * @param qty .
+     * @param date .
+     * @param id .
+     */
+    public Order(Integer orderId, Double qty, Date date, Integer id) {
+        this.orderId = orderId;
+        this.petrolQty = qty;
+        this.orderDate = date;
+        this.truckId = id;
+    }
+
+    /**
+     *
      * @return orderId.
      */
     public final Integer getOrderId() {

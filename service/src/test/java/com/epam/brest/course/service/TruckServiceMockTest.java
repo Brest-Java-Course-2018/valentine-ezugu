@@ -1,15 +1,12 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.TruckDao;
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.mockConfig.MockConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -30,6 +27,7 @@ public class TruckServiceMockTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final int ID = 12;
+    private static final String DESCRIPTIONS = "BLACK TRUCK";
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -42,24 +40,34 @@ public class TruckServiceMockTest {
 
     private Truck truck;
     private Truck truck2;
-    private TruckWIthAvgPetrolPerMonth truckPerMonth;
-    private TruckWIthAvgPetrolPerMonth truckPerMonth1;
+    private TruckWithAvgDto truckWithAvgDto;
 
     @Before
     public void setup() {
+
         truck = new Truck();
         truck.setDescriptions("NEW TRUCK");
         truck.setTruckCode("BY2442");
         truck.setTruckId(32);
 
         truck2 = new Truck();
-        truck2.setDescriptions("BLACK TRUCK");
+        truck2.setDescriptions(DESCRIPTIONS);
         truck2.setTruckCode("BY2606");
         truck2.setTruckId(12);
 
-        truckPerMonth = new TruckWIthAvgPetrolPerMonth();
-        truckPerMonth1 = new TruckWIthAvgPetrolPerMonth();
+        truckWithAvgDto = new TruckWithAvgDto();
+        truckWithAvgDto.setTruckId(12);
+        truckWithAvgDto.setAvgPerMonth(20.0);
+        truckWithAvgDto.setDescriptions(DESCRIPTIONS);
+        truckWithAvgDto.setTruckCode("BY2442");
+
     }
+
+    @After
+    public void tearDown(){
+        Mockito.reset(truckDao);
+    }
+
 
     @Test
     public void getTrucks() {
@@ -87,18 +95,19 @@ public class TruckServiceMockTest {
         Mockito.verify(truckDao).addTruck(truck);
     }
 
+
     @Test
-    public void getTruckWithId() {
-        LOGGER.debug("test: getTruckWithId()");
+    public void getTruckById() {
+        LOGGER.debug("test: getTruckById()");
 
-        when(truckDao.getTruckById(ID)).thenReturn(truck2);
-
-        Truck newTruck = truckService.getTruckById(ID);
+        when(truckDao.getTruckById(ID)).thenReturn(truckWithAvgDto);
+        TruckWithAvgDto truckWithAvgDto = truckService.getTruckById(ID);
 
         //assertions
-        Assert.assertEquals(newTruck.getTruckCode(), "BY2606");
+        Assert.assertEquals(truckWithAvgDto.getTruckCode(), "BY2442");
         Mockito.verify(truckDao).getTruckById(ID);
     }
+
 
     @Test
     public void deleteTruck() {
@@ -120,21 +129,6 @@ public class TruckServiceMockTest {
         Mockito.verify(truckDao).updateTruck(truck);
     }
 
-//
-//    @Test
-//    public void findAllTruck_AvgPetrolPerMonth() {
-//        LOGGER.debug("test: findAllTruck_AvgPetrolPerMonth()");
-//
-//        when(truckDao.getAllTruckWithAvgPetrolPerMonth())
-//                .thenReturn(Arrays.asList(truckPerMonth, truckPerMonth1));
-//
-//        Collection<TruckWIthAvgPetrolPerMonth> trucks =
-//                truckService.getAllTruckWithAvgPetrolPerMonth();
-//        Assert.assertTrue(trucks.containsAll(Arrays.asList(truckPerMonth, truckPerMonth1)));
-//        Mockito.verify(truckDao).getAllTruckWithAvgPetrolPerMonth();
-//    }
-
-
     @Test
     public void findOneTruck_ThrowsIllegalArgs() {
 
@@ -146,5 +140,7 @@ public class TruckServiceMockTest {
         exception.expect(IllegalArgumentException.class);
         truckService.getTruckById(null);
     }
+
+
 
 }

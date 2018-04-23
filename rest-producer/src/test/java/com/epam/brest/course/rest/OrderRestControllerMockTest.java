@@ -42,6 +42,7 @@ public class OrderRestControllerMockTest {
     private static final String TRUCK_CODE = "BY234";
     private static Integer ID = 1;
 
+    private static final String DATE_STRING = "2006-01-01";
     private static final String DATE_STRING_2 = "2009-01-01";
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,18 +71,20 @@ public class OrderRestControllerMockTest {
     @Before
     public void setUp() throws ParseException {
         order = new Order();
+        Date  date = formatter.parse(DATE_STRING);
 
-        Date date = formatter.parse(DATE_STRING_2);
+        Date date1 = formatter.parse(DATE_STRING_2);
         order.setOrderId(ID);
         order.setPetrolQty(QTY);
         order.setTruckId(ID);
-        order.setOrderDate(date);
+        order.setOrderDate(date1);
 
 
         order1 = new Order();
         order1.setOrderId(ID_1);
         order1.setPetrolQty(QTY);
         order1.setTruckId(ID_1);
+        order1.setOrderDate(date);
 
         orderDto = new OrderDto();
         orderDto.setOrderId(1);
@@ -178,25 +181,31 @@ public class OrderRestControllerMockTest {
         Mockito.verify(orderService).getAllOrders(null, null);
     }
 
-//    @Test
-//    public void ordersListWithTruck() throws Exception {
-//
-//        LOGGER.debug("test: ordersListWithTruck()");
-//
-//        when(orderService.getAllOrdersWithTruckCode()).thenReturn(Arrays.asList(orderWithTruckCodeDto));
-//
-//        mockMvc.perform(get("/orders/ordersWithTruckCode")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-//                .andExpect(jsonPath("$[0]orderId", Matchers.is(ID)))
-//                .andExpect(jsonPath("$[0]petrolQty", Matchers.is(QTY)))
-//                .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)));
-//
-//        Mockito.verify(orderService).getAllOrdersWithTruckCode();
-//
-//    }
+    @Test
+    public void getAllOrdersWithFilter() throws Exception {
+        LOGGER.debug("test: getAllOrders()");
+           Date  date = formatter.parse(DATE_STRING);
+           Date   date1 = formatter.parse(DATE_STRING_2);
+
+        when(orderService.getAllOrders(date, date1)).thenReturn(Arrays.asList(order, order1));
+
+        mockMvc.perform(get("/orders?start=2006-01-01&end=2009-01-01").accept(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$[0]orderId", Matchers.is(ID)))
+                .andExpect(jsonPath("$[0]petrolQty", Matchers.is(QTY)))
+                .andExpect(jsonPath("$[0]orderDate", Matchers.is(1230760800000L)))
+                .andExpect(jsonPath("$[0]truckId", Matchers.is(ID)))
+
+                .andExpect(jsonPath("$[1]orderId", Matchers.is(ID_1)))
+                .andExpect(jsonPath("$[1]petrolQty", Matchers.is(QTY)))
+                .andExpect(jsonPath("$[1]orderDate", Matchers.is(1136066400000L)))
+                .andExpect(jsonPath("$[1]truckId", Matchers.is(ID_1)));
+
+        Mockito.verify(orderService).getAllOrders(date, date1);
+    }
+
+
 
 }

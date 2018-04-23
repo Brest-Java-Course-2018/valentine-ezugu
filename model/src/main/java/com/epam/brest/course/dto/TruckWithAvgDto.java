@@ -1,11 +1,11 @@
-package com.epam.brest.course.utility.data;
+package com.epam.brest.course.dto;
 
 import java.util.Date;
 /**
  *This dto is used to get truck
  *  by id including a net average per month of petrol used by truck.
  */
-public class TruckWithAvgPetrolDto {
+public class TruckWithAvgDto {
 
     /**
      * truck id.
@@ -24,13 +24,13 @@ public class TruckWithAvgPetrolDto {
      */
     private String descriptions;
     /**
-     *
+     *for avg per month.
      */
     private Double avgPerMonth;
 
     /**
      *
-     * @return .
+     * @return
      */
     public Integer getTruckId() {
         return truckId;
@@ -38,7 +38,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param truckId .
+     * @param truckId
      */
     public void setTruckId(Integer truckId) {
         this.truckId = truckId;
@@ -54,7 +54,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param truckCode .
+     * @param truckCode
      */
     public void setTruckCode(String truckCode) {
         this.truckCode = truckCode;
@@ -70,7 +70,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param purchasedDate .
+     * @param purchasedDate
      */
     public void setPurchasedDate(Date purchasedDate) {
         this.purchasedDate = purchasedDate;
@@ -86,7 +86,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param descriptions .
+     * @param descriptions
      */
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
@@ -94,7 +94,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @return .
+     * @return
      */
     public Double getAvgPerMonth() {
         return avgPerMonth;
@@ -102,7 +102,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param avgPerMonth .
+     * @param avgPerMonth
      */
     public void setAvgPerMonth(Double avgPerMonth) {
         this.avgPerMonth = avgPerMonth;

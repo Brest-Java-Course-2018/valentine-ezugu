@@ -1,9 +1,11 @@
 package com.epam.brest.course.service;
 
-import com.epam.brest.course.dto.TruckWIthAvgPetrolPerMonth;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
+import com.epam.brest.course.utility.dozer.MappingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,12 +32,20 @@ public class TruckServiceImplTest {
     private static final int ONE = 1;
     private static final int SIZE = 5;
 
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String NEW_TRUCKCODE = "BY9000";
+    private static final String TESLA_BUS = "TESLA-BUS";
+    private static final String ACTUAL = "AUDI TRUCK";
+    private static final String TRUCK_CODE = "BY2354";
+    public static final double ACTUAL_AVG = 13.0;
 
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     private static final String DATE_STRING = "2007-01-01";
 
     @Autowired
     private TruckService truckService;
+
+    @Autowired
+    private MappingService mappingService;
 
     @Test
     public void getTruckCollection() {
@@ -52,37 +62,23 @@ public class TruckServiceImplTest {
     public void getTruckById() {
         LOGGER.debug("test: getTruckById()");
 
-        Truck truck = truckService.getTruckById(ONE);
-
+        TruckWithAvgDto truck = truckService.getTruckById(ONE);
         //Assertions
         Assert.assertNotNull(truck);
-        Assert.assertEquals(truck.getDescriptions(), "AUDI TRUCK");
+        Assert.assertEquals(truck.getDescriptions(), ACTUAL);
     }
 
-//    @Test
-//    public void getTruckWithAvgPetrolUsed() {
-//        LOGGER.debug("test: getTruckWithAvgPetrolUsed()");
-//
-//        Collection<TruckWIthAvgPetrolPerMonth> truckWIthAvgPetrolPerMonths =
-//                truckService.getAllTruckWithAvgPetrolPerMonth();
-//
-//        //assertions
-//        Assert.assertNotNull(truckWIthAvgPetrolPerMonths);
-//        Assert.assertFalse(truckWIthAvgPetrolPerMonths.isEmpty());
-//        Assert.assertTrue(truckWIthAvgPetrolPerMonths.size() > SIZE);
-//    }
 
     @Test
     public void addNewTruck() throws Exception {
         LOGGER.debug("test: addNewTruck()");
 
         Date date = formatter.parse(DATE_STRING);
-
-        Truck truckToAdd = new Truck("BY9000", date, "TESLA-BUS");
+        Truck truckToAdd = new Truck(NEW_TRUCKCODE, date, TESLA_BUS);
 
         Truck addedTruck = truckService.addTruck(truckToAdd);
         // this is line i use truckService to get truck but this is a add truck test
-        Truck truck = truckService.getTruckById(addedTruck.getTruckId());
+        TruckWithAvgDto truck = truckService.getTruckById(addedTruck.getTruckId());
         //assertions
         Assert.assertEquals(addedTruck.getTruckId(), truck.getTruckId());
         Assert.assertEquals(addedTruck.getTruckCode(), truck.getTruckCode());
@@ -96,6 +92,7 @@ public class TruckServiceImplTest {
         truckService.deleteTruckById(null);
     }
 
+
     @Test
     public void deleteTruckWithValidId() throws Exception {
         LOGGER.debug("test: deleteTruckWithValidId()");
@@ -105,19 +102,22 @@ public class TruckServiceImplTest {
         truckService.deleteTruckById(ONE);
         Collection<Truck> collection2 = truckService.getAllTrucks();
         int sizeAfter = collection2.size();
-        Assert.assertTrue((sizeAfter + 1) == sizeBefore);
+        Assert.assertTrue((sizeAfter + ONE) == sizeBefore);
     }
 
     @Test
     public void updateTruck() {
         LOGGER.debug("test: updateTruck()");
 
-        Truck truck = truckService.getTruckById(ONE);
-        Assert.assertEquals(truck.getDescriptions(), "AUDI TRUCK");
+        TruckWithAvgDto truckWithAvgDto = truckService.getTruckById(ONE);
+        Assert.assertEquals(truckWithAvgDto.getDescriptions(), "AUDI TRUCK");
 
-        truck.setDescriptions("BMW TRUCK");
+        truckWithAvgDto.setDescriptions("BMW TRUCK");
+
+        Truck truck = mappingService.map(truckWithAvgDto, Truck.class);
+
         truckService.updateTruck(truck);
-        Truck truckWithUpdate = truckService.getTruckById(ONE);
+        TruckWithAvgDto truckWithUpdate = truckService.getTruckById(ONE);
         Assert.assertEquals(truckWithUpdate.getDescriptions(), "BMW TRUCK");
 
     }
