@@ -7,8 +7,7 @@ export class Order {
   constructor(public orderId :number,
   public petrolQty :number,
   public orderDate : Date,
-  public truckId: number) {
+  public truckId: string) {
   }
-
 
 }

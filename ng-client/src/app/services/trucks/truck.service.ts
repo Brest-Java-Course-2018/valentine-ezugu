@@ -8,6 +8,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
 //import {Observable} from 'rxjs';
 import {catchError, map, tap} from "rxjs/operators";
+import {TruckDetail} from "../../model/truckDetail";
 
 @Injectable()
 export class TruckService {
@@ -59,8 +60,8 @@ export class TruckService {
         catchError(this.handleError));
   }
 
-  getTruckById(id: number): Observable<Truck> {
-    return this.http.get(this.baseUrl + '/' + id, {headers: this.headers})
+  getTruckById(id: number): Observable<TruckDetail> {
+    return this.http.get(this.baseUrl + "/" + id, {headers: this.headers})
       .pipe(map(this.extractData),
         catchError(this.handleError));
   }

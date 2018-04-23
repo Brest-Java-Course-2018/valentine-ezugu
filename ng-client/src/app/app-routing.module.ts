@@ -3,8 +3,9 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {OrdersComponent, TrucksComponent, PageNotFoundComponent} from "./components";
 import {EditTruckComponent} from "./components";
-import {EditOrderComponent} from "./components/edit-order/edit-order.component";
 import {TruckProfileComponent} from "./components/truck-profile/truck-profile.component";
+import {CreateTruckComponent} from "./components/create-truck/create-truck.component";
+import {CreateOrderComponent} from "./components/create-order/create-order.component";
 
 const routes: Routes = [
   {
@@ -20,11 +21,15 @@ const routes: Routes = [
     component: EditTruckComponent
   },
   {
-    path: 'editOrders',
-    component: EditOrderComponent
+    path: 'newTruck',
+    component: CreateTruckComponent
   },
   {
-    path: 'truckProfile',
+    path: 'newOrder/:truckId',
+    component: CreateOrderComponent
+  },
+  {
+    path: 'truckProfile/:truckId',
     component: TruckProfileComponent
   },
   {

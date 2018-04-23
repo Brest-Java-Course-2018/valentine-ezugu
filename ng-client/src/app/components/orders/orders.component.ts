@@ -24,8 +24,7 @@ export class OrdersComponent implements OnInit {
     date2: new FormControl('', Validators.required)
    });
 
-  statusCode:number;
-  private data: Order[];
+  statusCode: number;
 
   constructor(private orderService: OrderService, private router: Router) {
   }
@@ -34,16 +33,14 @@ export class OrdersComponent implements OnInit {
     this.orders = this.getOrders();
   }
 
-  // private getOrders() {
-  //   return this.orderService.getOrders(this.start, this.end)
-  // }
-
   private getOrdersFilter() {
-    this.orderService.getOrders(this.start, this.end)
-      .subscribe(data => {
-        this.data = data;
-      }, errorCode => this.statusCode = errorCode);
-    return this.orders;
+    if (this.dateForm.invalid) {
+      return;
+    }
+    this.start = this.dateForm.get('date1').value.trim();
+    this.end = this.dateForm.get('date2').value.trim();
+
+    this.orders = this.orderService.getOrders(this.start, this.end)
   }
 
   private getOrders() {

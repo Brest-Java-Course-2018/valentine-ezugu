@@ -8,7 +8,7 @@
            ngbTooltip="Add Truck"
            placement="bottom">
           <i class="fa fa-plus"></i> <span
-          class="d-none d-sm-inline" (click)="newTruck()">Add</span></a>
+          class="d-none d-sm-inline" [routerLink]="['/newTruck']">Add</span></a>
       </li>
     </ul>
   </nav>
@@ -16,7 +16,7 @@
 <section id="trucks">
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
+      <div class="col" *ngIf="trucks">
         <div class="card">
           <table class="table table-striped">
             <thead class="thead-inverse">
@@ -31,7 +31,7 @@
             <tbody>
             <tr *ngFor="let truck of trucks | async">
               <td>{{truck.truckId}}</td>
-              <a routerLink="/truckProfile/">
+              <a  [routerLink]="['/truckProfile', truck.truckId]">
               <td>{{truck.truckCode}}</td>
               </a>
               <td>{{truck.purchasedDate | date: 'yyyy-MM-dd'}}</td>
@@ -41,12 +41,9 @@
                    ngbTooltip="Edit Truck"
                    placement="top">
                   <i class="fa fa-bus"></i> <span
-                  class="d-none d-md-inline"  (click)="updateTruck(truck)" >Edit</span></a>
+                  class="d-none d-md-inline" [routerLink]="['/editsTrucks', truck.truckId]">Edit</span></a>
 
-                <!--routerLink="/editsTrucks/{{truck.truckId}}"-->
-                <!--(click)="updateTruck(truck)"-->
-
-                 <span data-toggle="modal" data-target="#deleteDialog">
+                <span data-toggle="modal" data-target="#deleteDialog">
                             	<a href="#" class="btn-sm btn-outline-secondary"
                                  ngbTooltip="delete truck"
                                  placement="top">

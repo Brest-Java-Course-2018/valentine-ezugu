@@ -11,13 +11,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 
 export class TrucksComponent implements OnInit {
-//truck:Truck;
+  truck:Truck;
   statusCode: number;
   trucks: Observable<Array<Truck>>;
   requestProcessing = false;
 
   constructor(private truckService: TruckService, private router: Router, private route: ActivatedRoute) {
-  }
+   }
 
   ngOnInit() {
     this.trucks = this.getTrucksDtos();

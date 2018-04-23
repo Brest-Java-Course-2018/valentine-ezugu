@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
+import  { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Truck} from "../../model/truck";
 import {Order} from "../../model/order";
 import {catchError, map, tap} from "rxjs/operators";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
-
-
 
 @Injectable()
 export class OrderService {
@@ -20,7 +18,7 @@ export class OrderService {
 
 
   constructor(private http: HttpClient) { }
-  //
+
   // getOrders(from: string, to: string): Observable<Order[]> {
   //   const params = new HttpParams();
   //
@@ -45,6 +43,7 @@ export class OrderService {
         catchError(this.handleError)
       );
   }
+
   getOrdersWithoutDate(): Observable<Order[]> {
     return this.http.get(this.baseUrl)
       .pipe(map(this.extractData),
@@ -58,7 +57,6 @@ export class OrderService {
       .pipe(map(this.extractData),
         catchError(this.handleError));
   }
-
 
   deleteOrderById(orderId: number) {
     return this.http.delete(this.baseUrl + "/" + orderId)
@@ -77,7 +75,7 @@ export class OrderService {
   }
 
   createOrder(order: Order): Observable<number> {
-    return this.http.post(this.baseUrl, JSON.stringify(this.order), {headers: this.headers})
+    return this.http.post(this.baseUrl, JSON.stringify(order), {headers: this.headers})
       .pipe(map(this.extractData),
         catchError(this.handleError));
   }
@@ -94,7 +92,6 @@ export class OrderService {
     console.log(body)
     return body;
   }
-
 
   private handleError(error: HttpErrorResponse| any) {
     let errorMessage: string;

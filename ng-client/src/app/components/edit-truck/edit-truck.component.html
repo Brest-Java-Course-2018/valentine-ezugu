@@ -1,3 +1,7 @@
+<html lang="en">
+<head>
+</head>
+<body>
 <header>
   <nav id="main-header"
        class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -7,13 +11,12 @@
       <li class="nav-item">
         <a type="submit" form="editFormTruck"
            (click)="processForm()"
-
            class="btn btn-light"
            title="Save Truck"
            data-toggle="tooltip"
            data-placement="bottom">
-          <i class="fa fa-save"></i> <span class="d-none d-sm-inline" *ngIf="truck.truckId === null">Save</span>
-          <span class="d-none d-sm-inline" *ngIf="truck.truckId">Update</span>
+          <i class="fa fa-save"></i>
+          <span class="d-none d-sm-inline" *ngIf="truck?.truckId">Update</span>
         </a></li>
     </ul>
   </nav>
@@ -25,8 +28,7 @@
       <div class="col">
         <div class="card">
           <div class="card-body">
-
-            <form [formGroup]="truckForm" (ngSubmit)="processForm()"   id="editFormTruck" >
+            <form [formGroup]="truckForm" *ngIf="truck" (ngSubmit)="processForm()"   id="editFormTruck"  >
 
               <!--truck code-->
               <div class="form-group">
@@ -39,12 +41,13 @@
                        type="text"
                        name="truckCode"
                        required
-                       [(ngModel)]="truck.truckCode"/> Truck Code
+                       [(ngModel)]="truck.truckCode"/><strong>Truck Code</strong>
                 <div *ngIf="statusCode === 409" [ngClass]="'success'">
                   Truck with such Code already exists try another TruckCode.
                 </div>
               </div>
-            <div>
+
+              <div class="form-group">
                 <label class="form-control-label" *ngIf="truckForm.get('date').invalid && processValidation"
                        [ngClass]="'error'"
                        for="purchasedDate">date is required.</label>
@@ -53,7 +56,7 @@
                        class="form-control"
                        type="date"
                        name="purchasedDate"
-                       [(ngModel)]="truck.purchasedDate"/> Purchased Date
+                       [(ngModel)]="truck.purchasedDate"/><strong>Purchased Date</strong>
               </div>
 
               <div class="form-group">
@@ -64,8 +67,7 @@
                        id="descriptions"
                        name="descriptions"
                        type="text"
-                       [(ngModel)]="truck.descriptions"/> Description
-
+                       [(ngModel)]="truck.descriptions"/><strong>Description</strong>
               </div>
 
               <br/>
@@ -98,3 +100,5 @@
   </div>
 
 </section>
+</body>
+</html>
