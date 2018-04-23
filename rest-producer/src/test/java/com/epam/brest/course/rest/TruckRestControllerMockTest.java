@@ -40,7 +40,6 @@ public class TruckRestControllerMockTest {
     private static final String DESCRIPTION_1 = "BLACK TRUCK";
     private static final String TRUCK_CODE1 = "BY2606";
     private static final int TRUCK_ID = 2;
-    private static final Double QTY = 123.0;
     private static final double AVG = 39.0;
     private static Integer ID = 1;
 
@@ -102,9 +101,7 @@ public class TruckRestControllerMockTest {
         LOGGER.debug("test: getTruckById()");
 
         when(truckService.getTruckById(ID)).thenReturn(truckWithAvgDto);
-
         mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
-
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -124,7 +121,6 @@ public class TruckRestControllerMockTest {
 
         mockMvc.perform(put("/trucks").contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(truck))
-
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andDo(print()).andExpect(status().isOk());
 
@@ -137,7 +133,6 @@ public class TruckRestControllerMockTest {
         LOGGER.debug("test: addTruck() ");
 
         when(truckService.addTruck(truck)).thenReturn(truck);
-
         mockMvc.perform(post("/trucks").contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(truck))
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -164,12 +159,10 @@ public class TruckRestControllerMockTest {
         LOGGER.debug("test: getTrucks()");
 
         when(truckService.getAllTrucks()).thenReturn(Arrays.asList(truck, truck2));
-
         mockMvc.perform(get("/trucks").accept(MediaType.APPLICATION_JSON))
 
                 .andDo(print())
-                .andExpect(status().isOk())
-
+                .andExpect(status().isOk()) 
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0]truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)))
