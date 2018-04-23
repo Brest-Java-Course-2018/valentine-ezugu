@@ -167,7 +167,6 @@ public class TruckDaoImpl implements TruckDao {
     }
 
 
-
     /**
      * @param id .
      * @return . This is an example of get BY id full detail- mapping of one to many.
