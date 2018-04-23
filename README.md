@@ -59,10 +59,12 @@
     
    **This project was generated with Angular CLI version 1.7.3.**
 
-5.  ng-client app runs on http://localhost:4200/
+5.  /ng-client app runs on http://localhost:4200/
+
+6. when in directory -npm install - ng serve -o 
 
 
-6.  Travis CI integration
+7.  Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/
 
 To be found in this projects are software products of the following versions :
