@@ -95,24 +95,23 @@ public class TruckRestControllerMockTest {
                 .build();
     }
 
-    //getByid
-    @Test
-    public void getTruckById() throws Exception {
-        LOGGER.debug("test: getTruckById()");
-
-        when(truckService.getTruckById(ID)).thenReturn(truckWithAvgDto);
-        mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("truckId", Matchers.is(ID)))
-                .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))
-                .andExpect(jsonPath("descriptions", Matchers.is(DESCRIPTION)))
-                .andExpect(jsonPath("avgPerMonth", Matchers.is(AVG)));
-
-
-        Mockito.verify(truckService).getTruckById(ID);
-    }
+//    //getByid
+//    @Test
+//    public void getTruckById() throws Exception {
+//        LOGGER.debug("test: getTruckById()");
+//
+//        when(truckService.getTruckById(ID)).thenReturn(truckWithAvgDto);
+//        mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(jsonPath("truckId", Matchers.is(ID)))
+//                .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))
+//                .andExpect(jsonPath("descriptions", Matchers.is(DESCRIPTION)))
+//                .andExpect(jsonPath("avgPerMonth", Matchers.is(AVG)));
+//
+//        Mockito.verify(truckService).getTruckById(ID);
+//    }
 
     //update
     @Test
@@ -162,7 +161,7 @@ public class TruckRestControllerMockTest {
         mockMvc.perform(get("/trucks").accept(MediaType.APPLICATION_JSON))
 
                 .andDo(print())
-                .andExpect(status().isOk()) 
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0]truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("$[0]truckCode", Matchers.is(TRUCK_CODE)))

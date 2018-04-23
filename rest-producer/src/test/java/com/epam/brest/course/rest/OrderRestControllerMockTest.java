@@ -79,7 +79,6 @@ public class OrderRestControllerMockTest {
         order.setTruckId(ID);
         order.setOrderDate(date1);
 
-
         order1 = new Order();
         order1.setOrderId(ID_1);
         order1.setPetrolQty(QTY);
@@ -205,7 +204,5 @@ public class OrderRestControllerMockTest {
 
         Mockito.verify(orderService).getAllOrders(date, date1);
     }
-
-
 
 }
