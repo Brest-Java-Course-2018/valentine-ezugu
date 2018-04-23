@@ -66,7 +66,7 @@ public class TruckRestController {
      * @param truckId param .
      * @return new truck through dto.
      */
-    @GetMapping(value = "/trucks/{truckId:[0-9]+}")
+    @GetMapping(value = "/trucks/{truckId}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public final TruckDto getTruckId(@PathVariable(value = "truckId")
