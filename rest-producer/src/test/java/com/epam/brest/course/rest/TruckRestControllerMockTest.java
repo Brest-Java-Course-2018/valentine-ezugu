@@ -106,7 +106,7 @@ public class TruckRestControllerMockTest {
         mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
 
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))
