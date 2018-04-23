@@ -1,6 +1,6 @@
 package com.epam.brest.course.rest;
 
- 
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import com.epam.brest.course.utility.data.TruckDto;
@@ -62,20 +62,20 @@ public class TruckRestController {
     @Autowired
     private TruckService truckService;
 
-//    /**
-//     * @param truckId param .
-//     * @return new truck through dto.
-//     */
-//    @GetMapping(value = "/trucks/{truckId}")
-//    @ResponseStatus(HttpStatus.OK)
-//    @ResponseBody
-//    public final TruckDto getTruckId(@PathVariable(value = "truckId")
-//                                         final Integer truckId) {
-//
-//        LOGGER.debug("test: truckId({})", truckId);
-//        TruckWithAvgDto truck = truckService.getTruckById(truckId);
-//        return mappingService.map(truck, TruckDto.class);
-//    }
+    /**
+     * @param truckId param .
+     * @return new truck through dto.
+     */
+    @GetMapping(value = "/trucks/{truckId}")
+    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseBody
+    public final TruckDto getTruckId(@PathVariable(value = "truckId")
+                                         final Integer truckId) {
+
+        LOGGER.debug("test: truckId({})", truckId);
+        TruckWithAvgDto truck = truckService.getTruckById(truckId);
+        return mappingService.map(truck, TruckDto.class);
+    }
 
 
     /**
