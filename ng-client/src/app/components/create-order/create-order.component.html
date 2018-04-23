@@ -28,7 +28,7 @@
           <div class="card-body">
             <form [formGroup]="createOrderForm"  (ngSubmit)="saveOrderForm()"   id="createOrderForm">
               <div>
-                <label class="form-control-label" *ngIf="createOrderForm.get('petrolQty').invalid && processValidation"
+                <label class="form-control-label" *ngIf="createOrderForm.get('petrolQty').value && processValidation"
                        [ngClass]="'error'"
                        for="petrolQty" role="alert">make an order with max of 500.</label>
                 <input formControlName="petrolQty"
@@ -36,6 +36,7 @@
                        class="form-control"
                        type="number"
                        name="petrolQty"
+                       placeholder="minimum of 12"
                 /><strong>Petrol Quantity</strong>
               </div>
 
@@ -57,7 +58,7 @@
               </div>
 
               <ng-template #processing>
-                <img *ngIf="requestProcessing" src="assets/images/logo.png"/>
+                <img *ngIf="requestProcessing" Loading..... />
               </ng-template>
 
           </div>

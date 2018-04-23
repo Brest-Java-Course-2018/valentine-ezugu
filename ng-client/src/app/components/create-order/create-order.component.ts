@@ -24,15 +24,25 @@ export class CreateOrderComponent implements OnInit {
   @Input() truck: TruckDetail;
 
   createOrderForm = new FormGroup({
-    petrolQty: new FormControl('', Validators.required)
+    petrolQty: new FormControl(Validators.minLength(12),Validators.required)
   });
 
+  /**
+   *
+   * @param {Router} router
+   * @param {ActivatedRoute} route
+   * @param {TruckService} truckService
+   * @param {OrderService} orderService
+   * @param {Location} location
+   */
   constructor(private router: Router, private route: ActivatedRoute,
               private truckService: TruckService, private orderService: OrderService,
               private location: Location) { }
 
   ngOnInit() {
-
+    /**
+     * get truck id on init for order.
+     */
     this.route.params
       .switchMap((params: Params) => this.truckService.getTruckById(+params['truckId']))
       .subscribe((truck) => {
@@ -41,6 +51,9 @@ export class CreateOrderComponent implements OnInit {
       });
   }
 
+  /**
+   * save order.
+   */
   saveOrderForm() {
 
     this.processValidation = true;

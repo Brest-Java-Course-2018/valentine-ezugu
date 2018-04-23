@@ -12,8 +12,8 @@ import {OrderService} from "./services/orders/order.service";
 import {TruckService} from "./services/trucks/truck.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TruckProfileComponent} from "./components/truck-profile/truck-profile.component";
-import { CreateTruckComponent } from './components/create-truck/create-truck.component';
-import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { CreateTruckComponent } from './components';
+import { CreateOrderComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     ReactiveFormsModule
   ],
   providers: [OrderService,TruckService],
-  bootstrap: [AppComponent,CreateTruckComponent, CreateOrderComponent,TrucksComponent,OrdersComponent,EditTruckComponent, TruckProfileComponent]
+  bootstrap: [AppComponent]
 })
 
  export class AppModule {
