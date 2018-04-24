@@ -38,6 +38,8 @@ public class TruckDaoImplTest {
     private static final String NEW_TRUCK_CODE = "BY8888";
     private static final int ONE = 1;
     private static final String AN_EXISTING_TRUCK = "BY2334";
+    public static final int THREE = 3;
+    public static final int FOUR = 4;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
 
@@ -81,20 +83,20 @@ public class TruckDaoImplTest {
     //this test for getting full truck details with orders for this truck.
     @Test
     public void getTruckDetailsFull() {
-        TruckFullDetailDto truckDetails = truckDao.getTruckFullDetailById(1);
+        TruckFullDetailDto truckDetails = truckDao.getTruckFullDetailById(FOUR);
         Assert.assertNotNull(truckDetails);
+        Assert.assertTrue(truckDetails.getOrderList().size() == THREE);
+
     }
+
 
     //test for get truck by code with average per month for this truck.
     @Test
     public void getTruckDetailLiteById() {
-
-        TruckWithAvgDto truck = truckDao.getTruckById(1);
+        TruckWithAvgDto truck = truckDao.getTruckById(THREE);
         Assert.assertNotNull(truck);
-        //avg is 0 for this truck
-        Assert.assertTrue(truck.getAvgPerMonth() == 0.0);
+        Assert.assertTrue(truck.getAvgPerMonth() == 13.0);
     }
-
 
     @Test(expected = DataIntegrityViolationException.class)
     public void addTruckWithTruckCodeAlreadyInUse() throws Exception {

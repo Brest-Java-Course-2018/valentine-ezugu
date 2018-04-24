@@ -31,10 +31,8 @@ export class TruckProfileComponent implements OnInit {
       });
   }
 
-
   back(){
     this.location.back();
   }
-
 
 }

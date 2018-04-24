@@ -1,11 +1,11 @@
 package com.epam.brest.course.service;
 
-import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.dto.TruckFullDetailDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.utility.dozer.MappingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,7 +62,7 @@ public class TruckServiceImplTest {
     public void getTruckById() {
         LOGGER.debug("test: getTruckById()");
 
-        TruckWithAvgDto truck = truckService.getTruckById(ONE);
+        TruckFullDetailDto truck = truckService.getTruckById(ONE);
         //Assertions
         Assert.assertNotNull(truck);
         Assert.assertEquals(truck.getDescriptions(), ACTUAL);
@@ -78,7 +78,7 @@ public class TruckServiceImplTest {
 
         Truck addedTruck = truckService.addTruck(truckToAdd);
         // this is line i use truckService to get truck but this is a add truck test
-        TruckWithAvgDto truck = truckService.getTruckById(addedTruck.getTruckId());
+        TruckFullDetailDto truck = truckService.getTruckById(addedTruck.getTruckId());
         //assertions
         Assert.assertEquals(addedTruck.getTruckId(), truck.getTruckId());
         Assert.assertEquals(addedTruck.getTruckCode(), truck.getTruckCode());
@@ -109,15 +109,15 @@ public class TruckServiceImplTest {
     public void updateTruck() {
         LOGGER.debug("test: updateTruck()");
 
-        TruckWithAvgDto truckWithAvgDto = truckService.getTruckById(ONE);
-        Assert.assertEquals(truckWithAvgDto.getDescriptions(), "AUDI TRUCK");
+        TruckFullDetailDto truckFullDetailDto = truckService.getTruckById(ONE);
+        Assert.assertEquals(truckFullDetailDto.getDescriptions(), "AUDI TRUCK");
 
-        truckWithAvgDto.setDescriptions("BMW TRUCK");
+        truckFullDetailDto.setDescriptions("BMW TRUCK");
 
-        Truck truck = mappingService.map(truckWithAvgDto, Truck.class);
+        Truck truck = mappingService.map(truckFullDetailDto, Truck.class);
 
         truckService.updateTruck(truck);
-        TruckWithAvgDto truckWithUpdate = truckService.getTruckById(ONE);
+        TruckFullDetailDto truckWithUpdate = truckService.getTruckById(ONE);
         Assert.assertEquals(truckWithUpdate.getDescriptions(), "BMW TRUCK");
 
     }

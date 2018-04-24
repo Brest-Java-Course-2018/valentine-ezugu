@@ -1,6 +1,6 @@
 package com.epam.brest.course.client;
 
-import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.dto.TruckFullDetailDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import org.apache.logging.log4j.LogManager;
@@ -38,8 +38,8 @@ public class TruckRestConsumerMockTest {
 
     private  static final double QTY = 23.0;
     private static final int ID = 1;
-     private static final String DESCRIPTION = "New truck for trucks";
-    public static final String TRUCK_CODE = "BY2432";
+    private static final String DESCRIPTION = "New truck for trucks";
+    private static final String TRUCK_CODE = "BY2432";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -50,7 +50,7 @@ public class TruckRestConsumerMockTest {
     private static String DATE_STRING = "2004-02-02";
 
     private Truck truck;
-    private TruckWithAvgDto truckWithAvgDto;
+    private TruckFullDetailDto truckWithAvgDto;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -64,7 +64,7 @@ public class TruckRestConsumerMockTest {
         truck.setTruckCode(TRUCK_CODE);
         truck.setDescriptions(DESCRIPTION);
 
-        truckWithAvgDto = new TruckWithAvgDto();
+        truckWithAvgDto = new TruckFullDetailDto();
         truckWithAvgDto.setTruckId(ID);
         truckWithAvgDto.setTruckCode(TRUCK_CODE);
         truckWithAvgDto.setDescriptions(DESCRIPTION);
@@ -103,14 +103,14 @@ public class TruckRestConsumerMockTest {
 
          ResponseEntity entity = new ResponseEntity<>(truckWithAvgDto, HttpStatus.FOUND);
 
-        when(restTemplate.getForEntity("http://localhost:8088/trucks/1", TruckWithAvgDto.class))
+        when(restTemplate.getForEntity("http://localhost:8088/trucks/1", TruckFullDetailDto.class))
                 .thenReturn(entity);
 
-            TruckWithAvgDto results = truckService.getTruckById(ID);
+            TruckFullDetailDto results = truckService.getTruckById(ID);
 
         Assert.assertNotNull(results);
         Mockito.verify(restTemplate)
-                .getForEntity("http://localhost:8088/trucks/1", TruckWithAvgDto.class);
+                .getForEntity("http://localhost:8088/trucks/1", TruckFullDetailDto.class);
     }
 
 

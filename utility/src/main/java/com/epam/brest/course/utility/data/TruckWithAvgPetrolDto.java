@@ -1,6 +1,11 @@
 package com.epam.brest.course.utility.data;
 
+import com.epam.brest.course.model.Order;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 /**
  *This dto is used to get truck
  *  by id including a net average per month of petrol used by truck.
@@ -27,6 +32,25 @@ public class TruckWithAvgPetrolDto {
      *
      */
     private Double avgPerMonth;
+
+    /**
+     * constructor.
+     */
+    public TruckWithAvgPetrolDto() {
+    }
+
+    /**
+     * list of orders.
+     */
+    private List<Order> orderList = new ArrayList<>();
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
 
     /**
      *

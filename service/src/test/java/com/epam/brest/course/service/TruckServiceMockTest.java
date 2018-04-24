@@ -1,6 +1,7 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.TruckDao;
+import com.epam.brest.course.dto.TruckFullDetailDto;
 import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.mockConfig.MockConfig;
@@ -40,7 +41,7 @@ public class TruckServiceMockTest {
 
     private Truck truck;
     private Truck truck2;
-    private TruckWithAvgDto truckWithAvgDto;
+    private TruckFullDetailDto truckWithAvgDtoAndFull;
 
     @Before
     public void setup() {
@@ -55,11 +56,11 @@ public class TruckServiceMockTest {
         truck2.setTruckCode("BY2606");
         truck2.setTruckId(12);
 
-        truckWithAvgDto = new TruckWithAvgDto();
-        truckWithAvgDto.setTruckId(12);
-        truckWithAvgDto.setAvgPerMonth(20.0);
-        truckWithAvgDto.setDescriptions(DESCRIPTIONS);
-        truckWithAvgDto.setTruckCode("BY2442");
+        truckWithAvgDtoAndFull = new TruckFullDetailDto();
+        truckWithAvgDtoAndFull.setTruckId(12);
+        truckWithAvgDtoAndFull.setAvgPerMonth(20.0);
+        truckWithAvgDtoAndFull.setDescriptions(DESCRIPTIONS);
+        truckWithAvgDtoAndFull.setTruckCode("BY2442");
 
     }
 
@@ -100,12 +101,12 @@ public class TruckServiceMockTest {
     public void getTruckById() {
         LOGGER.debug("test: getTruckById()");
 
-        when(truckDao.getTruckById(ID)).thenReturn(truckWithAvgDto);
-        TruckWithAvgDto truckWithAvgDto = truckService.getTruckById(ID);
+        when(truckDao.getTruckFullDetailById(ID)).thenReturn(truckWithAvgDtoAndFull);
+        TruckFullDetailDto truckFullDetailDto = truckService.getTruckById(ID);
 
         //assertions
-        Assert.assertEquals(truckWithAvgDto.getTruckCode(), "BY2442");
-        Mockito.verify(truckDao).getTruckById(ID);
+        Assert.assertEquals(truckFullDetailDto.getTruckCode(), "BY2442");
+        Mockito.verify(truckDao).getTruckFullDetailById(ID);
     }
 
 

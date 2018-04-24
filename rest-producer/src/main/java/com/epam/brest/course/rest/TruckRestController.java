@@ -1,10 +1,11 @@
 package com.epam.brest.course.rest;
 
-import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.dto.TruckFullDetailDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import com.epam.brest.course.utility.data.TruckDto;
 import com.epam.brest.course.utility.data.TruckLiteDto;
+import com.epam.brest.course.utility.data.TruckWithAvgPetrolDto;
 import com.epam.brest.course.utility.dozer.MappingService;
 import com.epam.brest.course.utility.validator.TruckValidator;
 import org.apache.logging.log4j.LogManager;
@@ -67,14 +68,14 @@ public class TruckRestController {
      * @return new truck through dto.
      */
     @GetMapping(value = "/trucks/{truckId}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public final TruckDto getTruckId(@PathVariable(value = "truckId")
+    public final TruckWithAvgPetrolDto getTruckId(@PathVariable(value = "truckId")
                                          final Integer truckId) {
 
         LOGGER.debug("test: truckId({})", truckId);
-        TruckWithAvgDto truck = truckService.getTruckById(truckId);
-        return mappingService.map(truck, TruckDto.class);
+        TruckFullDetailDto truck = truckService.getTruckById(truckId);
+        return mappingService.map(truck, TruckWithAvgPetrolDto.class);
     }
 
 

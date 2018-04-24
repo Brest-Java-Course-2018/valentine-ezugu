@@ -1,7 +1,7 @@
 package com.epam.brest.course.rest;
 
 
-import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.dto.TruckFullDetailDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.rest.config.TestUtil;
 import com.epam.brest.course.service.TruckService;
@@ -66,7 +66,7 @@ public class TruckRestControllerMockTest {
 
     private Truck truck2;
 
-    private TruckWithAvgDto truckWithAvgDto;
+    private TruckFullDetailDto truckFullDetailDto;
 
     @Before
     public void setUp() throws ParseException {
@@ -83,11 +83,11 @@ public class TruckRestControllerMockTest {
         truck2.setTruckCode(TRUCK_CODE1);
         truck2.setTruckId(TRUCK_ID);
 
-        truckWithAvgDto = new TruckWithAvgDto();
-        truckWithAvgDto.setTruckId(ID);
-        truckWithAvgDto.setTruckCode(TRUCK_CODE);
-        truckWithAvgDto.setDescriptions(DESCRIPTION);
-        truckWithAvgDto.setAvgPerMonth(AVG);
+        truckFullDetailDto = new TruckFullDetailDto();
+        truckFullDetailDto.setTruckId(ID);
+        truckFullDetailDto.setTruckCode(TRUCK_CODE);
+        truckFullDetailDto.setDescriptions(DESCRIPTION);
+        truckFullDetailDto.setAvgPerMonth(AVG);
 
 
         mockMvc = MockMvcBuilders.standaloneSetup(truckRestController)
@@ -95,15 +95,15 @@ public class TruckRestControllerMockTest {
                 .build();
     }
 
-    //getByid
+    //getById
     @Test
     public void getTruckById() throws Exception {
         LOGGER.debug("test: getTruckById()");
 
-        when(truckService.getTruckById(ID)).thenReturn(truckWithAvgDto);
+        when(truckService.getTruckById(ID)).thenReturn(truckFullDetailDto);
         mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isFound())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("truckId", Matchers.is(ID)))
                 .andExpect(jsonPath("truckCode", Matchers.is(TRUCK_CODE)))

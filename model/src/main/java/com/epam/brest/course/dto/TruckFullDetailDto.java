@@ -36,7 +36,14 @@ public class TruckFullDetailDto {
      */
     private Double avgPerMonth;
 
-
+    /**
+     *
+     * @param truckId truckId.
+     * @param truckCode code for truck.
+     * @param purchasedDate date.
+     * @param descriptions truck descriptions.
+     * @param avgPerMonth avg per month.
+     */
     public TruckFullDetailDto(Integer truckId, String truckCode, Date purchasedDate,
                               String descriptions,
                               Double avgPerMonth) {
@@ -44,7 +51,7 @@ public class TruckFullDetailDto {
         this.truckCode = truckCode;
         this.purchasedDate = purchasedDate;
         this.descriptions = descriptions;
-         this.avgPerMonth = avgPerMonth;
+        this.avgPerMonth = avgPerMonth;
     }
 
     public TruckFullDetailDto() {
