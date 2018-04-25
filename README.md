@@ -67,6 +67,8 @@ https://www.npmjs.com/get-npm
     
   **This project was generated with Angular CLI version 1.7.3.**
    
+   https://cli.angular.io/
+   
   **Move to directory ng-client**
    
 5. when in directory you will need npm - run  npm install 
