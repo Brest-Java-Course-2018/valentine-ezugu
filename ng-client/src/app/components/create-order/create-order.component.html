@@ -30,16 +30,27 @@
               <div>
                 <label class="form-control-label" *ngIf="createOrderForm.get('petrolQty').value && processValidation"
                        [ngClass]="'error'"
-                       for="petrolQty" role="alert">make an order with max of 500.</label>
+                       for="petrolQty" role="alert">make an order between 12 and 500 litres.</label>
                 <input formControlName="petrolQty"
                        id="petrolQty"
                        class="form-control"
                        type="number"
                        name="petrolQty"
                        placeholder="minimum of 12"
-                /><strong>Petrol Quantity</strong>
+                 >
+                <div *ngIf="petrolQty.invalid && (petrolQty.dirty || petrolQty.touched)"
+                     class="alert alert-danger">
+
+                  <div *ngIf="petrolQty.errors.required">
+                    petrolQty is required.
+                  </div>
+                  <div *ngIf="petrolQty.errors.value">
+                    petrolQty must be at least 12 litres.
+                  </div>
               </div>
 
+              </div>
+              <strong>Petrol Quantity</strong>
               </form>
 
               <br/>

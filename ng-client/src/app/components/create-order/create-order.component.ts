@@ -22,9 +22,12 @@ export class CreateOrderComponent implements OnInit {
   requestProcessing = false;
 
   @Input() truck: TruckDetail;
-
+order:Order;
   createOrderForm = new FormGroup({
-    petrolQty: new FormControl(Validators.minLength(12),Validators.required)
+    petrolQty: new FormControl('',[ Validators.min(12),
+      Validators.required,
+      Validators.max(500),
+     ])
   });
 
   /**
@@ -50,6 +53,11 @@ export class CreateOrderComponent implements OnInit {
         console.log("truck");
       });
   }
+
+  get petrolQty() {
+    return this.createOrderForm.get('petrolQty');
+  }
+
 
   /**
    * save order.

@@ -20,8 +20,8 @@ export class OrdersComponent implements OnInit {
   order: Order;
 
   dateForm = new FormGroup({
-    date1: new FormControl('', Validators.required),
-    date2: new FormControl('', Validators.required)
+    date1: new FormControl('', [Validators.required]),
+    date2: new FormControl('', [Validators.required])
    });
 
   statusCode: number;
@@ -32,6 +32,12 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.orders = this.getOrders();
   }
+
+
+  get date1() { return this.dateForm.get('date1'); }
+
+  get date2() { return this.dateForm.get('date2'); }
+
 
   private getOrdersFilter() {
     if (this.dateForm.invalid) {

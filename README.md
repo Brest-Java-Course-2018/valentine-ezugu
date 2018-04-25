@@ -58,10 +58,16 @@
 #Angular 
 
   **what you will need**
+    Prerequisites
+  
+npm is required
+how to install npm
+
+https://www.npmjs.com/get-npm 
     
-   **This project was generated with Angular CLI version 1.7.3.**
+  **This project was generated with Angular CLI version 1.7.3.**
    
-   **Move to directory ng-client**
+  **Move to directory ng-client**
    
 5. when in directory you will need npm - run  npm install 
 

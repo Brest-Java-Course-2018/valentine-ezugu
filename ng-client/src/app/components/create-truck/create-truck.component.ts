@@ -20,15 +20,18 @@ export class CreateTruckComponent implements OnInit {
   today = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());
 
   createForm = new FormGroup({
-    truckCode: new FormControl('', Validators.required),
-    date: new FormControl('', Validators.required),
-    descriptions: new FormControl('', Validators.required)
+    truckCode: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(7)]),
+    descriptions: new FormControl('', [Validators.required, Validators.minLength(7),Validators.maxLength(15)])
   });
 
   constructor(private truckService: TruckService, private router: Router,
               private location: Location) {
 
   }
+
+  get truckCode() { return this.createForm.get('truckCode'); }
+
+  get descriptions() { return this.createForm.get('descriptions'); }
 
   ngOnInit() {
     this.truckService.getter();
@@ -40,12 +43,11 @@ export class CreateTruckComponent implements OnInit {
       return; //Validation failed, exit from method.
     }
 
-// if we are here then all good
+    // if we are here then all good
     this.preProcessConfigurations()
     let truckCode = this.createForm.get('truckCode').value.trim();
     //let date = this.createForm.get('date').value.trim();
     let description = this.createForm.get('descriptions').value.trim();
-
     let truck = new Truck(null, truckCode, this.today, description);
 
       this.truckService.createTruck(truck).subscribe(successCode => {

@@ -10,6 +10,7 @@
     Dates must be given.
   </div>
 <form class="form-inline" id="myform" [formGroup]="dateForm">
+
     <div class="form-group mb-2">
     <label class="form-control-label" *ngIf="dateForm.get('date1').invalid && processValidation"
            required="required" [ngClass] ="'error'"
@@ -18,9 +19,17 @@
            formControlName="date1"
            class="form-control"
            [(ngModel)]="start"
-           name="startDate"
+           name="start"
            placeholder="From"/>
+
+      <div *ngIf="date1.invalid && (date1.dirty || date1.touched && processValidation )"
+           class="alert alert-danger">
+        <div *ngIf="date1.errors.required">
+          start date is required.
+        </div>
+      </div>
   </div>
+
   <div class="form-group mx-sm-3 mb-2">
     <label  class="form-control-label" *ngIf="dateForm.get('date2').invalid && processValidation"
             required="required" [ngClass] ="'error'"
@@ -29,10 +38,13 @@
             formControlName="date2"
             class="form-control"
             [(ngModel)]="end"
-            name="endDate"
+            name="end"
             placeholder="To"/>
+
+
   </div>
-  <button type="submit" form="myform" class="btn btn-dark"(click)="getOrdersFilter()">Filter</button>
+  <button type="submit" form="myform" class="btn btn-dark" (click)="getOrdersFilter()">Filter</button>
+
 </form>
 
 <!--(click)="getOrders()"-->

@@ -19,11 +19,9 @@ export class EditTruckComponent implements OnInit {
   statusCode: number;
   requestProcessing = false;
 
-
   truckForm = new FormGroup({
-    truckCode: new FormControl('', Validators.required),
-    date: new FormControl('', Validators.required),
-    descriptions: new FormControl('', Validators.required)
+    truckCode: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(7)]),
+    descriptions: new FormControl('', [Validators.required, Validators.minLength(7),Validators.maxLength(15)])
   });
 
   constructor(private truckService: TruckService,
@@ -40,6 +38,10 @@ export class EditTruckComponent implements OnInit {
   }
 
 
+  get truckCode() { return this.truckForm.get('truckCode'); }
+
+  get descriptions() { return this.truckForm.get('descriptions'); }
+
   back() {
     this.location.back()
   }
@@ -55,18 +57,14 @@ export class EditTruckComponent implements OnInit {
     this.preProcessConfigurations()
 
     let truckCode = this.truckForm.get('truckCode').value.trim();
-    let date = this.truckForm.get('date').value.trim();
     let description = this.truckForm.get('descriptions').value.trim();
 
-    //this.dateString = new Date(this.truck.purchasedDate);
-
-    let truck = new Truck(this.truck.truckId, truckCode, date , description);
+    let truck = new Truck(this.truck.truckId, truckCode, this.truck.purchasedDate, description);
 
     this.truckService.updateTrucks(truck).subscribe(successCode => {
       this.statusCode = successCode;
       this.router.navigate(['/trucks']);
     }, errorCode => this.statusCode = errorCode);
-
 
   }
 

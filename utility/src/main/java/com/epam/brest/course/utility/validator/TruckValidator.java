@@ -20,6 +20,15 @@ public class TruckValidator implements Validator {
     private static final int MAX_TRUCK_CODE = 7;
 
     /**
+     * min description length.
+     */
+    private static final int MIN_DESCRIPTION = 7;
+    /**
+     * max .
+     */
+    private static final int MAX_DESCRIPTION = 15;
+
+    /**
      * @param clazz generic.
      * @return truck.
      */
@@ -52,6 +61,11 @@ public class TruckValidator implements Validator {
             e.rejectValue("truckCode", "truckCode.long");
         }
 
+        if (truckDto.getDescriptions().length() < MIN_DESCRIPTION) {
+            e.rejectValue("descriptions", "description.short");
+        } else if (truckDto.getDescriptions().length() > MAX_DESCRIPTION) {
+            e.rejectValue("descriptions", "description.long");
+        }
     }
 
 }
