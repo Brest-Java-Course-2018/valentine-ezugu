@@ -52,6 +52,7 @@ public class TruckRestController {
     @InitBinder
     protected final void initBinder(final WebDataBinder binder) {
         binder.setValidator(new TruckValidator());
+        //false so should only take one type of format.
         formatter.setLenient(false);
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(formatter, true));

@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
 import java.text.ParseException;
 import java.util.Locale;
 
@@ -21,6 +20,7 @@ import java.util.Locale;
  */
 @ControllerAdvice
 public class RestErrorHandler {
+
     /**
      * logger.
      */
@@ -36,7 +36,6 @@ public class RestErrorHandler {
             Locale currentLocale = LocaleContextHolder.getLocale();
             String msg = msgSource.getMessage(error.getCode(),
                     error.getCodes(),
-
                     null, currentLocale);
             message = new MessageDTO(MessageType.ERROR, msg);
         }
@@ -51,17 +50,21 @@ public class RestErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public final String handleDataAccessException(
-                                                @RequestBody final DataAccessException e) {
+                                   @RequestBody final DataAccessException e) {
         LOGGER.debug("handleDataAccessException({})", e);
 
         return "DataAccessException: " + e.getLocalizedMessage();
     }
 
+    /**
+     * checks my unique values and handles exception.
+     */
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)  // 409
     @ExceptionHandler( DataIntegrityViolationException.class)
-    public void handleConflict() {
-
+    public String handleConflict(@RequestBody DataIntegrityViolationException e) {
+        LOGGER.debug("handleConflict({})", e);
+       return "already exist such truck code";
     }
 
         /**
@@ -72,17 +75,19 @@ public class RestErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public final String handleParseException(
-                                                    final ParseException e) {
+                                           final ParseException e) {
 
         LOGGER.debug("handleIllegalArgumentException({})", e);
         return "Parse-Exception: " + e.getLocalizedMessage();
     }
 
+    /**
+     *illegal invocations of method.
+     */
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
-    public final void illegalStateHandler( ) {
+    public final void illegalStateHandler() {
     }
-
 
     /**
      * message source.
@@ -119,5 +124,6 @@ public class RestErrorHandler {
 
         return "IllegalStateException: " + ex.getMessage();
     }
+
 
 }

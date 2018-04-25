@@ -5,8 +5,11 @@ import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
@@ -15,8 +18,8 @@ import java.util.List;
 /**
  * client rest consumer service.
  */
+@Service
 public class TruckRestConsumer implements TruckService {
-
 
     /**
      * logger.
@@ -25,22 +28,13 @@ public class TruckRestConsumer implements TruckService {
     /**
      * url.
      */
-    private final String url;
+    @Value("${truck.ClientUrl}")
+    private String url;
     /**
      * rest template.
      */
+    @Autowired
     private RestTemplate restTemplate;
-
-
-    /**
-     * @param url1          url for getting resource.
-     * @param restTemplate1 restTemplate.
-     */
-    public TruckRestConsumer(final String url1,
-                             final RestTemplate restTemplate1) {
-        url = url1;
-        this.restTemplate = restTemplate1;
-    }
 
     /**
      * @return list of trucks.

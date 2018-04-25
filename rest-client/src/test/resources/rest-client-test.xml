@@ -23,14 +23,4 @@
         <constructor-arg value="org.springframework.web.client.RestTemplate"/>
     </bean>
 
-    <bean id="orderService" class="com.epam.brest.course.client.OrderRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.orders}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
-    <bean id="truckService" class="com.epam.brest.course.client.TruckRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.trucks}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
 </beans>

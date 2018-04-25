@@ -29,7 +29,7 @@ public class TruckWithAvgPetrolDto {
      */
     private String descriptions;
     /**
-     *
+     *avg.
      */
     private Double avgPerMonth;
 
@@ -44,10 +44,18 @@ public class TruckWithAvgPetrolDto {
      */
     private List<Order> orderList = new ArrayList<>();
 
+    /**
+     *
+     * @return list.
+     */
     public List<Order> getOrderList() {
         return orderList;
     }
 
+    /**
+     *
+     * @param orderList setter.
+     */
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
     }
@@ -70,7 +78,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @return
+     * @return code.
      */
     public String getTruckCode() {
         return truckCode;
@@ -78,7 +86,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param truckCode .
+     * @param truckCode setter.
      */
     public void setTruckCode(String truckCode) {
         this.truckCode = truckCode;
@@ -86,7 +94,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @return
+     * @return dade.
      */
     public Date getPurchasedDate() {
         return purchasedDate;
@@ -94,7 +102,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param purchasedDate .
+     * @param purchasedDate setter .
      */
     public void setPurchasedDate(Date purchasedDate) {
         this.purchasedDate = purchasedDate;
@@ -102,7 +110,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @return
+     * @return desc.
      */
     public String getDescriptions() {
         return descriptions;
@@ -110,7 +118,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param descriptions .
+     * @param descriptions setter .
      */
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
@@ -118,7 +126,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @return .
+     * @return avg.
      */
     public Double getAvgPerMonth() {
         return avgPerMonth;
@@ -126,7 +134,7 @@ public class TruckWithAvgPetrolDto {
 
     /**
      *
-     * @param avgPerMonth .
+     * @param avgPerMonth setter.
      */
     public void setAvgPerMonth(Double avgPerMonth) {
         this.avgPerMonth = avgPerMonth;

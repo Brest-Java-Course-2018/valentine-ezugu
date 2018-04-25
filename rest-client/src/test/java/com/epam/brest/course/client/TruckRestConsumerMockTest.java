@@ -35,7 +35,6 @@ public class TruckRestConsumerMockTest {
      * logger.
      */
     private static final Logger LOGGER = LogManager.getLogger();
-
     private  static final double QTY = 23.0;
     private static final int ID = 1;
     private static final String DESCRIPTION = "New truck for trucks";
@@ -46,12 +45,9 @@ public class TruckRestConsumerMockTest {
 
     @Autowired
     private TruckService truckService;
-
     private static String DATE_STRING = "2004-02-02";
-
     private Truck truck;
     private TruckFullDetailDto truckWithAvgDto;
-
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     @Before
@@ -81,13 +77,11 @@ public class TruckRestConsumerMockTest {
     @SuppressWarnings("unchecked")
     public void getTrucks() {
         LOGGER.debug("client test: getTrucks()");
-
         List trucks = Arrays.asList(truck);
         ResponseEntity entity = new ResponseEntity(trucks, HttpStatus.FOUND);
 
         when(restTemplate.getForEntity("http://localhost:8088/trucks", List.class))
                 .thenReturn(entity);
-
         Collection<Truck> results
                 = truckService.getAllTrucks();
 
@@ -100,14 +94,11 @@ public class TruckRestConsumerMockTest {
     @Test
     public void getTruckId()  {
         LOGGER.debug("client test: getTruckId()");
-
          ResponseEntity entity = new ResponseEntity<>(truckWithAvgDto, HttpStatus.FOUND);
 
         when(restTemplate.getForEntity("http://localhost:8088/trucks/1", TruckFullDetailDto.class))
                 .thenReturn(entity);
-
             TruckFullDetailDto results = truckService.getTruckById(ID);
-
         Assert.assertNotNull(results);
         Mockito.verify(restTemplate)
                 .getForEntity("http://localhost:8088/trucks/1", TruckFullDetailDto.class);
@@ -127,10 +118,8 @@ public class TruckRestConsumerMockTest {
                 .thenReturn(entity);
 
         Truck result = truckService.addTruck(truck);
-
         Assert.assertNotNull(result);
         Assert.assertEquals(ID, result.getTruckId().intValue());
-
         Mockito.verify(restTemplate).postForEntity("http://localhost:8088/trucks",
                 truck, Truck.class);
     }
@@ -150,4 +139,6 @@ public class TruckRestConsumerMockTest {
 
         Mockito.verify(restTemplate).delete("http://localhost:8088/trucks/" + ID);
     }
+
+
 }

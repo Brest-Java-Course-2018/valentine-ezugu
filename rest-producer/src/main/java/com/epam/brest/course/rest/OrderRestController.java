@@ -1,6 +1,5 @@
 package com.epam.brest.course.rest;
 
-
 import com.epam.brest.course.model.Order;
 import com.epam.brest.course.service.OrderService;
 import com.epam.brest.course.utility.data.OrderDto;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.DefaultMessageCodesResolver;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,13 +47,13 @@ public class OrderRestController {
     private MappingService mappingService;
 
     /**
-     *
      * @param binder binding datas and error check.
      */
     @InitBinder
     protected final void initBinder(final WebDataBinder binder) {
+        //set validator used to init our custom validator
         binder.setValidator(new OrderValidator());
-        binder.setMessageCodesResolver(new DefaultMessageCodesResolver());
+        //throw parse exception when date not in right format.
         formatter.setLenient(false);
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(formatter, true));

@@ -12,6 +12,8 @@
     $export JAVA_HOME = ..
         
     $mvn -version
+    
+    Get a copy from clone or download section on gitHub.
         
 2. Build
     
@@ -58,13 +60,16 @@
   **what you will need**
     
    **This project was generated with Angular CLI version 1.7.3.**
+   
+   **Move to directory ng-client**
+   
+5. when in directory you will need npm - run  npm install 
+
+6.To start angular run - ng serve -o 
 
 5.  /ng-client app runs on http://localhost:4200/
 
-6. when in directory -npm install - ng serve -o 
-
-
-7.  Travis CI integration
+8.  Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/
 
 To be found in this projects are software products of the following versions :

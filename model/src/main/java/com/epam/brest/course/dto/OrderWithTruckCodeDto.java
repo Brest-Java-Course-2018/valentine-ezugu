@@ -100,6 +100,19 @@ public class OrderWithTruckCodeDto {
         this.truckCode = code;
     }
 
+    /**
+     *
+     * @return for debug.
+     */
+    @Override
+    public String toString() {
+        return "OrderWithTruckCodeDto{"
+                + "orderId=" + orderId
+                + ", orderDate=" + orderDate
+                + ", petrolQty=" + petrolQty
+                + ", truckCode='" + truckCode + '\''
+                + '}';
+    }
 }
 
 

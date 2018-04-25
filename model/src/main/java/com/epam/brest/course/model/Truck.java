@@ -108,7 +108,11 @@ public class Truck {
         this.descriptions = description1;
     }
 
-
+    /**
+     *
+     * @param o obj.
+     * @return boolean.
+     */
     @Override
     public final boolean equals(final Object o) {
         if (this == o) {
@@ -124,6 +128,10 @@ public class Truck {
                 && Objects.equals(getDescriptions(), truck.getDescriptions());
     }
 
+    /**
+     *
+     * @return  distinct integer.
+     */
     @Override
     public final int hashCode() {
 
@@ -132,6 +140,10 @@ public class Truck {
                 getDescriptions());
     }
 
+    /**
+     *
+     * @return all truck.
+     */
     @Override
     public final String toString() {
         return "Truck{"

@@ -155,4 +155,18 @@ public class Order {
                 getOrderDate(),
                 getTruckId());
     }
+
+    /**
+     *
+     * @return for debug.
+     */
+    @Override
+    public String toString() {
+        return "Order{"
+                + "orderId=" + orderId
+                + ", petrolQty=" + petrolQty
+                + ", orderDate=" + orderDate
+                + ", truckId=" + truckId
+                + '}';
+    }
 }

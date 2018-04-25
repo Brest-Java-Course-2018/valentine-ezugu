@@ -3,8 +3,11 @@ package com.epam.brest.course.client;
 import com.epam.brest.course.dto.OrderWithTruckCodeDto;
 import com.epam.brest.course.model.Order;
 import com.epam.brest.course.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
@@ -17,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 /**
  *This is the client service class for order.
  */
+@Service
 public class OrderRestConsumer  implements OrderService {
 
     /**
@@ -26,21 +30,13 @@ public class OrderRestConsumer  implements OrderService {
     /**
      *url.
      */
+    @Value("${order.ClientUrl}")
     private String url;
     /**
      *rest template.
      */
+    @Autowired
     private RestTemplate restTemplate;
-
-    /**
-     * @param url1 url for getting resource.
-     * @param restTemplate1 restTemplate.
-     */
-    public OrderRestConsumer(final String url1,
-                             final RestTemplate restTemplate1) {
-        url = url1;
-        this.restTemplate = restTemplate1;
-    }
 
     /**
      * @return list of trucks with code.
