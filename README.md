@@ -73,11 +73,13 @@ https://www.npmjs.com/get-npm
    
 5. when in directory you will need npm - run  npm install 
 
-6.To start angular run - ng serve -o 
+6. To run test- from directory run - ng test
 
-5.  /ng-client app runs on http://localhost:4200/
+7.To start angular run - ng serve -o 
 
-8.  Travis CI integration
+8.  /ng-client app runs on http://localhost:4200/
+
+   Travis CI integration
     https://travis-ci.org/Brest-Java-Course-2018/valentine-ezugu/
 
 To be found in this projects are software products of the following versions :
