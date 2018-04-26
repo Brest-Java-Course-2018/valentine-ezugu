@@ -42,102 +42,90 @@ public class TruckWithAvgPetrolDto {
     /**
      * list of orders.
      */
-    private List<Order> orderList = new ArrayList<>();
+    private  List<Order> orderList = new ArrayList<>();
 
     /**
-     *
      * @return list.
      */
-    public List<Order> getOrderList() {
+    public final List<Order> getOrderList() {
         return orderList;
     }
 
     /**
-     *
-     * @param orderList setter.
+     * @param list setter.
      */
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
+    public final void setOrderList(final List<Order> list) {
+        this.orderList = list;
     }
 
     /**
-     *
      * @return .
      */
-    public Integer getTruckId() {
+    public final Integer getTruckId() {
         return truckId;
     }
 
     /**
-     *
-     * @param truckId .
+     * @param id .
      */
-    public void setTruckId(Integer truckId) {
-        this.truckId = truckId;
+    public final void setTruckId(final Integer id) {
+        this.truckId = id;
     }
 
     /**
-     *
      * @return code.
      */
-    public String getTruckCode() {
+    public final String getTruckCode() {
         return truckCode;
     }
 
     /**
-     *
-     * @param truckCode setter.
+     * @param code setter.
      */
-    public void setTruckCode(String truckCode) {
-        this.truckCode = truckCode;
+    public final void setTruckCode(final String code) {
+        this.truckCode = code;
     }
 
     /**
-     *
      * @return dade.
      */
-    public Date getPurchasedDate() {
+    public final Date getPurchasedDate() {
         return purchasedDate;
     }
 
     /**
-     *
-     * @param purchasedDate setter .
+     * @param purchasedDate1 setter .
      */
-    public void setPurchasedDate(Date purchasedDate) {
-        this.purchasedDate = purchasedDate;
+    public final void setPurchasedDate(final Date purchasedDate1) {
+        this.purchasedDate = purchasedDate1;
     }
 
     /**
-     *
      * @return desc.
      */
-    public String getDescriptions() {
+    public final String getDescriptions() {
         return descriptions;
     }
 
     /**
-     *
-     * @param descriptions setter .
+     * @param descriptions1 setter .
      */
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public final void setDescriptions(final String descriptions1) {
+        this.descriptions = descriptions1;
     }
 
     /**
-     *
      * @return avg.
      */
-    public Double getAvgPerMonth() {
+    public final Double getAvgPerMonth() {
         return avgPerMonth;
     }
 
     /**
-     *
-     * @param avgPerMonth setter.
+     * @param avgPerMonth1 setter.
      */
-    public void setAvgPerMonth(Double avgPerMonth) {
-        this.avgPerMonth = avgPerMonth;
+    public final void setAvgPerMonth(final Double avgPerMonth1) {
+        this.avgPerMonth = avgPerMonth1;
     }
 
 }

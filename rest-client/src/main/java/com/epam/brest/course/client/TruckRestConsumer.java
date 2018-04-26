@@ -76,8 +76,9 @@ public class TruckRestConsumer implements TruckService {
         LOGGER.debug("getTruckById({})", id);
 
         ResponseEntity<TruckFullDetailDto> responseEntity =
+                restTemplate.getForEntity(url + "/" + id,
+                        TruckFullDetailDto.class);
 
-                restTemplate.getForEntity(url + "/" + id, TruckFullDetailDto.class);
         TruckFullDetailDto result = responseEntity.getBody();
         return result;
     }

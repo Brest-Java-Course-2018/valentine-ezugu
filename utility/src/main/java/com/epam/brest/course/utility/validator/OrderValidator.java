@@ -47,8 +47,10 @@ public class OrderValidator implements Validator {
 
         OrderDto orderDto = (OrderDto) obj;
 
-        if (orderDto.getPetrolQty() == null || orderDto.getPetrolQty() < TWELVE) {
-            e.rejectValue("petrolQty", "petrol.small", "petrol qty must be above 249");
+        if (orderDto.getPetrolQty() == null
+                || orderDto.getPetrolQty() < TWELVE) {
+            e.rejectValue("petrolQty",
+                    "petrol.small", "petrol qty must be above 249");
         } else if (orderDto.getPetrolQty() > FIVE_HUNDS) {
             e.rejectValue("salary", "petrol.large",
                     "salary must be above 249");

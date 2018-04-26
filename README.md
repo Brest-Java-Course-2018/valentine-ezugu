@@ -31,7 +31,7 @@
         ``
 4.  To run jetty server
         
-   To run  rest go to dir* -/rest-producer mvn jetty run 
+   To run  rest service go to dir* -/rest-producer mvn jetty:run 
   
 # use embedded jetty server to test rest-producer
      

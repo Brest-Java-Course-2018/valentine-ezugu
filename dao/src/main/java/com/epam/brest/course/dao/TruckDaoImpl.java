@@ -18,22 +18,56 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
 
 /**
  * dao implementation for truck.
  */
 public class TruckDaoImpl implements TruckDao {
-
-
-    public static final String TRUCK_ID = "truckId";
-    public static final String AVG_PER_MONTH = "avgPerMonth";
-    public static final String PURCHASED_DATE = "purchasedDate";
+    /**
+     * desc.
+     */
     public static final String DESCRIPTIONS = "descriptions";
     /**
      * Logger.
      */
     private static final Logger LOGGER = LogManager.getLogger();
+    /**
+     * id.
+     */
+    private static final String TRUCK_ID = "truckId";
+    /**
+     * code.
+     */
+    private static final String TRUCK_CODE = "truckCode";
+    /**
+     * avg per month.
+     */
+    private static final String AVG_PER_MONTH = "avgPerMonth";
+    /**
+     * desc.
+     */
+    private static final String DESCRIPTIONS1 = "descriptions";
+    /**
+     * date of purchase.
+     */
+    private static final String PURCHASED_DATE = "purchasedDate";
+    /**
+     * id.
+     */
+    private static final String ORDER_ID = "orderId";
+    /**
+     * qty petrol.
+     */
+    private static final String PETROL_QTY = "petrolQty";
+    /**
+     * date.
+     */
+    private static final String ORDER_DATE = "orderDate";
+    /**
+     * truckId.
+     */
+    private static final String T_TRUCK_ID = "t.truckId";
     /**
      * sql query for insert.
      */
@@ -107,11 +141,11 @@ public class TruckDaoImpl implements TruckDao {
 
         MapSqlParameterSource
             namedParameters = new MapSqlParameterSource();
-            namedParameters.addValue("truckCode",
+            namedParameters.addValue(TRUCK_CODE,
                     truck.getTruckCode());
-            namedParameters.addValue("purchasedDate",
+            namedParameters.addValue(PURCHASED_DATE,
                     truck.getPurchasedDate());
-            namedParameters.addValue("descriptions",
+            namedParameters.addValue(DESCRIPTIONS,
                     truck.getDescriptions());
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(
@@ -142,15 +176,16 @@ public class TruckDaoImpl implements TruckDao {
     @Override
     public final void updateTruck(final Truck truck) {
         SqlParameterSource namedParameterSource =
-                new MapSqlParameterSource("truckId",
+                new MapSqlParameterSource(TRUCK_ID,
                         truck.getTruckId())
-                        .addValue("truckCode", truck.getTruckCode())
-                        .addValue("purchasedDate", truck.getPurchasedDate())
-                        .addValue("descriptions", truck.getDescriptions());
+                        .addValue(TRUCK_CODE, truck.getTruckCode())
+                        .addValue(PURCHASED_DATE, truck.getPurchasedDate())
+                        .addValue(DESCRIPTIONS, truck.getDescriptions());
         namedParameterJdbcTemplate.update(updateTruckSql, namedParameterSource);
     }
 
-    //Both get BY iD can be used depend what is needed,simple getById or getTruckFullDetailById.
+    //Both get BY id can be used depend what is needed,
+    // simple getById or getTruckFullDetailById.
     /**
      * @param id .
      * @return truck.
@@ -159,24 +194,26 @@ public class TruckDaoImpl implements TruckDao {
     public final TruckWithAvgDto getTruckById(final Integer id) {
         LOGGER.debug("getTruckById({})", id);
         SqlParameterSource parameterSource =
-                new MapSqlParameterSource("t.truckId", id);
+                new MapSqlParameterSource(T_TRUCK_ID, id);
         TruckWithAvgDto truckWithAvgDto = namedParameterJdbcTemplate
-                .queryForObject(getTruckDetailByIdsql
-                        , parameterSource,
-                        BeanPropertyRowMapper.newInstance(TruckWithAvgDto.class));
+                .queryForObject(getTruckDetailByIdsql,
+                        parameterSource,
+                     BeanPropertyRowMapper.newInstance(TruckWithAvgDto.class));
         return truckWithAvgDto;
     }
 
     /**
      * @param id .
-     * @return .This is an example of get BY id with full-truck detail- mapping of one to many.
+     * @return .This is an example of get BY
+     * id with full-truck detail- mapping of one to many.
      */
     @Override
-    public TruckFullDetailDto getTruckFullDetailById (final Integer id) {
+    public final TruckFullDetailDto getTruckFullDetailById(final Integer id) {
      SqlParameterSource namedParameterSource =
-                new MapSqlParameterSource("t.truckId", id);
+                new MapSqlParameterSource(T_TRUCK_ID, id);
        TruckDetailMapper mapper = new TruckDetailMapper();
-       namedParameterJdbcTemplate.query(fullTruckDetailsql, namedParameterSource, mapper);
+       namedParameterJdbcTemplate.query(fullTruckDetailsql,
+                                                namedParameterSource, mapper);
 
        TruckFullDetailDto truck = mapper.getDetail();
        return truck;
@@ -186,34 +223,47 @@ public class TruckDaoImpl implements TruckDao {
      * This is mapper maps one to many relationship.
      */
     public class TruckDetailMapper implements RowMapper<TruckFullDetailDto> {
-
+        /**
+         * dto.
+         */
     private TruckFullDetailDto detail;
 
-     public TruckFullDetailDto mapRow(ResultSet rs, int rowNum)
+        /**
+         *
+         * @param rs .
+         * @param rowNum .
+         * @return mapped class.
+         * @throws SQLException ex.
+         */
+     public final TruckFullDetailDto mapRow(
+                                    final ResultSet rs, final int rowNum)
             throws SQLException {
 
         if (detail == null) {
 
             this.detail = new TruckFullDetailDto();
 
-            detail.setTruckId(rs.getInt("truckId"));
-            detail.setTruckCode(rs.getString("truckCode"));
-            detail.setAvgPerMonth(rs.getDouble("avgPerMonth"));
-            detail.setDescriptions(rs.getString("descriptions"));
-            detail.setPurchasedDate(rs.getDate("purchasedDate"));
+            detail.setTruckId(rs.getInt(TRUCK_ID));
+            detail.setTruckCode(rs.getString(TRUCK_CODE));
+            detail.setAvgPerMonth(rs.getDouble(AVG_PER_MONTH));
+            detail.setDescriptions(rs.getString(DESCRIPTIONS1));
+            detail.setPurchasedDate(rs.getDate(PURCHASED_DATE));
         }
 
-         Order order = new Order ();
-         order.setOrderId(rs.getInt("orderId"));
-         order.setPetrolQty(rs.getDouble("petrolQty"));
-         order.setOrderDate(rs.getDate("orderDate"));
-         order.setTruckId(rs.getInt("truckId"));
+         Order order = new Order();
+         order.setOrderId(rs.getInt(ORDER_ID));
+         order.setPetrolQty(rs.getDouble(PETROL_QTY));
+         order.setOrderDate(rs.getDate(ORDER_DATE));
+         order.setTruckId(rs.getInt(TRUCK_ID));
 
         this.detail.getOrderList().add(order);
         return null;
 
     }
 
+        /**
+         * @return detail.
+         */
      private TruckFullDetailDto getDetail() {
         return detail;
      }

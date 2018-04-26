@@ -15,7 +15,19 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 import javax.validation.Valid;
 
@@ -71,8 +83,8 @@ public class TruckRestController {
     @GetMapping(value = "/trucks/{truckId}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public final TruckWithAvgPetrolDto getTruckId(@PathVariable(value = "truckId")
-                                         final Integer truckId) {
+    public final TruckWithAvgPetrolDto getTruckId(
+                     @PathVariable(value = "truckId") final Integer truckId) {
 
         LOGGER.debug("test: truckId({})", truckId);
         TruckFullDetailDto truck = truckService.getTruckById(truckId);

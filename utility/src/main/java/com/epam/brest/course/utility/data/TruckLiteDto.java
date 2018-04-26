@@ -1,10 +1,12 @@
 package com.epam.brest.course.utility.data;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.validation.Valid;
 import java.util.Date;
 
+/**
+ * truckLite for few details.
+ */
 public class TruckLiteDto {
     /**
      * id .
@@ -21,6 +23,9 @@ public class TruckLiteDto {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date purchasedDate;
 
+    /**
+     * constructor.
+     */
     public TruckLiteDto() {
     }
 
@@ -29,46 +34,62 @@ public class TruckLiteDto {
      */
     private String descriptions;
 
-    public Integer getTruckId() {
+    /**
+     *
+     * @return id.
+     */
+    public final Integer getTruckId() {
         return truckId;
     }
 
-    public void setTruckId(Integer truckId) {
-        this.truckId = truckId;
+    /**
+     *
+     * @param id setter.
+     */
+    public final void setTruckId(final Integer id) {
+        this.truckId = id;
     }
 
-    public String getTruckCode() {
+    /**
+     * @return code.
+     */
+    public final String getTruckCode() {
         return truckCode;
     }
 
-    public void setTruckCode(String truckCode) {
-        this.truckCode = truckCode;
+    /**
+     * @param code code.
+     */
+    public final void setTruckCode(final String code) {
+        this.truckCode = code;
     }
 
-    public Date getPurchasedDate() {
+    /**
+     * @return date.
+     */
+    public final Date getPurchasedDate() {
         return purchasedDate;
     }
 
-    public void setPurchasedDate(Date purchasedDate) {
-        this.purchasedDate = purchasedDate;
+    /**
+     * @param date setter.
+     */
+    public final void setPurchasedDate(final Date date) {
+        this.purchasedDate = date;
     }
 
-    public String getDescriptions() {
+    /**
+     * @return desc.
+     */
+    public final String getDescriptions() {
         return descriptions;
     }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
-    }
-
-    @Override
-    public String toString() {
-        return "TruckLiteDto{" +
-                "truckId=" + truckId
-                + ", truckCode='" + truckCode + '\''
-                + ", purchasedDate=" + purchasedDate
-                + ", descriptions='" + descriptions + '\''
-                + '}';
+    /**
+     * @param descriptions1 setter.
+     */
+    public final void setDescriptions(final String descriptions1) {
+        this.descriptions = descriptions1;
     }
 
 }

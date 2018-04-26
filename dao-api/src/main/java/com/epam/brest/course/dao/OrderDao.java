@@ -13,7 +13,9 @@ import java.util.Date;
 public interface OrderDao {
     /**
      *
-     * @return orders.
+     * @param start date.
+     * @param end date.
+     * @return filtered.
      */
     Collection<Order> getAllOrders(Date start, Date end);
 

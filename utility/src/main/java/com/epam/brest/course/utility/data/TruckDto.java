@@ -2,7 +2,6 @@ package com.epam.brest.course.utility.data;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import javax.validation.Valid;
 import java.util.Date;
 
@@ -99,25 +98,25 @@ public class TruckDto {
 
     /**
      *
-     * @param descriptions setter.
+     * @param descriptions1 setter.
      */
-    public final void setDescriptions(final String descriptions) {
-        this.descriptions = descriptions;
+    public final void setDescriptions(final String descriptions1) {
+        this.descriptions = descriptions1;
     }
 
     /**
      *
      * @return avg per month.
      */
-    public Double getAvgPerMonth() {
+    public final Double getAvgPerMonth() {
         return avgPerMonth;
     }
 
     /**
      *
-     * @param avgPerMonth setter.
+     * @param avgPerMonth1 setter.
      */
-    public void setAvgPerMonth(Double avgPerMonth) {
-        this.avgPerMonth = avgPerMonth;
+    public final void setAvgPerMonth(final Double avgPerMonth1) {
+        this.avgPerMonth = avgPerMonth1;
     }
 }

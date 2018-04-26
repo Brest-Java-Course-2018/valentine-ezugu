@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-db-spring.xml",
         "classpath:dao-test.xml", "classpath:dao.xml"})
@@ -54,6 +53,7 @@ public class OrderDaoImplTest {
         Assert.assertTrue(order.getTruckId().equals(TRUCK_ID));
     }
 
+
     @Test
     public void getAllOrderWithTruckCodeDto() {
         LOGGER.debug("test: getAllOrderWithTruckCodeDto()");
@@ -65,6 +65,7 @@ public class OrderDaoImplTest {
         Assert.assertTrue(orders.size() == 7);
     }
 
+
     @Test
     public void getAllOrders() {
         LOGGER.debug("test: getAllOrders()");
@@ -73,7 +74,6 @@ public class OrderDaoImplTest {
         Assert.assertFalse(orderCollection.isEmpty());
         Assert.assertTrue(orderCollection.size() == 7);
     }
-
 
 
     @Test
@@ -90,6 +90,7 @@ public class OrderDaoImplTest {
         Assert.assertTrue(order.getOrderDate().equals(date));
         Assert.assertTrue((sizeBefore + 1) == orderDao.getAllOrders(null, null).size());
     }
+
 
     @Test
     public void updateOrder() throws Exception {

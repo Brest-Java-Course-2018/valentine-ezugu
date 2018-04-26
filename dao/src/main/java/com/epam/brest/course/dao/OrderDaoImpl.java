@@ -75,7 +75,7 @@ public class OrderDaoImpl implements OrderDao {
      * @param namedParameterJdbcTemplate1 inject.
      */
     public final void setNamedParameterJdbcTemplate(final
-                                                    NamedParameterJdbcTemplate namedParameterJdbcTemplate1) {
+                    NamedParameterJdbcTemplate namedParameterJdbcTemplate1) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate1;
     }
 
@@ -99,7 +99,8 @@ public class OrderDaoImpl implements OrderDao {
      * @return all orders.
      */
     @Override
-    public final Collection<Order> getAllOrders(Date start, Date end) {
+    public final Collection<Order> getAllOrders(
+                                            final Date start, final Date end) {
         LOGGER.debug("getAllOrders({})", start, end);
 
         MapSqlParameterSource parameterSource =
@@ -175,7 +176,8 @@ public class OrderDaoImpl implements OrderDao {
     /**
      * @param order for update.
      *              BeanPropertySqlParameterSource obtains parameter values
-     *              from bean properties of a given JavaBean object. The names of the bean
+     *              from bean properties of a given JavaBean object.
+     *              The names of the bean
      *              properties have to match the parameter names.
      */
     @Override

@@ -105,7 +105,7 @@ public class OrderWithTruckCodeDto {
      * @return for debug.
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "OrderWithTruckCodeDto{"
                 + "orderId=" + orderId
                 + ", orderDate=" + orderDate

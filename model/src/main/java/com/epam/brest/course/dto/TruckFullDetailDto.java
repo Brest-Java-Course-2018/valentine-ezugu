@@ -38,111 +38,119 @@ public class TruckFullDetailDto {
 
     /**
      *
-     * @param truckId truckId.
-     * @param truckCode code for truck.
-     * @param purchasedDate date.
-     * @param descriptions truck descriptions.
-     * @param avgPerMonth avg per month.
+     * @param id truckId.
+     * @param code code for truck.
+     * @param date date.
+     * @param description truck descriptions.
+     * @param avgMonth avg per month.
      */
-    public TruckFullDetailDto(Integer truckId, String truckCode, Date purchasedDate,
-                              String descriptions,
-                              Double avgPerMonth) {
-        this.truckId = truckId;
-        this.truckCode = truckCode;
-        this.purchasedDate = purchasedDate;
-        this.descriptions = descriptions;
-        this.avgPerMonth = avgPerMonth;
+    public TruckFullDetailDto(final Integer id, final String code,
+                              final Date date,
+                              final String description,
+                              final Double avgMonth) {
+        this.truckId = id;
+        this.truckCode = code;
+        this.purchasedDate = date;
+        this.descriptions = description;
+        this.avgPerMonth = avgMonth;
     }
 
+    /**
+     * constructor.
+     */
     public TruckFullDetailDto() {
     }
 
     /**
      * @return id.
      */
-    public Integer getTruckId() {
+    public final Integer getTruckId() {
         return truckId;
     }
 
     /**
      * @param id .
      */
-    public void setTruckId(Integer id) {
+    public final void setTruckId(final Integer id) {
         this.truckId = id;
     }
 
     /**
      * @return code.
      */
-    public String getTruckCode() {
+    public final String getTruckCode() {
         return truckCode;
     }
 
     /**
      * @param code setter.
      */
-    public void setTruckCode(String code) {
+    public final void setTruckCode(final String code) {
         this.truckCode = code;
     }
 
     /**
      * @return date.
      */
-    public Date getPurchasedDate() {
+    public final Date getPurchasedDate() {
         return purchasedDate;
     }
 
     /**
      * @param date date.
      */
-    public void setPurchasedDate(Date date) {
+    public final void setPurchasedDate(final Date date) {
         this.purchasedDate = date;
     }
 
     /**
      * @return descriptions.
      */
-    public String getDescriptions() {
+    public final String getDescriptions() {
         return descriptions;
     }
 
     /**
      * @param description setter.
      */
-    public void setDescriptions(String description) {
+    public final void setDescriptions(final String description) {
         this.descriptions = description;
     }
 
     /**
      * @return list.
      */
-    public List<Order> getOrderList() {
+    public final List<Order> getOrderList() {
         return orderList;
     }
 
     /**
-     * @param orderList setter.
+     * @param list setter.
      */
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
+    public final void setOrderList(final List<Order> list) {
+        this.orderList = list;
     }
 
     /**
      * @return avg.
      */
-    public Double getAvgPerMonth() {
+    public final Double getAvgPerMonth() {
         return avgPerMonth;
     }
 
     /**
      * @param permonth setter.
      */
-    public void setAvgPerMonth(Double permonth) {
+    public final void setAvgPerMonth(final Double permonth) {
         this.avgPerMonth = permonth;
     }
 
+    /**
+     *
+     * @return string.
+     */
     @Override
-    public String toString() {
+    public final String toString() {
         return "TruckDetail{"
                 + "truckId=" + truckId
                 + ", truckCode='" + truckCode + '\''

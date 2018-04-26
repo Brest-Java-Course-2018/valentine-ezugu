@@ -30,82 +30,78 @@ public class TruckWithAvgDto {
 
     /**
      *
-     * @return
+     * @return id.
      */
-    public Integer getTruckId() {
+    public final Integer getTruckId() {
         return truckId;
     }
 
     /**
-     *
-     * @param truckId
+     * @param id setter.
      */
-    public void setTruckId(Integer truckId) {
-        this.truckId = truckId;
+    public final void setTruckId(final Integer id) {
+        this.truckId = id;
     }
 
     /**
-     *
-     * @return
+     * @return code.
      */
-    public String getTruckCode() {
+    public final String getTruckCode() {
         return truckCode;
     }
 
     /**
-     *
-     * @param truckCode
+     * @param code code.
      */
-    public void setTruckCode(String truckCode) {
-        this.truckCode = truckCode;
+    public final void setTruckCode(final String code) {
+        this.truckCode = code;
     }
 
     /**
-     *
-     * @return
+     * @return date.
      */
-    public Date getPurchasedDate() {
+    public final Date getPurchasedDate() {
         return purchasedDate;
     }
 
     /**
      *
-     * @param purchasedDate
+     * @param date date.
      */
-    public void setPurchasedDate(Date purchasedDate) {
-        this.purchasedDate = purchasedDate;
+    public final void setPurchasedDate(final Date date) {
+        this.purchasedDate = date;
     }
 
     /**
      *
-     * @return
+     * @return desc.
      */
-    public String getDescriptions() {
+    public final String getDescriptions() {
         return descriptions;
     }
 
     /**
      *
-     * @param descriptions
+     * @param descriptions1 desc.
      */
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public final void setDescriptions(final String descriptions1) {
+        this.descriptions = descriptions1;
     }
 
     /**
      *
-     * @return
+     * @return avg.
      */
-    public Double getAvgPerMonth() {
+    public final Double getAvgPerMonth() {
         return avgPerMonth;
     }
 
     /**
      *
-     * @param avgPerMonth
+     * @param avg setter.
      */
-    public void setAvgPerMonth(Double avgPerMonth) {
-        this.avgPerMonth = avgPerMonth;
+    public final void setAvgPerMonth(final Double avg) {
+        this.avgPerMonth = avg;
     }
 
 }

@@ -33,13 +33,14 @@ public class Order {
 
     /**
      *
-     * @param orderId .
+     * @param id1 .
      * @param qty .
      * @param date .
      * @param id .
      */
-    public Order(Integer orderId, Double qty, Date date, Integer id) {
-        this.orderId = orderId;
+    public Order(final Integer id1, final Double qty,
+                                           final Date date, final Integer id) {
+        this.orderId = id1;
         this.petrolQty = qty;
         this.orderDate = date;
         this.truckId = id;
@@ -161,7 +162,7 @@ public class Order {
      * @return for debug.
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "Order{"
                 + "orderId=" + orderId
                 + ", petrolQty=" + petrolQty

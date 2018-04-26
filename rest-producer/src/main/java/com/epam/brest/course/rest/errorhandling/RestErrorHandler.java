@@ -11,7 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import java.text.ParseException;
 import java.util.Locale;
 
@@ -57,14 +63,16 @@ public class RestErrorHandler {
     }
 
     /**
-     * checks my unique values and handles exception.
+     * @param e integrityViolationEx.
+     * @return String.
      */
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)  // 409
-    @ExceptionHandler( DataIntegrityViolationException.class)
-    public String handleConflict(@RequestBody DataIntegrityViolationException e) {
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final String handleConflict(
+                        @RequestBody final DataIntegrityViolationException e) {
         LOGGER.debug("handleConflict({})", e);
-       return "already exist such truck code";
+       return "already exist such truck code" + e.getLocalizedMessage();
     }
 
         /**
@@ -103,8 +111,8 @@ public class RestErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public final MessageDTO handleMethodArgumentNotValidException (
-                          final  MethodArgumentNotValidException ex) {
+    public final MessageDTO handleMethodArgumentNotValidException(
+                            final  MethodArgumentNotValidException ex) {
         LOGGER.debug("processValidationError({})", ex);
 
         BindingResult result = ex.getBindingResult();
@@ -119,7 +127,8 @@ public class RestErrorHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public final String alreadyExistsException(final IllegalArgumentException ex) {
+    public final String alreadyExistsException(
+                                  final IllegalArgumentException ex) {
         LOGGER.debug("processValidationError({})", ex);
 
         return "IllegalStateException: " + ex.getMessage();
