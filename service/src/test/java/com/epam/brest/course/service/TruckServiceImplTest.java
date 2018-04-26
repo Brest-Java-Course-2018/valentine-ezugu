@@ -35,9 +35,6 @@ public class TruckServiceImplTest {
     private static final String NEW_TRUCKCODE = "BY9000";
     private static final String TESLA_BUS = "TESLA-BUS";
     private static final String ACTUAL = "AUDI TRUCK";
-    private static final String TRUCK_CODE = "BY2354";
-    public static final double ACTUAL_AVG = 13.0;
-
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     private static final String DATE_STRING = "2007-01-01";
 

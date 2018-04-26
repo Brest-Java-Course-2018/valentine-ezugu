@@ -19,23 +19,6 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  // getOrders(from: string, to: string): Observable<Order[]> {
-  //   const params = new HttpParams();
-  //
-  //   if (from) {
-  //     params.append('start', from);
-  //   }
-  //
-  //   if (to) {
-  //     params.set('end', to);
-  //   }
-  //   return this.http.get(this.baseUrl +'?', { params: params })
-  //     .pipe(map(this.extractData),
-  //          tap(data => console.log(JSON.stringify(data))),
-  //         catchError(this.handleError)
-  //        );
-  // }
-
   getOrders(From: Date, To: Date): Observable<Order[]> {
     return this.http.get(this.baseUrl + '?start=' + From + '&end=' + To)
       .pipe(map(this.extractData),

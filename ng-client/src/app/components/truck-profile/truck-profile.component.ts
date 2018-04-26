@@ -19,7 +19,7 @@ export class TruckProfileComponent implements OnInit {
   @Input() truck: TruckDetail;
 
   constructor(private truckService: TruckService, private route: ActivatedRoute,
-              private location: Location, private orderService: OrderService) {
+              private location: Location ) {
   }
 
   ngOnInit() {

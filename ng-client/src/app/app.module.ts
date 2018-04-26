@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {Router } from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-
 import { AppComponent } from './app.component';
 import {OrdersComponent, TrucksComponent ,PageNotFoundComponent ,EditTruckComponent} from './components';
 import {NavigationComponent} from "./components/navigation/navigation.component";
+
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {OrderService} from "./services/orders/order.service";
@@ -14,6 +14,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TruckProfileComponent} from "./components/truck-profile/truck-profile.component";
 import { CreateTruckComponent } from './components';
 import { CreateOrderComponent } from './components';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -33,11 +35,25 @@ import { CreateOrderComponent } from './components';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
+
   providers: [OrderService,TruckService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  exports:[TrucksComponent,
+    OrdersComponent,
+    PageNotFoundComponent,
+    NavigationComponent,
+    EditTruckComponent,
+    TruckProfileComponent,
+    CreateTruckComponent,
+    CreateOrderComponent]
 })
 
  export class AppModule {

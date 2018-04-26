@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrdersComponent } from './orders.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
+import {OrderService} from "../../services/orders/order.service";
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -8,7 +12,9 @@ describe('OrdersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, FormsModule,RouterTestingModule,HttpClientTestingModule],
       declarations: [ OrdersComponent ]
+      ,providers:[OrderService]
     })
     .compileComponents();
   }));

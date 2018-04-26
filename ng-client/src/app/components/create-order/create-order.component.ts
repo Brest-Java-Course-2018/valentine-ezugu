@@ -80,6 +80,7 @@ order:Order;
       this.statusCode = successCode;
       this.router.navigate(['/trucks']);
     }, errorCode => this.statusCode = errorCode);
+
   }
 
   preProcessConfigurations() {
@@ -87,7 +88,7 @@ order:Order;
     this.requestProcessing = true;
   }
 
-  back(){
+  back() {
     this.location.back()
   }
 
