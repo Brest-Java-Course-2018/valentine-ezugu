@@ -31,10 +31,7 @@ public class TruckFullDetailDto {
      * list of orders.
      */
     private List<Order> orderList = new ArrayList<>();
-    /**
-     * avg per month.
-     */
-    private Double avgPerMonth;
+
 
     /**
      *
@@ -42,17 +39,16 @@ public class TruckFullDetailDto {
      * @param code code for truck.
      * @param date date.
      * @param description truck descriptions.
-     * @param avgMonth avg per month.
      */
     public TruckFullDetailDto(final Integer id, final String code,
                               final Date date,
-                              final String description,
-                              final Double avgMonth) {
+                              final String description
+                               ) {
         this.truckId = id;
         this.truckCode = code;
         this.purchasedDate = date;
         this.descriptions = description;
-        this.avgPerMonth = avgMonth;
+
     }
 
     /**
@@ -132,20 +128,6 @@ public class TruckFullDetailDto {
     }
 
     /**
-     * @return avg.
-     */
-    public final Double getAvgPerMonth() {
-        return avgPerMonth;
-    }
-
-    /**
-     * @param permonth setter.
-     */
-    public final void setAvgPerMonth(final Double permonth) {
-        this.avgPerMonth = permonth;
-    }
-
-    /**
      *
      * @return string.
      */
@@ -157,7 +139,6 @@ public class TruckFullDetailDto {
                 + ", purchasedDate=" + purchasedDate
                 + ", descriptions='" + descriptions + '\''
                 + ", orderList=" + orderList
-                + ", avgPerMonth=" + avgPerMonth
                 + '}';
     }
 

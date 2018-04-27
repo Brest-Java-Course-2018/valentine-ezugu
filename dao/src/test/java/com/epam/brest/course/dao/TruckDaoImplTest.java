@@ -38,8 +38,8 @@ public class TruckDaoImplTest {
     private static final String NEW_TRUCK_CODE = "BY8888";
     private static final int ONE = 1;
     private static final String AN_EXISTING_TRUCK = "BY2334";
-    public static final int THREE = 3;
-    public static final int FOUR = 4;
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
 
@@ -86,7 +86,6 @@ public class TruckDaoImplTest {
         TruckFullDetailDto truckDetails = truckDao.getTruckFullDetailById(FOUR);
         Assert.assertNotNull(truckDetails);
         Assert.assertTrue(truckDetails.getOrderList().size() == THREE);
-
     }
 
 

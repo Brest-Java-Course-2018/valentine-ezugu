@@ -39,10 +39,7 @@ public class TruckDaoImpl implements TruckDao {
      * code.
      */
     private static final String TRUCK_CODE = "truckCode";
-    /**
-     * avg per month.
-     */
-    private static final String AVG_PER_MONTH = "avgPerMonth";
+
     /**
      * desc.
      */
@@ -242,7 +239,6 @@ public class TruckDaoImpl implements TruckDao {
 
             detail.setTruckId(rs.getInt(TRUCK_ID));
             detail.setTruckCode(rs.getString(TRUCK_CODE));
-            detail.setAvgPerMonth(rs.getDouble(AVG_PER_MONTH));
             detail.setDescriptions(rs.getString(DESCRIPTIONS1));
             detail.setPurchasedDate(rs.getDate(PURCHASED_DATE));
         }
