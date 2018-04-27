@@ -41,7 +41,7 @@ public class TruckServiceMockTest {
 
     private Truck truck;
     private Truck truck2;
-    private TruckFullDetailDto truckWithAvgDtoAndFull;
+    private TruckWithAvgDto truckWithAvgDto;
 
     @Before
     public void setup() {
@@ -56,11 +56,11 @@ public class TruckServiceMockTest {
         truck2.setTruckCode("BY2606");
         truck2.setTruckId(12);
 
-        truckWithAvgDtoAndFull = new TruckFullDetailDto();
-        truckWithAvgDtoAndFull.setTruckId(12);
-        truckWithAvgDtoAndFull.setAvgPerMonth(20.0);
-        truckWithAvgDtoAndFull.setDescriptions(DESCRIPTIONS);
-        truckWithAvgDtoAndFull.setTruckCode("BY2442");
+        truckWithAvgDto = new TruckWithAvgDto();
+        truckWithAvgDto.setTruckId(12);
+        truckWithAvgDto.setAvgPerMonth(20.0);
+        truckWithAvgDto.setDescriptions(DESCRIPTIONS);
+        truckWithAvgDto.setTruckCode("BY2442");
 
     }
 
@@ -101,12 +101,12 @@ public class TruckServiceMockTest {
     public void getTruckById() {
         LOGGER.debug("test: getTruckById()");
 
-        when(truckDao.getTruckFullDetailById(ID)).thenReturn(truckWithAvgDtoAndFull);
-        TruckFullDetailDto truckFullDetailDto = truckService.getTruckById(ID);
+        when(truckDao.getTruckById(ID)).thenReturn(truckWithAvgDto);
+        TruckWithAvgDto truckFullDetailDto = truckService.getTruckById(ID);
 
         //assertions
         Assert.assertEquals(truckFullDetailDto.getTruckCode(), "BY2442");
-        Mockito.verify(truckDao).getTruckFullDetailById(ID);
+        Mockito.verify(truckDao).getTruckById(ID);
     }
 
 

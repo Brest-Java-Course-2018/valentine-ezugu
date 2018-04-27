@@ -1,6 +1,7 @@
 package com.epam.brest.course.client;
 
-import com.epam.brest.course.dto.TruckFullDetailDto;
+
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import org.apache.logging.log4j.LogManager;
@@ -71,15 +72,15 @@ public class TruckRestConsumer implements TruckService {
      * @throws DataAccessException exception.
      */
     @Override
-    public final TruckFullDetailDto getTruckById(final Integer id)
+    public final TruckWithAvgDto getTruckById(final Integer id)
             throws DataAccessException {
         LOGGER.debug("getTruckById({})", id);
 
-        ResponseEntity<TruckFullDetailDto> responseEntity =
+        ResponseEntity<TruckWithAvgDto> responseEntity =
                 restTemplate.getForEntity(url + "/" + id,
-                        TruckFullDetailDto.class);
+                        TruckWithAvgDto.class);
 
-        TruckFullDetailDto result = responseEntity.getBody();
+        TruckWithAvgDto result = responseEntity.getBody();
         return result;
     }
 

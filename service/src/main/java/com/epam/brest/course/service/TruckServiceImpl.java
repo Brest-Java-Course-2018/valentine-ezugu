@@ -1,7 +1,7 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.TruckDao;
-import com.epam.brest.course.dto.TruckFullDetailDto;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -93,11 +93,11 @@ public class TruckServiceImpl implements TruckService {
      * @return truck with details and avg.
      */
     @Override
-    public final TruckFullDetailDto getTruckById(final Integer id) {
+    public final TruckWithAvgDto getTruckById(final Integer id) {
         LOGGER.debug("getTruckById({})", id);
 
         Assert.notNull(id, "id cannot be null");
-        return truckDao.getTruckFullDetailById(id);
+        return truckDao.getTruckById(id);
     }
 
 }

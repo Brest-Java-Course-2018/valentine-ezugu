@@ -1,6 +1,6 @@
 package com.epam.brest.course.service;
 
-import com.epam.brest.course.dto.TruckFullDetailDto;
+ import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.utility.dozer.MappingService;
 import org.apache.logging.log4j.LogManager;
@@ -59,7 +59,7 @@ public class TruckServiceImplTest {
     public void getTruckById() {
         LOGGER.debug("test: getTruckById()");
 
-        TruckFullDetailDto truck = truckService.getTruckById(ONE);
+        TruckWithAvgDto truck = truckService.getTruckById(ONE);
         //Assertions
         Assert.assertNotNull(truck);
         Assert.assertEquals(truck.getDescriptions(), ACTUAL);
@@ -75,7 +75,7 @@ public class TruckServiceImplTest {
 
         Truck addedTruck = truckService.addTruck(truckToAdd);
         // this is line i use truckService to get truck but this is a add truck test
-        TruckFullDetailDto truck = truckService.getTruckById(addedTruck.getTruckId());
+        TruckWithAvgDto truck = truckService.getTruckById(addedTruck.getTruckId());
         //assertions
         Assert.assertEquals(addedTruck.getTruckId(), truck.getTruckId());
         Assert.assertEquals(addedTruck.getTruckCode(), truck.getTruckCode());
@@ -106,15 +106,15 @@ public class TruckServiceImplTest {
     public void updateTruck() {
         LOGGER.debug("test: updateTruck()");
 
-        TruckFullDetailDto truckFullDetailDto = truckService.getTruckById(ONE);
-        Assert.assertEquals(truckFullDetailDto.getDescriptions(), "AUDI TRUCK");
+        TruckWithAvgDto truckWithAvgDto = truckService.getTruckById(ONE);
+        Assert.assertEquals(truckWithAvgDto.getDescriptions(), "AUDI TRUCK");
 
-        truckFullDetailDto.setDescriptions("BMW TRUCK");
+        truckWithAvgDto.setDescriptions("BMW TRUCK");
 
-        Truck truck = mappingService.map(truckFullDetailDto, Truck.class);
+        Truck truck = mappingService.map(truckWithAvgDto, Truck.class);
 
         truckService.updateTruck(truck);
-        TruckFullDetailDto truckWithUpdate = truckService.getTruckById(ONE);
+        TruckWithAvgDto truckWithUpdate = truckService.getTruckById(ONE);
         Assert.assertEquals(truckWithUpdate.getDescriptions(), "BMW TRUCK");
 
     }

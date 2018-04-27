@@ -2,6 +2,7 @@ package com.epam.brest.course.rest;
 
 
 import com.epam.brest.course.dto.TruckFullDetailDto;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.rest.config.TestUtil;
 import com.epam.brest.course.service.TruckService;
@@ -66,7 +67,7 @@ public class TruckRestControllerMockTest {
 
     private Truck truck2;
 
-    private TruckFullDetailDto truckFullDetailDto;
+    private TruckWithAvgDto truckWithAvgDto;
 
     @Before
     public void setUp() throws ParseException {
@@ -83,11 +84,11 @@ public class TruckRestControllerMockTest {
         truck2.setTruckCode(TRUCK_CODE1);
         truck2.setTruckId(TRUCK_ID);
 
-        truckFullDetailDto = new TruckFullDetailDto();
-        truckFullDetailDto.setTruckId(ID);
-        truckFullDetailDto.setTruckCode(TRUCK_CODE);
-        truckFullDetailDto.setDescriptions(DESCRIPTION);
-        truckFullDetailDto.setAvgPerMonth(AVG);
+        truckWithAvgDto = new TruckWithAvgDto();
+        truckWithAvgDto.setTruckId(ID);
+        truckWithAvgDto.setTruckCode(TRUCK_CODE);
+        truckWithAvgDto.setDescriptions(DESCRIPTION);
+        truckWithAvgDto.setAvgPerMonth(AVG);
 
 
         mockMvc = MockMvcBuilders.standaloneSetup(truckRestController)
@@ -100,7 +101,7 @@ public class TruckRestControllerMockTest {
     public void getTruckById() throws Exception {
         LOGGER.debug("test: getTruckById()");
 
-        when(truckService.getTruckById(ID)).thenReturn(truckFullDetailDto);
+        when(truckService.getTruckById(ID)).thenReturn(truckWithAvgDto);
         mockMvc.perform(get("/trucks/{truckId}", ID).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

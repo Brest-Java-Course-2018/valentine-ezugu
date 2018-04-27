@@ -1,6 +1,6 @@
 package com.epam.brest.course.service;
 
-import com.epam.brest.course.dto.TruckFullDetailDto;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import org.springframework.dao.DataAccessException;
 
@@ -42,7 +42,7 @@ public interface TruckService {
      * @param id .
      * @return truck with avg per month.
      */
-    TruckFullDetailDto getTruckById(final Integer id);
+    TruckWithAvgDto getTruckById(final Integer id);
 
 
 }

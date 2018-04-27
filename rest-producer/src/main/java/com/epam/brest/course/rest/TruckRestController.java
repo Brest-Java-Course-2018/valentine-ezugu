@@ -1,11 +1,11 @@
 package com.epam.brest.course.rest;
 
-import com.epam.brest.course.dto.TruckFullDetailDto;
+
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import com.epam.brest.course.utility.data.TruckDto;
 import com.epam.brest.course.utility.data.TruckLiteDto;
-import com.epam.brest.course.utility.data.TruckWithAvgPetrolDto;
 import com.epam.brest.course.utility.dozer.MappingService;
 import com.epam.brest.course.utility.validator.TruckValidator;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.WebDataBinder;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -83,12 +82,12 @@ public class TruckRestController {
     @GetMapping(value = "/trucks/{truckId}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public final TruckWithAvgPetrolDto getTruckId(
+    public final TruckDto getTruckId(
                      @PathVariable(value = "truckId") final Integer truckId) {
 
         LOGGER.debug("test: truckId({})", truckId);
-        TruckFullDetailDto truck = truckService.getTruckById(truckId);
-        return mappingService.map(truck, TruckWithAvgPetrolDto.class);
+        TruckWithAvgDto truck = truckService.getTruckById(truckId);
+        return mappingService.map(truck, TruckDto.class);
     }
 
 

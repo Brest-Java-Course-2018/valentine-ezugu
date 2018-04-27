@@ -1,6 +1,6 @@
 package com.epam.brest.course.client;
 
-import com.epam.brest.course.dto.TruckFullDetailDto;
+import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import org.apache.logging.log4j.LogManager;
@@ -47,7 +47,7 @@ public class TruckRestConsumerMockTest {
     private TruckService truckService;
     private static String DATE_STRING = "2004-02-02";
     private Truck truck;
-    private TruckFullDetailDto truckWithAvgDto;
+    private TruckWithAvgDto truckWithAvgDto;
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     @Before
@@ -60,7 +60,7 @@ public class TruckRestConsumerMockTest {
         truck.setTruckCode(TRUCK_CODE);
         truck.setDescriptions(DESCRIPTION);
 
-        truckWithAvgDto = new TruckFullDetailDto();
+        truckWithAvgDto = new TruckWithAvgDto();
         truckWithAvgDto.setTruckId(ID);
         truckWithAvgDto.setTruckCode(TRUCK_CODE);
         truckWithAvgDto.setDescriptions(DESCRIPTION);
@@ -96,12 +96,12 @@ public class TruckRestConsumerMockTest {
         LOGGER.debug("client test: getTruckId()");
          ResponseEntity entity = new ResponseEntity<>(truckWithAvgDto, HttpStatus.FOUND);
 
-        when(restTemplate.getForEntity("http://localhost:8088/trucks/1", TruckFullDetailDto.class))
+        when(restTemplate.getForEntity("http://localhost:8088/trucks/1", TruckWithAvgDto.class))
                 .thenReturn(entity);
-            TruckFullDetailDto results = truckService.getTruckById(ID);
+        TruckWithAvgDto results = truckService.getTruckById(ID);
         Assert.assertNotNull(results);
         Mockito.verify(restTemplate)
-                .getForEntity("http://localhost:8088/trucks/1", TruckFullDetailDto.class);
+                .getForEntity("http://localhost:8088/trucks/1", TruckWithAvgDto.class);
     }
 
 

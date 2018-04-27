@@ -47,29 +47,6 @@
               </tr>
               </thead>
             </table>
-            <p class="text-center"><strong>History Of Orders</strong></p>
-
-            <div class="card">
-              <table class="table table-striped">
-                <thead class="thead-inverse">
-                <tr *ngIf="orderList">
-                  <th></th>
-                </tr>
-                <tr>
-                  <th>OrderId</th>
-                  <th>PetrolQty</th>
-                  <th>OrderDate</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let truck of truck?.orderList">
-                  <td>{{truck?.orderId}}</td>
-                  <td>{{truck?.petrolQty}}</td>
-                  <td>{{truck?.orderDate | date: 'yyyy-MM-dd'}}</td>
-                 </tr>
-                </tbody>
-              </table>
-            </div>
 
           </div>
         </div>
