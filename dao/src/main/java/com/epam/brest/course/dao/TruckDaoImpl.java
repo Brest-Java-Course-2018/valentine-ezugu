@@ -1,7 +1,6 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.dto.TruckFullDetailDto;
-
 import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Order;
 import com.epam.brest.course.model.Truck;
@@ -155,8 +154,6 @@ public class TruckDaoImpl implements TruckDao {
 
         return truck;
     }
-
-
 
     /**
      * @param id delete by id.

@@ -14,17 +14,21 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class OrdersComponent implements OnInit {
 
   orders: Observable<Array<Order>>;
+  orderz:Order[];
   status: number;
   start: Date;
   end: Date;
   order: Order;
 
+  processValidation = false;
+  requestProcessing = false;
+
   dateForm = new FormGroup({
-    date1: new FormControl('', [Validators.required]),
-    date2: new FormControl('', [Validators.required])
+    date1: new FormControl('', [Validators.required, Validators.pattern("^\\d{4}-\\d{2}-\\d{2}$")]),
+    date2: new FormControl('', [Validators.required, Validators.pattern("^\\d{4}-\\d{2}-\\d{2}$")])
    });
 
-  statusCode: number;
+  statusCode: any;
 
   constructor(private orderService: OrderService, private router: Router) {
   }
@@ -34,19 +38,27 @@ export class OrdersComponent implements OnInit {
   }
 
 
-  get date1() { return this.dateForm.get('date1'); }
+  get date1() {
+    return this.dateForm.get('date1');
+  }
 
-  get date2() { return this.dateForm.get('date2'); }
+  get date2() {
+    return this.dateForm.get('date2');
+  }
 
 
   private getOrdersFilter() {
+    this.processValidation = true;
     if (this.dateForm.invalid) {
       return;
     }
-    this.start = this.dateForm.get('date1').value.trim();
-    this.end = this.dateForm.get('date2').value.trim();
+
+    this.preProcessConfigurations();
+    this.start = this.dateForm.get('date1').value ;
+    this.end = this.dateForm.get('date2').value ;
 
     this.orders = this.orderService.getOrders(this.start, this.end)
+
   }
 
   private getOrders() {
@@ -67,4 +79,8 @@ export class OrdersComponent implements OnInit {
     this.router.navigate(['/editOrders'])
   }
 
+  preProcessConfigurations() {
+    this.statusCode = null;
+    this.requestProcessing = true;
+  }
 }

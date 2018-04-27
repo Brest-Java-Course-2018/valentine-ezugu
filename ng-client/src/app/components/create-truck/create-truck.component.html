@@ -45,13 +45,13 @@
                 <div *ngIf="truckCode.invalid && (truckCode.dirty || truckCode.touched && processValidation )"
                      class="alert alert-danger">
                   <div *ngIf="truckCode.errors.required">
-                    truckCode is required.
+                    TruckCode is required.
                   </div>
                   <div *ngIf="truckCode.errors.minlength">
-                    truckCode must be at least 5 characters long.
+                    TruckCode must be at least 5 characters long.
                   </div>
                   <div *ngIf="truckCode.errors.maxlength">
-                    truckCode must be at max 7 characters long.
+                    TruckCode must be at max 7 characters long.
                   </div>
 
                 </div>
@@ -73,13 +73,13 @@
                 <div *ngIf="descriptions.invalid && (descriptions.dirty || descriptions.touched && processValidation )"
                      class="alert alert-danger">
                   <div *ngIf="descriptions.errors.required">
-                    description is required.
+                    Description is required.
                   </div>
                   <div *ngIf="descriptions.errors.minlength">
-                    description must be at least 7 characters long.
+                    Description must be at least 7 characters long.
                   </div>
                   <div *ngIf="descriptions.errors.maxlength">
-                    description must be at max 15 characters long.
+                    Description must be at max 15 characters long.
                   </div>
 
               </div>

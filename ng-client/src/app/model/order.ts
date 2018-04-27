@@ -3,7 +3,6 @@
  */
 export class Order {
 
-
   constructor(public orderId :number,
   public petrolQty :number,
   public orderDate : Date,

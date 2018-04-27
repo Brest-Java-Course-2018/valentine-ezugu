@@ -46,7 +46,6 @@ export class CreateTruckComponent implements OnInit {
     // if we are here then all good
     this.preProcessConfigurations()
     let truckCode = this.createForm.get('truckCode').value.trim();
-    //let date = this.createForm.get('date').value.trim();
     let description = this.createForm.get('descriptions').value.trim();
     let truck = new Truck(null, truckCode, this.today, description);
 

@@ -95,7 +95,7 @@ public class TruckDaoImplTest {
     public void getTruckDetailLiteById() {
         TruckWithAvgDto truck = truckDao.getTruckById(THREE);
         Assert.assertNotNull(truck);
-        Assert.assertTrue(truck.getAvgPerMonth() == 13.0);
+        Assert.assertTrue(truck.getAvgPerMonth() == 58.333333333333336);
     }
 
     @Test(expected = DataIntegrityViolationException.class)
@@ -141,6 +141,7 @@ public class TruckDaoImplTest {
         TruckWithAvgDto truckWithNewCode = truckDao.getTruckById(ID);
         Assert.assertEquals(truckWithNewCode.getTruckCode(), NEW_TRUCK_CODE);
     }
+
 
     @Test
     public void deleteAnExistingTruck() throws Exception {

@@ -5,10 +5,10 @@
     <ul class="navbar-nav float-right">
       <li class="nav-item">
         <a class="btn btn-light"
-           ngbTooltip="Add Truck"
+           ngbTooltip="Add Truck" [routerLink]="['/newTruck']"
            placement="bottom">
           <i class="fa fa-plus"></i> <span
-          class="d-none d-sm-inline" [routerLink]="['/newTruck']">Add</span></a>
+          class="d-none d-sm-inline" >Add</span></a>
       </li>
     </ul>
   </nav>
@@ -23,8 +23,8 @@
             <tr>
               <th>TruckId</th>
               <th>TruckCode</th>
-              <th>purchasedDate</th>
-              <th>descriptions</th>
+              <th>PurchasedDate</th>
+              <th>Descriptions</th>
               <th></th>
             </tr>
             </thead>
@@ -38,10 +38,10 @@
               <td>{{truck.descriptions}}</td>
               <td class="text-right">
                 <a class="btn-sm btn-outline-secondary"
-                   ngbTooltip="Edit Truck"
+                   ngbTooltip="Edit Truck" [routerLink]="['/editsTrucks', truck.truckId]"
                    placement="top">
                   <i class="fa fa-bus"></i> <span
-                  class="d-none d-md-inline" [routerLink]="['/editsTrucks', truck.truckId]">Edit</span></a>
+                  class="d-none d-md-inline" >Edit</span></a>
 
                 <span data-toggle="modal" data-target="#deleteDialog">
                             	<a href="#" class="btn-sm btn-outline-secondary"

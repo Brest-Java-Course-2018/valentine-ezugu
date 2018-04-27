@@ -1,3 +1,8 @@
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml">
+<head>
+
+</head>
+<body class="container-fluid">
 <header>
   <nav id="main-header"
        class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -6,15 +11,13 @@
     </ul>
   </nav>
 </header>
-  <div *ngIf="statusCode === 400" [ngClass]="'success'" >
-    Dates must be given.
-  </div>
-<form class="form-inline" id="myform" [formGroup]="dateForm">
+
+  <form [formGroup]="dateForm" class="form-inline" id="myform" >
 
     <div class="form-group mb-2">
     <label class="form-control-label" *ngIf="dateForm.get('date1').invalid && processValidation"
            required="required" [ngClass] ="'error'"
-           for="date1">date is required to filter.</label>
+           for="date1"><p class="alert alert-secondary">Date is required to filter.</p></label>
     <input id="date1" type="text"
            formControlName="date1"
            class="form-control"
@@ -22,18 +25,24 @@
            name="start"
            placeholder="From"/>
 
-      <div *ngIf="date1.invalid && (date1.dirty || date1.touched && processValidation )"
+      <div *ngIf="date1.invalid && (date1.dirty || date1.touched)"
            class="alert alert-danger">
+
         <div *ngIf="date1.errors.required">
           start date is required.
         </div>
+
+        <div *ngIf="date1.errors.pattern">
+          date must follow pattern yyyy-mm-dd.
+        </div>
       </div>
+
   </div>
 
   <div class="form-group mx-sm-3 mb-2">
-    <label  class="form-control-label" *ngIf="dateForm.get('date2').invalid && processValidation"
+    <label  class="form-control-label" *ngIf="dateForm.get('date2').invalid  && processValidation"
             required="required" [ngClass] ="'error'"
-            for="date2">date is required to filter.</label>
+            for="date2"><p class="alert alert-secondary">Date is required to filter.</p></label>
     <input  id="date2" type="text"
             formControlName="date2"
             class="form-control"
@@ -41,12 +50,22 @@
             name="end"
             placeholder="To"/>
 
+    <div *ngIf="date2.invalid && (date2.dirty || date2.touched)"
+         class="alert alert-danger">
+
+      <div *ngIf="date2.errors.required">
+        start date is required.
+      </div>
+
+      <div *ngIf="date2.errors.pattern">
+        Date must follow pattern yyyy-mm-dd.
+      </div>
+
+    </div>
 
   </div>
   <button type="submit" form="myform" class="btn btn-dark" (click)="getOrdersFilter()">Filter</button>
-
 </form>
-
 <!--(click)="getOrders()"-->
 
 <section id="orders">
@@ -59,8 +78,8 @@
             <tr>
               <th>OrderId</th>
               <th>PetrolQty</th>
-              <th>orderDate</th>
-              <th>truckId</th>
+              <th>OrderDate</th>
+              <th>TruckId</th>
               <th></th>
             </tr>
             </thead>
@@ -88,3 +107,5 @@
     </div>
   </div>
 </section>
+</body>
+</html>
