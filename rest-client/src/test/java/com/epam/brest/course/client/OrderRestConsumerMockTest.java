@@ -5,18 +5,18 @@ import com.epam.brest.course.model.Order;
 import com.epam.brest.course.service.OrderService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
@@ -40,8 +40,14 @@ public class OrderRestConsumerMockTest {
      private  static final double QTY = 23.0;
      private static final int ID = 1;
      private static final int TWO = 2;
-    private static final int THREE = 3;
-     @Autowired
+     private static final int THREE = 3;
+    /**
+     * exception test.
+     */
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
+    @Autowired
      private RestTemplate restTemplate;
 
      @Autowired
@@ -182,4 +188,22 @@ public class OrderRestConsumerMockTest {
 
        Mockito.verify(restTemplate).delete("http://localhost:8088/orders/" + ID);
     }
+
+    /**
+     * simple exception test with Mockito
+     */
+    @Test
+    public void getOrdersRestClientException() {
+
+        when(restTemplate.getForEntity("http://localhost:8088/orders", List.class))
+                .thenThrow(new RestClientException("") {
+        });
+        exception.expect(RestClientException.class);
+        Collection<Order> results
+                = orderService.getAllOrders(null, null);
+        Mockito.verify(restTemplate).getForEntity("http://localhost:8088/orders", List.class);
+    }
+
+
+
 }

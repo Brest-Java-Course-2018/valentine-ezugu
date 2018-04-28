@@ -88,7 +88,6 @@ public class TruckDaoImplTest {
         Assert.assertTrue(truckDetails.getOrderList().size() == THREE);
     }
 
-
     //test for get truck by code with average per month for this truck.
     @Test
     public void getTruckDetailLiteById() {

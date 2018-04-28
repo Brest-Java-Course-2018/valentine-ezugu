@@ -11,7 +11,8 @@ import java.io.IOException;
  */
 public class CustomResponseErrorHandler implements ResponseErrorHandler {
     /**
-     *
+     *to instantiate the error handler with class
+     *  DefaultResponseErrorHandler.
      */
     private ResponseErrorHandler errorHandler =
             new DefaultResponseErrorHandler();

@@ -1,14 +1,13 @@
 package com.epam.brest.course.client;
 
 import com.epam.brest.course.dto.TruckWithAvgDto;
+import com.epam.brest.course.model.Order;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.service.TruckService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
@@ -17,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
@@ -39,6 +39,12 @@ public class TruckRestConsumerMockTest {
     private static final int ID = 1;
     private static final String DESCRIPTION = "New truck for trucks";
     private static final String TRUCK_CODE = "BY2432";
+
+    /**
+     * exception test.
+     */
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
 
     @Autowired
     private RestTemplate restTemplate;
@@ -65,7 +71,6 @@ public class TruckRestConsumerMockTest {
         truckWithAvgDto.setTruckCode(TRUCK_CODE);
         truckWithAvgDto.setDescriptions(DESCRIPTION);
         truckWithAvgDto.setAvgPerMonth(39.0);
-
     }
 
     @After
@@ -140,5 +145,19 @@ public class TruckRestConsumerMockTest {
         Mockito.verify(restTemplate).delete("http://localhost:8088/trucks/" + ID);
     }
 
+    /**
+     * simple exception test with Mockito
+     */
+    @Test
+    public void getTrucksRestClientException() {
+
+        when(restTemplate.getForEntity("http://localhost:8088/trucks", List.class))
+                .thenThrow(new RestClientException("") {
+                });
+        exception.expect(RestClientException.class);
+        Collection<Truck> results
+                = truckService.getAllTrucks();
+        Mockito.verify(restTemplate).getForEntity("http://localhost:8088/trucks", List.class);
+    }
 
 }
