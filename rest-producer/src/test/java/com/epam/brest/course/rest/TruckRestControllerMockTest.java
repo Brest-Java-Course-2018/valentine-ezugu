@@ -1,7 +1,6 @@
 package com.epam.brest.course.rest;
 
 
-import com.epam.brest.course.dto.TruckFullDetailDto;
 import com.epam.brest.course.dto.TruckWithAvgDto;
 import com.epam.brest.course.model.Truck;
 import com.epam.brest.course.rest.config.TestUtil;

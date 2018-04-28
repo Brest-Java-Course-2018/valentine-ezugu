@@ -132,7 +132,6 @@ public class OrderRestConsumerMockTest {
     }
 
 
-
     @SuppressWarnings("unchecked")
     @Test
     public void getOrderById() {

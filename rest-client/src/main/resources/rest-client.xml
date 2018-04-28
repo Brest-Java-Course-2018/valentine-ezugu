@@ -16,11 +16,9 @@
     </bean>
 
     <context:annotation-config/>
-
     <context:component-scan base-package="com.epam.brest.course.*"/>
 
     <bean id="customResponseErrorHandler" class="com.epam.brest.course.client.errorHandler.CustomResponseErrorHandler">
-
     </bean>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">

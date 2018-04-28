@@ -14,7 +14,8 @@
     <groupId>com.epam.brest.course</groupId>
     <artifactId>rest-producer</artifactId>
     <version>1.0-SNAPSHOT</version>
-<packaging>war</packaging>
+     <packaging>war</packaging>
+
     <dependencies>
 
         <dependency>
@@ -30,12 +31,6 @@
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.epam.brest.course</groupId>
-            <artifactId>test-db</artifactId>
         </dependency>
 
         <dependency>
@@ -75,11 +70,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <scope>test</scope>
@@ -89,6 +79,12 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -100,6 +96,7 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>

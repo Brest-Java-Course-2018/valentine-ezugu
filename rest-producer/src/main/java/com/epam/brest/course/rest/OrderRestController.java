@@ -25,11 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
-
-
-
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -63,7 +58,7 @@ public class OrderRestController {
     private MappingService mappingService;
 
     /**
-     * @param binder binding datas and error check.
+     * @param binder binding data and error check.
      */
     @InitBinder
     protected final void initBinder(final WebDataBinder binder) {

@@ -208,7 +208,6 @@ public class TruckDaoImpl implements TruckDao {
        TruckDetailMapper mapper = new TruckDetailMapper();
        namedParameterJdbcTemplate.query(fullTruckDetailsql,
                                                 namedParameterSource, mapper);
-
        TruckFullDetailDto truck = mapper.getDetail();
        return truck;
      }
@@ -252,8 +251,7 @@ public class TruckDaoImpl implements TruckDao {
         this.detail.getOrderList().add(order);
         return null;
 
-    }
-
+     }
         /**
          * @return detail.
          */
