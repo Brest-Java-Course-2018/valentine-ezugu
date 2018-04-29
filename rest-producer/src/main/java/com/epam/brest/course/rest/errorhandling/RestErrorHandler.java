@@ -75,7 +75,20 @@ public class RestErrorHandler {
        return "already exist such truck code" + e.getLocalizedMessage();
     }
 
-        /**
+    /**
+     * @param e null Pointer.
+     * @return String.
+     */
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(NullPointerException.class)
+    public final String handleServerError(
+            @RequestBody final NullPointerException e) {
+        LOGGER.debug("nullPointer({})", e);
+        return "This is a server error" + e.getLocalizedMessage();
+    }
+
+    /**
          * @param e exception.
          * @return string and local message.
          */

@@ -47,12 +47,14 @@
      
      curl -v localhost:8088/trucks/1
      
-     curl -H "Content-Type: application/json" -X POST -d '{"truckCode":"BY2354","purchasedDate":"xyz", "description":"my truck is good"}' -v localhost:8088/trucks
+     curl -H "Content-Type: application/json" -X POST -d '{"truckCode":"BY3354","purchasedDate":"xyz", "descriptions":"my truck"}' -v localhost:8088/trucks
      
      curl -X "DELETE" localhost:8088/trucks/1
      
      curl -v localhost:8088/orders/
-      
+     
+     curl -X  "DELETE" localhost:8088/orders/2
+     
      curl -v  http://localhost:8088/orders?start=2007-01-01&end=2008-01-01
 
 #Angular 
