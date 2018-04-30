@@ -14,6 +14,7 @@
 
   <form [formGroup]="dateForm" class="form-inline container-fluid" id="myform"  >
 
+
     <div class="form-group mb-2">
     <label class="form-control-label" *ngIf="dateForm.get('date1').invalid && processValidation"
            required="required" [ngClass] ="'error'"
@@ -57,16 +58,22 @@
         start date is required.
       </div>
 
-      <div *ngIf="date2.errors.pattern">
+      <div *ngIf="date2.errors.pattern" >
         Date must follow pattern yyyy-mm-dd.
       </div>
 
+      <div *ngIf="date2.errors.pattern">
+        Date must follow pattern yyyy-mm-dd.
+      </div>
     </div>
-
   </div>
   <button type="submit" form="myform" class="btn btn-dark" (click)="getOrdersFilter()">Filter</button>
-</form>
-<!--(click)="getOrders()"-->
+
+    <div *ngIf="date2.value < date1.value" class="alert alert-danger">
+      start date must be less than end date.
+    </div>
+  </form>
+
 
 <section id="orders" class="container-fluid">
   <div >

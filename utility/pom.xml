@@ -28,7 +28,6 @@
             <artifactId>dozer</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer-spring</artifactId>
@@ -43,7 +42,6 @@
             <groupId>com.epam.brest.course</groupId>
             <artifactId>model</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>

@@ -83,4 +83,5 @@ export class OrdersComponent implements OnInit {
     this.statusCode = null;
     this.requestProcessing = true;
   }
+
 }
